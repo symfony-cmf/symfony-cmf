@@ -6,7 +6,7 @@ Links
 
 - GitHub: <https://github.com/symfony-cmf/symfony-cmf>
 - Web: <http://cmf.symfony-project.org/>
-- Wiki: <https://fosswiki.liip.ch/display/SFCMF/Home>
+- Wiki: <http://wiki.github.com/symfony-cmf/symfony-cmf/>
 - IRC: #symfony-cmf @ irc.freenode.org
 - Users mailing list: <http://groups.google.com/group/symfony-cmf-users>
 - Devs mailing list: <http://groups.google.com/group/symfony-cmf-devs>
