@@ -1,6 +1,11 @@
 Symfony Content Management Framework
 ====================================
 
+Mission Statement
+-----------------
+
+The Symfony CMF project makes it easier for **developers** to add **CMS functionality** to applications built with the **Symfony2 PHP** framework. Key development principles for the provided **set of bundles** are **scalability**, **usability**, **documentation** and **testing**.
+
 Links
 -----
 
