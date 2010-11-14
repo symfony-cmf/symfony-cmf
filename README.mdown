@@ -12,6 +12,7 @@ Links
 - GitHub: <https://github.com/symfony-cmf/symfony-cmf>
 - Web: <http://cmf.symfony-project.org/>
 - Wiki: <http://wiki.github.com/symfony-cmf/symfony-cmf/>
+- Issue Tracker: <http://cmf.symfony-project.org/redmine/>
 - IRC: irc://freenode/#symfony-cmf
 - Users mailing list: <http://groups.google.com/group/symfony-cmf-users>
 - Devs mailing list: <http://groups.google.com/group/symfony-cmf-devs>
