@@ -217,10 +217,10 @@
 
         <div class="slide">
             <h2>Code example:</h2>
-            <p>traversal API: <span class="file">XXX.php</span></p>
+            <p>traversal API:</p>
             <pre class="brush: php">
                 // traversal API
-                getParents($path)
+                public function getParents($path)
                 {
                     $node = $this->phpcrsession->getRootNode()->getNode($path);
                     $i = 1;
@@ -236,7 +236,7 @@
 
         <div class="slide">
             <h2>Code example:</h2>
-            <p>versioning API: <span class="file">XXX.php</span></p>
+            <p>versioning API:</p>
             <pre class="brush: php">
                 // versioning API
                 $versionManager = $workspace->getVersionManager()
@@ -250,7 +250,7 @@
 
         <div class="slide">
             <h2>Code example:</h2>
-            <p>ACL API: <span class="file">XXX.php</span></p>
+            <p>ACL API:</p>
             <pre class="brush: php">
                 // ACL API
                 // not yet implemented
@@ -282,15 +282,26 @@
             <div class="vcenter">
                 <h2>Not all data fits well in PHPCR/JCR</h2>
                 <h2>For example aggregation is better done in an RDBMS</h2>
-                <h2>web store: product infos PHPCR/JCR, inventory/orders RDBMS</h2>
+                <h2>Web store: product infos PHPCR/JCR, inventory/orders RDBMS</h2>
             </div>
         </div>
 
+        <div class="slide" style="text-align:center">
+            <div class="vcenter">
+                <h2>Play with it today!</h2>
+                <h2><a href="https://github.com/symfony-cmf/cmf-sandbox">https://github.com/symfony-cmf/cmf-sandbox</a></h2>
+            </div>
+        </div>
 
         <div class="slide" style="text-align:center">
             <div class="vcenter">
-                <h2>Play with it today</h2>
-                <h2><a href="https://github.com/symfony-cmf/cmf-sandbox">https://github.com/symfony-cmf/cmf-sandbox</a></h2>
+                <h2>Next steps</h2>
+                <ul>
+                    <li>Keep the CMF sandbox in sync with Symfony2 core</li>
+                    <li>Make BaseApplicationBundle compatible</li>
+                    <li>Create frontend Bundles</li>
+                    <li>Define content structure concept</li>
+                </ul>
             </div>
         </div>
 
