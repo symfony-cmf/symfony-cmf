@@ -115,7 +115,7 @@
         <div class="slide" style="text-align:center">
             <div class="vcenter">
                 <h2>CMF = Content Management Framework</h2>
-                <h2>In other words its a toolbox to create your own custom CMS</h2>
+                <h2>In other words: its a toolbox to create your own custom CMS</h2>
             </div>
         </div>
 
@@ -182,7 +182,7 @@
 
         <div class="slide" style="text-align:center">
             <div class="vcenter">
-                <h2>Complexity shouldn't overwhelmed developers</h2>
+                <h2>Complexity shouldn't overwhelm developers</h2>
             </div>
         </div>
 
@@ -221,6 +221,17 @@
             <p>traversal API: <span class="file">XXX.php</span></p>
             <pre class="brush: php">
                 // traversal API
+                getParents($path)
+                {
+                    $node = $this->phpcrsession->getRootNode()->getNode($path);
+                    $i = 1;
+                    $breadcrumb = array();
+                    while(($parent = $node->getAncestor($i++)) != $node) {
+                        $breadcrumb[$parent->getPath()] =
+                            $parent->getPropertyValue('label');
+                    }
+                    return $breadcrumb;
+                }
             </pre>
         </div>
 
@@ -229,6 +240,12 @@
             <p>versioning API: <span class="file">XXX.php</span></p>
             <pre class="brush: php">
                 // versioning API
+                $versionManager = $workspace->getVersionManager()
+                $versions = $versionManager.getVersionHistory().getAllVersions();
+
+                foreach($versions as $node) {
+                    echo $version->getPropertyValue('label');
+                }
             </pre>
         </div>
 
@@ -243,7 +260,7 @@
 
         <div class="slide" style="text-align:center">
             <div class="vcenter">
-                <h2>Yes this means the other stuff is already implemented!</h2>
+                <h2>Yes, this means the other stuff is already implemented!</h2>
                 <h2>Eventually there will be a pure PHP backend</h2>
             </div>
         </div>
