@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Symfony2 Introduction</title>
+        <meta name="author" content="Lukas Kahwe Smith" />
+        <meta name="email" content="lukas.smith@liip.ch" />
+        <meta name="date" content="2010-03-03" />
+        <meta name="venue" content="Symfony Live Paris 2011" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <!-- Slippy core file and dependencies -->
+        <script type="text/javascript" src="jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="jquery.history.js"></script>
+        <script type="text/javascript" src="slippy-0.9.0.js"></script>
+        <!-- Slippy structural styles -->
+        <link type="text/css" rel="stylesheet" href="slippy-0.9.0.css"/>
+        <!-- Slippy theme -->
+        <link type="text/css" rel="stylesheet" href="slippy-pure.css"/>
+        <!-- Syntax highlighting core file  -->
+        <script type="text/javascript" src="highlighter/shCore.js"></script>
+        <!-- Syntax highlighting brushes, remove those you don't need -->
+        <script type="text/javascript" src="highlighter/shBrushPhp.js"></script>
+        <script type="text/javascript" src="highlighter/shBrushPlain.js"></script>
+        <script type="text/javascript" src="highlighter/shBrushXml.js"></script>
+        <!-- Syntax highlighting styles-->
+        <link type="text/css" rel="stylesheet" href="highlighter/shCore.css"/>
+        <link type="text/css" rel="stylesheet" href="highlighter/shThemeEclipse.css"/>
+        <style type="text/css">
+            body > * {
+                font-size: 1.2em;
+            }
+
+            body {
+                background: #fff;
+            }
+
+            div.syntaxhighlighter {
+                background: #aaa !important;
+            }
+
+            span.file {
+                font-size: 0.8em;
+                color: #f00;
+                float: right;
+                margin: -.2em .5em 0 0;
+            }
+
+            .smallcode {
+                font-size: 0.8em;
+            }
+
+            strong {
+                color: #662222;
+            }
+        </style>
+        <!-- Slippy init code -->
+        <script type="text/javascript">
+            $(function() {
+                $(".slide").slippy({
+                });
+                SyntaxHighlighter.all();
+            });
+        </script>
+    </head>
+
+    <body>
+        <div class="slide" style="text-align:center">
+            <img src="./liip.png" alt="Liip AG" />
+            <h1>Lukas Kahwe Smith | Liip AG</h1>
+            <h1>Symfony2 CMF</h1>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>Drupal is awesome!</h2>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>No REALLY!</h2>
+            <h2>Drupal is awesome!</h2>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>Drupal is awesome if you are an end user!</h2>
+            <h2>Click click</h2>
+        </div>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>Drupal is awesome if you are a sales guy!</h2>
+            <h2>Brand</h2>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <div class="vcenter">
+                <h2>Drupal sucks if you are a developer!</h2>
+                <h2>CMS first, framework second</h2>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Drupal nightmares ..</h2>
+            <ul>
+                <li>.. no clean separation of configuration, logic and content</li>
+                <li>.. no clean deployment and staging concept</li>
+                <li>.. inconsistent cache layers</li>
+                <li>.. function callback AOP is not every ones cup of tea</li>
+                <li>.. lots of legacy baggage</li>
+                <li>.. NIH (not invented here) syndrom</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h2>Do we also suffer from NIH?</h2>
+            <ul>
+                <li>Focus on solving core issues of Drupal</li>
+                <li>Based ourselves as much on standard tools and specs</li>
+                <li>Deliver value within a reasonable time</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h2>CMF = Content Management Framework</h2>
+            <ul>
+                <li>In other words: its a toolbox to create your own custom CMS</li>
+                <li>Not a one size fits all, but increase code sharing</li>
+                <li>Imagine Diem, Sympal, Apostrophe all build on the same content foundation</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h2>Interest is huge!</h2>
+            <ul>
+                <li>Over 100 people on the mailinglist</li>
+                <li>About 10 more per month</li>
+                <li>All key decisions have been made in public forums</li>
+            </ul>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>Many companies are committed to the effort</h2>
+            <h2><img src="./CMF/cmf_companies.png" alt="CMF supporters" /></h2>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>The Symfony CMF project makes it easier for <strong>developers</strong> to add <strong>CMS functionality</strong> to
+                applications built with the <strong>Symfony2 PHP</strong> framework. Key development principles for the provided
+                <strong>set of bundles</strong> are <strong>scalability</strong>, <strong>usability</strong>,
+                <strong>documentation</strong> and <strong>testing</strong>
+            </h2>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>Data in a CMS is mostly unstructured</h2>
+            <h2>RDBMS are not a good fit, hurray for NoSQL</h2>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>CMS often organize content as a tree/graph</h2>
+            <h2>Most NoSQL not a good fit, hurray for Graph DBs</h2>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>CMS should be able version content</h2>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>CMS require granular access right management</h2>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>Need a solution that can scale both from small to large projects and we want to get somewhere within 12 months!</h2>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>Complexity shouldn't overwhelm developers</h2>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>Enter Doctrine PHPCR ODM</h2>
+            <h2>(PHP Content Repository)</h2>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>Doctrine PHPCR ODM sits on top of Jackalope which supports Jackrabbit JCR</h2>
+            <h2>Get all the features of the JCR spec!</h2>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>Works like MongoDB or CouchDB ODM, but also includes a tree/graph, versioning and ACL API</h2>
+            <h2><img src="./CMF/JCRvsRDBMSvsNoSQL.png" alt="JCR vs. RDBMS/NoSQL" /></h2>
+        </div>
+
+        <div class="slide">
+            <h2>Code example:</h2>
+            <p>CRUD:</p>
+            <pre class="brush: php">
+                // Create
+                $node = new Foo\Bar();
+                $phpcrManager->persist($node, $path);
+                $phpcrManager->flush();
+
+                // Read
+                $repo = $phpcrManager->getRepository('Foo\Bar');
+                $node = $repo->find($path);
+
+                // Update
+                $node->setName('foo!');
+                $phpcrManager->flush();
+
+                // Remove
+                $phpcrManager->remove($node);
+                $phpcrManager->flush();
+            </pre>
+        </div>
+
+        <div class="slide">
+            <h2>Code example:</h2>
+            <p>Traversal API:</p>
+            <pre class="brush: php">
+                public function getParents($path)
+                {
+                    $root = $this->phpcrsession->getRootNode();
+                    $node = $root->getNode($path);
+                    $i = 0; $breadcrumb = array();
+
+                    do {
+                        $i++;
+                        $parent = $node->getAncestor($i);
+                        $breadcrumb[$parent->getPath()] =
+                            $parent->getPropertyValue('label');
+                    } while ($parent != $node);
+
+                    return $breadcrumb;
+                }
+            </pre>
+        </div>
+
+        <div class="slide">
+            <h2>Code example:</h2>
+            <p>Versioning API:</p>
+            <pre class="brush: php">
+                $versionManager = $workspace->getVersionManager()
+                $history = $versionManager->getVersionHistory();
+
+                foreach ($history->getAllVersions() as $node) {
+                    echo $node->getPropertyValue('label');
+                }
+            </pre>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>Architecture Overview</h2>
+            <h2><img src="./XXX.png" alt="simple PHPCR setup example" /></h2>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>Architecture Overview</h2>
+            <h2><img src="./XXX.png" alt="complex PHPCR setup example" /></h2>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>Still some work to finish and optimize Jackalope</h2>
+            <h2>Eventually there will be a pure PHP backend</h2>
+        </div>
+
+        <div class="slide">
+            <h2>Not all data fits well in PHPCR/JCR</h2>
+            <ul>
+                <li>For example aggregation is better done in an RDBMS</li>
+                <li>Store web store product description in PHPCR/JCR</li>
+                <li>store web store inventory and orders in RDBMS</li>
+            </ul>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>Play with it today!</h2>
+            <h2><a href="https://github.com/symfony-cmf/cmf-sandbox">https://github.com/symfony-cmf/cmf-sandbox</a></h2>
+        </div>
+
+        <div class="slide">
+            <h2>Next steps</h2>
+            <ul>
+                <li>Keep the CMF sandbox in sync with Symfony2 core</li>
+                <li>Make BaseApplicationBundle compatible</li>
+                <li>Create frontend Bundles</li>
+                <li>Define content structure concept</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h2>Resources</h2>
+            <ul>
+                <li><a href="irc://freenode/#symfony-cmf">#symfony-cmf IRC</a></li>
+                <li><a href="http://cmf.symfony-project.org">http://cmf.symfony-project.org</a></li>
+                <li><a href="https://github.com/symfony-cmf/symfony-cmf/wiki">Symfony CMF wiki</a></li>
+                <li><a href="http://jcp.org/en/jsr/detail?id=283">JSR 283 (Chapter 3)</a></li>
+                <li><a href="http://jcp.org/en/jsr/detail?id=333">JSR 333</a></li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h1>Q&A</h1>
+            <h1>lukas.smith@liip.ch</h1>
+        </div>
+
+        <div class="layout" name="default">
+            <div class="vcenter">
+                <content></content>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span class="left">Lukas Kahwe Smith</span>
+            <span class="right">Company <a href="http://liip.ch/">liip.ch</a></span>
+            <span class="left">Twitter <a href="http://twitter.com/lsmith">@lsmith</a></span>
+            <span class="right">Blog <a href="http://pooteeweet.org/">pooteeweet.org</a></span>
+            <hr class="defloat" />
+        </div>
+    </body>
+</html>
