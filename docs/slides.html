@@ -82,7 +82,6 @@
             <h2>Drupal is awesome if you are an end user!</h2>
             <h2>Click click</h2>
         </div>
-        </div>
 
         <div class="slide" style="text-align:center">
             <h2>Drupal is awesome if you are a sales guy!</h2>
@@ -190,36 +189,36 @@
         </div>
 
         <div class="slide">
-            <h2>Code example:</h2>
-            <p>CRUD:</p>
+            <h2>CRUD API</h2>
             <pre class="brush: php">
                 // Create
                 $node = new Foo\Bar();
-                $phpcrManager->persist($node, $path);
-                $phpcrManager->flush();
+                // Alert: violation of the Doctrine ODM interface!
+                $documentManager->persist($node, $path);
+                $documentManager->flush();
 
                 // Read
-                $repo = $phpcrManager->getRepository('Foo\Bar');
+                $repo = $documentManager->getRepository('Foo\Bar');
                 $node = $repo->find($path);
 
                 // Update
                 $node->setName('foo!');
-                $phpcrManager->flush();
+                $documentManager->flush();
 
                 // Remove
-                $phpcrManager->remove($node);
-                $phpcrManager->flush();
+                $documentManager->remove($node);
+                $documentManager->flush();
             </pre>
         </div>
 
         <div class="slide">
-            <h2>Code example:</h2>
-            <p>Traversal API:</p>
+            <h2>Traversal API</h2>
             <pre class="brush: php">
                 public function getParents($path)
                 {
                     $root = $this->phpcrsession->getRootNode();
                     $node = $root->getNode($path);
+
                     $i = 0; $breadcrumb = array();
 
                     do {
@@ -235,8 +234,7 @@
         </div>
 
         <div class="slide">
-            <h2>Code example:</h2>
-            <p>Versioning API:</p>
+            <h2>Versioning API</h2>
             <pre class="brush: php">
                 $versionManager = $workspace->getVersionManager()
                 $history = $versionManager->getVersionHistory();
@@ -248,17 +246,7 @@
         </div>
 
         <div class="slide" style="text-align:center">
-            <h2>Architecture Overview</h2>
-            <h2><img src="./XXX.png" alt="simple PHPCR setup example" /></h2>
-        </div>
-
-        <div class="slide" style="text-align:center">
-            <h2>Architecture Overview</h2>
-            <h2><img src="./XXX.png" alt="complex PHPCR setup example" /></h2>
-        </div>
-
-        <div class="slide" style="text-align:center">
-            <h2>Still some work to finish and optimize Jackalope</h2>
+            <h2>Some work left to finish and optimize Jackalope/PHPCR ODM</h2>
             <h2>Eventually there will be a pure PHP backend</h2>
         </div>
 
@@ -267,7 +255,7 @@
             <ul>
                 <li>For example aggregation is better done in an RDBMS</li>
                 <li>Store web store product description in PHPCR/JCR</li>
-                <li>store web store inventory and orders in RDBMS</li>
+                <li>Store web store inventory and orders in RDBMS</li>
             </ul>
         </div>
 
@@ -292,8 +280,8 @@
                 <li><a href="irc://freenode/#symfony-cmf">#symfony-cmf IRC</a></li>
                 <li><a href="http://cmf.symfony-project.org">http://cmf.symfony-project.org</a></li>
                 <li><a href="https://github.com/symfony-cmf/symfony-cmf/wiki">Symfony CMF wiki</a></li>
-                <li><a href="http://jcp.org/en/jsr/detail?id=283">JSR 283 (Chapter 3)</a></li>
-                <li><a href="http://jcp.org/en/jsr/detail?id=333">JSR 333</a></li>
+                <li><a href="http://jcp.org/en/jsr/detail?id=283">JSR 283 (aka JCR 2, read Chapter 3)</a></li>
+                <li><a href="http://jcp.org/en/jsr/detail?id=333">JSR 333 (aka JCR 2.1)</a></li>
             </ul>
         </div>
 
