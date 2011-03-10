@@ -194,6 +194,36 @@
         </div>
 
         <div class="slide">
+            <h2>Document class</h2>
+            <pre class="brush: php">
+                namespace Foo;
+
+                /** @phpcr:Document() */
+                class Bar
+                {
+                    /** @phpcr:Path */
+                    public $path;
+
+                    /** @phpcr:Node */
+                    public $node;
+
+                    /** @phpcr:String(name="name") */
+                    private $name;
+
+                    public function getName()
+                    {
+                      return $this->name;
+                    }
+
+                    public function setName($name)
+                    {
+                      $this->name = $name;
+                    }
+                }
+            </pre>
+        </div>
+
+        <div class="slide">
             <h2>CRUD API</h2>
             <pre class="brush: php">
                 // Create
@@ -219,10 +249,10 @@
         <div class="slide">
             <h2>Traversal API</h2>
             <pre class="brush: php">
-                public function getParents($path)
+                public function getParents($document)
                 {
                     $root = $this->phpcrsession->getRootNode();
-                    $node = $root->getNode($path);
+                    $node = $document->node;
 
                     $i = 0; $breadcrumb = array();
 
