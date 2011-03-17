@@ -228,8 +228,8 @@
             <pre class="brush: php">
                 // Create
                 $node = new Foo\Bar();
-                // Alert: violation of the Doctrine ODM interface!
-                $documentManager->persist($node, $path);
+                $node->setPath($path)
+                $documentManager->persist($node);
                 $documentManager->flush();
 
                 // Read
