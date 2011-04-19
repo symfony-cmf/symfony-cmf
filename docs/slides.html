@@ -186,6 +186,8 @@
         <div class="slide" style="text-align:center">
             <h2>Doctrine PHPCR ODM sits on top of Jackalope which supports Jackrabbit JCR</h2>
             <h2>Get all the features of the JCR spec!</h2>
+            <h2>PHPCR has been <a href="http://java.net/jira/browse/JSR_333-28" target="_new">submitted to the JCR spec</a></h2>
+            <h2>Actually David Nüschler, JCR spec lead, asked us to submit it!</h2>
         </div>
 
         <div class="slide" style="text-align:center">
@@ -198,11 +200,11 @@
             <pre class="brush: php">
                 namespace Foo;
 
-                /** @phpcr:Document() */
+                /** @phpcr:Document(repositoryClass="Foo\BarRepo") */
                 class Bar
                 {
-                    /** @phpcr:Path */
-                    public $path;
+                    /** @phpcr:Id(strategy="repository") */
+                    public $id;
 
                     /** @phpcr:Node */
                     public $node;
@@ -224,24 +226,51 @@
         </div>
 
         <div class="slide">
+            <h2>Document repository (optional)</h2>
+            <pre class="brush: php">
+                namespace Foo;
+
+                use Doctrine\ODM\PHPCR\Id\RepositoryIdInterface,
+                    Doctrine\ODM\PHPCR\DocumentRepository;
+
+                class BarRepo
+                    extends DocumentRepository
+                    implements RepositoryIdInterface
+                {
+                    /**
+                     * Generate a document id
+                     *
+                     * @param object $document
+                     * @return string
+                     */
+                    public function generateId($document)
+                    {
+                        return $document->getName();
+                    }
+                }
+            </pre>
+        </div>
+
+        <div class="slide">
             <h2>CRUD API</h2>
             <pre class="brush: php">
                 // Create
-                $node = new Foo\Bar();
-                $node->setPath($path)
-                $documentManager->persist($node);
+                $document = new Foo\Bar();
+                $document->setName($name)
+                $documentManager->persist($document);
                 $documentManager->flush();
+                $id = $document->id;
 
                 // Read
                 $repo = $documentManager->getRepository('Foo\Bar');
-                $node = $repo->find($path);
+                $document = $repo->find($id);
 
                 // Update
-                $node->setName('foo!');
+                $document->setName('foo!');
                 $documentManager->flush();
 
                 // Remove
-                $documentManager->remove($node);
+                $documentManager->remove($document);
                 $documentManager->flush();
             </pre>
         </div>
@@ -303,9 +332,17 @@
             <h2>Next steps</h2>
             <ul>
                 <li>Keep the CMF sandbox in sync with Symfony2 core</li>
-                <li>Make BaseApplicationBundle compatible</li>
+                <li>Make AdminBundle compatible</li>
                 <li>Create frontend Bundles</li>
                 <li>Define content structure concept</li>
+            </ul>
+        </div>
+
+
+        <div class="slide">
+            <h2>Eat your own dog food</h2>
+            <ul>
+                <li>Liip is currently rebuilding its website on top the CMF</li>
             </ul>
         </div>
 
