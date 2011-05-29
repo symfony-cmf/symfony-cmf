@@ -6,18 +6,19 @@
 
         <title>Symfony2 CMF Introduction</title>
 
-        <meta name="author" content="Lukas Kahwe Smith" />
-        <meta name="email" content="lukas.smith@liip.ch" />
-        <meta name="date" content="2010-03-03" />
-        <meta name="venue" content="Symfony Live Paris 2011" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
+        <meta name="author" content="Symfony CMF" />
+        <meta name="email" content="symfony-cmf-devs@googlegroups.com" />
+        <meta name="date" content="2011-05-29" />
+        <meta name="venue" content="The Internets" />
+
         <!-- Slippy core file and dependencies -->
-        <script type="text/javascript" src="jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="jquery.min.js"></script>
         <script type="text/javascript" src="jquery.history.js"></script>
-        <script type="text/javascript" src="slippy-0.9.0.js"></script>
+        <script type="text/javascript" src="slippy.js"></script>
         <!-- Slippy structural styles -->
-        <link type="text/css" rel="stylesheet" href="slippy-0.9.0.css"/>
+        <link type="text/css" rel="stylesheet" href="slippy.css"/>
         <!-- Slippy theme -->
         <link type="text/css" rel="stylesheet" href="slippy-pure.css"/>
         <!-- Syntax highlighting core file  -->
@@ -96,7 +97,13 @@
         <div class="slide" style="text-align:center">
             <div class="vcenter">
                 <h2>Drupal sucks if you are a developer!</h2>
-                <h2>CMS first, framework second</h2>
+            </div>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <div class="vcenter">
+                <h2>Drupal is CMS 1st, development framework 2nd</h2>
+                <h2>This is a legitimate prioritization for users</h2>
             </div>
         </div>
 
@@ -130,19 +137,6 @@
             </ul>
         </div>
 
-        <div class="slide">
-            <h2>Interest is huge!</h2>
-            <ul>
-                <li>Over 100 people on the mailinglist</li>
-                <li>About 10 more per month</li>
-                <li>All key decisions have been made in public forums</li>
-            </ul>
-        </div>
-
-        <div class="slide" style="text-align:center">
-            <h2>Many companies are committed to the effort</h2>
-            <h2><img src="cmf_companies.png" alt="CMF supporters" /></h2>
-        </div>
 
         <div class="slide" style="text-align:center">
             <h2>The Symfony CMF project makes it easier for <strong>developers</strong> to add <strong>CMS functionality</strong> to
@@ -155,48 +149,95 @@
         <div class="slide" style="text-align:center">
             <h2>Data in a CMS is mostly unstructured</h2>
             <h2>RDBMS are not a good fit, hurray for NoSQL</h2>
+            <h2><img src="square_in_a_circle.png" alt="like fitting a square into a circle" /></h2>
         </div>
 
         <div class="slide" style="text-align:center">
             <h2>CMS often organize content as a tree/graph</h2>
             <h2>Most NoSQL not a good fit, hurray for Graph DBs</h2>
+            <h2><img src="content_graph.png" alt="content graph" /></h2>
         </div>
 
         <div class="slide" style="text-align:center">
-            <h2>CMS should be able version content</h2>
-        </div>
-
-        <div class="slide" style="text-align:center">
-            <h2>CMS require granular access right management</h2>
-        </div>
-
-        <div class="slide" style="text-align:center">
-            <h2>Need a solution that can scale both from small to large projects and we want to get somewhere within 12 months!</h2>
+            <h2>CMS should be able to store content versions</h2>
+            <h2><img src="versioning.png" alt="multiple versions" /></h2>
         </div>
 
         <div class="slide" style="text-align:center">
             <h2>Complexity shouldn't overwhelm developers</h2>
+            <h2>Need a solution that can scale both from small to large projects and we want to get somewhere within 12 months!</h2>
         </div>
 
         <div class="slide" style="text-align:center">
             <h2>Enter Doctrine PHPCR ODM</h2>
             <h2>PHP Content Repository + Doctrine ODM</h2>
+            <h2>PHPCR (aka PHP-ified JCR specification)</h2>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>Works like MongoDB or CouchDB ODM, but also includes a tree/graph, versioning API</h2>
+            <h2><img src="JCRvsRDBMSvsNoSQL.png" alt="JCR vs. RDBMS/NoSQL" /></h2>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>PHPCR Aims to provide a standard API that can be used by any PHP content management system to interface with any content repository.</h2>
         </div>
 
         <div class="slide">
-            <h2>PHPCR (aka PHP-ified JCR specification)</h2>
+            <h2>PHPCR implementations</h2>
             <ul>
-                <li>Implemented by Jackalope (which supports Jackrabbit JCR)</li>
-                <li>Doctrine PHPCR ODM sits on top of Jackalope</li>
-                <li>Get all the features of the JCR spec!</li>
-                <li>PHPCR has been <a href="http://java.net/jira/browse/JSR_333-28" target="_new">submitted to the JCR spec</a></li>
-                <li>Actually David Nüschler, JCR spec lead, asked us to submit it!</li>
+                <li>Jackalope (currently supports Jackrabbit and Doctrine DBAL)</li>
+                <li>Midgard2 PHPCR</li>
+                <li>..</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h2>PHPCR has been <a href="http://java.net/jira/browse/JSR_333-28" target="_new">submitted</a> to the JCR spec at the request of David Nüschler, JCR spec lead</h2>
+        </div>
+
+        <div class="slide">
+            <h2>Workspaces</h2>
+            <ul>
+                <li>Multiple workspaces, each with its own name and root node</li>
+                <li>Is similar to a Unix file system structure</li>
+                <li>Each workspace is independent</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h2>Nodes</h2>
+            <ul>
+                <li>Are identified by the path where are stored</li>
+                <li>ex. “/my/path/under/water/fish”</li>
+                <li>Can be created, deleted, modified, copied...</li>
+                <li>Are typed using namespaced names</li>
+                <li>ex. nt:unstructured, nt:folder, nt:file ...</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h2>Node mixins</h2>
+            <ul>
+                <li>A mixin node type can be assigned to a node during that node's lifetime</li>
+                <li>ex. mix:referenceable (implies availability of a jcr:uuid property)</li>
+                <li>ex. mix:versionable (implies availability of a jcr:versionHistory, jcr:predecessors, jcr:baseVersion, jcr:isCheckedOut, jcr:mergeFailed properties)</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h2>Properties</h2>
+            <ul>
+                <li>Typed attributes</li>
+                <li>STRING, URI, BOOLEAN, LONG, DOUBLE, DECIMAL, BINARY, DATE, NAME, PATH,  WEAKREFERENCE REFERENCE</li>
+                <li>Are typed using namespaced names</li>
+                <li>jcr:created, jcr:mimeType, phpcr:alias</li>
             </ul>
         </div>
 
         <div class="slide" style="text-align:center">
-            <h2>Works like MongoDB or CouchDB ODM, but also includes a tree/graph, versioning and ACL API</h2>
-            <h2><img src="JCRvsRDBMSvsNoSQL.png" alt="JCR vs. RDBMS/NoSQL" /></h2>
+            <h2>PHPCR</h2>
+            <h2><img src="phpcr.png" alt="PHPCR class interaction diagramm" /></h2>
         </div>
 
         <div class="slide">
@@ -204,26 +245,28 @@
             <pre class="brush: php">
                 namespace Foo;
 
-                /** @phpcr:Document(repositoryClass="Foo\BarRepo") */
+                use Doctrine\ODM\PHPCR\Mapping as PHPCR
+
+                /** @PHPCR\Document(repositoryClass="Foo\BarRepo", alias="bar") */
                 class Bar
                 {
-                    /** @phpcr:Id(strategy="repository") */
+                    /** @PHPCR\Id(strategy="repository") */
                     public $id;
 
-                    /** @phpcr:Node */
+                    /** @PHPCR\Node */
                     public $node;
 
-                    /** @phpcr:String(name="name") */
+                    /** @PHPCR\String(name="name") */
                     private $name;
 
                     public function getName()
                     {
-                      return $this->name;
+                        return $this->name;
                     }
 
                     public function setName($name)
                     {
-                      $this->name = $name;
+                        $this->name = $name;
                     }
                 }
             </pre>
@@ -282,22 +325,14 @@
         <div class="slide">
             <h2>Traversal API</h2>
             <pre class="brush: php">
-                public function getParents($document)
-                {
-                    $root = $this->phpcrsession->getRootNode();
-                    $node = $document->node;
+                $i = 0; $breadcrumb = array();
 
-                    $i = 0; $breadcrumb = array();
-
-                    do {
-                        $i++;
-                        $parent = $node->getAncestor($i);
-                        $breadcrumb[$parent->getPath()] =
-                            $parent->getPropertyValue('label');
-                    } while ($parent != $node);
-
-                    return $breadcrumb;
-                }
+                do {
+                    $i++;
+                    $parent = $node->getAncestor($i);
+                    $breadcrumb[$parent->getPath()] =
+                        $parent->getPropertyValue('label');
+                } while ($parent != $node);
             </pre>
         </div>
 
@@ -313,9 +348,22 @@
             </pre>
         </div>
 
-        <div class="slide" style="text-align:center">
-            <h2>Some work left to finish and optimize Jackalope/PHPCR ODM</h2>
-            <h2>Eventually there will be a pure PHP backend</h2>
+        <div class="slide">
+            <h2>Search via SQL2 API in Jackalope</h2>
+            <pre class="brush: php">
+                $sql = "SELECT * FROM [nt:unstructured]
+                    WHERE [nt:unstructured].[phpcr:alias] = 'bar'
+                    ORDER BY [nt:unstructured].title";
+                $queryManager = $workspace->getQueryManager();
+                $query = $queryManager->createQuery($sql, 'JCR-SQL2');
+                $query->setLimit($limit);
+                $query->setOffset($offset);
+                $queryResult = $query->execute();
+
+                foreach ($queryResult->getRows() as $row) {
+                    $node = $row->getNode();
+                }
+            </pre>
         </div>
 
         <div class="slide">
@@ -328,25 +376,55 @@
         </div>
 
         <div class="slide" style="text-align:center">
+            <h2>Door swings both ways, so remember</h2>
+            <h2><img src="square_in_a_circle.png" alt="like fitting a square into a circle" /></h2>
+        </div>
+
+        <div class="slide" style="text-align:center">
             <h2>Play with it today!</h2>
-            <h2><a href="https://github.com/symfony-cmf/cmf-sandbox">https://github.com/symfony-cmf/cmf-sandbox</a></h2>
+            <h2><a href="https://github.com/symfony-cmf/cmf-sandbox">CMF sandbox</a></h2>
         </div>
 
         <div class="slide">
             <h2>Next steps</h2>
             <ul>
-                <li>Keep the CMF sandbox in sync with Symfony2 core</li>
-                <li>Make AdminBundle compatible</li>
-                <li>Create frontend Bundles</li>
-                <li>Define content structure concept</li>
+                <li>Add mapping support for children, parents, versions</li>
+                <li>Implement SQL2/OQM search query support</li>
+                <li>Performance optimizations</li>
+                <li>Make AdminBundle compatible and build frontend Bundles</li>
             </ul>
         </div>
-
 
         <div class="slide">
             <h2>Eat your own dog food</h2>
             <ul>
-                <li>Liip is currently rebuilding its website on top the CMF</li>
+                <li>Liip and Ideato are currently rebuilding their websites on top the CMF</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h2>Interest is huge!</h2>
+            <ul>
+                <li>Over 150 people on the mailinglist</li>
+                <li>About 20 more per month</li>
+                <li>All key decisions have been made in public forums</li>
+                <li>Multiple people are working and commiting to all parts of the code</li>
+            </ul>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>Many companies are committed to the effort</h2>
+            <h2><img src="cmf_companies.png" alt="CMF supporters" /></h2>
+        </div>
+
+        <div class="slide">
+            <h2>Github projects</h2>
+            <ul>
+                <li><a href="https://github.com/phpcr/phpcr">PHPCR</a></li>
+                <li><a href="https://github.com/jackalope/jackalope">Jackalope</a></li>
+                <li><a href="https://github.com/doctrine/phpcr-odm">PHPCR ODM</a></li>
+                <li><a href="https://github.com/symfony-cmf/DoctrinePHPCRBundle">DoctrinePHPCRBundle</a></li>
+                <li><a href="https://github.com/symfony-cmf/cmf-sandbox">CMF sandbox</a></li>
             </ul>
         </div>
 
@@ -361,7 +439,7 @@
             </ul>
         </div>
 
-        <div class="layout" name="default">
+        <div class="layout" data-name="default">
             <div class="vcenter">
                 <content></content>
             </div>
