@@ -10,6 +10,7 @@ Links
 -----
 
 - GitHub: <https://github.com/symfony-cmf/symfony-cmf>
+- Sandbox: <https://github.com/symfony-cmf/cmf-sandbox>
 - Web: <http://cmf.symfony-project.org/>
 - Wiki: <http://wiki.github.com/symfony-cmf/symfony-cmf/>
 - Issue Tracker: <http://cmf.symfony-project.org/redmine/>
