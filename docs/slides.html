@@ -86,12 +86,12 @@
 
         <div class="slide" style="text-align:center">
             <h2>Drupal is awesome if you are an end user!</h2>
-            <h2>Click click</h2>
+            <h2>Powerful admin interface</h2>
         </div>
 
         <div class="slide" style="text-align:center">
             <h2>Drupal is awesome if you are a sales guy!</h2>
-            <h2>Brand</h2>
+            <h2>Well known brand</h2>
         </div>
 
         <div class="slide" style="text-align:center">
@@ -103,12 +103,12 @@
         <div class="slide" style="text-align:center">
             <div class="vcenter">
                 <h2>Drupal is CMS 1st, development framework 2nd</h2>
-                <h2>This is a legitimate prioritization for users</h2>
+                <h2>This is a legitimate prioritization for their users</h2>
             </div>
         </div>
 
         <div class="slide">
-            <h2>Drupal nightmares ..</h2>
+            <h2>Drupal developer nightmares ..</h2>
             <ul>
                 <li>.. no clean separation of configuration, logic and content</li>
                 <li>.. no clean deployment and staging concept</li>
@@ -136,7 +136,6 @@
                 <li>Imagine Diem, Sympal, Apostrophe all build on the same content foundation</li>
             </ul>
         </div>
-
 
         <div class="slide" style="text-align:center">
             <h2>The Symfony CMF project makes it easier for <strong>developers</strong> to add <strong>CMS functionality</strong> to
@@ -180,13 +179,17 @@
         </div>
 
         <div class="slide" style="text-align:center">
-            <h2>PHPCR Aims to provide a standard API that can be used by any PHP content management system to interface with any content repository.</h2>
+            <h2>PHPCR provides a <strong>standardized API</strong> that can be used by any PHP content management system to interface with any content repository.</h2>
         </div>
 
         <div class="slide">
             <h2>PHPCR implementations</h2>
             <ul>
-                <li>Jackalope (currently supports Jackrabbit and Doctrine DBAL)</li>
+                <li>Jackalope</li>
+                <ul>
+                    <li>Davex (Jackrabbit) transport layer</li>
+                    <li>Doctrine DBAL transport layer</li>
+                </ul>
                 <li>Midgard2 PHPCR</li>
                 <li>..</li>
             </ul>
@@ -208,11 +211,11 @@
         <div class="slide">
             <h2>Nodes</h2>
             <ul>
-                <li>Are identified by the path where are stored</li>
-                <li>ex. “/my/path/under/water/fish”</li>
                 <li>Can be created, deleted, modified, copied...</li>
+                <li>Are identified by their path (*)</li>
+                <ul><li>ex. “/my/path/under/water/fish”</li></ul>
                 <li>Are typed using namespaced names</li>
-                <li>ex. nt:unstructured, nt:folder, nt:file ...</li>
+                <ul><li>nt:unstructured, nt:folder, nt:file ...</li></ul>
             </ul>
         </div>
 
@@ -220,18 +223,27 @@
             <h2>Node mixins</h2>
             <ul>
                 <li>A mixin node type can be assigned to a node during that node's lifetime</li>
-                <li>ex. mix:referenceable (implies availability of a jcr:uuid property)</li>
-                <li>ex. mix:versionable (implies availability of a jcr:versionHistory, jcr:predecessors, jcr:baseVersion, jcr:isCheckedOut, jcr:mergeFailed properties)</li>
+                <ul>
+                    <li>mix:referenceable implies availability of property</li>
+                    <ul>
+                        <li>jcr:uuid</li>
+                    </ul>
+                    <li>mix:versionable implies availability of properties</li>
+                    <ul>
+                        <li>jcr:versionHistory, jcr:predecessors, jcr:baseVersion, jcr:isCheckedOut, jcr:mergeFailed properties)</li>
+                    </ul>
+                    <li>...</li>
+                </ul>
             </ul>
         </div>
 
         <div class="slide">
             <h2>Properties</h2>
             <ul>
-                <li>Typed attributes</li>
-                <li>STRING, URI, BOOLEAN, LONG, DOUBLE, DECIMAL, BINARY, DATE, NAME, PATH,  WEAKREFERENCE REFERENCE</li>
-                <li>Are typed using namespaced names</li>
-                <li>jcr:created, jcr:mimeType, phpcr:alias</li>
+                <li>Use namespaced names</li>
+                <ul><li>jcr:created, jcr:mimeType, phpcr:alias</li></ul>
+                <li>Use one of the several type</li>
+                <ul><li>STRING, URI, BOOLEAN, LONG, DOUBLE, DECIMAL, BINARY, DATE, NAME, PATH, WEAKREFERENCE, REFERENCE</li></ul>
             </ul>
         </div>
 
@@ -247,14 +259,14 @@
 
                 use Doctrine\ODM\PHPCR\Mapping as PHPCR
 
-                /** @PHPCR\Document(repositoryClass="Foo\BarRepo", alias="bar") */
+                /** @PHPCR\Document(alias="bar", repositoryClass="Foo\BarRepository") */
                 class Bar
                 {
                     /** @PHPCR\Id(strategy="repository") */
                     public $id;
 
-                    /** @PHPCR\Node */
-                    public $node;
+                    /** @PHPCR\Children */
+                    public $children;
 
                     /** @PHPCR\String(name="name") */
                     private $name;
@@ -277,22 +289,22 @@
             <pre class="brush: php">
                 namespace Foo;
 
-                use Doctrine\ODM\PHPCR\Id\RepositoryIdInterface,
-                    Doctrine\ODM\PHPCR\DocumentRepository;
+                use Doctrine\ODM\PHPCR\DocumentRepository,
+                    Doctrine\ODM\PHPCR\Id\RepositoryIdInterface;
 
-                class BarRepo
+                class BarRepository
                     extends DocumentRepository
                     implements RepositoryIdInterface
                 {
                     /**
                      * Generate a document id
                      *
-                     * @param object $document
+                     * @param Bar $document
                      * @return string
                      */
-                    public function generateId($document)
+                    public function generateId(Bar $document)
                     {
-                        return $document->getName();
+                        return '/'.$document->getName();
                     }
                 }
             </pre>
@@ -325,8 +337,14 @@
         <div class="slide">
             <h2>Traversal API</h2>
             <pre class="brush: php">
-                $i = 0; $breadcrumb = array();
+                $workspace = $documentManager->getWorkspace();
+                $session = $workspace->getSession();
+                $node = $session->getNode('/foo/bar/ding/dong');
 
+                $i = 0;
+                $breadcrumb = array();
+
+                // note this code doesn't handle graphs
                 do {
                     $i++;
                     $parent = $node->getAncestor($i);
@@ -339,8 +357,16 @@
         <div class="slide">
             <h2>Versioning API</h2>
             <pre class="brush: php">
+                // immediate predecessor(s)
+                $repo = $documentManager->getRepository('Foo\Bar');
+                $document = $repo->find($id);
+                $predecessor = $repo->getPredecessor($document);
+                echo $predecessor->getPropertyValue('label');
+
+                // get entire history
+                $workspace = $documentManager->getWorkspace();
                 $versionManager = $workspace->getVersionManager()
-                $history = $versionManager->getVersionHistory();
+                $history = $versionManager->getVersionHistory($id);
 
                 foreach ($history->getAllVersions() as $node) {
                     echo $node->getPropertyValue('label');
@@ -349,12 +375,13 @@
         </div>
 
         <div class="slide">
-            <h2>Search via SQL2 API in Jackalope</h2>
+            <h2>Search via SQL2 API</h2>
             <pre class="brush: php">
+                $queryManager = $workspace->getQueryManager();
+
                 $sql = "SELECT * FROM [nt:unstructured]
                     WHERE [nt:unstructured].[phpcr:alias] = 'bar'
                     ORDER BY [nt:unstructured].title";
-                $queryManager = $workspace->getQueryManager();
                 $query = $queryManager->createQuery($sql, 'JCR-SQL2');
                 $query->setLimit($limit);
                 $query->setOffset($offset);
@@ -380,6 +407,16 @@
             <h2><img src="square_in_a_circle.png" alt="like fitting a square into a circle" /></h2>
         </div>
 
+        <div class="slide">
+            <h2>Interest is huge!</h2>
+            <ul>
+                <li>Over 150 people on the mailinglist</li>
+                <li>About 20 more per month</li>
+                <li>All key decisions have been made in public forums</li>
+                <li>Multiple people are working and committing to all parts of the code</li>
+            </ul>
+        </div>
+
         <div class="slide" style="text-align:center">
             <h2>Play with it today!</h2>
             <h2><a href="https://github.com/symfony-cmf/cmf-sandbox">CMF sandbox</a></h2>
@@ -398,17 +435,7 @@
         <div class="slide">
             <h2>Eat your own dog food</h2>
             <ul>
-                <li>Liip and Ideato are currently rebuilding their websites on top the CMF</li>
-            </ul>
-        </div>
-
-        <div class="slide">
-            <h2>Interest is huge!</h2>
-            <ul>
-                <li>Over 150 people on the mailinglist</li>
-                <li>About 20 more per month</li>
-                <li>All key decisions have been made in public forums</li>
-                <li>Multiple people are working and commiting to all parts of the code</li>
+                <li>Liip and Ideato are currently rebuilding their websites on top of the CMF</li>
             </ul>
         </div>
 
