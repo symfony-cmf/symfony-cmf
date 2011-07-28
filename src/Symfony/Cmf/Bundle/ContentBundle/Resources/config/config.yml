@@ -1,6 +1,6 @@
 parameters:
     #TODO: make parameters configurable
 
-    symfony.cmf.content.document: Symfony\Cmf\Bundle\ContentBundle\Document\StaticContent
-    symfony.cmf.content.static_basepath: /cms/content/static
+    symfony_cmf_content.document: Symfony\Cmf\Bundle\ContentBundle\Document\StaticContent
+    symfony_cmf_content.static_basepath: /cms/content/static
 

@@ -11,7 +11,7 @@
 
 namespace Symfony\Cmf\Bundle\PhpcrCommandsBundle\Command;
 
-use Symfony\Component\Console\Command\Command;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
@@ -24,7 +24,7 @@ use Symfony\Cmf\Bundle\PhpcrCommandsBundle\Helper\Fixtures\PHPCRExecutor;
 use Symfony\Cmf\Bundle\PhpcrCommandsBundle\Helper\Fixtures\PHPCRPurger;
 use Symfony\Cmf\Bundle\PhpcrCommandsBundle\Helper\ConsoleParametersParser;
 
-class LoadFixtureCommand extends Command
+class LoadFixtureCommand extends ContainerAwareCommand
 {
     /**
      * @var DocumentManager
@@ -66,9 +66,9 @@ EOF
             $purge = ($purge_option == '1' || ConsoleParametersParser::isTrueString($purge_option));
         }
 
-        $this->dm = $this->container->get('doctrine_phpcr.odm.default_document_manager');
+        $this->dm = $this->getContainer()->get('doctrine_phpcr.odm.default_document_manager');
 
-        $loader = new Loader($this->container);
+        $loader = new Loader($this->getContainer());
         $loader->loadFromDirectory($path);
 
         $purger = new PHPCRPurger();

@@ -1,2 +1,2 @@
 controllers:
-    static_pages: symfony.cmf.content.controller:indexAction
+    static_pages: symfony_cmf_content.controller:indexAction

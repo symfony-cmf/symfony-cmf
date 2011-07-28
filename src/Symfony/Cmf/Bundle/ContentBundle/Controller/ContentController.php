@@ -18,7 +18,7 @@ class ContentController extends Controller
      * @param array $translationUrls urls to all language versions to pass on to twig
      * @return Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction($page, $path, $translationUrls)
+    public function indexAction($page, $path, $translationUrls = array())
     {
         if (!$page) {
             throw new NotFoundHttpException('Content not found: ' . $path);
