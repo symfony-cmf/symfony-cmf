@@ -21,9 +21,9 @@ use Symfony\Cmf\Bundle\PhpcrCommandsBundle\Helper\NodeHelper;
 abstract class PhpcrCommand extends Command
 {
     /**
-     * @var JackalopeLoader
+     * @var \PHPCR\SessionInterface
      */
-    protected $jackalope_loader;
+    protected $session;
 
     /**
      * @var NodeHelper
@@ -35,8 +35,8 @@ abstract class PhpcrCommand extends Command
     {
         parent::initialize($input, $output);
 
-        $this->jackalope_loader = $this->container->get('jackalope.loader');
-        $this->node_helper = new NodeHelper($this->jackalope_loader);
+        $this->session = $this->container->get('doctrine_phpcr.default_session');
+        $this->node_helper = new NodeHelper($this->session);
     }
 
 }

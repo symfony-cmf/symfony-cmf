@@ -26,7 +26,7 @@ class HierarchyWalkerTest extends CmfTestCase
 
     public function testGetChildList()
     {
-        $walker = new HierarchyWalker($this->getContainer()->get('jackalope.loader'),
+        $walker = new HierarchyWalker($this->getContainer()->get('doctrine_phpcr.default_session'),
                                       new DirectPathMapper('/cms/navigation/main'));
         $childlist = $walker->getChildList('test/');
 
@@ -38,14 +38,14 @@ class HierarchyWalkerTest extends CmfTestCase
 
     public function testGetParents()
     {
-        $walker = new HierarchyWalker($this->getContainer()->get('jackalope.loader'),
+        $walker = new HierarchyWalker($this->getContainer()->get('doctrine_phpcr.default_session'),
                                       new DirectPathMapper('/cms/navigation/main'));
         $breadcrumb = $walker->getAncestors('test/leveltwo/levelthree');
 
         $expected = array('/'               => 'Home',
                           '/test'           => 'nav test',
                           '/test/leveltwo'  => 'nav leveltwo');
-        
+
         $this->assertEquals($expected, $breadcrumb);
     }
 

@@ -51,13 +51,13 @@ class HierarchyWalker
 
     /**
      * @param DocumentManager $document_manager the phpcr-odm document manager to load navigation entry documents
-     * @param JackalopeLoader $jackalope the jackalope service to get the session from. TODO: remove when all annotations work
+     * @param \PHPCR\SessionInterface $session the phpcr session. TODO: remove when all annotations work
      * @param PathMapperInterface $mapper to map urls to storage ids
      */
-    public function __construct(DocumentManager $document_manager, $jackalope, PathMapperInterface $mapper)
+    public function __construct(DocumentManager $document_manager, $session, PathMapperInterface $mapper)
     {
         $this->odm = $document_manager;
-        $this->session = $jackalope->getSession();
+        $this->session = $session;
         $this->mapper  = $mapper;
         $basepath = $mapper->getStorageId('/');
         $this->rootnode = $this->session->getNode($basepath);

@@ -4,7 +4,7 @@ services:
         arguments:
             container: "@service_container"
             document_manager: "@doctrine.phpcr_odm.document_manager"
-            jackalope_loader: @jackalope.loader
+            session: @doctrine_phpcr.default_session
             annotation_reader: @symfony_cmf_multilang_content.annotation_reader
             lang_prefix: %symfony_cmf_multilang_content.lang_prefix%
 
@@ -22,7 +22,7 @@ services:
     symfony_cmf_multilang_content.event_listener:
         class: %symfony_cmf_multilang_content.event_listener_class%
         arguments:
-            jackalope_loader: @jackalope.loader
+            session: @doctrine_phpcr.default_session
             annotation_reader: @symfony_cmf_multilang_content.annotation_reader
             lang_helper: @symfony_cmf_multilang_content.chooser
             lang_prefix: %symfony_cmf_multilang_content.lang_prefix%
@@ -33,6 +33,6 @@ services:
         class: Symfony\Cmf\Bundle\MultilangContentBundle\Controller\LanguageSelectorController
         arguments:
             container: "@service_container"
-            jackalope_loader: "@jackalope.loader"
+            session: "@doctrine_phpcr.default_session"
             chooser: "@symfony_cmf_multilang_content.chooser"
             routename: "%symfony_cmf_navigation.mainmenu_routename%"

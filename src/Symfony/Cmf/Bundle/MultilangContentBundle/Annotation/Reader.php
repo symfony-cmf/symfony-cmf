@@ -44,7 +44,7 @@ class Reader {
 
                 if (count($annotations)) {
                     /* TODO: should we support a name parameter in the
-                     * annotation for the jackalope node property name? here we
+                     * annotation for the phpcr node property name? here we
                      * always use the same name as the document property.
                      */
                     $refPropName = $refProp->getName();

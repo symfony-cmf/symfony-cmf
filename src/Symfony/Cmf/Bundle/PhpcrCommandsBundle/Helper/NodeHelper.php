@@ -11,18 +11,13 @@
 
 namespace Symfony\Cmf\Bundle\PhpcrCommandsBundle\Helper;
 
-use Symfony\Bundle\DoctrinePHPCRBundle\JackalopeLoader;
-use Jackalope\Node;
-use Jackalope\Property;
-use Jackalope\Transport\Davex\HTTPErrorException;
-
 /**
  * Helper class to manipulate PHPCR nodes
  */
 class NodeHelper
 {
     /**
-     * @var JackalopeLoader
+     * @var \PHPCR\SessionInterface
      */
     protected $session;
 
@@ -32,18 +27,18 @@ class NodeHelper
     protected $root;
 
     /**
-     * @param JackalopeLoader $loader
+     * @param \PHPCR\SessionInterface $session
      */
-    public function __construct(JackalopeLoader $loader)
+    public function __construct(\PHPCR\SessionInterface $session)
     {
-        $this->session = $loader->getSession();
+        $this->session = $session;
         $this->root = $this->session->getRootNode();
     }
 
     /**
-     * Return the jackalope session object
+     * Return the phpcr session object
      *
-     * @return Jackalope\Session
+     * @return \PHPCR\SessionInterface
      */
     public function getSession()
     {
@@ -53,7 +48,7 @@ class NodeHelper
     /**
      * Return the root node
      *
-     * @return Jackalope\Node
+     * @return \PHPCR\NodeInterface
      */
     public function getRoot()
     {
@@ -67,13 +62,12 @@ class NodeHelper
      */
     public function getNode($path)
     {
-        try {
+        // TODO: this method has no real value i think
 
+        try {
             $node = $this->session->getNode($path);
             return $node;
-
         } catch (\PHPCR\PathNotFoundException $ex) {
-
             return false;
         }
     }
@@ -88,17 +82,16 @@ class NodeHelper
      */
     public function createNode($name, Node $parent = null)
     {
+        // TODO: this method has no real value i think
+
         if ($parent === null) {
             $parent = $this->root;
         }
 
         try {
-
             $node = $parent->addNode($name);
             $this->session->save();
-
-        } catch (HTTPErrorException $ex) {
-
+        } catch (\Exception $ex) {
             return false;
         }
 
@@ -125,7 +118,7 @@ class NodeHelper
                 }
             }
             $this->session->save();
-        } catch (HTTPErrorException $ex) {
+        } catch (\Exception $ex) {
             return false;
         }
 
@@ -154,7 +147,4 @@ class NodeHelper
     {
         return substr($prop->getName(), 0, 4) === 'jcr:';
     }
-
-
-
 }

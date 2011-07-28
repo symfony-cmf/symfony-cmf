@@ -2,7 +2,6 @@
 
 namespace Symfony\Cmf\Bundle\CoreBundle\Helper;
 
-use Symfony\Bundle\DoctrinePHPCRBundle\JackalopeLoader;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use PHPCR\NodeInterface;
 use Symfony\Cmf\Bundle\CoreBundle\Helper\DirectPathMapper;
@@ -15,7 +14,7 @@ use Symfony\Cmf\Bundle\CoreBundle\Helper\ExtensionGuesser;
 class RepositoryFileHelper implements FileMapperInterface
 {
     /**
-     * @var JackalopeLoader
+     * @var \PHPCR\SessionInterface
      */
     protected $session;
 
@@ -36,14 +35,14 @@ class RepositoryFileHelper implements FileMapperInterface
 
 
     /**
-     * @param JackalopeLoader $loader
+     * @param PHPCR\SessionInterface $session
      * @param string $pathPrefix Content repository path prefix (e.g. /cms/content)
      * @param string $fileBasePath
      * @param string $webRelativePath a path relative to the web directory
      */
-    public function __construct(JackalopeLoader $loader, $pathPrefix, $fileBasePath, $webRelativePath)
+    public function __construct(\PHPCR\SessionInterface $session, $pathPrefix, $fileBasePath, $webRelativePath)
     {
-        $this->session = $loader->getSession();
+        $this->session = $session;
         $this->fileBasePath = $fileBasePath;
         $this->pathMapper = new DirectPathMapper($pathPrefix);
         $this->webRelativePath = '/' . $webRelativePath;

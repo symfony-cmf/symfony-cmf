@@ -6,7 +6,6 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ODM\PHPCR\Event;
 use Doctrine\ODM\PHPCR\Events\LifecycleEventArgs;
 use Doctrine\ODM\PHPCR\DocumentNotFoundException;
-use Jackalope\Node;
 
 use Symfony\Cmf\Bundle\MultilangContentBundle\Annotation\Information;
 
@@ -27,13 +26,13 @@ class NodeTranslator implements EventSubscriber {
     protected $langPrefix;
 
     /**
-     * @param object $jackalope_loader to get the PHPCR session from
+     * @param \PHPCR\SessionInterface $session the PHPCR session
      * @param object $annotation_reader the annotation reader to find out which properties are translated
      * @param object $lang_helper the language chooser
      * @param object $lang_prefix the translation child prefix. TODO: should use a namespace for this.
      */
-    public function __construct($jackalope_loader, $annotation_reader, $lang_helper, $lang_prefix) {
-        $this->session = $jackalope_loader->getSession();
+    public function __construct($session, $annotation_reader, $lang_helper, $lang_prefix) {
+        $this->session = $session;
         $this->reader = $annotation_reader;
         $this->langHelper = $lang_helper;
         $this->langPrefix = $lang_prefix;

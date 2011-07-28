@@ -66,9 +66,7 @@ EOF
             $purge = ($purge_option == '1' || ConsoleParametersParser::isTrueString($purge_option));
         }
 
-        $jackalope = $this->container->get('jackalope.loader');
-
-        $this->dm = $this->container->get('doctrine.phpcr_odm.document_manager');
+        $this->dm = $this->container->get('doctrine_phpcr.odm.default_document_manager');
 
         $loader = new Loader($this->container);
         $loader->loadFromDirectory($path);

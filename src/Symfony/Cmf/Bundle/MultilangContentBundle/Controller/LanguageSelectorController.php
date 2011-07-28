@@ -16,10 +16,10 @@ class LanguageSelectorController extends Controller
     protected $chooser;
     protected $routename;
 
-    public function __construct(ContainerInterface $container, $jackalope_loader, $chooser, $routename)
+    public function __construct(ContainerInterface $container, $session, $chooser, $routename)
     {
         $this->container = $container;
-        $this->session = $jackalope_loader->getSession();
+        $this->session = $session;
         $this->chooser = $chooser;
         $this->routename = $routename;
     }

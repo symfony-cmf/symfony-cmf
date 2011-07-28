@@ -4,7 +4,7 @@ services:
         class: Symfony\Cmf\Bundle\NavigationBundle\Service\HierarchyWalker
         arguments:
             document_manager: "@doctrine.phpcr_odm.document_manager"
-            jackalope: "@jackalope.loader"
+            session: "@doctrine_phpcr.default_session"
             mapper: "@symfony_cmf_core.pathMapper"
     symfony_cmf_navigation.controller:
         class: Symfony\Cmf\Bundle\NavigationBundle\Controller\NavigationController

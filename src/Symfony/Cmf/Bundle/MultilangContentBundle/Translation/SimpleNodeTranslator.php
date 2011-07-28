@@ -24,7 +24,7 @@ class SimpleNodeTranslator
     */
     protected $odm;
 
-    /** jackalope session */
+    /** phpcr session */
     protected $session;
 
     /** helper to get document annoations for translatable properties */
@@ -35,15 +35,15 @@ class SimpleNodeTranslator
     /**
      * @param ContainerInterface $container
      * @param DocumentManager $odm
-     * @param object $jackalope_loader to get the PHPCR session. TODO: pass phpcr session directly?
+     * @param \PHPCR\SessionInterface $session the PHPCR session
      * @param object $annotation_reader the annotation reader to use
      * @param string $lang_prefix the prefix for the language child node. TODO: should use a namespace for this.
      */
-    public function __construct(ContainerInterface $container, DocumentManager $odm, $jackalope_loader, $annotation_reader, $lang_prefix)
+    public function __construct(ContainerInterface $container, DocumentManager $odm, $session, $annotation_reader, $lang_prefix)
     {
         $this->container = $container;
         $this->odm = $odm;
-        $this->session = $jackalope_loader->getSession();
+        $this->session = $session;
         $this->reader = $annotation_reader;
         $this->langPrefix = $lang_prefix;
     }

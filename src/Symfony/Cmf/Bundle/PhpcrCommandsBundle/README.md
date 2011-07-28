@@ -133,12 +133,12 @@ Here is an example of fixture:
 
 # NodeHelper
 
-NodeHelper implements some utility methods to simplify the interaction with the Jackalope session.
+NodeHelper implements some utility methods to simplify the interaction with the PHPCR session.
 
 DOC NEEDS TO BE REVIEWED
 
     /**
-     * Return the jackalope session
+     * Return the phpcr session
      */
     public function getSession()
 

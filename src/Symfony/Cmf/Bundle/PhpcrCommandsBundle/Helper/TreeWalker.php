@@ -12,8 +12,8 @@
 namespace Symfony\Cmf\Bundle\PhpcrCommandsBundle\Helper;
 
 use PHPCR\ItemVisitorInterface;
-use Jackalope\Node;
-use Jackalope\Property;
+use \PHPCR\NodeInterface;
+use \PHPCR\PropertyInterface;
 
 class TreeWalker
 {
@@ -71,10 +71,10 @@ class TreeWalker
 
     /**
      * Return whether a node must be traversed or not
-     * @param Node $node
+     * @param NodeInterface $node
      * @return boolean
      */
-    protected function mustVisitNode(Node $node)
+    protected function mustVisitNode(NodeInterface $node)
     {
         foreach($this->node_filters as $filter) {
             if (! $filter->must_visit($node)) {
@@ -87,10 +87,10 @@ class TreeWalker
 
     /**
      * Return whether a node property must be traversed or not
-     * @param Property $property
+     * @param PropertyInterface $property
      * @return boolean
      */
-    protected function mustVisitProperty(Property $property)
+    protected function mustVisitProperty(PropertyInterface $property)
     {
         foreach($this->property_filters as $filter) {
             if (! $filter->must_visit($property)) {
@@ -103,10 +103,10 @@ class TreeWalker
 
     /**
      * Traverse a node
-     * @param Node $node
+     * @param NodeInterface $node
      * @param int $level Recursion level
      */
-    public function traverse(Node $node, $level = 0)
+    public function traverse(NodeInterface $node, $level = 0)
     {
         if ($this->mustVisitNode($node)) {
 
