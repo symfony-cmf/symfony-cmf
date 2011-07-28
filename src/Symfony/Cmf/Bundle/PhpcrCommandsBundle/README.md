@@ -7,22 +7,33 @@ This bundle contains console commands to manipulate the content repository
 
 DISCLAIMER: This bundle is still in an experimental state.
 
-# Installation
+
+# Standalone Installation
+
+*If you are using this bundle inside the symfony-cmf distribution, you do not
+need this step.*
 
 This bundle depends on a PHPCR implementation. The easiest is to follow the
-installation instruction of the DoctrinePHPCRBundle
-https://github.com/symfony-cmf/DoctrinePHPCRBundle
+installation instruction of the [DoctrinePHPCRBundle](https://github.com/symfony-cmf/DoctrinePHPCRBundle)
+
+Once you have installed the pre-requisites, add this bundle to your project and
+register it with autoload and the app kernel.
+
+
+# Additional requirements
 
 To use the phpcr:fixtures:load command, you additionally need the Doctrine
 data-fixtures and the symfony doctrine fixtures bundle:
 - https://github.com/symfony/DoctrineFixturesBundle
 - https://github.com/doctrine/data-fixtures
 
-Once you have installed the pre-requisites, add this bundle to your project and
-register it with autoload and the app kernel.
-
 
 # Commands
+
+The bundle provides a couple of symfony commands. To execute them, from your
+main project folder run
+
+    app/console.php <command> [options] [arguments]
 
 ## phpcr:dump
 
@@ -163,6 +174,8 @@ DOC NEEDS TO BE REVIEWED
 
 
 # TreeWalker
+
+TODO: The navigation bundle also contains a tree walker. This might be redundant.
 
 You can use the Helper\\TreeWalker class to easily traverse the content repository nodes and properties.
 
