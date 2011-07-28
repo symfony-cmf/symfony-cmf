@@ -1,0 +1,10 @@
+{% extends "SymfonyCmfCoreBundle::skeleton.html.twig" %}
+
+{% block content %}
+{{ page.content|raw }}
+{% endblock %}
+
+{% block content_extra %}
+<h3 class="offset">Child pages</h3>
+{% render "symfony.cmf.navigation.renderer:childlistAction" with { 'url': url } %}
+{% endblock %}
