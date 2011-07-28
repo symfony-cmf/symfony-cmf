@@ -18,6 +18,11 @@ service to render a language chooser.
 
 ## Annotations
 
+To use the annotations, you need to have registered them in the AnnotationRegistry
+
+    AnnotationRegistry::registerFile(__DIR__.'/../vendor/symfony-cmf/src/Symfony/Cmf/Bundle/MultilangContentBundle/Annotation/TranslationAnnotations.php');
+
+
 * ``@cmfTranslate\Multilang`` => class annotation for general options. currently has attribute ``strategy``
 * Multilang attribute ``strategy`` => whether to store translated fields in a translation child node or in translation attributes
 * ``@cmfTranslate\Language`` => language this document is currently in

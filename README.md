@@ -28,8 +28,8 @@ You need to install [Doctrine PHPCR ODM](http://github.com/doctrine/phpcr-odm) a
 ### Setup
 
 * Add this repository to your vendors
-* Make sure to run ```git submodule update --recursive --init``` inside the symfony-cmf folder after each vendor update (we add this to the vendors script)
-* Add autoloader entries ( *before* the line registering Symfony itself )
+* Make sure to run ```git submodule update --recursive --init``` inside the symfony-cmf folder after each vendor update (we added this to the vendors script)
+* app/autoload.php: Add autoloader entries ( *before* the line registering Symfony itself )
 
     'Symfony\\Cmf'                          => __DIR__.'/../vendor/symfony-cmf/src',
     'Symfony\\Bundle\\DoctrinePHPCRBundle'  => __DIR__.'/../vendor/symfony-cmf/src',
@@ -37,7 +37,11 @@ You need to install [Doctrine PHPCR ODM](http://github.com/doctrine/phpcr-odm) a
     'Jackalope'                             => __DIR__.'/../vendor/doctrine-phpcr-odm/lib/vendor/jackalope/src',
     'PHPCR'                                 => __DIR__.'/../vendor/doctrine-phpcr-odm/lib/vendor/jackalope/lib/phpcr/src',
 
-* Initialize bundles in the Kernel registerBundle method
+* app/autoload.php: Add autoloader entry for the multilang annotations right after the last AnnotationRegistry::registerFile line
+
+    AnnotationRegistry::registerFile(__DIR__.'/../vendor/symfony-cmf/src/Symfony/Cmf/Bundle/MultilangContentBundle/Annotation/TranslationAnnotations.php');
+
+* app/AppKernel.php: Initialize bundles in the Kernel registerBundle method
 
     new Symfony\Bundle\DoctrinePHPCRBundle\DoctrinePHPCRBundle(),
     new Symfony\Cmf\Bundle\CoreBundle\SymfonyCmfCoreBundle(),
