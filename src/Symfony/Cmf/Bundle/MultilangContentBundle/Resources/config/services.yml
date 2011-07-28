@@ -27,7 +27,7 @@ services:
             lang_helper: @symfony_cmf_multilang_content.chooser
             lang_prefix: %symfony_cmf_multilang_content.lang_prefix%
         tags:
-            - { name: doctrine.phpcr_odm.default_event_subscriber }
+            - { name: doctrine_phpcr.event_subscriber }
 
     symfony_cmf_multilang_content.languageSelectorController:
         class: Symfony\Cmf\Bundle\MultilangContentBundle\Controller\LanguageSelectorController
