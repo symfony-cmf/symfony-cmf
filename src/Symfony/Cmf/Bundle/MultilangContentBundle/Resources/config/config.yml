@@ -1,0 +1,21 @@
+parameters:
+    symfony_cmf_multilang_content.translator: symfony_cmf_multilang_content.node_translation
+    symfony_cmf_multilang_content.event_listener_class: Symfony\Cmf\Bundle\MultilangContentBundle\EventListener\NodeTranslator
+    symfony_cmf_multilang_content.lang_prefix: "lang~"
+    symfony_cmf_multilang_content.default_lang: en
+    symfony_cmf_multilang_content.lang_preference:
+        en: [en, de]
+        de: [de, en]
+    symfony_cmf_multilang_content.lang_meta:
+        de:
+            fullname: Deutsch
+            completion: utsch
+        fr:
+            fullname: Français
+            completion: ançais
+        en:
+            fullname: English
+            completion: glish
+        it:
+            fullname: Italiano
+            completion: aliano
