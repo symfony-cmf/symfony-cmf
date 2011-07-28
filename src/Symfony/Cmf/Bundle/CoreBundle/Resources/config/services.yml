@@ -1,0 +1,15 @@
+
+services:
+    symfony_cmf_core.pathMapper:
+        class: Symfony\Cmf\Bundle\CoreBundle\Helper\DirectPathMapper
+        arguments:
+            basepath: %symfony_cmf_core.mainmenu_basepath%
+        shared: true
+
+    symfony_cmf_core.fileHelper:
+        class: Symfony\Cmf\Bundle\CoreBundle\Helper\RepositoryFileHelper
+        arguments:
+            loader: @jackalope.loader
+            pathPrefix: %symfony_cmf_core.content_basepath%
+            fileBasePath: %symfony_cmf_core.filestore_basepath%
+            fileRelativePath: %symfony_cmf_core.filestore_relative_basepath%

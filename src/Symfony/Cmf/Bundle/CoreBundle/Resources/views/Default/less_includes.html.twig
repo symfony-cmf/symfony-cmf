@@ -1,0 +1,23 @@
+{% stylesheets output="assets/style.css"
+    '@LiipchCoreBundle/Resources/less/yahoo-reset.less'
+    '@LiipchCoreBundle/Resources/less/main.less'
+    '@LiipchCoreBundle/Resources/less/misc.less'
+    '@LiipchCoreBundle/Resources/less/layout.less'
+    '@LiipchCoreBundle/Resources/less/typography.less'
+    '@LiipchCoreBundle/Resources/less/list.less'
+    '@LiipchCoreBundle/Resources/less/navigation.less'
+    '@LiipchCoreBundle/Resources/less/forms.less'
+    '@LiipchCoreBundle/Resources/less/block.less'
+    '@LiipchTeamBundle/Resources/less/team.less'
+    '@LiipchEventBundle/Resources/less/event.less'
+    '@LiipchNewsBundle/Resources/less/news.less'
+    '@LiipchProjectsBundle/Resources/less/projects.less'
+%}
+    <link href="{{ asset_url }}" media="screen" type="text/css" rel="stylesheet" />
+{% endstylesheets %}
+
+<!--[if IE 7]>
+{% stylesheets output='assets/ie7.css' '@LiipchCoreBundle/Resources/less/ie7.less' %}
+    <link href="{{ asset_url }}" media="screen" type="text/css" rel="stylesheet" />
+{% endstylesheets %}
+<![endif]-->
