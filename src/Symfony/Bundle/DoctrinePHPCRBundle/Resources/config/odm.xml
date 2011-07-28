@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+
+    <parameters>
+        <parameter key="doctrine_phpcr.odm.configuration.class">Doctrine\ODM\PHPCR\Configuration</parameter>
+        <parameter key="doctrine_phpcr.odm.document_manager.class">Doctrine\ODM\PHPCR\DocumentManager</parameter>
+        <parameter key="doctrine_phpcr.odm.document_manager.event_manager.class">Doctrine\Common\EventManager</parameter>
+
+        <parameter key="doctrine_phpcr.odm.metadata.driver_chain.class">Doctrine\ODM\PHPCR\Mapping\Driver\DriverChain</parameter>
+        <parameter key="doctrine_phpcr.odm.metadata.annotation.class">Doctrine\ODM\PHPCR\Mapping\Driver\AnnotationDriver</parameter>
+        <parameter key="doctrine_phpcr.odm.metadata.annotation_reader.class">Symfony\Bridge\Doctrine\Annotations\IndexedReader</parameter>
+        <parameter key="doctrine_phpcr.odm.metadata.xml.class">Doctrine\Bundle\PHPCRBundle\Mapping\Driver\XmlDriver</parameter>
+        <parameter key="doctrine_phpcr.odm.metadata.yml.class">Doctrine\Bundle\PHPCRBundle\Mapping\Driver\YamlDriver</parameter>
+        <parameter key="doctrine_phpcr.odm.metadata.php.class">Doctrine\ODM\PHPCR\Mapping\Driver\PHPDriver</parameter>
+    </parameters>
+
+    <services>
+        <service id="doctrine_phpcr.odm.metadata.annotation_reader" class="%doctrine_phpcr.odm.metadata.annotation_reader.class%" public="false">
+            <argument type="service" id="annotation_reader" />
+        </service>
+
+        <service
+            id="doctrine_phpcr.odm.configuration"
+            class="%doctrine_phpcr.odm.configuration.class%"
+            abstract="true"
+            public="false"
+        />
+
+        <service
+            id="doctrine_phpcr.odm.document_manager.abstract"
+            class="%doctrine_phpcr.odm.document_manager.class%"
+            abstract="true"
+        />
+
+        <service
+            id="doctrine_phpcr.odm.document_manager.event_manager"
+            abstract="true"
+            class="%doctrine_phpcr.odm.document_manager.event_manager.class%"
+        />
+    </services>
+</container>

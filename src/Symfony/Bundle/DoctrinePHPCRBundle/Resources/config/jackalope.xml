@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+
+        <parameter key="doctrine_phpcr.jackalope.factory.class">Jackalope\Factory</parameter>
+        <parameter key="doctrine_phpcr.jackalope.repository.class">Jackalope\Repository</parameter>
+
+        <parameter key="doctrine_phpcr.jackalope.davex.class">Jackalope\Transport\Davex\Client</parameter>
+        <parameter key="doctrine_phpcr.jackalope.doctrinedbal.class">Jackalope\Transport\DoctrineDBAL\Client</parameter>
+
+    </parameters>
+
+    <services>
+
+        <service id="doctrine_phpcr.jackalope.factory" class="%doctrine_phpcr.jackalope.factory.class%" public="false" />
+
+        <service id="doctrine_phpcr.jackalope.transport.davex" class="%doctrine_phpcr.jackalope.davex.class%" public="false">
+            <argument type="service" id="doctrine_phpcr.jackalope.factory" />
+            <argument>http://localhost:8080/server/</argument>
+            <call method="setCheckLoginOnServer">
+                <argument>false</argument>
+            </call>
+        </service>
+
+        <service id="doctrine_phpcr.jackalope.transport.doctrinedbal" class="%doctrine_phpcr.jackalope.doctrinedbal.class%" public="false">
+            <argument type="service" id="doctrine_phpcr.jackalope.factory" />
+            <argument type="service" id="database_connection" />
+            <call method="setCheckLoginOnServer">
+                <argument>false</argument>
+            </call>
+        </service>
+
+        <service id="doctrine_phpcr.jackalope.repository" class="%doctrine_phpcr.jackalope.repository.class%" abstract="true">
+            <argument type="service" id="doctrine_phpcr.jackalope.factory" />
+            <argument /><!-- jackalope transport service (1) -->
+        </service>
+
+        <service id="doctrine_phpcr.jackalope.session"
+                 class="%doctrine_phpcr.jackalope.repository.class%"
+                 factory-service="doctrine_phpcr.jackalope.repository"
+                 factory-method="login"
+                 abstract="true"
+        >
+            <argument /><!-- phpcr credentials service (0) -->
+            <argument /><!-- workspace string (1) -->
+        </service>
+
+    </services>
+
+</container>
