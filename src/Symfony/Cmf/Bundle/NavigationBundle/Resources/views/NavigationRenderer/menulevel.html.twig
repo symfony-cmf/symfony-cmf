@@ -1,0 +1,11 @@
+<ul>
+    {% for entry in menu %}
+        <li class="{% if entry.selected %}selected{% else %}unselected{% endif %} {% if entry.children %}{% if entry.children %}children{% else %}nochildren{% endif %}{% endif %} {% if loop.last %}last_child{% endif %}">
+        {# if no children elem present at all, walker did not check for children #}
+            <a href="{{ path(routename, {'url': entry.url}) }}" title="{{ entry.info }}">{{ entry.title }}</a>
+            {% if entry.children %}
+                {% include "SymfonyCmfNavigationBundle:NavigationRenderer:menulevel.html.twig" with {'menu': entry.children} %}
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

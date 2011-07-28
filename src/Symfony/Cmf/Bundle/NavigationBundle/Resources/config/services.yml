@@ -1,0 +1,24 @@
+
+services:
+    symfony_cmf_navigation.hierarchyWalker:
+        class: Symfony\Cmf\Bundle\NavigationBundle\Service\HierarchyWalker
+        arguments:
+            document_manager: "@doctrine.phpcr_odm.document_manager"
+            jackalope: "@jackalope.loader"
+            mapper: "@symfony_cmf_core.pathMapper"
+    symfony_cmf_navigation.controller:
+        class: Symfony\Cmf\Bundle\NavigationBundle\Controller\NavigationController
+        arguments:
+            container: "@service_container"
+            document_manager: "@doctrine.phpcr_odm.document_manager"
+            walker: "@symfony_cmf_navigation.hierarchyWalker"
+            mapper: "@symfony_cmf_core.pathMapper"
+            routename: "%symfony_cmf_navigation.mainmenu_routename%"
+        #scope: ?
+    symfony_cmf_navigation.renderer:
+        class: Symfony\Cmf\Bundle\NavigationBundle\Controller\NavigationRendererController
+        arguments:
+            container: "@service_container"
+            walker: "@symfony_cmf_navigation.hierarchyWalker"
+            routename: "%symfony_cmf_navigation.mainmenu_routename%"
+        #scope: ?

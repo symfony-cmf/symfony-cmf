@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cms jcr:primaryType="nt:unstructured" xmlns:crx="http://www.day.com/crx/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:fn_old="http://www.w3.org/2004/10/xpath-functions" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:vlt="http://www.day.com/jcr/vault/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:sv="http://www.jcp.org/jcr/sv/1.0" xmlns:rep="internal" xmlns:phpcr="http://www.doctrine-project.org/projects/phpcr_odm">
+    <navigation jcr:primaryType="nt:unstructured">
+        <main name="Home" jcr:primaryType="nt:unstructured">
+            <test jcr:primaryType="nt:unstructured" phpcr:alias="page" content="test content" name="nav test" title="test">
+                <leveltwo jcr:primaryType="nt:unstructured" phpcr:alias="page" content="2nd level node" name="nav leveltwo" title="2nd level">
+                    <levelthree jcr:primaryType="nt:unstructured" phpcr:alias="page" content="third" name="nav leveltree" title="3rd level"/>
+                    <otherlevelthree jcr:primaryType="nt:unstructured" phpcr:alias="page" content="test" name="nav otherleveltree" title="another 3rd level"/>
+                </leveltwo>
+                <otherleveltwo jcr:primaryType="nt:unstructured" phpcr:alias="page" content="test content" name="nav otherleveltwo" title="another 2nd level"/>
+            </test>
+        </main>
+    </navigation>
+</cms>

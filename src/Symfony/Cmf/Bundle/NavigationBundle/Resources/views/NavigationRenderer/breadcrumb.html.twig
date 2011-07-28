@@ -1,0 +1,7 @@
+<div class="cmf-breadcrumb">
+    <ul>
+        {% for url, title in breadcrumb %}
+            <li><a href="{{ path(routename, {'url': url}) }}">{{ title }}</a></li>
+        {% endfor %}
+    </ul>
+</div>

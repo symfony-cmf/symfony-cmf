@@ -1,0 +1,17 @@
+<div class="cmf-sitemap">
+    <ul>
+        {% foreach entry in map %}
+            <li>
+                <a href="{{ path(routename, {'url': entry.url}) }}"
+                    class="
+                        {% if entry.children and count(entry.children) %}
+                                children
+                        {% endif %}
+                    >{{ entry.title }}</a>
+                {% if entry.children and count(entry.children) %}
+                    {% include "SymfonyCmfNavigationBundle:NavigationRenderer:sitemap.html.twig" with {'map': entry.children} %}
+                {% endif %}
+            </li>
+        {% endforeach %}
+    </ul>
+</div>
