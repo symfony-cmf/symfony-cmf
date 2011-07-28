@@ -3,7 +3,7 @@ services:
         class: Symfony\Cmf\Bundle\MultilangContentBundle\Translation\SimpleNodeTranslator
         arguments:
             container: "@service_container"
-            document_manager: "@doctrine.phpcr_odm.document_manager"
+            document_manager: "@doctrine_phpcr.odm.default_document_manager"
             session: @doctrine_phpcr.default_session
             annotation_reader: @symfony_cmf_multilang_content.annotation_reader
             lang_prefix: %symfony_cmf_multilang_content.lang_prefix%
