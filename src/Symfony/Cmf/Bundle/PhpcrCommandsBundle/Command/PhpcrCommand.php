@@ -11,14 +11,14 @@
 
 namespace Symfony\Cmf\Bundle\PhpcrCommandsBundle\Command;
 
-use Symfony\Component\Console\Command\Command;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use Symfony\Cmf\Bundle\PhpcrCommandsBundle\Helper\NodeHelper;
 
 
-abstract class PhpcrCommand extends Command
+abstract class PhpcrCommand extends ContainerAwareCommand
 {
     /**
      * @var \PHPCR\SessionInterface
@@ -35,7 +35,7 @@ abstract class PhpcrCommand extends Command
     {
         parent::initialize($input, $output);
 
-        $this->session = $this->container->get('doctrine_phpcr.default_session');
+        $this->session = $this->getContainer()->get('doctrine_phpcr.default_session'); // TODO: make it possible to specify which session
         $this->node_helper = new NodeHelper($this->session);
     }
 

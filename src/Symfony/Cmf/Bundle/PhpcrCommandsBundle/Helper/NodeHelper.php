@@ -11,6 +11,10 @@
 
 namespace Symfony\Cmf\Bundle\PhpcrCommandsBundle\Helper;
 
+use PHPCR\SessionInterface;
+use PHPCR\NodeInterface;
+use PHPCR\PropertyInterface;
+
 /**
  * Helper class to manipulate PHPCR nodes
  */
@@ -29,7 +33,7 @@ class NodeHelper
     /**
      * @param \PHPCR\SessionInterface $session
      */
-    public function __construct(\PHPCR\SessionInterface $session)
+    public function __construct(SessionInterface $session)
     {
         $this->session = $session;
         $this->root = $this->session->getRootNode();
@@ -77,10 +81,10 @@ class NodeHelper
      * If $parent is null then the new node is create at the root.
      *
      * @param string $name Name of the new node
-     * @param Node $parent Parent node of the new node
+     * @param PHPCR\NodeInterface $parent Parent node of the new node
      * @return Node
      */
-    public function createNode($name, Node $parent = null)
+    public function createNode($name, NodeInterface $parent = null)
     {
         // TODO: this method has no real value i think
 
@@ -138,12 +142,12 @@ class NodeHelper
         $this->session->save();
     }
 
-    public function isSystemNode(Node $node)
+    public function isSystemNode(NodeInterface $node)
     {
         return substr($node->getName(), 0, 4) === 'jcr:';
     }
 
-    public function isSystemProperty(Property $prop)
+    public function isSystemProperty(PropertyInterface $prop)
     {
         return substr($prop->getName(), 0, 4) === 'jcr:';
     }

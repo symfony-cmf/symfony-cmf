@@ -11,7 +11,7 @@
 
 namespace Symfony\Cmf\Bundle\PhpcrCommandsBundle\Command;
 
-use Symfony\Component\Console\Command\Command;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -19,7 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 use Symfony\Cmf\Bundle\PhpcrCommandsBundle\Helper\JackrabbitHelper;
 
-class JackrabbitCommand extends Command
+class JackrabbitCommand extends ContainerAwareCommand
 {
     /**
      * Path to Jackrabbit jar file
@@ -69,8 +69,8 @@ EOF
         $jar = $input->getOption('jackrabbit_jar');
         if ($jar) {
             $this->jrpath = $jar;
-        } elseif ($this->container->hasParameter('phpcr_commands.jackrabbit_jar')) {
-            $this->jrpath = $this->container->getParameter('phpcr_commands.jackrabbit_jar');
+        } elseif ($this->getContainer()->hasParameter('phpcr_commands.jackrabbit_jar')) {
+            $this->jrpath = $this->getContainer()->getParameter('phpcr_commands.jackrabbit_jar');
         }
 
         if (!file_exists($this->jrpath)) {

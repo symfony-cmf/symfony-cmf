@@ -11,7 +11,6 @@
 
 namespace Symfony\Cmf\Bundle\PhpcrCommandsBundle\Command;
 
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -70,7 +69,7 @@ class DumpCommand extends PhpcrCommand
         $prop_visitor = null;
         if (ConsoleParametersParser::isTrueString($input->getOption('props'))) {
             $prop_visitor = new ConsoleDumperPropertyVisitor($output);
-            $prop_visitor->setContainer($this->container);
+            $prop_visitor->setContainer($this->getContainer());
         }
 
         $walker = new TreeWalker($node_visitor, $prop_visitor);
