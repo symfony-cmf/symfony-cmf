@@ -4,7 +4,7 @@ namespace Symfony\Cmf\Bundle\MultilangContentBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ODM\PHPCR\Event;
-use Doctrine\ODM\PHPCR\Events\LifecycleEventArgs;
+use Doctrine\ODM\PHPCR\Event\LifecycleEventArgs;
 use Doctrine\ODM\PHPCR\DocumentNotFoundException;
 
 use Symfony\Cmf\Bundle\MultilangContentBundle\Annotation\Information;
