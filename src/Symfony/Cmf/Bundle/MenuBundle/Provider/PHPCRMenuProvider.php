@@ -28,7 +28,7 @@ class PHPCRMenuProvider implements ProviderInterface
 
     protected function createFromMenu($menu)
     {
-        $item = new MenuItem($menu->getName(), $menu->getUri(), $menu->getAttributes());
+        $item = new MenuItem($menu->getName(), $this->getUri($menu), $menu->getAttributes());
         $item->setLabel($menu->getLabel());
 
 
@@ -37,6 +37,14 @@ class PHPCRMenuProvider implements ProviderInterface
         }
 
         return $item;
+    }
+
+    protected function getUri($menu)
+    {
+        if ($menu->getUri() !== null) {
+            return $menu->getUri();
+        }
+        return '';
     }
 
     protected function determineCurrentMenu($menu)
