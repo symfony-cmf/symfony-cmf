@@ -37,6 +37,7 @@ You need to install [Doctrine PHPCR ODM](http://github.com/doctrine/phpcr-odm) a
     'Doctrine\\ODM\\PHPCR'                  => __DIR__.'/../vendor/symfony-cmf/vendor/doctrine-phpcr-odm/lib',
     'Jackalope'                             => __DIR__.'/../vendor/symfony-cmf/vendor/doctrine-phpcr-odm/lib/vendor/jackalope/src',
     'PHPCR'                                 => __DIR__.'/../vendor/symfony-cmf/vendor/doctrine-phpcr-odm/lib/vendor/jackalope/lib/phpcr/src',
+    
 
 *app/autoload.php:* Add autoloader entry for the multilang annotations right after the last AnnotationRegistry::registerFile line
 
@@ -50,6 +51,16 @@ You need to install [Doctrine PHPCR ODM](http://github.com/doctrine/phpcr-odm) a
     new Symfony\Cmf\Bundle\NavigationBundle\SymfonyCmfNavigationBundle(),
     new Symfony\Cmf\Bundle\ContentBundle\SymfonyCmfContentBundle(),
     new Symfony\Cmf\Bundle\PhpcrCommandsBundle\PhpcrCommandsBundle(),
+
+#### Menus
+
+The MenuBundle makes use of the KnpMenuBundle (see https://github.com/knplabs/KnpMenuBundle). If you want to use menus you need to add the KnpMenuBundle to your vendors. There is currently a PR open to make it work with the MenuBundle (https://github.com/knplabs/KnpMenuBundle/pull/53 or https://github.com/knplabs/KnpMenuBundle/pull/55). Until that issue is fixed you can use our version at https://github.com/uwej711/KnpMenuBundle/tree/set_current_uri.
+
+And don't forget to add the bundle in app/AppKernel.php:
+
+*app/AppKernel.php:* Initialize bundles in the Kernel registerBundle method
+
+    new Symfony\Cmf\Bundle\MenuBundle\SymfonyCmfMenuBundle(),
 
 
 ### Note
