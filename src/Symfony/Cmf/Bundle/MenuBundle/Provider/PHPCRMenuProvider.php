@@ -9,15 +9,17 @@ use Doctrine\ODM\PHPCR\DocumentManager;
 
 class PHPCRMenuProvider implements ProviderInterface
 {
-    private $menu_root = null;
-    private $container = null;
-    private $dm = null;
+    protected $menu_root = null;
+    protected $container = null;
+    protected $dm = null;
+    protected $router = null;
 
     public function __construct(ContainerInterface $container, $dm_name, $menu_root)
     {
         $this->container = $container;
         $this->dm = $this->container->get($dm_name);
         $this->menu_root = $menu_root;
+        $this->router = $this->container->get('router');
     }
 
     public function getMenu($name)
@@ -43,6 +45,8 @@ class PHPCRMenuProvider implements ProviderInterface
     {
         if ($menu->getUri() !== null) {
             return $menu->getUri();
+        } else if ($menu->getRoute() !== null) {
+            return $this->router->generate($menu->getRoute());
         }
         return '';
     }

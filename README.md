@@ -37,6 +37,7 @@ You need to install [Doctrine PHPCR ODM](http://github.com/doctrine/phpcr-odm) a
     'Doctrine\\ODM\\PHPCR'                  => __DIR__.'/../vendor/symfony-cmf/vendor/doctrine-phpcr-odm/lib',
     'Jackalope'                             => __DIR__.'/../vendor/symfony-cmf/vendor/doctrine-phpcr-odm/lib/vendor/jackalope/src',
     'PHPCR'                                 => __DIR__.'/../vendor/symfony-cmf/vendor/doctrine-phpcr-odm/lib/vendor/jackalope/lib/phpcr/src',
+    
 
 *app/autoload.php:* Add autoloader entry for the multilang annotations right after the last AnnotationRegistry::registerFile line
 
@@ -51,6 +52,8 @@ You need to install [Doctrine PHPCR ODM](http://github.com/doctrine/phpcr-odm) a
     new Symfony\Cmf\Bundle\ContentBundle\SymfonyCmfContentBundle(),
     new Symfony\Cmf\Bundle\PhpcrCommandsBundle\PhpcrCommandsBundle(),
 
+#### Menus
+The MenuBundle makes use of the KnpMenuBundle. If you want to use menus you need to add the KnpMenuBundle to your vendors.
 
 ### Note
 
