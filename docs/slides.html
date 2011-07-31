@@ -2,7 +2,7 @@
 <html>
     <head>
 
-        <!-- To render these slides you need Slippy https://github.com/seldaek/slippy -->
+        <!-- To render these slides you need Slippy https://github.com/Seldaek/slippy -->
 
         <title>Symfony2 CMF Introduction</title>
 
@@ -185,18 +185,19 @@
         <div class="slide">
             <h2>PHPCR implementations</h2>
             <ul>
-                <li>Jackalope</li>
-                <ul>
-                    <li>Davex (Jackrabbit) transport layer</li>
-                    <li>Doctrine DBAL transport layer</li>
-                </ul>
+                <li>Jackalope
+                    <ul>
+                        <li>Davex (Jackrabbit) transport layer</li>
+                        <li>Doctrine DBAL transport layer</li>
+                    </ul>
+                </li>
                 <li>Midgard2 PHPCR</li>
                 <li>..</li>
             </ul>
         </div>
 
         <div class="slide">
-            <h2>PHPCR has been <a href="http://java.net/jira/browse/JSR_333-28" target="_new">submitted</a> to the JCR spec at the request of David Nüschler, JCR spec lead</h2>
+            <h2>PHPCR has been <a href="http://java.net/jira/browse/JSR_333-28" target="_blank">submitted</a> to the JCR spec at the request of David Nüschler, JCR spec lead</h2>
         </div>
 
         <div class="slide">
@@ -212,38 +213,45 @@
             <h2>Nodes</h2>
             <ul>
                 <li>Can be created, deleted, modified, copied...</li>
-                <li>Are identified by their path (*)</li>
-                <ul><li>ex. “/my/path/under/water/fish”</li></ul>
-                <li>Are typed using namespaced names</li>
-                <ul><li>nt:unstructured, nt:folder, nt:file ...</li></ul>
+                <li>Are identified by their path (*)
+                    <ul><li>ex. “/my/path/under/water/fish”</li></ul>
+                </li>
+                <li>Are typed using namespaced names
+                    <ul><li>nt:unstructured, nt:folder, nt:file ...</li></ul>
+                </li>
             </ul>
         </div>
 
         <div class="slide">
             <h2>Node mixins</h2>
             <ul>
-                <li>A mixin node type can be assigned to a node during that node's lifetime</li>
-                <ul>
-                    <li>mix:referenceable implies availability of property</li>
+                <li>A mixin node type can be assigned to a node during that node's lifetime
                     <ul>
-                        <li>jcr:uuid</li>
+                        <li>mix:referenceable implies availability of property
+                            <ul>
+                                <li>jcr:uuid</li>
+                            </ul>
+                        </li>
+                        <li>mix:versionable implies availability of properties
+                            <ul>
+                                <li>jcr:versionHistory, jcr:predecessors, jcr:baseVersion, jcr:isCheckedOut, jcr:mergeFailed properties)</li>
+                            </ul>
+                        </li>
+                        <li>...</li>
                     </ul>
-                    <li>mix:versionable implies availability of properties</li>
-                    <ul>
-                        <li>jcr:versionHistory, jcr:predecessors, jcr:baseVersion, jcr:isCheckedOut, jcr:mergeFailed properties)</li>
-                    </ul>
-                    <li>...</li>
-                </ul>
+                </li>
             </ul>
         </div>
 
         <div class="slide">
             <h2>Properties</h2>
             <ul>
-                <li>Use namespaced names</li>
-                <ul><li>jcr:created, jcr:mimeType, phpcr:alias</li></ul>
-                <li>Use one of the several type</li>
-                <ul><li>STRING, URI, BOOLEAN, LONG, DOUBLE, DECIMAL, BINARY, DATE, NAME, PATH, WEAKREFERENCE, REFERENCE</li></ul>
+                <li>Use namespaced names
+                    <ul><li>jcr:created, jcr:mimeType, phpcr:alias</li></ul>
+                </li>
+                <li>Use one of the several type
+                    <ul><li>STRING, URI, BOOLEAN, LONG, DOUBLE, DECIMAL, BINARY, DATE, NAME, PATH, WEAKREFERENCE, REFERENCE</li></ul>
+                </li>
             </ul>
         </div>
 
