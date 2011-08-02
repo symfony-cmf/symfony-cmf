@@ -64,7 +64,7 @@ class DoctrinePHPCRExtension extends AbstractDoctrineExtension
             $type = isset($config['backend']['type']) ? $config['backend']['type'] : 'davex';
             switch ($type) {
                 case 'doctrinedbal':
-                case 'davex':
+                case 'jackrabbit':
                     if (empty($loaded['jackalope'])) {
                         $loader->load('jackalope.xml');
                         $loaded['jackalope'] = true;
@@ -90,27 +90,49 @@ class DoctrinePHPCRExtension extends AbstractDoctrineExtension
 
     private function loadJackalopeSession($name, array $config, ContainerBuilder $container, $type)
     {
-        $transport = $container
-            ->setDefinition(sprintf('doctrine_phpcr.jackalope.%s_transport', $name), new DefinitionDecorator('doctrine_phpcr.jackalope.transport.'.$type))
-        ;
-
         switch ($type) {
             case 'doctrinedbal':
+                $parameters['jackalope.check_login_on_server'] = false;
                 if (isset($config['backend']['connection'])) {
-                    $transport->replaceArgument(0, new Reference($config['backend']['connection']));
+                    $parameters['jackalope.doctrine_dbal_connection'] = new Reference($config['backend']['connection']);
+                }
+                if (isset($config['backend']['check_login_on_server'])) {
+                    $parameters['jackalope.check_login_on_server'] = $config['backend']['check_login_on_server'];
+                }
+                if (isset($config['backend']['disable_stream_wrapper'])) {
+                    $parameters['jackalope.disable_stream_wrapper'] = $config['backend']['disable_stream_wrapper'];
+                }
+                if (isset($config['backend']['disable_transactions'])) {
+                    $parameters['jackalope.disable_transactions'] = $config['backend']['disable_transactions'];
                 }
                 break;
-            case 'davex':
+            case 'jackrabbit':
+                $parameters['jackalope.check_login_on_server'] = false;
                 if (isset($config['backend']['url'])) {
-                    $transport->replaceArgument(1, $config['backend']['url']);
+                    $parameters['jackalope.jackrabbit_uri'] = $config['backend']['url'];
+                }
+                if (isset($config['backend']['default_header'])) {
+                    $parameters['jackalope.jackalope.default_header'] = $config['backend']['default_header'];
+                }
+                if (isset($config['backend']['expect'])) {
+                    $parameters['jackalope.jackalope.jackrabbit_expect'] = $config['backend']['expect'];
+                }
+                if (isset($config['backend']['check_login_on_server'])) {
+                    $parameters['jackalope.check_login_on_server'] = $config['backend']['check_login_on_server'];
+                }
+                if (isset($config['backend']['disable_stream_wrapper'])) {
+                    $parameters['jackalope.disable_stream_wrapper'] = $config['backend']['disable_stream_wrapper'];
+                }
+                if (isset($config['backend']['disable_transactions'])) {
+                    $parameters['jackalope.disable_transactions'] = $config['backend']['disable_transactions'];
                 }
                 break;
         }
 
-        $container
-            ->setDefinition(sprintf('doctrine_phpcr.%s_repository', $name), new DefinitionDecorator('doctrine_phpcr.jackalope.repository'))
-            ->replaceArgument(1, new Reference(sprintf('doctrine_phpcr.jackalope.%s_transport', $name)))
+        $factory = $container
+            ->setDefinition(sprintf('doctrine_phpcr.jackalope.repository.%s', $name), new DefinitionDecorator('doctrine_phpcr.jackalope.repository.factory.'.$type))
         ;
+        $factory->replaceArgument(0, $parameters);
 
         $container
             ->setDefinition(sprintf('doctrine_phpcr.%s_credentials', $name), new DefinitionDecorator('doctrine_phpcr.credentials'))
@@ -120,7 +142,7 @@ class DoctrinePHPCRExtension extends AbstractDoctrineExtension
 
         $container
             ->setDefinition(sprintf('doctrine_phpcr.%s_session', $name), new DefinitionDecorator('doctrine_phpcr.jackalope.session'))
-            ->setFactoryService(sprintf('doctrine_phpcr.%s_repository', $name))
+            ->setFactoryService(sprintf('doctrine_phpcr.jackalope.repository.%s', $name))
             ->replaceArgument(0, new Reference(sprintf('doctrine_phpcr.%s_credentials', $name)))
             ->replaceArgument(1, $config['workspace'])
         ;
