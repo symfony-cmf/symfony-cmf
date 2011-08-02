@@ -37,7 +37,7 @@ You need to install [Doctrine PHPCR ODM](http://github.com/doctrine/phpcr-odm) a
     'Doctrine\\ODM\\PHPCR'                  => __DIR__.'/../vendor/symfony-cmf/vendor/doctrine-phpcr-odm/lib',
     'Jackalope'                             => __DIR__.'/../vendor/symfony-cmf/vendor/doctrine-phpcr-odm/lib/vendor/jackalope/src',
     'PHPCR'                                 => __DIR__.'/../vendor/symfony-cmf/vendor/doctrine-phpcr-odm/lib/vendor/jackalope/lib/phpcr/src',
-    
+
 
 *app/autoload.php:* Add autoloader entry for the multilang annotations right after the last AnnotationRegistry::registerFile line
 
@@ -70,3 +70,4 @@ you want to use only a specific bundle. Browse https://github.com/symfony-cmf/
 to see which are available. If you miss one, please contact us and explain why
 it should be available stand-alone.
 
+Documentation on that part is in doc/StandaloneBundles.md
