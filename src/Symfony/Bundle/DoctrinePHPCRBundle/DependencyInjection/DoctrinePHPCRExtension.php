@@ -21,7 +21,7 @@ use Symfony\Component\Config\Definition\Processor;
 class DoctrinePHPCRExtension extends AbstractDoctrineExtension
 {
     private $documentManagers;
-    
+
     private $bundleDirs = array();
 
     public function load(array $configs, ContainerBuilder $container)
@@ -61,7 +61,7 @@ class DoctrinePHPCRExtension extends AbstractDoctrineExtension
 
         $loaded = array();
         foreach ($config['sessions'] as $name => $config) {
-            $type = isset($config['backend']['type']) ? $config['backend']['type'] : 'davex';
+            $type = isset($config['backend']['type']) ? $config['backend']['type'] : 'jackrabbit';
             switch ($type) {
                 case 'doctrinedbal':
                 case 'jackrabbit':
@@ -204,7 +204,7 @@ class DoctrinePHPCRExtension extends AbstractDoctrineExtension
         foreach ($methods as $method => $arg) {
             $odmConfigDef->addMethodCall($method, array($arg));
         }
-        
+
         if (!isset($documentManager['session'])) {
             $documentManager['session'] = $this->defaultSession;
         }
@@ -220,11 +220,11 @@ class DoctrinePHPCRExtension extends AbstractDoctrineExtension
             ))
         ;
     }
-    
+
     protected function getMappingDriverBundleConfigDefaults(array $bundleConfig, \ReflectionClass $bundle, ContainerBuilder $container)
-    {        
+    {
         $this->bundleDirs[] = dirname($bundle->getFileName());
-        
+
         return parent::getMappingDriverBundleConfigDefaults($bundleConfig, $bundle, $container);
     }
 
