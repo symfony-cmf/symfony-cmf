@@ -1,26 +1,37 @@
-This is the PHPCR commands bundle for the Symfony2 content management framework.
+# Useful commands for PHPCR
 
-See http://cmf.symfony-project.org/ for more information about the CMF.
-
-
-This bundle contains console commands to manipulate the content repository
+This bundle contains console commands to manipulate the content repository.
 
 DISCLAIMER: This bundle is still in an experimental state.
 
+It is part of the (symfony-cmf)[https://github.com/symfony-cmf/symfony-cmf]
+repository and additionally exposed standalone repository in case you do not
+want the rest of the symfony-cmf bundles.
 
-# Standalone Installation
+**Never commit to the standalone repository.** All commits and pull requests go
+to the main repository https://github.com/symfony-cmf/symfony-cmf
+Maintainers: See docs/StandaloneBundles.md for how to update the standalone
+repository.
 
-*If you are using this bundle inside the symfony-cmf distribution, you do not
-need this step.*
+
+# Installation
+
+### With symfony-cmf
+
+Please see the main README at https://github.com/symfony-cmf/symfony-cmf
+
+### Standalone
 
 This bundle depends on a PHPCR implementation. The easiest is to follow the
 installation instruction of the [DoctrinePHPCRBundle](https://github.com/symfony-cmf/DoctrinePHPCRBundle)
 
-Once you have installed the pre-requisites, add this bundle to your project and
-register it with autoload and the app kernel.
+Once you have installed the pre-requisites, add this repository into your project and
+
+* Add `Symfony\Cmf\Bundle\PhpcrCommandsBundle\PhpcrCommandsBundle` to your Kernel's registerBundles() method
+* Add autoloader for the Symfony\Cmf namespace
 
 
-# Additional requirements
+# Additional requirements for the phpcr:fixtures:load command
 
 To use the phpcr:fixtures:load command, you additionally need the Doctrine
 data-fixtures and the symfony doctrine fixtures bundle:
