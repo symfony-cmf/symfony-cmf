@@ -9,7 +9,6 @@ http://help.github.com/split-a-subpath-into-a-new-repo/
     git filter-branch --prune-empty --subdirectory-filter src/Symfony/Cmf/Bundle/PhpcrCommandsBundle/ master
     git remote add bundle git@github.com:symfony-cmf/PhpcrCommandsBundle.git
     git remote update
-    git merge bundle/master
     git push bundle master
 
 
@@ -18,15 +17,18 @@ http://help.github.com/split-a-subpath-into-a-new-repo/
     git filter-branch --prune-empty --subdirectory-filter src/Symfony/Bundle/DoctrinePHPCRBundle/ master
     git remote add bundle git@github.com:symfony-cmf/DoctrinePHPCRBundle.git
     git remote update
-    git merge bundle/master
     git push bundle master
 
 
 ## History
 
-Some bundles where already existing in stand alnoe repositories. Those where
+Some bundles where already existing as standalone repositories. Those where
 merged into the symfony-cmf repository according to the guide at
-http://help.github.com/subtree-merge/
+http://help.github.com/subtree-merge/ which seems to be no more than just copy
+the files. All commit history is lost and we just kept Archive_ repositories
+of the PhpcrCommandsBundle and DoctrinePHPCRBundle for reference.
+
+https://github.com/symfony-cmf/Archived_PhpcrCommandsBundle
 
 **Pulling in the changes later does not work, it completely replaces the
 repository with the subtree.**
