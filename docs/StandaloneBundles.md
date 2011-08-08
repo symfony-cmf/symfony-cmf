@@ -19,6 +19,11 @@ http://help.github.com/split-a-subpath-into-a-new-repo/
     git remote update
     git push bundle master
 
+NOTE: You have to do a fresh checkout of symfony-cmf each time you want to
+update the subtree repository. This seems not to hurt anything however.
+If somebody finds a way to keep the repo and not having to do a fresh checkout
+for each time, please tell and document it here...
+
 
 ## History
 

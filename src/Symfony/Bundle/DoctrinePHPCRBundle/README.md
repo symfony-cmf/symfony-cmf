@@ -3,7 +3,7 @@
 This bundle integrates Doctrine PHPCR ODM and PHPCR backends like Jackalope or
 Midgard2 CR into Symfony2.
 
-It is part of the (symfony-cmf)[https://github.com/symfony-cmf/symfony-cmf]
+It is part of the [symfony-cmf](https://github.com/symfony-cmf/symfony-cmf)
 repository and additionally exposed standalone repository in case you do not
 want the rest of the symfony-cmf bundles.
 

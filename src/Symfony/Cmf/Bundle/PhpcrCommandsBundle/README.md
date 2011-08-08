@@ -4,7 +4,7 @@ This bundle contains console commands to manipulate the content repository.
 
 DISCLAIMER: This bundle is still in an experimental state.
 
-It is part of the (symfony-cmf)[https://github.com/symfony-cmf/symfony-cmf]
+It is part of the [symfony-cmf](https://github.com/symfony-cmf/symfony-cmf)
 repository and additionally exposed standalone repository in case you do not
 want the rest of the symfony-cmf bundles.
 
