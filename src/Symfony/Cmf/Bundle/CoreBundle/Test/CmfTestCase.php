@@ -45,7 +45,7 @@ class CmfTestCase extends BaseWebTestCase
     {
         parent::__construct();
 
-        $this->importexport = new \jackrabbit_importexport($fixturesPath);
+        $this->importexport = new \JackrabbitFixtureLoader($fixturesPath);
     }
 
     /**
@@ -60,10 +60,10 @@ class CmfTestCase extends BaseWebTestCase
     {
         //TODO: improve importexport to have an other way to pass options
         $container = $this->getContainer();
-        $GLOBALS['jcr.url'] = $container->getParameter('jackalope.options.url');
-        $GLOBALS['jcr.workspace'] = $container->getParameter('jackalope.options.workspace');
-        $GLOBALS['jcr.user'] = $container->getParameter('jackalope.options.user');
-        $GLOBALS['jcr.pass'] = $container->getParameter('jackalope.options.pass');
+        $GLOBALS['jackrabbit.uri'] = $container->getParameter('jackrabbit_url');
+        $GLOBALS['phpcr.workspace'] = $container->getParameter('phpcr_workspace');
+        $GLOBALS['phpcr.user'] = $container->getParameter('phpcr_user');
+        $GLOBALS['phpcr.pass'] = $container->getParameter('phpcr_pass');
 
         $this->importexport->import($name);
     }
@@ -80,7 +80,7 @@ class CmfTestCase extends BaseWebTestCase
         static $url;
         if (null === $available) {
             $container = $this->getContainer();
-            $url = $container->getParameter('jackalope.options.url');
+            $url = $container->getParameter('jackrabbit_url');
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
