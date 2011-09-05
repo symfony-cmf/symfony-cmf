@@ -5,7 +5,6 @@ namespace Symfony\Cmf\Bundle\MultilangContentBundle\EventListener;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ODM\PHPCR\Event;
 use Doctrine\ODM\PHPCR\Event\LifecycleEventArgs;
-use Doctrine\ODM\PHPCR\DocumentNotFoundException;
 
 use Symfony\Cmf\Bundle\MultilangContentBundle\Annotation\Information;
 
@@ -91,8 +90,8 @@ class NodeTranslator implements EventSubscriber {
         }
 
         if (!$child) {
-            //TODO: is this a good idea or should we allow for no translations available?
-            throw new DocumentNotFoundException("No translations found, but translation properties exist for the document");
+            // no translation found
+            return;
         }
 
         foreach ($translationInfo->getTranslatedProperties() as $property) {
