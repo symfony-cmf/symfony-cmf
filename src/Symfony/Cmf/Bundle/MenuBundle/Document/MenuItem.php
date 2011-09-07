@@ -3,7 +3,7 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
-use Knp\Bundle\MenuBundle\NodeInterface;
+use Knp\Menu\NodeInterface;
 
 /**
  * This class represents a menu item for the cmf.
@@ -143,6 +143,16 @@ class MenuItem implements NodeInterface {
     public function getChildren()
     {
         return $this->children;
+    }
+
+    /**
+     * To comply with the Knp\Menu\NodeInterface requirements
+     *
+     * @return array an empty array
+     */
+    public function getOptions()
+    {
+        return array();
     }
 
 }
