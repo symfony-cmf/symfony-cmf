@@ -240,7 +240,7 @@ class HierarchyWalker
      * @param int $curdepth current depth recursion is into unselected nodes
      * @return nested array of all children of this node and their children down the selected path and others down to $depth
      */
-    protected function visitMenuRecursive($parentrecord, $path, $visitor, $depth, $curdepth)
+    protected function visitMenuRecursive(&$parentrecord, $path, $visitor, $depth, $curdepth)
     {
         $visitor->reset();
         foreach($parentrecord['node'] as $child) {
@@ -248,8 +248,10 @@ class HierarchyWalker
             $child->accept($visitor);
         }
         $list = $visitor->getArray();
-        foreach($list as $key => $record) {
+        $childselected = false;
+        foreach($list as $key => &$record) {
             if ($record['selected']) {
+                $childselected = true;
                 $list[$key]['children'] = $this->visitMenuRecursive($record, $path, $visitor, $depth, 0);
             } elseif ($curdepth < $depth) {
                 $list[$key]['children'] = $this->visitMenuRecursive($record, $path, $visitor, $depth, $curdepth + 1);
@@ -259,6 +261,7 @@ class HierarchyWalker
                 $list[$key]['children'] = false;
             }
         }
+        $parentrecord['childselected'] = $childselected;
         return $list;
     }
 }

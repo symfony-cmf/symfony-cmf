@@ -78,9 +78,20 @@ class NavigationRendererController extends Controller
     {
         $this->checkUrl($url);
         $menu = $this->walker->getMenu($url);
+
+        // would be nicer if we could get that information from the walker...
+        $entryselected = false;
+        foreach($menu as $entry) {
+            if ($entry['selected']) {
+                $entryselected = true;
+            }
+        }
+
         return $this->render('SymfonyCmfNavigationBundle:NavigationRenderer:menu.html.twig',
                              array('root' => $menu,
-                                   'routename' => $this->routename));
+                                   'routename' => $this->routename,
+                                   'entryselected' => $entryselected,
+                             ));
     }
 
     public function sitemapAction()
