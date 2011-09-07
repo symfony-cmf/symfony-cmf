@@ -35,7 +35,27 @@ on the AbstractDoctrineBundle aswell:
         # configure the PHPCR session
         session:
             backend:
+                ## backend type: jackrabbit, doctrinedbal or midgard
+                type: jackrabbit
+
+                ## doctrinedbal only, required
+                connection: <service name of the doctrine dbal connection>
+
+                ## jackrabbit only, required
                 url: http://localhost:8080/server/
+                ## jackrabbit only, optional. see https://github.com/jackalope/jackalope/blob/master/src/Jackalope/RepositoryFactoryJackrabbit.php
+                default_header: ...
+                expect: 'Expect: 100-continue'
+
+                ## tweak options for jackrabbit and doctrinedbal (all jackalope versions)
+                # optional, below set to the default
+                # enable if you want to have an exception right away if backend login fails
+                check_login_on_server: false
+                # enable if you experience segmentation faults while working with binary data in documents
+                disable_stream_wrapper: false
+                # enable if you do not want to use transactions and you neither want the odm to automatically use transactions
+                # its highly recommended NOT to disable transactions
+                disable_transactions: false
             workspace: default
             username: admin
             password: admin
