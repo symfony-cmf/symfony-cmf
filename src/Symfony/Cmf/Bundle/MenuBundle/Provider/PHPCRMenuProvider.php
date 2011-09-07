@@ -2,59 +2,35 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Provider;
 
-use Knp\Bundle\MenuBundle\ProviderInterface;
-use Knp\Bundle\MenuBundle\MenuItem;
+use Knp\Menu\Provider\MenuProviderInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Doctrine\ODM\PHPCR\DocumentManager;
 
-class PHPCRMenuProvider implements ProviderInterface
+class PHPCRMenuProvider implements MenuProviderInterface
 {
-    protected $menu_root = null;
     protected $container = null;
     protected $dm = null;
-    protected $router = null;
+    protected $menu_root = null;
+    protected $factory = null;
 
     public function __construct(ContainerInterface $container, $dm_name, $menu_root)
     {
         $this->container = $container;
         $this->dm = $this->container->get($dm_name);
         $this->menu_root = $menu_root;
-        $this->router = $this->container->get('router');
+        $this->factory = $this->container->get('phpcr.menu.factory');
     }
 
-    public function getMenu($name)
+    public function get($name)
     {
         $menu = $this->dm->find(null, $this->menu_root . '/' . $name);
-        return $this->createFromMenu($menu);
+        $menuItem = $this->factory->createFromNode($menu);
+        $menuItem->setCurrentUri($this->container->get('request')->getRequestUri());
+        return $menuItem;
     }
 
-    protected function createFromMenu($menu)
+    public function has($name)
     {
-        $item = new MenuItem($menu->getName(), $this->getUri($menu), $menu->getAttributes());
-        $item->setLabel($menu->getLabel());
-
-
-        foreach ($menu->getChildren() as $childMenu) {
-            $item->addChild($this->createFromMenu($childMenu));
-        }
-
-        return $item;
-    }
-
-    protected function getUri($menu)
-    {
-        if ($menu->getUri() !== null) {
-            return $menu->getUri();
-        } else if ($menu->getRoute() !== null) {
-            return $this->router->generate($menu->getRoute());
-        }
-        return '';
-    }
-
-    protected function determineCurrentMenu($menu)
-    {
-        if (false) {
-            $item->setIsCurrent($this->determineCurrentMenu($menu));
-        }
+        $menu = $this->dm->find(null, $this->menu_root . '/' . $name);
+        return $menu !== null;
     }
 }

@@ -145,14 +145,20 @@ class MenuItem implements NodeInterface {
         return $this->children;
     }
 
-    /**
-     * To comply with the Knp\Menu\NodeInterface requirements
-     *
-     * @return array an empty array
-     */
     public function getOptions()
     {
-        return array();
+        return array(
+            'uri' => $this->getUri(),
+            'route' => $this->getRoute(),
+            'label' => $this->getLabel(),
+            'attributes' => $this->getAttributes(),
+            'display' => true,
+            'displayChildren' => true,
+            // TODO
+            'routeParameters' => array(),
+            'routeAbsolute' => false,
+            'linkAttributes' => array(),
+            'labelAttributes' => array(),
+        );
     }
-
 }
