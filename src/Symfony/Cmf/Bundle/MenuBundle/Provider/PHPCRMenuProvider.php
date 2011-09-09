@@ -23,6 +23,9 @@ class PHPCRMenuProvider implements MenuProviderInterface
     public function get($name)
     {
         $menu = $this->dm->find(null, $this->menu_root . '/' . $name);
+        if ($menu === null) {
+            throw new \InvalidArgumentException(sprintf('The menu "%s" is not defined.', $name));
+        }
         $menuItem = $this->factory->createFromNode($menu);
         $menuItem->setCurrentUri($this->container->get('request')->getRequestUri());
         return $menuItem;
