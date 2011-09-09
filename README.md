@@ -55,7 +55,7 @@ You need to install [Doctrine PHPCR ODM](http://github.com/doctrine/phpcr-odm) a
 
 #### Menus
 
-The MenuBundle makes use of the KnpMenu application and KnpMenuBundle (see http://github.com/knplabs/KnpMenuBundle for installation and configuration). If you want to use menus you need to add KnpMenu and KnpMenuBundle to your vendors.
+The MenuBundle makes use of the KnpMenu library and KnpMenuBundle (see http://github.com/knplabs/KnpMenuBundle for installation and configuration). If you want to use menus you need to add KnpMenu and KnpMenuBundle to your vendors.
 
 Don't forget to add the bundle in app/AppKernel.php:
 
