@@ -19,6 +19,7 @@ class ContentAwareFactory extends RouterAwareFactory
     {
         if (!empty($options['content'])) {
             $options['uri'] = $this->content_router->generate($options['content']);
+            unset($options['route']);
         }
 
         return parent::createItem($name, $options);
