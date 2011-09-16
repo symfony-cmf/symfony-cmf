@@ -26,7 +26,7 @@ class LoadFixtureCommand extends ContainerAwareCommand
 
         $this->setName('doctrine:phpcr:fixtures:load')
             ->setDescription('Load fixtures PHPCR files')
-            ->addOption('document_manager', null, InputOption::VALUE_OPTIONAL, 'The document manager to use for this command')
+            ->addOption('dm', null, InputOption::VALUE_OPTIONAL, 'The document manager to use for this command')
             ->addOption('path', null, InputOption::VALUE_REQUIRED, 'The path to the fixtures')
             ->addOption('purge', null, InputOption::VALUE_OPTIONAL, 'Set to true if the database must be purged')
             ->setHelp(<<<EOF
@@ -45,7 +45,7 @@ EOF
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        DoctrineCommandHelper::setApplicationDocumentManager($this->getApplication(), $input->getOption('document_manager'));
+        DoctrineCommandHelper::setApplicationDocumentManager($this->getApplication(), $input->getOption('dm'));
 
         $path = $input->getOption('path');
         if (! is_dir($path)) {
