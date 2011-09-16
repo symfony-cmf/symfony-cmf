@@ -178,7 +178,7 @@ class DoctrinePHPCRExtension extends AbstractDoctrineExtension
             $tmp = array_keys($this->documentManagers);
             $config['default_document_manager'] = reset($tmp);
         }
-        $container->setParameter('doctrine_phpcr.default_document_manager', $config['default_document_manager']);
+        $container->setParameter('doctrine_phpcr.odm.default_document_manager', $config['default_document_manager']);
 
         $container->setAlias('doctrine_phpcr.odm.document_manager', sprintf('doctrine_phpcr.odm.%s_document_manager', $config['default_document_manager']));
 
