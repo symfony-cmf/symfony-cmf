@@ -24,7 +24,7 @@ class LoadFixtureCommand extends ContainerAwareCommand
     {
         parent::configure();
 
-        $this->setName('phpcr:fixtures:load')
+        $this->setName('doctrine:phpcr:fixtures:load')
             ->setDescription('Load fixtures PHPCR files')
             ->addOption('document_manager', null, InputOption::VALUE_OPTIONAL, 'The document manager to use for this command')
             ->addOption('path', null, InputOption::VALUE_REQUIRED, 'The path to the fixtures')

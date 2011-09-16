@@ -27,7 +27,7 @@ class DumpCommand extends DoctrineCommandHelper
     {
         parent::configure();
 
-        $this->setName('phpcr:dump')
+        $this->setName('doctrine:phpcr:dump')
             ->addOption('session', null, InputOption::VALUE_OPTIONAL, 'The session to use for this command')
             ->addOption('sys_nodes', null, InputOption::VALUE_OPTIONAL, 'Set to "yes" to dump the system nodes', "no")
             ->addOption('props', null, InputOption::VALUE_OPTIONAL, 'Set to "yes" to dump the node properties', "no")

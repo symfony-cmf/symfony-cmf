@@ -86,9 +86,9 @@ You can access the PHPCR services like this:
 
 # Useful commands for PHPCR
 
-# Additional requirements for the phpcr:fixtures:load command
+# Additional requirements for the doctrine:phpcr:fixtures:load command
 
-To use the phpcr:fixtures:load command, you additionally need the Doctrine
+To use the doctrine:phpcr:fixtures:load command, you additionally need the Doctrine
 data-fixtures and the symfony doctrine fixtures bundle:
 - https://github.com/symfony/DoctrineFixturesBundle
 - https://github.com/doctrine/data-fixtures
@@ -101,42 +101,42 @@ main project folder run
 
     app/console.php <command> [options] [arguments]
 
-## phpcr:dump
+## doctrine:phpcr:dump
 
     Usage:
-     phpcr:dump [--sys_nodes[="..."]] [--props[="..."]] [path]
+    doctrine:phpcr:dump [--sys_nodes[="..."]] [--props[="..."]] [path]
 
     Arguments:
-     path         Path of the node to dump (default: /)
+    path         Path of the node to dump (default: /)
 
     Options:
      --sys_nodes Set to "yes" to dump the system nodes (default: no)
      --props Set to "yes" to dump the node properties (default: no)
 
     Help:
-     The phpcr:dump command dumps a node (specified by the path argument) and its subnodes in a yaml-like style.
+    The doctrine:phpcr:dump command dumps a node (specified by the path argument) and its subnodes in a yaml-like style.
 
      If the props option is set to yes the nodes properties are displayed as yaml arrays.
      By default the command filters out system nodes and properties (i.e. nodes and properties with names starting
      with 'jcr:'), the sys_nodes option allows to turn this filter off.
 
 
-## phpcr:purge
+## doctrine:phpcr:purge
 
     Usage:
-     phpcr:purge
+    doctrine:phpcr:purge
 
     Options:
      --force Set to "yes" to bypass the confirmation dialog (default: no)
 
     Help:
-     The phpcr:purge command remove all the non-standard nodes from the content repository
+     The doctrine:phpcr:purge command remove all the non-standard nodes from the content repository
 
 
-## phpcr:sql
+## doctrine:phpcr:sql
 
     Usage:
-    phpcr:sql sql
+    doctrine:phpcr:sql sql
 
     Arguments:
     sql  JCR SQL2 statement to execute
@@ -145,10 +145,10 @@ main project folder run
     The phpcr:sql command executes a JCR SQL2 statement on the content repository
 
 
-## phpcr:jackrabbit
+## doctrine:phpcr:jackrabbit
 
     Usage:
-     phpcr:jackrabbit [--jackrabbit_jar[="..."]] cmd
+     doctrine:phpcr:jackrabbit [--jackrabbit_jar[="..."]] cmd
 
     Arguments:
      cmd               Command to execute (start | stop | status)
@@ -157,7 +157,7 @@ main project folder run
      --jackrabbit_jar Path to the Jackrabbit jar file
 
     Help:
-     The phpcr:jackrabbit command allows to have a minimal control on the Jackrabbit server
+     The doctrine:phpcr:jackrabbit command allows to have a minimal control on the Jackrabbit server
      from within a Symfony 2 command.
 
      If the jackrabbit_jar option is set, it will be used as the Jackrabbit server jar file.
@@ -165,17 +165,17 @@ main project folder run
      valid Jackrabbit server jar file.
 
 
-## phpcr:fixtures:load
+## doctrine:phpcr:fixtures:load
 
     Usage:
-     phpcr:fixtures:load [--path="..."] [--purge[="..."]]
+     doctrine:phpcr:fixtures:load [--path="..."] [--purge[="..."]]
 
     Options:
      * --path The path to the fixtures
      * --purge Set to true if the database must be purged
 
     Help:
-     The phpcr:fixtures:load command loads PHPCR fixtures
+     The doctrine:phpcr:fixtures:load command loads PHPCR fixtures
 
 
 # Fixtures

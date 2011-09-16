@@ -28,7 +28,7 @@ class JackrabbitCommand extends ContainerAwareCommand
     {
         parent::configure();
 
-        $this->setName('phpcr:jackrabbit')
+        $this->setName('doctrine:phpcr:jackrabbit')
             ->addArgument('cmd', InputArgument::REQUIRED, 'Command to execute (start | stop | status)')
             ->addOption('jackrabbit_jar', null, InputOption::VALUE_OPTIONAL, 'Path to the Jackrabbit jar file')
             ->setDescription('Start and stop the Jackrabbit server')

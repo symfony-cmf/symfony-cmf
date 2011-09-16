@@ -19,7 +19,7 @@ class PurgeCommand extends DoctrineCommandHelper
     {
         parent::configure();
 
-        $this->setName('phpcr:purge')
+        $this->setName('doctrine:phpcr:purge')
             ->setDescription('Purge the content repository')
             ->addOption('session', null, InputOption::VALUE_OPTIONAL, 'The session to use for this command')
             ->addOption('force', null, InputOption::VALUE_OPTIONAL, 'Set to "yes" to bypass the confirmation dialog', "no")

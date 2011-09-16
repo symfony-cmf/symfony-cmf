@@ -27,7 +27,7 @@ class SqlCommand extends DoctrineCommandHelper
     {
         parent::configure();
 
-        $this->setName('phpcr:sql')
+        $this->setName('doctrine:phpcr:sql')
             ->addArgument('sql', InputArgument::REQUIRED, 'JCR SQL statement to execute')
             ->addOption('session', null, InputOption::VALUE_OPTIONAL, 'The session to use for this command')
             ->setDescription('Execute a JCR SQL2 statement')
