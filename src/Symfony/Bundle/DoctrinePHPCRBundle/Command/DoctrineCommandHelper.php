@@ -7,7 +7,7 @@ use Doctrine\ODM\PHPCR\Tools\Console\Helper\DocumentManagerHelper;
 
 /**
  * Provides some helper and convenience methods to configure doctrine commands in the context of bundles
- * and multiple sessions/entity managers.
+ * and multiple sessions/document managers.
  *
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  */
