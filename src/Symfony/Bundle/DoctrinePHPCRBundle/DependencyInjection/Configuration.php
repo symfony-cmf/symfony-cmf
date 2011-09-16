@@ -29,7 +29,12 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('doctrine_phpcr');
+        $rootNode = $treeBuilder->root('doctrine_phpcr')
+            ->children()
+                ->scalarNode('jackrabbit_jar')->end()
+                ->scalarNode('doctrine_phpcr.dump_max_line_length')->defaultValue(120)->end()
+            ->end()
+        ;
 
         $this->addPHPCRSection($rootNode);
         $this->addOdmSection($rootNode);

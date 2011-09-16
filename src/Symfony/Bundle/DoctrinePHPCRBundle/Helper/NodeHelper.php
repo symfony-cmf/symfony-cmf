@@ -1,15 +1,6 @@
 <?php
 
-/*
- * This file is part of the Symfony/Cmf/PhpcrCommandsBundle
- *
- * (c) Daniel Barsotti <daniel.barsotti@liip.ch>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
-namespace Symfony\Cmf\Bundle\PhpcrCommandsBundle\Helper;
+namespace Symfony\Bundle\DoctrinePHPCRBundle\Helper;
 
 use PHPCR\SessionInterface;
 use PHPCR\NodeInterface;
@@ -17,6 +8,8 @@ use PHPCR\PropertyInterface;
 
 /**
  * Helper class to manipulate PHPCR nodes
+ * 
+ * @author Daniel Barsotti <daniel.barsotti@liip.ch>
  */
 class NodeHelper
 {

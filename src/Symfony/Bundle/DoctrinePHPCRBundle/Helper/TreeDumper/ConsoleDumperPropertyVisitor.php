@@ -1,15 +1,6 @@
 <?php
 
-/*
- * This file is part of the Symfony/Cmf/PhpcrCommandsBundle
- *
- * (c) Daniel Barsotti <daniel.barsotti@liip.ch>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
-namespace Symfony\Cmf\Bundle\PhpcrCommandsBundle\Helper\TreeDumper;
+namespace Symfony\Bundle\DoctrinePHPCRBundle\Helper\TreeDumper;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -19,6 +10,9 @@ use PHPCR\ItemVisitorInterface;
 use PHPCR\ItemInterface;
 use PHPCR\PropertyInterface;
 
+/**
+ * @author Daniel Barsotti <daniel.barsotti@liip.ch>
+ */
 class ConsoleDumperPropertyVisitor implements ItemVisitorInterface, ContainerAwareInterface
 {
     protected $container;
@@ -27,7 +21,7 @@ class ConsoleDumperPropertyVisitor implements ItemVisitorInterface, ContainerAwa
 
     protected $level = 0;
 
-    protected $max_line_length = 120;
+    protected $maxLineLength = 120;
     
     public function __construct(OutputInterface $output)
     {
@@ -50,7 +44,7 @@ class ConsoleDumperPropertyVisitor implements ItemVisitorInterface, ContainerAwa
             throw new \Exception("Internal error: did not expect to visit a non-node object: $item");
         }
 
-        $this->max_line_length = $this->container->getParameter('phpcr_commands.dump_max_line_length');
+        $this->maxLineLength = $this->container->getParameter('doctrine_phpcr.dump_max_line_length');
 
         $value = $item->getString();
 
@@ -58,8 +52,8 @@ class ConsoleDumperPropertyVisitor implements ItemVisitorInterface, ContainerAwa
             $value = print_r($value, true);
         }
 
-        if (strlen($value) > $this->max_line_length) {
-            $value = substr($value, 0, $this->max_line_length) . '...';
+        if (strlen($value) > $this->maxLineLength) {
+            $value = substr($value, 0, $this->maxLineLength) . '...';
         }
 
         $value = str_replace(array("\n", "\t"), '', $value);

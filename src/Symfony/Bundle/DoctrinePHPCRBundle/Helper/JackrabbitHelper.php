@@ -1,18 +1,11 @@
 <?php
 
-/*
- * This file is part of the Symfony/Cmf/PhpcrCommandsBundle
- *
- * (c) Daniel Barsotti <daniel.barsotti@liip.ch>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
-namespace Symfony\Cmf\Bundle\PhpcrCommandsBundle\Helper;
+namespace Symfony\Bundle\DoctrinePHPCRBundle\Helper;
 
 /**
  * Helper class for basic jackrabbit server management
+ * 
+ * @author Daniel Barsotti <daniel.barsotti@liip.ch>
  */
 class JackrabbitHelper
 {

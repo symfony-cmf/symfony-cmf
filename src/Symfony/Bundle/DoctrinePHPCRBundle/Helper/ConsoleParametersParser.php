@@ -1,16 +1,10 @@
 <?php
 
-/*
- * This file is part of the Symfony/Cmf/PhpcrCommandsBundle
- *
- * (c) Daniel Barsotti <daniel.barsotti@liip.ch>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
+namespace Symfony\Bundle\DoctrinePHPCRBundle\Helper;
+
+/**
+ * @author Daniel Barsotti <daniel.barsotti@liip.ch>
  */
-
-namespace Symfony\Cmf\Bundle\PhpcrCommandsBundle\Helper;
-
 class ConsoleParametersParser
 {
     /**
