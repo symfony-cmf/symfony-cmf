@@ -20,7 +20,7 @@ class RegisterEventListenersAndSubscribersPass implements CompilerPassInterface
         }
 
         $this->container = $container;
-        $this->documentManagers = $container->getParameter('doctrine_phpcr.document_managers');
+        $this->documentManagers = $container->getParameter('doctrine_phpcr.odm.document_managers');
 
         foreach ($container->findTaggedServiceIds('doctrine_phpcr.event_subscriber') as $subscriberId => $instances) {
             $this->registerSubscriber($subscriberId, $instances);
