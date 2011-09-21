@@ -15,7 +15,7 @@ class RegisterEventListenersAndSubscribersPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasParameter('doctrine_phpcr.default_document_manager')) {
+        if (!$container->hasParameter('doctrine_phpcr.odm.default_document_manager')) {
             return;
         }
 
