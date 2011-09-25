@@ -20,7 +20,8 @@ use Symfony\Component\Config\Definition\Processor;
  */
 class DoctrinePHPCRExtension extends AbstractDoctrineExtension
 {
-    private $documentManagers;
+    private $defaultSession;
+    private $sessions = array();
 
     private $bundleDirs = array();
 
@@ -35,6 +36,9 @@ class DoctrinePHPCRExtension extends AbstractDoctrineExtension
         }
 
         if (!empty($config['odm'])) {
+            if (empty($this->sessions)) {
+                throw new \InvalidArgumentException("You did not configure a session for the document managers");
+            }
             $this->odmLoad($config['odm'], $container);
         }
     }
@@ -44,24 +48,16 @@ class DoctrinePHPCRExtension extends AbstractDoctrineExtension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('phpcr.xml');
 
-        if (empty($config['default_session'])) {
-            $keys = array_keys($config['sessions']);
-            $config['default_session'] = reset($keys);
-        }
-        $this->defaultSession = $config['default_session'];
+        $sessions = $loaded = array();
+        foreach ($config['sessions'] as $name => $session) {
+            if (empty($config['default_session'])) {
+                $config['default_session'] = $name;
+            }
 
-        $container->setAlias('phpcr.session', sprintf('doctrine_phpcr.%s_session', $this->defaultSession));
+            $session['name'] = $name;
+            $session['service_name'] = $sessions[$name] = sprintf('doctrine_phpcr.%s_session', $name);
 
-        $sessions = array();
-        foreach (array_keys($config['sessions']) as $name) {
-            $sessions[$name] = sprintf('doctrine_phpcr.%s_session', $name);
-        }
-        $container->setParameter('doctrine_phpcr.sessions', $sessions);
-        $container->setParameter('doctrine_phpcr.default_session', $this->defaultSession);
-
-        $loaded = array();
-        foreach ($config['sessions'] as $name => $config) {
-            $type = isset($config['backend']['type']) ? $config['backend']['type'] : 'jackrabbit';
+            $type = isset($session['backend']['type']) ? $session['backend']['type'] : 'jackrabbit';
             switch ($type) {
                 case 'doctrinedbal':
                 case 'jackrabbit':
@@ -69,150 +65,154 @@ class DoctrinePHPCRExtension extends AbstractDoctrineExtension
                         $loader->load('jackalope.xml');
                         $loaded['jackalope'] = true;
                     }
-                    $this->loadJackalopeSession($name, $config, $container, $type);
+                    $this->loadJackalopeSession($session, $container, $type);
                     break;
                 case 'midgard':
                     if (empty($loaded['midgard'])) {
                         $loader->load('midgard.xml');
                         $loaded['midgard'] = true;
 
-                        if (isset($config['config'])) {
-                            ini_set('midgard.configuration_file', $config['config']);
+                        if (isset($session['config'])) {
+                            ini_set('midgard.configuration_file', $session['config']);
                         }
                     }
-                    $this->loadMidgardSession($name, $config, $container);
+                    $this->loadMidgardSession($session, $container);
                     break;
                 default:
                     throw new \InvalidArgumentException("You set an unsupported transport type '$type' for session '$name'");
             }
         }
+
+        $container->setParameter('doctrine_phpcr.sessions', $sessions);
+
+        // no sessions configured
+        if (empty($config['default_session'])) {
+            return;
+        }
+
+        $this->defaultSession = $config['default_session'];
+        $this->sessions = $sessions;
+        $container->setParameter('doctrine_phpcr.default_session', $config['default_session']);
+        $container->setAlias('doctrine_phpcr.session', $sessions[$config['default_session']]);
     }
 
-    private function loadJackalopeSession($name, array $config, ContainerBuilder $container, $type)
+    private function loadJackalopeSession(array $session, ContainerBuilder $container, $type)
     {
         switch ($type) {
             case 'doctrinedbal':
-                $parameters['jackalope.check_login_on_server'] = false;
-                if (isset($config['backend']['connection'])) {
-                    $parameters['jackalope.doctrine_dbal_connection'] = new Reference($config['backend']['connection']);
-                }
-                if (isset($config['backend']['check_login_on_server'])) {
-                    $parameters['jackalope.check_login_on_server'] = $config['backend']['check_login_on_server'];
-                }
-                if (isset($config['backend']['disable_stream_wrapper'])) {
-                    $parameters['jackalope.disable_stream_wrapper'] = $config['backend']['disable_stream_wrapper'];
-                }
-                if (isset($config['backend']['disable_transactions'])) {
-                    $parameters['jackalope.disable_transactions'] = $config['backend']['disable_transactions'];
+                if (isset($session['backend']['connection'])) {
+                    $parameters['jackalope.doctrine_dbal_connection'] = new Reference($session['backend']['connection']);
                 }
                 break;
             case 'jackrabbit':
-                $parameters['jackalope.check_login_on_server'] = false;
-                if (isset($config['backend']['url'])) {
-                    $parameters['jackalope.jackrabbit_uri'] = $config['backend']['url'];
+                if (isset($session['backend']['url'])) {
+                    $parameters['jackalope.jackrabbit_uri'] = $session['backend']['url'];
                 }
-                if (isset($config['backend']['default_header'])) {
-                    $parameters['jackalope.jackalope.default_header'] = $config['backend']['default_header'];
+                if (isset($session['backend']['default_header'])) {
+                    $parameters['jackalope.jackalope.default_header'] = $session['backend']['default_header'];
                 }
-                if (isset($config['backend']['expect'])) {
-                    $parameters['jackalope.jackalope.jackrabbit_expect'] = $config['backend']['expect'];
-                }
-                if (isset($config['backend']['check_login_on_server'])) {
-                    $parameters['jackalope.check_login_on_server'] = $config['backend']['check_login_on_server'];
-                }
-                if (isset($config['backend']['disable_stream_wrapper'])) {
-                    $parameters['jackalope.disable_stream_wrapper'] = $config['backend']['disable_stream_wrapper'];
-                }
-                if (isset($config['backend']['disable_transactions'])) {
-                    $parameters['jackalope.disable_transactions'] = $config['backend']['disable_transactions'];
+                if (isset($session['backend']['expect'])) {
+                    $parameters['jackalope.jackalope.jackrabbit_expect'] = $session['backend']['expect'];
                 }
                 break;
         }
 
+        $parameters['jackalope.check_login_on_server'] = false;
+        if (isset($session['backend']['check_login_on_server'])) {
+            $parameters['jackalope.check_login_on_server'] = $session['backend']['check_login_on_server'];
+        }
+        if (isset($session['backend']['disable_stream_wrapper'])) {
+            $parameters['jackalope.disable_stream_wrapper'] = $session['backend']['disable_stream_wrapper'];
+        }
+        if (isset($session['backend']['disable_transactions'])) {
+            $parameters['jackalope.disable_transactions'] = $session['backend']['disable_transactions'];
+        }
+
         $factory = $container
-            ->setDefinition(sprintf('doctrine_phpcr.jackalope.repository.%s', $name), new DefinitionDecorator('doctrine_phpcr.jackalope.repository.factory.'.$type))
+            ->setDefinition(sprintf('doctrine_phpcr.jackalope.repository.%s', $session['name']), new DefinitionDecorator('doctrine_phpcr.jackalope.repository.factory.'.$type))
         ;
         $factory->replaceArgument(0, $parameters);
 
         $container
-            ->setDefinition(sprintf('doctrine_phpcr.%s_credentials', $name), new DefinitionDecorator('doctrine_phpcr.credentials'))
-            ->replaceArgument(0, $config['username'])
-            ->replaceArgument(1, $config['password'])
+            ->setDefinition(sprintf('doctrine_phpcr.%s_credentials', $session['name']), new DefinitionDecorator('doctrine_phpcr.credentials'))
+            ->replaceArgument(0, $session['username'])
+            ->replaceArgument(1, $session['password'])
         ;
 
         $container
-            ->setDefinition(sprintf('doctrine_phpcr.%s_session', $name), new DefinitionDecorator('doctrine_phpcr.jackalope.session'))
-            ->setFactoryService(sprintf('doctrine_phpcr.jackalope.repository.%s', $name))
-            ->replaceArgument(0, new Reference(sprintf('doctrine_phpcr.%s_credentials', $name)))
-            ->replaceArgument(1, $config['workspace'])
+            ->setDefinition($session['service_name'], new DefinitionDecorator('doctrine_phpcr.jackalope.session'))
+            ->setFactoryService(sprintf('doctrine_phpcr.jackalope.repository.%s', $session['name']))
+            ->replaceArgument(0, new Reference(sprintf('doctrine_phpcr.%s_credentials', $session['name'])))
+            ->replaceArgument(1, $session['workspace'])
         ;
     }
 
-    private function loadMidgardSession($name, array $config, ContainerBuilder $container)
+    private function loadMidgardSession(array $session, ContainerBuilder $container)
     {
         $container
-            ->setDefinition(sprintf('doctrine_phpcr.%s_credentials', $name), new DefinitionDecorator('doctrine_phpcr.credentials'))
-            ->replaceArgument(0, $config['username'])
-            ->replaceArgument(1, $config['password'])
+            ->setDefinition(sprintf('doctrine_phpcr.%s_credentials', $session['name']), new DefinitionDecorator('doctrine_phpcr.credentials'))
+            ->replaceArgument(0, $session['username'])
+            ->replaceArgument(1, $session['password'])
         ;
 
         $container
-            ->setDefinition(sprintf('doctrine_phpcr.%s_session', $name), new DefinitionDecorator('doctrine_phpcr.midgard.session'))
-            ->replaceArgument(0, new Reference(sprintf('doctrine_phpcr.%s_credentials', $name)))
-            ->replaceArgument(1, $config['workspace'])
+            ->setDefinition($session['service_name'], new DefinitionDecorator('doctrine_phpcr.midgard.session'))
+            ->replaceArgument(0, new Reference(sprintf('doctrine_phpcr.%s_credentials', $session['name'])))
+            ->replaceArgument(1, $session['workspace'])
         ;
     }
 
-    private function odmLoad($config, $container)
+    private function odmLoad(array $config, ContainerBuilder $container)
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('odm.xml');
 
-        $this->documentManagers = array();
-        foreach (array_keys($config['document_managers']) as $name) {
-            $this->documentManagers[$name] = sprintf('doctrine_phpcr.odm.%s_document_manager', $name);
-        }
-        $container->setParameter('doctrine_phpcr.odm.document_managers', $this->documentManagers);
-
-        if (empty($config['default_document_manager'])) {
-            $tmp = array_keys($this->documentManagers);
-            $config['default_document_manager'] = reset($tmp);
-        }
-        $container->setParameter('doctrine_phpcr.odm.default_document_manager', $config['default_document_manager']);
-
-        $container->setAlias('doctrine_phpcr.odm.document_manager', sprintf('doctrine_phpcr.odm.%s_document_manager', $config['default_document_manager']));
-
+        $documentManagers = array();
         foreach ($config['document_managers'] as $name => $documentManager) {
+            if (empty($config['default_document_manager'])) {
+                $config['default_document_manager'] = $name;
+            }
+
             $documentManager['name'] = $name;
+            $documentManager['service_name'] = $documentManagers[$name] = sprintf('doctrine_phpcr.odm.%s_document_manager', $name);
+            if ($documentManager['auto_mapping'] && count($config['document_managers']) > 1) {
+                throw new \LogicException('You cannot enable "auto_mapping" when several PHPCR document managers are defined.');
+            }
+
             $this->loadOdmDocumentManager($documentManager, $container);
         }
-    }
 
-    private function loadOdmDocumentManager($documentManager, ContainerBuilder $container)
-    {
-        if ($documentManager['auto_mapping'] && count($this->documentManagers) > 1) {
-            throw new \LogicException('You cannot enable "auto_mapping" when several PHPCR document managers are defined.');
+        $container->setParameter('doctrine_phpcr.odm.document_managers', $documentManagers);
+
+        // no document manager configured
+        if (empty($config['default_document_manager'])) {
+            return;
         }
 
+        $container->setParameter('doctrine_phpcr.odm.default_document_manager', $config['default_document_manager']);
+        $container->setAlias('doctrine_phpcr.odm.document_manager', $documentManagers[$config['default_document_manager']]);
+    }
+
+    private function loadOdmDocumentManager(array $documentManager, ContainerBuilder $container)
+    {
         $odmConfigDef = $container->setDefinition(sprintf('doctrine_phpcr.odm.%s_configuration', $documentManager['name']), new DefinitionDecorator('doctrine_phpcr.odm.configuration'));
 
         $this->loadOdmDocumentManagerMappingInformation($documentManager, $odmConfigDef, $container);
 
-        $methods = array(
-            'setMetadataDriverImpl' => new Reference('doctrine_phpcr.odm.'.$documentManager['name'].'_metadata_driver'),
-        );
-        foreach ($methods as $method => $arg) {
-            $odmConfigDef->addMethodCall($method, array($arg));
-        }
+        $odmConfigDef->addMethodCall('setMetadataDriverImpl', array(new Reference('doctrine_phpcr.odm.'.$documentManager['name'].'_metadata_driver')));
 
         if (!isset($documentManager['session'])) {
             $documentManager['session'] = $this->defaultSession;
         }
 
+        if (!isset($this->sessions[$documentManager['session']])) {
+            throw new \InvalidArgumentException(sprintf("You have configured a non existent session '%s' for the document manager '%s'", $documentManager['session'], $documentManager['name']));
+        }
+
         $container->setDefinition(sprintf('doctrine_phpcr.odm.%s_session.event_manager', $documentManager['name']), new DefinitionDecorator('doctrine_phpcr.odm.document_manager.event_manager'));
 
         $container
-            ->setDefinition(sprintf('doctrine_phpcr.odm.%s_document_manager', $documentManager['name']), new DefinitionDecorator('doctrine_phpcr.odm.document_manager.abstract'))
+            ->setDefinition($documentManager['service_name'], new DefinitionDecorator('doctrine_phpcr.odm.document_manager.abstract'))
             ->setArguments(array(
                 new Reference(sprintf('doctrine_phpcr.%s_session', $documentManager['session'])),
                 new Reference(sprintf('doctrine_phpcr.odm.%s_configuration', $documentManager['name'])),

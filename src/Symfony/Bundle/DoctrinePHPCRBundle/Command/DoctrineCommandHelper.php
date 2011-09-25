@@ -15,7 +15,7 @@ abstract class DoctrineCommandHelper
 {
     static public function setApplicationPHPCRSession(Application $application, $connName)
     {
-        $service = null === $connName ? 'phpcr.session' : 'doctrine_phpcr.'.$connName.'_session';
+        $service = null === $connName ? 'doctrine_phpcr.session' : 'doctrine_phpcr.'.$connName.'_session';
         $session = $application->getKernel()->getContainer()->get($service);
         $helperSet = $application->getHelperSet();
         $helperSet->set(new DocumentManagerHelper($session));

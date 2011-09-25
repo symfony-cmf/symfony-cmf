@@ -42,7 +42,6 @@ class Configuration implements ConfigurationInterface
         $node
             ->children()
             ->arrayNode('session')
-                ->isRequired()
                 ->beforeNormalization()
                     ->ifTrue(function ($v) { return !is_array($v) || (is_array($v) && !array_key_exists('sessions', $v) && !array_key_exists('session', $v)); })
                     ->then(function ($v) {
