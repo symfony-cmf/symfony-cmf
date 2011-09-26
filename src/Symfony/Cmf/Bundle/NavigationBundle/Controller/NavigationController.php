@@ -12,7 +12,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver;
 
 use Doctrine\ODM\PHPCR\DocumentManager;
 
-use Symfony\Cmf\Bundle\NavigationBundle\Service\HierarchyWalker;
 use Symfony\Cmf\Bundle\CoreBundle\Helper\PathMapperInterface;
 
 /**
@@ -39,20 +38,16 @@ class NavigationController extends Controller
      */
     protected $route_name;
 
-    protected $walker;
-
     protected $mapper;
 
     public function __construct(ContainerInterface $container,
                                 DocumentManager $document_manager,
-                                HierarchyWalker $walker,
                                 PathMapperInterface $mapper,
                                 $route_name)
     {
         $this->container = $container;
         $this->dm = $document_manager;
         $this->route_name = $route_name;
-        $this->walker = $walker;
         $this->mapper = $mapper;
 
         $this->documenttype = $this->container->getParameter('symfony_cmf_navigation.document');
@@ -65,6 +60,9 @@ class NavigationController extends Controller
      */
     public function indexAction($url = '')
     {
+        // TODO: this is way to much logic for a controller
+        // define services and inject them!
+
         $crpath = $this->mapper->getStorageId($url);
         $repo = $this->dm->getRepository($this->documenttype);
         $page = $repo->find($crpath);
