@@ -76,7 +76,7 @@ class TreeWalker
      */
     protected function mustVisitNode(NodeInterface $node)
     {
-        foreach($this->node_filters as $filter) {
+        foreach ($this->node_filters as $filter) {
             if (! $filter->must_visit($node)) {
                 return false;
             }
@@ -92,7 +92,7 @@ class TreeWalker
      */
     protected function mustVisitProperty(PropertyInterface $property)
     {
-        foreach($this->property_filters as $filter) {
+        foreach ($this->property_filters as $filter) {
             if (! $filter->must_visit($property)) {
                 return false;
             }
@@ -125,7 +125,7 @@ class TreeWalker
             }
 
             // Visit children
-            foreach($node->getNodes() as $child) {
+            foreach ($node->getNodes() as $child) {
                 $this->traverse($child, $level + 1);
             }
         }

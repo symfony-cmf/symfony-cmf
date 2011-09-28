@@ -96,7 +96,7 @@ class HierarchyWalker
     public function visitChildren($url, ItemVisitorInterface $visitor)
     {
         $node = $this->session->getNode($this->mapper->getStorageId($url));
-        foreach($node as $child) {
+        foreach ($node as $child) {
             $child->accept($visitor);
         }
     }
@@ -243,13 +243,13 @@ class HierarchyWalker
     protected function visitMenuRecursive(&$parentrecord, $path, $visitor, $depth, $curdepth)
     {
         $visitor->reset();
-        foreach($parentrecord['node'] as $child) {
+        foreach ($parentrecord['node'] as $child) {
             //iterate over that node's children
             $child->accept($visitor);
         }
         $list = $visitor->getArray();
         $childselected = false;
-        foreach($list as $key => &$record) {
+        foreach ($list as $key => &$record) {
             if ($record['selected']) {
                 $childselected = true;
                 $list[$key]['children'] = $this->visitMenuRecursive($record, $path, $visitor, $depth, 0);

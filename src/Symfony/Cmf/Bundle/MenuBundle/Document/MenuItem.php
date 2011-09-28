@@ -123,7 +123,7 @@ class MenuItem implements NodeInterface {
         if ($this->weak && !$weak) {
             $this->strongContent = $this->weakContent;
             $this->weakContent = null;
-        } else if (!$this->weak && $weak) {
+        } elseif (!$this->weak && $weak) {
             $this->weakContent = $this->strongContent;
             $this->strongContent = null;
         }

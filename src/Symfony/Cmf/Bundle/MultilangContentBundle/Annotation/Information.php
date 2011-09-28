@@ -30,7 +30,7 @@ class Information {
     {
         if (! strcasecmp('attribute', $label)) {
             $this->translationStrategy = self::STRATEGY_ATTRIBUTE;
-        } else if (! strcasecmp('child', $label)) {
+        } elseif (! strcasecmp('child', $label)) {
             $this->translationStrategy = self::STRATEGY_CHILD;
         } else {
             throw new \Exception("Unknown translation strategy $label");

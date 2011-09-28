@@ -100,19 +100,19 @@ class SqlCommand extends PhpcrCommand
 
         // test for the various tag states
         if (preg_match('/.+<\/\w[^>]*>$/', $tok, $matches)) { // open and closing tags on same line
-          if($debug) echo " =$tok= ";
+          if ($debug) echo " =$tok= ";
           $indent=0; // no change
         }
-        else if (preg_match('/^<\/\w/', $tok, $matches)) { // closing tag
-          if($debug) echo " -$tok- ";
+        elseif (preg_match('/^<\/\w/', $tok, $matches)) { // closing tag
+          if ($debug) echo " -$tok- ";
           $pad--; //  outdent now
         }
-        else if (preg_match('/^<\w[^>]*[^\/]>.*$/', $tok, $matches)) { // opening tag
-          if($debug) echo " +$tok+ ";
+        elseif (preg_match('/^<\w[^>]*[^\/]>.*$/', $tok, $matches)) { // opening tag
+          if ($debug) echo " +$tok+ ";
           $indent=1; // don't pad this one, only subsequent tags
         }
         else {
-          if($debug) echo " !$tok! ";
+          if ($debug) echo " !$tok! ";
           $indent = 0; // no indentation needed
         }
 
