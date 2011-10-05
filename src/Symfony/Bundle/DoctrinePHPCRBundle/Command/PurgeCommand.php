@@ -2,6 +2,7 @@
 
 namespace Symfony\Bundle\DoctrinePHPCRBundle\Command;
 
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -13,7 +14,7 @@ use Symfony\Bundle\DoctrinePHPCRBundle\Helper\ConsoleParametersParser;
 /**
  * @author Daniel Barsotti <daniel.barsotti@liip.ch>
  */
-class PurgeCommand extends DoctrineCommandHelper
+class PurgeCommand extends Command
 {
     protected function configure()
     {

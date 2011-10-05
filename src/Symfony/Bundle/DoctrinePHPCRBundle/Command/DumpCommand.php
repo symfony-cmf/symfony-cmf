@@ -2,6 +2,7 @@
 
 namespace Symfony\Bundle\DoctrinePHPCRBundle\Command;
 
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,7 +19,7 @@ use Symfony\Bundle\DoctrinePHPCRBundle\Helper\TreeDumper\SystemNodeFilter;
 /**
  * @author Daniel Barsotti <daniel.barsotti@liip.ch>
  */
-class DumpCommand extends DoctrineCommandHelper
+class DumpCommand extends Command
 {
     /**
      * Configures the current command.

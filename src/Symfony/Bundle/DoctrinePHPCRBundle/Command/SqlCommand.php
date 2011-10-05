@@ -18,7 +18,7 @@ use Symfony\Bundle\DoctrinePHPCRBundle\Helper\TreeDumper\SystemNodeFilter;
 /**
  * @author Daniel Barsotti <daniel.barsotti@liip.ch>
  */
-class SqlCommand extends DoctrineCommandHelper
+class SqlCommand extends Command
 {
     /**
      * Configures the current command.
