@@ -1,15 +1,6 @@
 <?php
 
-/*
- * This file is part of the Symfony/Cmf/PhpcrCommandsBundle
- *
- * (c) Daniel Barsotti <daniel.barsotti@liip.ch>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
-namespace Symfony\Cmf\Bundle\PhpcrCommandsBundle\Command;
+namespace Symfony\Bundle\DoctrinePHPCRBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputOption;
@@ -17,8 +8,11 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-use Symfony\Cmf\Bundle\PhpcrCommandsBundle\Helper\JackrabbitHelper;
+use Symfony\Bundle\DoctrinePHPCRBundle\Helper\JackrabbitHelper;
 
+/**
+ * @author Daniel Barsotti <daniel.barsotti@liip.ch>
+ */
 class JackrabbitCommand extends ContainerAwareCommand
 {
     /**
@@ -34,7 +28,7 @@ class JackrabbitCommand extends ContainerAwareCommand
     {
         parent::configure();
 
-        $this->setName('phpcr:jackrabbit')
+        $this->setName('doctrine:phpcr:jackrabbit')
             ->addArgument('cmd', InputArgument::REQUIRED, 'Command to execute (start | stop | status)')
             ->addOption('jackrabbit_jar', null, InputOption::VALUE_OPTIONAL, 'Path to the Jackrabbit jar file')
             ->setDescription('Start and stop the Jackrabbit server')
@@ -43,7 +37,7 @@ The <info>phpcr:jackrabbit</info> command allows to have a minimal control on th
 Symfony 2 command.
 
 If the <info>jackrabbit_jar</info> option is set, it will be used as the Jackrabbit server jar file.
-Otherwise you will have to set the phpcr_commands.jackrabbit_jar config parameter to a valid Jackrabbit
+Otherwise you will have to set the doctrine_phpcr.jackrabbit_jar config parameter to a valid Jackrabbit
 server jar file.
 EOF
 );
@@ -69,8 +63,8 @@ EOF
         $jar = $input->getOption('jackrabbit_jar');
         if ($jar) {
             $this->jrpath = $jar;
-        } elseif ($this->getContainer()->hasParameter('phpcr_commands.jackrabbit_jar')) {
-            $this->jrpath = $this->getContainer()->getParameter('phpcr_commands.jackrabbit_jar');
+        } elseif ($this->getContainer()->hasParameter('doctrine_phpcr.jackrabbit_jar')) {
+            $this->jrpath = $this->getContainer()->getParameter('doctrine_phpcr.jackrabbit_jar');
         }
 
         if (!file_exists($this->jrpath)) {

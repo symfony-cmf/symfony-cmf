@@ -4,14 +4,6 @@ use them without using the Symfony CMF.
 To update the subtree repository, according to
 http://help.github.com/split-a-subpath-into-a-new-repo/
 
-    git clone git@github.com:symfony-cmf/symfony-cmf.git PhpcrCommandsBundle
-    cd PhpcrCommandsBundle
-    git filter-branch --prune-empty --subdirectory-filter src/Symfony/Cmf/Bundle/PhpcrCommandsBundle/ master
-    git remote add bundle git@github.com:symfony-cmf/PhpcrCommandsBundle.git
-    git remote update
-    git push bundle master
-
-
     git clone git@github.com:symfony-cmf/symfony-cmf.git DoctrinePHPCRBundle
     cd DoctrinePHPCRBundle
     git filter-branch --prune-empty --subdirectory-filter src/Symfony/Bundle/DoctrinePHPCRBundle/ master

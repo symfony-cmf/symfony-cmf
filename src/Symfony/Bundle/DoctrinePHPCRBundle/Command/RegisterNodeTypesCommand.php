@@ -12,8 +12,6 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Wrapper to use RegisterNodeTypeCommand with Symfony's app/console
  *
  * @see Doctrine/ODM/PHPCR/Tools/Console/Command/RegisterNodeTypesCommand
- * 
- * TODO: a option for different document manager once this is implemented
  */
 class RegisterNodeTypesCommand extends BaseRegisterNodeTypesCommand
 {

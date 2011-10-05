@@ -1,9 +1,10 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\PhpcrCommandsBundle\Tests\Helper;
+namespace Symfony\Bundle\DoctrinePHPCRBundle\Tests\Helper;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
-use Symfony\Cmf\Bundle\PhpcrCommandsBundle\Helper\JackrabbitHelper;
+
+use Symfony\Bundle\DoctrinePHPCRBundle\Helper\JackrabbitHelper;
 
 /**
  * Test jackrabbit helper
@@ -17,11 +18,11 @@ class JackrabbitHelperTest extends WebTestCase
 
     public function setUp()
     {
-        if (! $this->getContainer()->hasParameter('phpcr_commands.jackrabbit_jar')) {
+        if (! $this->getContainer()->hasParameter('doctrine_phpcr.jackrabbit_jar')) {
             $this->markTestSkipped('Default Jackrabbit jar file not set');
         }
 
-        $this->default_jackrabbit_jar = $this->getContainer()->getParameter('phpcr_commands.jackrabbit_jar');
+        $this->default_jackrabbit_jar = $this->getContainer()->getParameter('doctrine_phpcr.jackrabbit_jar');
 
         if (!file_exists($this->default_jackrabbit_jar)) {
             $this->markTestSkipped('Default Jackrabbit jar file not found');

@@ -20,7 +20,7 @@ abstract class DoctrineCommandHelper
         $helperSet = $application->getHelperSet();
         $helperSet->set(new DocumentManagerHelper($session));
     }
-    
+
     static public function setApplicationDocumentManager(Application $application, $dmName)
     {
         $service = null === $dmName ? 'doctrine_phpcr.odm.document_manager' : 'doctrine_phpcr.odm.'.$dmName.'_document_manager';
