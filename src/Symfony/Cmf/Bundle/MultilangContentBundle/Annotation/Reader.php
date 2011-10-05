@@ -30,7 +30,7 @@ class Reader {
             $translatedProperties = array();
 
             $refClass = new \ReflectionClass($className);
-            foreach($this->reader->getClassAnnotations($refClass) as $annotation) {
+            foreach ($this->reader->getClassAnnotations($refClass) as $annotation) {
                 if ($annotation instanceof Multilang) {
                     if (isset($annotation->strategy)) {
                         $info->setTranslationStrategy($annotation->strategy);
@@ -53,7 +53,7 @@ class Reader {
                         if ($annotation instanceof Language) {
                             $info->setLanguageIndicator($refPropName);
                             $info->addTranslatedProperty($refPropName);
-                        } else if ($annotation instanceof Translated) {
+                        } elseif ($annotation instanceof Translated) {
                             $info->addTranslatedProperty($refPropName);
                         }
                     }

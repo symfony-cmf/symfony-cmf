@@ -90,12 +90,12 @@ class SqlCommand extends DoctrineCommandHelper
                     echo " =$tok= ";
                 }
                 $indent=0; // no change
-            } else if (preg_match('/^<\/\w/', $tok, $matches)) { // closing tag
+            } elseif (preg_match('/^<\/\w/', $tok, $matches)) { // closing tag
                 if ($debug) {
                     echo " -$tok- ";
                 }
                 $pad--; //  outdent now
-            } else if (preg_match('/^<\w[^>]*[^\/]>.*$/', $tok, $matches)) { // opening tag
+            } elseif (preg_match('/^<\w[^>]*[^\/]>.*$/', $tok, $matches)) { // opening tag
                 if ($debug) {
                     echo " +$tok+ ";
                 }

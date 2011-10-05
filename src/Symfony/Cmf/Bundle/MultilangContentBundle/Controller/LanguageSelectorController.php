@@ -39,7 +39,7 @@ class LanguageSelectorController extends Controller
                 //nothing to choose from, don't show language chooser
                 return new Response();
             }
-            foreach($available as $lang) {
+            foreach ($available as $lang) {
                 $languageUrls[$lang] = $this->chooser->getLanguageMeta($lang);
                 $languageUrls[$lang]['url'] = $this->generateUrl($this->routename, array('_locale' => $lang, 'url' => $url));
                 // TODO: check for availability of this url in this lang and add to the language info.

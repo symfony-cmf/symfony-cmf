@@ -15,12 +15,12 @@ class RegisterEventListenersAndSubscribersPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasParameter('doctrine_phpcr.default_document_manager')) {
+        if (!$container->hasParameter('doctrine_phpcr.odm.default_document_manager')) {
             return;
         }
 
         $this->container = $container;
-        $this->documentManagers = $container->getParameter('doctrine_phpcr.document_managers');
+        $this->documentManagers = $container->getParameter('doctrine_phpcr.odm.document_managers');
 
         foreach ($container->findTaggedServiceIds('doctrine_phpcr.event_subscriber') as $subscriberId => $instances) {
             $this->registerSubscriber($subscriberId, $instances);

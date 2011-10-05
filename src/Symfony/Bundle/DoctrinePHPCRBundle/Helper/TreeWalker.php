@@ -119,7 +119,7 @@ class TreeWalker
             }
 
             // Visit children
-            foreach($node->getNodes() as $child) {
+            foreach ($node->getNodes() as $child) {
                 $this->traverse($child, $level + 1);
             }
         }

@@ -47,7 +47,7 @@ class PHPCRPurger implements PurgerInterface
     protected function deleteAllNodes()
     {
         $session = $this->dm->getPhpcrSession();
-        foreach($session->getRootNode()->getNodes() as $node) {
+        foreach ($session->getRootNode()->getNodes() as $node) {
             if (substr($node->getName(), 0, 4) !== 'jcr:') {
                 $node->remove();
             }

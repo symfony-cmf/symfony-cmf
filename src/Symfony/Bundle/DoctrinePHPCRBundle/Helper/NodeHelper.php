@@ -127,7 +127,7 @@ class NodeHelper
      */
     public function deleteAllNodes()
     {
-        foreach($this->root->getNodes() as $node) {
+        foreach ($this->root->getNodes() as $node) {
             if (! $this->isSystemNode($node)) {
                 $node->remove();
             }

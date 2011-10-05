@@ -81,7 +81,7 @@ class NavigationRendererController extends Controller
 
         // would be nicer if we could get that information from the walker...
         $entryselected = false;
-        foreach($menu as $entry) {
+        foreach ($menu as $entry) {
             if ($entry['selected']) {
                 $entryselected = true;
             }
