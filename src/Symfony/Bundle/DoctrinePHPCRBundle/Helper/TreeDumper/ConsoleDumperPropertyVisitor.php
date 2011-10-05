@@ -2,8 +2,6 @@
 
 namespace Symfony\Bundle\DoctrinePHPCRBundle\Helper\TreeDumper;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use PHPCR\ItemVisitorInterface;
@@ -13,24 +11,21 @@ use PHPCR\PropertyInterface;
 /**
  * @author Daniel Barsotti <daniel.barsotti@liip.ch>
  */
-class ConsoleDumperPropertyVisitor implements ItemVisitorInterface, ContainerAwareInterface
+class ConsoleDumperPropertyVisitor implements ItemVisitorInterface
 {
-    protected $container;
-
     protected $output;
 
     protected $level = 0;
 
     protected $maxLineLength = 120;
     
-    public function __construct(OutputInterface $output)
+    public function __construct(OutputInterface $output, $maxLineLength = null)
     {
         $this->output = $output;
-    }
 
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
+        if (null !== $maxLineLength) {
+            $this->maxLineLength = $maxLineLength;
+        }
     }
 
     public function setLevel($level)
@@ -43,8 +38,6 @@ class ConsoleDumperPropertyVisitor implements ItemVisitorInterface, ContainerAwa
         if (! $item instanceof PropertyInterface) {
             throw new \Exception("Internal error: did not expect to visit a non-node object: $item");
         }
-
-        $this->maxLineLength = $this->container->getParameter('doctrine_phpcr.dump_max_line_length');
 
         $value = $item->getString();
 

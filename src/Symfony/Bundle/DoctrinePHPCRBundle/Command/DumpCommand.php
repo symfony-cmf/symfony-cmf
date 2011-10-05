@@ -2,7 +2,6 @@
 
 namespace Symfony\Bundle\DoctrinePHPCRBundle\Command;
 
-
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
@@ -56,8 +55,10 @@ class DumpCommand extends ContainerAwareCommand
 
         $propVisitor = null;
         if (ConsoleParametersParser::isTrueString($input->getOption('props'))) {
-            $propVisitor = new ConsoleDumperPropertyVisitor($output);
-            $propVisitor->setContainer($this->getContainer());
+            $propVisitor = new ConsoleDumperPropertyVisitor(
+                $output,
+                $this->getContainer()->getParameter('doctrine_phpcr.dump_max_line_length')
+            );
         }
 
         $walker = new TreeWalker($nodeVisitor, $propVisitor);
