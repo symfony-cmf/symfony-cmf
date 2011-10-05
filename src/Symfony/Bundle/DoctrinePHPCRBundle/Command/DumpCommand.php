@@ -2,7 +2,8 @@
 
 namespace Symfony\Bundle\DoctrinePHPCRBundle\Command;
 
-use Symfony\Component\Console\Command\Command;
+
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -19,7 +20,7 @@ use Symfony\Bundle\DoctrinePHPCRBundle\Helper\TreeDumper\SystemNodeFilter;
 /**
  * @author Daniel Barsotti <daniel.barsotti@liip.ch>
  */
-class DumpCommand extends Command
+class DumpCommand extends ContainerAwareCommand
 {
     /**
      * Configures the current command.
