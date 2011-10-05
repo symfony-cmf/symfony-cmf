@@ -49,71 +49,18 @@ class SqlCommand extends Command
         $sql = $input->getArgument('sql');
 
         $session = $this->getHelper('phpcr')->getSession();
-        $transport = $session->getTransport();
-        $xml = $transport->querySQL($sql);
+        $qm = $session->getWorkspace()->getQueryManager();
+        $query = $qm->createQuery($sql, \PHPCR\Query\QueryInterface::JCR_SQL2);
 
-        $output->writeln($this->prettyXML($xml));
-
-        return 0;
-    }
-
-    /**
-     * Pretty an XML string typically returned from DOMDocument->saveXML()
-     *
-     * Ignores ?xml !DOCTYPE !-- tags (adjust regular expressions and pad/indent logic to change this)
-     *
-     * @param   string $xml the xml text to format
-     * @param   boolean $debug set to get debug-prints of RegExp matches
-     * @returns string formatted XML
-     * @copyright TJ
-     * @link kml.tjworld.net
-    */
-    protected function prettyXML($xml, $debug = false)
-    {
-        // add marker linefeeds to aid the pretty-tokeniser
-        // adds a linefeed between all tag-end boundaries
-        $xml = preg_replace('/(>)(<)(\/*)/', "$1\n$2$3", $xml);
-
-        // now pretty it up (indent the tags)
-        $tok = strtok($xml, "\n");
-        $formatted = ''; // holds pretty version as it is built
-        $pad = 0; // initial indent
-        $matches = array(); // returns from preg_matches()
-
-        /* pre- and post- adjustments to the padding indent are made, so changes can be applied to
-        * the current line or subsequent lines, or both
-        */
-        while ($tok !== false) { // scan each line and adjust indent based on opening/closing tags
-            // test for the various tag states
-            if (preg_match('/.+<\/\w[^>]*>$/', $tok, $matches)) { // open and closing tags on same line
-                if ($debug) {
-                    echo " =$tok= ";
-                }
-                $indent=0; // no change
-            } elseif (preg_match('/^<\/\w/', $tok, $matches)) { // closing tag
-                if ($debug) {
-                    echo " -$tok- ";
-                }
-                $pad--; //  outdent now
-            } elseif (preg_match('/^<\w[^>]*[^\/]>.*$/', $tok, $matches)) { // opening tag
-                if ($debug) {
-                    echo " +$tok+ ";
-                }
-                $indent=1; // don't pad this one, only subsequent tags
-            } else {
-                if ($debug) {
-                    echo " !$tok! ";
-                }
-                $indent = 0; // no indentation needed
+        $result = $query->execute();
+        foreach ($result as $i => $row) {
+            $values = $row->getValues();
+            $output->writeln("\n".($i+1).'. Row:');
+            foreach ($values as $column => $value) {
+                $output->writeln("$column: $value");
             }
-    
-            // pad the line with the required number of leading spaces
-            $prettyLine = str_pad($tok, strlen($tok)+$pad, ' ', STR_PAD_LEFT);
-            $formatted .= $prettyLine . "\n"; // add to the cumulative result, with linefeed
-            $tok = strtok("\n"); // get the next token
-            $pad += $indent; // update the pad size for subsequent lines
         }
 
-        return $formatted; // pretty format
+        return 0;
     }
 }
