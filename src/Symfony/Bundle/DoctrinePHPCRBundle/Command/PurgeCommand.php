@@ -1,32 +1,28 @@
 <?php
 
-/*
- * This file is part of the Symfony/Cmf/PhpcrCommandsBundle
- *
- * (c) Daniel Barsotti <daniel.barsotti@liip.ch>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
+namespace Symfony\Bundle\DoctrinePHPCRBundle\Command;
 
-namespace Symfony\Cmf\Bundle\PhpcrCommandsBundle\Command;
-
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\DialogHelper;
 
-use Symfony\Cmf\Bundle\PhpcrCommandsBundle\Helper\NodeHelper;
-use Symfony\Cmf\Bundle\PhpcrCommandsBundle\Helper\ConsoleParametersParser;
+use Symfony\Bundle\DoctrinePHPCRBundle\Helper\NodeHelper;
+use Symfony\Bundle\DoctrinePHPCRBundle\Helper\ConsoleParametersParser;
 
-class PurgeCommand extends PhpcrCommand
+/**
+ * @author Daniel Barsotti <daniel.barsotti@liip.ch>
+ */
+class PurgeCommand extends Command
 {
     protected function configure()
     {
         parent::configure();
 
-        $this->setName('phpcr:purge')
+        $this->setName('doctrine:phpcr:purge')
             ->setDescription('Purge the content repository')
+            ->addOption('session', null, InputOption::VALUE_OPTIONAL, 'The session to use for this command')
             ->addOption('force', null, InputOption::VALUE_OPTIONAL, 'Set to "yes" to bypass the confirmation dialog', "no")
             ->setHelp(<<<EOF
 The <info>phpcr:purge</info> command remove all the non-standard nodes from the content repository
@@ -44,6 +40,8 @@ EOF
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        DoctrineCommandHelper::setApplicationPHPCRSession($this->getApplication(), $input->getOption('session'));
+
         $force = ConsoleParametersParser::isTrueString($input->getOption('force'));
 
         if (! $force) {
@@ -52,7 +50,8 @@ EOF
         }
 
         if ($force || $res) {
-            $this->node_helper->deleteAllNodes();
+            $nodeHelper = new NodeHelper($this->getHelper('phpcr')->getSession());
+            $nodeHelper->deleteAllNodes();
             $output->writeln("Done\n");
         }
 

@@ -1,3 +1,0 @@
-parameters:
-  phpcr_commands.dump_max_line_length: 120
-  phpcr_commands.jackrabbit_jar: /home/dev/cmf/jackrabbit-standalone-2.2.6-SNAPSHOT.jar

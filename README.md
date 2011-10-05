@@ -51,7 +51,6 @@ You need to install [Doctrine PHPCR ODM](http://github.com/doctrine/phpcr-odm) a
     new Symfony\Cmf\Bundle\MultilangContentBundle\SymfonyCmfMultilangContentBundle(),
     new Symfony\Cmf\Bundle\NavigationBundle\SymfonyCmfNavigationBundle(),
     new Symfony\Cmf\Bundle\ContentBundle\SymfonyCmfContentBundle(),
-    new Symfony\Cmf\Bundle\PhpcrCommandsBundle\PhpcrCommandsBundle(),
 
 #### Menus
 

@@ -1,42 +1,26 @@
 <?php
 
-/*
- * This file is part of the Symfony/Cmf/PhpcrCommandsBundle
- *
- * (c) Daniel Barsotti <daniel.barsotti@liip.ch>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
+namespace Symfony\Bundle\DoctrinePHPCRBundle\Command;
 
-namespace Symfony\Cmf\Bundle\PhpcrCommandsBundle\Command;
-
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-use Symfony\Cmf\Bundle\PhpcrCommandsBundle\Helper\NodeHelper;
-use Symfony\Cmf\Bundle\PhpcrCommandsBundle\Helper\ConsoleParametersParser;
+use Symfony\Bundle\DoctrinePHPCRBundle\Helper\NodeHelper;
+use Symfony\Bundle\DoctrinePHPCRBundle\Helper\ConsoleParametersParser;
 
-use Symfony\Cmf\Bundle\PhpcrCommandsBundle\Helper\TreeWalker;
-use Symfony\Cmf\Bundle\PhpcrCommandsBundle\Helper\TreeDumper\ConsoleDumperNodeVisitor;
-use Symfony\Cmf\Bundle\PhpcrCommandsBundle\Helper\TreeDumper\ConsoleDumperPropertyVisitor;
-use Symfony\Cmf\Bundle\PhpcrCommandsBundle\Helper\TreeDumper\SystemNodeFilter;
+use Symfony\Bundle\DoctrinePHPCRBundle\Helper\TreeWalker;
+use Symfony\Bundle\DoctrinePHPCRBundle\Helper\TreeDumper\ConsoleDumperNodeVisitor;
+use Symfony\Bundle\DoctrinePHPCRBundle\Helper\TreeDumper\ConsoleDumperPropertyVisitor;
+use Symfony\Bundle\DoctrinePHPCRBundle\Helper\TreeDumper\SystemNodeFilter;
 
-class DumpCommand extends PhpcrCommand
+/**
+ * @author Daniel Barsotti <daniel.barsotti@liip.ch>
+ */
+class DumpCommand extends ContainerAwareCommand
 {
-    /**
-     * @var boolean
-     */
-    protected $dump_sys;
-
-    /**
-     * @var boolean
-     */
-    protected $dump_props;
-
-
     /**
      * Configures the current command.
      */
@@ -44,7 +28,8 @@ class DumpCommand extends PhpcrCommand
     {
         parent::configure();
 
-        $this->setName('phpcr:dump')
+        $this->setName('doctrine:phpcr:dump')
+            ->addOption('session', null, InputOption::VALUE_OPTIONAL, 'The session to use for this command')
             ->addOption('sys_nodes', null, InputOption::VALUE_OPTIONAL, 'Set to "yes" to dump the system nodes', "no")
             ->addOption('props', null, InputOption::VALUE_OPTIONAL, 'Set to "yes" to dump the node properties', "no")
             ->addArgument('path', InputArgument::OPTIONAL, 'Path of the node to dump', '/')
@@ -62,17 +47,21 @@ class DumpCommand extends PhpcrCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        DoctrineCommandHelper::setApplicationPHPCRSession($this->getApplication(), $input->getOption('session'));
+
         $path = $input->getArgument('path');
 
-        $node_visitor = new ConsoleDumperNodeVisitor($output);
+        $nodeVisitor = new ConsoleDumperNodeVisitor($output);
 
-        $prop_visitor = null;
+        $propVisitor = null;
         if (ConsoleParametersParser::isTrueString($input->getOption('props'))) {
-            $prop_visitor = new ConsoleDumperPropertyVisitor($output);
-            $prop_visitor->setContainer($this->getContainer());
+            $propVisitor = new ConsoleDumperPropertyVisitor(
+                $output,
+                $this->getContainer()->getParameter('doctrine_phpcr.dump_max_line_length')
+            );
         }
 
-        $walker = new TreeWalker($node_visitor, $prop_visitor);
+        $walker = new TreeWalker($nodeVisitor, $propVisitor);
 
         if (! ConsoleParametersParser::isTrueString($input->getOption('sys_nodes'))) {
             $filter = new SystemNodeFilter();
@@ -80,7 +69,8 @@ class DumpCommand extends PhpcrCommand
             $walker->addPropertyFilter($filter);
         }
 
-        if ($root = $this->node_helper->getNode($path)) {
+        $nodeHelper = new NodeHelper($this->getHelper('phpcr')->getSession());
+        if ($root = $nodeHelper->getNode($path)) {
             $walker->traverse($root);
         } else {
             $output->writeln("Node '$path' not found");
