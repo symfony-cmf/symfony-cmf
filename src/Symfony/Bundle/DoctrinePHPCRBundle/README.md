@@ -278,8 +278,8 @@ The visitor classes must implement PHPCR\\ItemVisitorInterface.
 
 Then call the traverse method passing the node where the traversal must start.
 
-    $my_node_visitor = new MyNodeVisitor();
-    $walker = new TreeWalker($my_node_visitor, $my_property_visitor);
+    $my_nodeVisitor = new MyNodeVisitor();
+    $walker = new TreeWalker($my_nodeVisitor, $my_propertyVisitor);
     $walker->traverse($some_node);
 
 You can filter out nodes or properties by setting a node or property filter.
@@ -297,5 +297,5 @@ A filter is simply a class implementing TreeWalkerFilterInterface.
     }
 
     $filter = new MyNodeFilter();
-    $walker = new TreeWalker($my_node_visitor);
+    $walker = new TreeWalker($my_nodeVisitor);
     $walker->addNodeFilter($filter);

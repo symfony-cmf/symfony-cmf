@@ -30,7 +30,8 @@ class NodeTranslator implements EventSubscriber {
      * @param object $lang_helper the language chooser
      * @param object $lang_prefix the translation child prefix. TODO: should use a namespace for this.
      */
-    public function __construct($session, $annotation_reader, $lang_helper, $lang_prefix) {
+    public function __construct($session, $annotation_reader, $lang_helper, $lang_prefix)
+    {
         $this->session = $session;
         $this->reader = $annotation_reader;
         $this->langHelper = $lang_helper;
@@ -42,7 +43,8 @@ class NodeTranslator implements EventSubscriber {
      *
      * @return array
      */
-    public function getSubscribedEvents() {
+    public function getSubscribedEvents()
+    {
         return array(
             Event::postLoad,
 #            Event::postPersist,

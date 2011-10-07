@@ -14,31 +14,31 @@ class TreeWalker
     /**
      * @var ItemVisitorInterface
      */
-    protected $node_visitor;
+    protected $nodeVisitor;
 
     /**
      * @var ItemVisitorInterface
      */
-    protected $property_visitor;
+    protected $propertyVisitor;
 
     /**
      * @var array()
      */
-    protected $node_filters = array();
+    protected $nodeFilters = array();
 
     /**
      * @var array()
      */
-    protected $property_filters = array();
+    protected $propertyFilters = array();
 
     /**
-     * @param ItemVisitorInterface $node_visitor The visitor for the nodes
-     * @param ItemVisitorInterface $property_visitor The visitor for the nodes properties
+     * @param ItemVisitorInterface $nodeVisitor The visitor for the nodes
+     * @param ItemVisitorInterface $propertyVisitor The visitor for the nodes properties
      */
-    public function __construct(ItemVisitorInterface $node_visitor, ItemVisitorInterface $property_visitor = null)
+    public function __construct(ItemVisitorInterface $nodeVisitor, ItemVisitorInterface $propertyVisitor = null)
     {
-        $this->node_visitor = $node_visitor;
-        $this->property_visitor = $property_visitor;
+        $this->nodeVisitor = $nodeVisitor;
+        $this->propertyVisitor = $propertyVisitor;
     }
 
     /**
@@ -47,8 +47,8 @@ class TreeWalker
      */
     public function addNodeFilter(TreeWalkerFilterInterface $filter)
     {
-        if (!array_search($filter, $this->node_filters)) {
-            $this->node_filters[] = $filter;
+        if (!array_search($filter, $this->nodeFilters)) {
+            $this->nodeFilters[] = $filter;
         }
     }
 
@@ -58,8 +58,8 @@ class TreeWalker
      */
     public function addPropertyFilter(TreeWalkerFilterInterface $filter)
     {
-        if (!array_search($filter, $this->property_filters)) {
-            $this->property_filters[] = $filter;
+        if (!array_search($filter, $this->propertyFilters)) {
+            $this->propertyFilters[] = $filter;
         }
     }
 
@@ -70,7 +70,7 @@ class TreeWalker
      */
     protected function mustVisitNode(NodeInterface $node)
     {
-        foreach($this->node_filters as $filter) {
+        foreach ($this->nodeFilters as $filter) {
             if (! $filter->mustVisit($node)) {
                 return false;
             }
@@ -86,7 +86,7 @@ class TreeWalker
      */
     protected function mustVisitProperty(PropertyInterface $property)
     {
-        foreach($this->property_filters as $filter) {
+        foreach ($this->propertyFilters as $filter) {
             if (! $filter->mustVisit($property)) {
                 return false;
             }
@@ -105,15 +105,15 @@ class TreeWalker
         if ($this->mustVisitNode($node)) {
 
             // Visit node
-            $this->node_visitor->setLevel($level);
-            $node->accept($this->node_visitor);
+            $this->nodeVisitor->setLevel($level);
+            $node->accept($this->nodeVisitor);
 
             // Visit properties
-            if ($this->property_visitor !== null) {
+            if ($this->propertyVisitor !== null) {
                 foreach ($node->getProperties() as $prop) {
                     if ($this->mustVisitProperty($prop)) {
-                        $this->property_visitor->setLevel($level);
-                        $prop->accept($this->property_visitor);
+                        $this->propertyVisitor->setLevel($level);
+                        $prop->accept($this->propertyVisitor);
                     }
                 }
             }

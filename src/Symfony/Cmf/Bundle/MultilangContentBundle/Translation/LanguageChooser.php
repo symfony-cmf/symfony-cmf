@@ -31,7 +31,8 @@ class LanguageChooser {
      *      lang_preferences. keys are lang code, values is array as returned
      *      by getLanguageMeta
      */
-    public function __construct(Session $session, $lang_preference, $default_lang, $lang_meta) {
+    public function __construct(Session $session, $lang_preference, $default_lang, $lang_meta)
+    {
         $this->session = $session;
         $this->langPreference = $lang_preference;
         $this->defaultLang = $default_lang;
@@ -43,7 +44,8 @@ class LanguageChooser {
      *
      * @return array $preferredLanguages
      */
-    public function getPreferredLanguages() {
+    public function getPreferredLanguages()
+    {
         if (is_null($this->preferred)) {
             $this->setPreferredLanguage($this->session->getLocale());
         }
@@ -55,7 +57,8 @@ class LanguageChooser {
      *
      * @return array preferred language order for the default language
      */
-    public function getDefaultLanguages() {
+    public function getDefaultLanguages()
+    {
         return $this->langPreference[$this->defaultLang];
     }
 
@@ -79,7 +82,8 @@ class LanguageChooser {
      * If it is not available, the default language is used.
      * @param string $lang the language to set.
      */
-    protected function setPreferredLanguage($lang) {
+    protected function setPreferredLanguage($lang)
+    {
         // Use the default language for lang preferences if the given language is not one of the available languages.
         if (!in_array($lang, array_keys($this->langPreference))) {
             $this->preferred = $this->langPreference[$this->defaultLang];
