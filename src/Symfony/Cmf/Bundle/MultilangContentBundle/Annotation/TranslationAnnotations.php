@@ -7,6 +7,9 @@ use Doctrine\Common\Annotations\Annotation;
 /**
  * A field that has to be translated
  * @author brian.king (at) liip.ch
+ *
+ * @Annotation
+ * @Target("PROPERTY")
  */
 final class Translated extends Annotation
 {
@@ -16,6 +19,9 @@ final class Translated extends Annotation
 /**
  * The field that specifies the current language of the document
  * @author brian.king (at) liip.ch
+ *
+ * @Annotation
+ * @Target("PROPERTY")
  */
 final class Language extends Annotation
 {
@@ -29,6 +35,9 @@ final class Language extends Annotation
  * Defaults to child nodes if not specified.
  *
  * @author david.buchmann (at) liip.ch
+ *
+ * @Annotation
+ * @Target("CLASS")
  */
 final class Multilang extends Annotation
 {
