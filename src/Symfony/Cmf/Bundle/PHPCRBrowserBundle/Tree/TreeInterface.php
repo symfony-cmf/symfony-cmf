@@ -16,7 +16,7 @@ interface TreeInterface
      * @param string $path The path of any PHPCR node
      * @return array children list
      */
-    public function getChildren($path);
+    function getChildren($path);
     
     /**
      * Returns an array representation of properties of a node
@@ -24,6 +24,6 @@ interface TreeInterface
      * @param string $path The path of any PHPCR node
      * @return array properties list
      */
-    public function getProperties($path);
+    function getProperties($path);
 }
 
