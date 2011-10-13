@@ -16,7 +16,7 @@ class PHPCRTree implements TreeInterface
         $this->session = $session;
     }
     
-    public function getJSONChildren($path)
+    public function getChildren($path)
     {
         $root = $this->session->getNode($path);
 
@@ -34,10 +34,10 @@ class PHPCRTree implements TreeInterface
             $children[] = $child;
         }
         
-        return json_encode($children);
+        return $children;
     }
 
-    public function getJSONProperties($path)
+    public function getProperties($path)
     {
         $node = $this->session->getNode($path);
         $properties = array();
@@ -49,6 +49,6 @@ class PHPCRTree implements TreeInterface
             );
         }
         
-        return json_encode($properties);
+        return $properties;
     }
 }

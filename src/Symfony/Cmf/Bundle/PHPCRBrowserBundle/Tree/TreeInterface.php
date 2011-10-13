@@ -11,19 +11,19 @@ namespace Symfony\Cmf\Bundle\PHPCRBrowserBundle\Tree;
 interface TreeInterface
 {
     /**
-     * Returns a JSON representation of children nodes of a node
+     * Returns an array representation of children nodes of a node
      * 
      * @param string $path The path of any PHPCR node
-     * @return string JSON formatted children list
+     * @return array children list
      */
-    public function getJSONChildren($path);
+    public function getChildren($path);
     
     /**
-     * Returns a JSON representation of properties of a node
+     * Returns an array representation of properties of a node
      * 
      * @param string $path The path of any PHPCR node
-     * @return string JSON formatted properties list
+     * @return array properties list
      */
-    public function getJSONProperties($path);
+    public function getProperties($path);
 }
 

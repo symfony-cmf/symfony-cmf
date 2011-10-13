@@ -30,18 +30,18 @@ class PHPCRBrowserController
             $path = '/';
         }
 
-        return new Response($this->tree->$method($path));
+        return new Response(json_encode($this->tree->$method($path)));
     }
 
     public function childrenAction(Request $request)
     {
         $path = $request->query->get('root');
-        return $this->processNode($path, "getJSONChildren");
+        return $this->processNode($path, "getChildren");
     }
 
     public function propertiesAction(Request $request)
     {
         $path = $request->query->get('root');
-        return $this->processNode($path, "getJSONProperties");
+        return $this->processNode($path, "getProperties");
     }
 }
