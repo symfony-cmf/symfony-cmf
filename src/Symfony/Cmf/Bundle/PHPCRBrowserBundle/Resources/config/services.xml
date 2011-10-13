@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="symfony_cmf_phpcr_browser.tree" class="Symfony\Cmf\Bundle\PHPCRBrowserBundle\Tree\PHPCRTree">
+            <argument type="service" id="doctrine_phpcr.session" />
+        </service>
+
+        <service id="symfony_cmf_phpcr_browser.controller" class="Symfony\Cmf\Bundle\PHPCRBrowserBundle\Controller\PHPCRBrowserController">
+            <argument type="service" id="symfony_cmf_phpcr_browser.tree" />
+        </service>
+
+    </services>
+</container>
