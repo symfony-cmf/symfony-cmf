@@ -2,7 +2,6 @@
 
 namespace Symfony\Cmf\Bundle\PHPCRBrowserBundle\Tests\Functional;
 
-//use Symfony\Cmf\Bundle\CoreBundle\Test\CmfTestCase;
 use Liip\FunctionalTestBundle\Test\WebTestCase as BaseWebTestCase;
 
 /**

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="../../../../../../../app/bootstrap.php.cache">
   <php>
-    <server name="SYMFONY" value="/home/jakuza/Projects/cmf-sandbox/vendor/symfony/src" />
+    <server name="SYMFONY" value="../../../../../../symfony/src" />
   </php>
   <testsuites>
     <testsuite name="PHPCRBrowserBundle Test Suite">
