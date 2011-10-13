@@ -29,6 +29,7 @@ class PHPCRBrowserController
         if (empty($path)) {
             $path = '/';
         }
+
         return new Response($this->tree->$method($path));
     }
 

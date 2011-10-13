@@ -24,10 +24,8 @@ class SymfonyCmfPHPCRBrowserExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
-        if (is_string($config['session_id'])) {
-            $tree = $container->getDefinition('symfony_cmf_phpcr_browser.tree');
-            $session = new Reference($config['session_id']);
-            $tree->replaceArgument(0, $session);
-        }
+        $tree = $container->getDefinition('symfony_cmf_phpcr_browser.tree');
+        $session = new Reference($config['session_id']);
+        $tree->replaceArgument(0, $session);
     }
 }
