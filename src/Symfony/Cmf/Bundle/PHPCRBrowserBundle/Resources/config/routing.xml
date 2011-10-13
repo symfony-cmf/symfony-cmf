@@ -6,23 +6,10 @@
 
     <route id="symfony_cmf_phpcr_browser_children" pattern="/children">
         <default key="_controller">symfony_cmf_phpcr_browser.controller:childrenAction</default>
-        <default key="root">source</default>
-        <requirement key="_method">GET</requirement>
-    </route>
-
-
-    <route id="symfony_cmf_phpcr_browser_children_root" pattern="/children/{root}">
-        <default key="_controller">symfony_cmf_phpcr_browser.controller:childrenAction</default>
         <requirement key="_method">GET</requirement>
     </route>
 
     <route id="symfony_cmf_phpcr_browser_properties" pattern="/properties">
-        <default key="_controller">symfony_cmf_phpcr_browser.controller:propertiesAction</default>
-        <default key="root">source</default>
-        <requirement key="_method">GET</requirement>
-    </route>
-
-    <route id="symfony_cmf_phpcr_browser_properties_root" pattern="/properties/{root}">
         <default key="_controller">symfony_cmf_phpcr_browser.controller:propertiesAction</default>
         <requirement key="_method">GET</requirement>
     </route>

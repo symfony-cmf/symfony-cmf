@@ -2,17 +2,15 @@
 
 namespace Symfony\Cmf\Bundle\PHPCRBrowserBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use Symfony\Cmf\Bundle\PHPCRBrowserBundle\Tree\TreeInterface;
 
 class PHPCRBrowserController
 {
     /**
-     * @var PHPCR\SessionInterface
+     * @var TreeInterface
      */
     protected $tree;
 
@@ -22,43 +20,27 @@ class PHPCRBrowserController
     }
 
     /**
-     * @param type $root Node to process
-     * @param type $method Method to execute on the node
+     * @param string $path Node to process
+     * @param string $method Method to execute on the node
      * @return \Symfony\Component\HttpFoundation\Response 
      */
-    private function processNode($root, $method)
+    private function processNode($path, $method)
     {
-        $path = $root !== 'source' ? $root : '/';
-
+        if (empty($path)) {
+            $path = '/';
+        }
         return new Response($this->tree->$method($path));
     }
-    
-    /**
-     * @Route("/")
-     * @Template()
-     */
-    public function indexAction()
+
+    public function childrenAction(Request $request)
     {
-        return array("foo" => 1);
+        $path = $request->query->get('root');
+        return $this->processNode($path, "getJSONChildren");
     }
 
-    /**
-     * @Route("/children", defaults={"root" = "source"})
-     * @Route("/children/{root}")
-     * @Template()
-     */
-    public function childrenAction($root)
+    public function propertiesAction(Request $request)
     {
-        return $this->processNode($root, "getJSONChildren");
-    }
-
-    /**
-     * @Route("/properties", defaults={"root" = "source"})
-     * @Route("/properties/{root}")
-     * @Template()
-     */
-    public function propertiesAction($root)
-    {
-        return $this->processNode($root, "getJSONProperties");
+        $path = $request->query->get('root');
+        return $this->processNode($path, "getJSONProperties");
     }
 }
