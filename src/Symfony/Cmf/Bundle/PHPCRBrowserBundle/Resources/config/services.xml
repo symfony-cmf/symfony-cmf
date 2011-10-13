@@ -7,7 +7,7 @@
     <services>
 
         <service id="symfony_cmf_phpcr_browser.tree" class="Symfony\Cmf\Bundle\PHPCRBrowserBundle\Tree\PHPCRTree">
-            <argument type="service" id="doctrine_phpcr.session" />
+            <argument />
         </service>
 
         <service id="symfony_cmf_phpcr_browser.controller" class="Symfony\Cmf\Bundle\PHPCRBrowserBundle\Controller\PHPCRBrowserController">

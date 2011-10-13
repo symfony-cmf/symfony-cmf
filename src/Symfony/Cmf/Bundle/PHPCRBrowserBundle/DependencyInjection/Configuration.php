@@ -24,7 +24,13 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('fos_rest', 'array');
+        $rootNode = $treeBuilder->root('symfony_cmf_phpcr_browser');
+
+        $rootNode
+            ->children()
+                ->scalarNode('session_id')->defaultValue('doctrine_phpcr.session')->end()
+            ->end()
+        ;
 
         return $treeBuilder;
     }
