@@ -25,7 +25,7 @@ class PHPCRTreeTest extends \PHPUnit_Framework_TestCase
         $this->tree = new \Symfony\Cmf\Bundle\PHPCRBrowserBundle\Tree\PHPCRTree($this->session);
     }
     
-    public function testPHPCRChildrenToJSON()
+    public function testPHPCRChildren()
     {
         $node_mock_prototype = $this->getMockBuilder('Jackalope\Node')->
             disableOriginalConstructor()->
@@ -73,18 +73,40 @@ class PHPCRTreeTest extends \PHPUnit_Framework_TestCase
         $this->com->expects($this->once())->
                 method('getNodes')->
                 will($this->returnValue($children));
-        
-        $this->assertEquals(
-            '[{"text":"anonimarmonisti","id":"\/com\/anonimarmonisti","hasChildren":true},{"text":"romereview","id":"\/com\/romereview","hasChildren":true},{"text":"5etto","id":"\/com\/5etto","hasChildren":true},{"text":"wordpress","id":"\/com\/wordpress","hasChildren":true}]',
-            $this->tree->getJSONChildren('/com')
+
+        $expected = array (
+            array (
+                'text' => 'anonimarmonisti',
+                'id' => '/com/anonimarmonisti',
+                'hasChildren' => true,
+            ),
+            array (
+                'text' => 'romereview',
+                'id' => '/com/romereview',
+                'hasChildren' => true,
+            ),
+            array (
+                'text' => '5etto',
+                'id' => '/com/5etto',
+                'hasChildren' => true,
+            ),
+            array (
+                'text' => 'wordpress',
+                'id' => '/com/wordpress',
+                'hasChildren' => true,
+            )
         );
+
+        $this->assertEquals($expected, $this->tree->getChildren('/com'));
     }
 
-    public function testPHPCRPropertiesToJSON()
+    public function testPHPCRProperties()
     {
+        $date = new \DateTime("2011-08-31 11:02:39");
+
         $properties = array(
             'jcr:createdBy'     => 'user',
-            'jcr:created'       => new \DateTime("2011-08-31 11:02:39"),
+            'jcr:created'       => $date,
             'jcr:primaryType'   => 'nt:folder',
         );
         
@@ -92,12 +114,21 @@ class PHPCRTreeTest extends \PHPUnit_Framework_TestCase
                 method('getPropertiesValues')->
                 will($this->returnValue($properties));
 
-        $now = new \DateTime();
-        $timezone = str_replace('/', '\/', $now->getTimezone()->getName());
-        
-        $this->assertEquals(
-            '[{"name":"jcr:createdBy","value":"user"},{"name":"jcr:created","value":{"date":"2011-08-31 11:02:39","timezone_type":3,"timezone":"'.$timezone.'"}},{"name":"jcr:primaryType","value":"nt:folder"}]',
-            $this->tree->getJSONProperties('/com')
+        $expected = array (
+            array (
+                'name' => 'jcr:createdBy',
+                'value' => 'user',
+            ),
+            array (
+                'name' => 'jcr:created',
+                'value' =>  $date,
+            ),
+            array (
+                'name' => 'jcr:primaryType',
+                'value' => 'nt:folder',
+            ),
         );
+
+        $this->assertEquals($expected, $this->tree->getProperties('/com'));
     }
 }
