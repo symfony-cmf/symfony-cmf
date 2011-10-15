@@ -4,8 +4,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-
     <parameters>
+
         <parameter key="doctrine_phpcr.odm.configuration.class">Doctrine\ODM\PHPCR\Configuration</parameter>
         <parameter key="doctrine_phpcr.odm.document_manager.class">Doctrine\ODM\PHPCR\DocumentManager</parameter>
         <parameter key="doctrine_phpcr.odm.document_manager.event_manager.class">Doctrine\Common\EventManager</parameter>
@@ -16,9 +16,13 @@
         <parameter key="doctrine_phpcr.odm.metadata.xml.class">Doctrine\Bundle\PHPCRBundle\Mapping\Driver\XmlDriver</parameter>
         <parameter key="doctrine_phpcr.odm.metadata.yml.class">Doctrine\Bundle\PHPCRBundle\Mapping\Driver\YamlDriver</parameter>
         <parameter key="doctrine_phpcr.odm.metadata.php.class">Doctrine\ODM\PHPCR\Mapping\Driver\PHPDriver</parameter>
+
+        <parameter key="doctrine_phpcr.odm.class">Symfony\Bundle\DoctrinePHPCRBundle\ManagerRegistry</parameter>
+
     </parameters>
 
     <services>
+
         <service id="doctrine_phpcr.odm.metadata.annotation_reader" class="%doctrine_phpcr.odm.metadata.annotation_reader.class%" public="false">
             <argument type="service" id="annotation_reader" />
         </service>
@@ -41,5 +45,18 @@
             abstract="true"
             class="%doctrine_phpcr.odm.document_manager.event_manager.class%"
         />
+
+        <service id="doctrine_phpcr.odm" class="%doctrine_phpcr.odm.class%">
+            <argument>PHPCR</argument>
+            <argument>%doctrine_phpcr.sessions%</argument>
+            <argument>%doctrine_phpcr.odm.document_managers%</argument>
+            <argument>%doctrine_phpcr.default_session%</argument>
+            <argument>%doctrine_phpcr.odm.default_document_manager%</argument>
+            <argument>Doctrine\ODM\PHPCR\Proxy\Proxy</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
     </services>
 </container>
