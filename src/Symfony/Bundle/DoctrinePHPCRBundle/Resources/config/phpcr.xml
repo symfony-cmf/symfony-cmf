@@ -7,6 +7,11 @@
     <parameters>
 
         <parameter key="doctrine_phpcr.credentials.class">PHPCR\SimpleCredentials</parameter>
+        <parameter key="doctrine_phpcr.odm.class">Symfony\Bundle\DoctrinePHPCRBundle\ManagerRegistry</parameter>
+        <parameter key="doctrine_phpcr.sessions" type="collection" />
+        <parameter key="doctrine_phpcr.odm.document_managers" type="collection" />
+        <parameter key="doctrine_phpcr.default_session"></parameter>
+        <parameter key="doctrine_phpcr.odm.default_document_manager"></parameter>
 
     </parameters>
 
@@ -15,6 +20,18 @@
         <service id="doctrine_phpcr.credentials" class="%doctrine_phpcr.credentials.class%" public="false">
             <argument /><!-- username string (0) -->
             <argument /><!-- password string (1) -->
+        </service>
+
+        <service id="doctrine_phpcr.odm" class="%doctrine_phpcr.odm.class%">
+            <argument>PHPCR</argument>
+            <argument>%doctrine_phpcr.sessions%</argument>
+            <argument>%doctrine_phpcr.odm.document_managers%</argument>
+            <argument>%doctrine_phpcr.default_session%</argument>
+            <argument>%doctrine_phpcr.odm.default_document_manager%</argument>
+            <argument>Doctrine\ODM\PHPCR\Proxy\Proxy</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
         </service>
 
     </services>

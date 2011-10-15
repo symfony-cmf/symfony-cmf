@@ -17,8 +17,6 @@
         <parameter key="doctrine_phpcr.odm.metadata.yml.class">Doctrine\Bundle\PHPCRBundle\Mapping\Driver\YamlDriver</parameter>
         <parameter key="doctrine_phpcr.odm.metadata.php.class">Doctrine\ODM\PHPCR\Mapping\Driver\PHPDriver</parameter>
 
-        <parameter key="doctrine_phpcr.odm.class">Symfony\Bundle\DoctrinePHPCRBundle\ManagerRegistry</parameter>
-
     </parameters>
 
     <services>
@@ -45,18 +43,6 @@
             abstract="true"
             class="%doctrine_phpcr.odm.document_manager.event_manager.class%"
         />
-
-        <service id="doctrine_phpcr.odm" class="%doctrine_phpcr.odm.class%">
-            <argument>PHPCR</argument>
-            <argument>%doctrine_phpcr.sessions%</argument>
-            <argument>%doctrine_phpcr.odm.document_managers%</argument>
-            <argument>%doctrine_phpcr.default_session%</argument>
-            <argument>%doctrine_phpcr.odm.default_document_manager%</argument>
-            <argument>Doctrine\ODM\PHPCR\Proxy\Proxy</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
 
     </services>
 </container>
