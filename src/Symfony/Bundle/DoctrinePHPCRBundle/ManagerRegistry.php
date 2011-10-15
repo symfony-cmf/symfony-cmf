@@ -23,6 +23,6 @@ class ManagerRegistry extends BaseManagerRegistry
             }
         }
 
-        throw PHPCRException::unknownEntityNamespace($alias);
+        throw PHPCRException::unknownDocumentNamespace($alias);
     }
 }
