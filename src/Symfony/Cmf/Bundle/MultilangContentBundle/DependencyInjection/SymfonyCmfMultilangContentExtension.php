@@ -28,6 +28,7 @@ class SymfonyCmfMultilangContentExtension extends Extension
         foreach ($config as $key => $value) {
             $container->setParameter($alias . '.' . $key, $value);
         }
+
         $loader->load('services.xml');
     }
 }

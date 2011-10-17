@@ -56,10 +56,10 @@ class NodeTranslator implements EventSubscriber
         $document = $eventArgs->getDocument();
 
         $translationInfo = $this->reader->translationInformation(get_class($document));
-
         if (!$translationInfo->isTranslatable()) {
             return;
         }
+
         switch($translationInfo->getTranslationStrategy()) {
             case Information::STRATEGY_CHILD:
                 $this->loadTranslationFromNode($document, $translationInfo);
@@ -97,21 +97,24 @@ class NodeTranslator implements EventSubscriber
                 $document->$property = $child->getPropertyValue($property);
             }
         }
+
         $document->{$translationInfo->getLanguageIndicator()} = $lang;
     }
 
     protected function loadTranslationFromAttribute($document, $translationInfo)
     {
         $node = $document->getNode();
+        $props = null;
+
         // Get the best language for this user.
         $langs = $this->langHelper->getPreferredLanguages();
-        $props = null;
         foreach ($langs as $lang) {
             $prefix = $this->langPrefix . $lang .'-';
             if ($props = $node->getPropertiesValues($prefix.'*')) {
                 break;
             }
         }
+
         foreach ($translationInfo->getTranslatedProperties() as $property) {
             if (isset($props[$prefix.$property])) {
                 $document->$property = $props[$prefix.$property];

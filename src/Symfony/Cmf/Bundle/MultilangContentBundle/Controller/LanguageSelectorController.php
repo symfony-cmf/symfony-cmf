@@ -41,6 +41,7 @@ class LanguageSelectorController
                 //nothing to choose from, don't show language chooser
                 return new Response();
             }
+
             foreach ($available as $lang) {
                 $languageUrls[$lang] = $this->chooser->getLanguageMeta($lang);
                 $languageUrls[$lang]['url'] = $this->generateUrl($this->routename, array('_locale' => $lang, 'url' => $url));
@@ -48,6 +49,7 @@ class LanguageSelectorController
                 // we could also provide a variant that walks up the tree to link only existing languages if no fallback is desired
             }
         }
+
         return $this->templating->renderResponse('SymfonyCmfMultilangContentBundle:LanguageSelector:languageselector.html.twig',
             array('languageUrls' => $languageUrls)
         );
@@ -77,5 +79,4 @@ class LanguageSelectorController
         $response->setVary('accept-language');
         return $response;
     }
-
 }

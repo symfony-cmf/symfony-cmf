@@ -35,7 +35,6 @@ class SimpleNodeTranslator
         $this->langPrefix = $lang_prefix;
     }
 
-
     /**
      * Persist a new Document to the data store, and add the appropriate child translation node.
      * If an existing, attached Document is passed in and updateExistingParent is true,

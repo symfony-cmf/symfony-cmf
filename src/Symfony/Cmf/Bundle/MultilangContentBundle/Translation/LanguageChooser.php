@@ -13,8 +13,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @author brian.king (at) liip.ch
  */
-class LanguageChooser {
-
+class LanguageChooser
+{
     protected $container;
     protected $langPreference;
     protected $defaultLang;
