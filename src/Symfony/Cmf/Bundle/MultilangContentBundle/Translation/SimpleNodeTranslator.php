@@ -3,7 +3,6 @@
 namespace Symfony\Cmf\Bundle\MultilangContentBundle\Translation;
 
 use Doctrine\ODM\PHPCR\DocumentManager;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Cmf\Bundle\MultilangContentBundle\Annotation\Information;
 
 /**
@@ -15,11 +14,6 @@ use Symfony\Cmf\Bundle\MultilangContentBundle\Annotation\Information;
 class SimpleNodeTranslator
 {
     /**
-     * ContainerInterface
-     */
-    protected $container;
-
-    /**
      * DocumentManager
     */
     protected $odm;
@@ -27,21 +21,19 @@ class SimpleNodeTranslator
     /** phpcr session */
     protected $session;
 
-    /** helper to get document annoations for translatable properties */
+    /** helper to get document annotations for translatable properties */
     protected $reader;
 
     protected $langPrefix;
 
     /**
-     * @param ContainerInterface $container
      * @param DocumentManager $odm
      * @param \PHPCR\SessionInterface $session the PHPCR session
      * @param object $annotation_reader the annotation reader to use
      * @param string $lang_prefix the prefix for the language child node. TODO: should use a namespace for this.
      */
-    public function __construct(ContainerInterface $container, DocumentManager $odm, $session, $annotation_reader, $lang_prefix)
+    public function __construct(DocumentManager $odm, $session, $annotation_reader, $lang_prefix)
     {
-        $this->container = $container;
         $this->odm = $odm;
         $this->session = $session;
         $this->reader = $annotation_reader;

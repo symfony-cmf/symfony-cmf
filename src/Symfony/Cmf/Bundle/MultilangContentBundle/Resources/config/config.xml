@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+
+        <parameter key="symfony_cmf_multilang_content.translator">symfony_cmf_multilang_content.node_translation</parameter>
+        <parameter key="symfony_cmf_multilang_content.event_listener_class">Symfony\Cmf\Bundle\MultilangContentBundle\EventListener\NodeTranslator</parameter>
+        <parameter key="symfony_cmf_multilang_content.lang_prefix">lang~</parameter>
+        <parameter key="symfony_cmf_multilang_content.default_lang">en</parameter>
+        <parameter key="symfony_cmf_multilang_content.lang_preference" type="collection">
+            <argument key="en">
+                <argument>en</argument>
+                <argument>de</argument>
+            </argument>
+            <argument key="de">
+                <argument>de</argument>
+                <argument>en</argument>
+            </argument>
+        </parameter>
+        <parameter key="symfony_cmf_multilang_content.lang_meta" type="collection">
+            <argument key="de">
+                <argument key="fullname">Deutsch</argument>
+                <argument key="completion">utsch</argument>
+            </argument>
+            <argument key="fr">
+                <argument key="fullname">Français</argument>
+                <argument key="completion">ançais</argument>
+            </argument>
+            <argument key="en">
+                <argument key="fullname">English</argument>
+                <argument key="completion">glish</argument>
+            </argument>
+            <argument key="it">
+                <argument key="fullname">Italiano</argument>
+                <argument key="completion">aliano</argument>
+            </argument>
+        </parameter>
+
+    </parameters>
+
+</container>

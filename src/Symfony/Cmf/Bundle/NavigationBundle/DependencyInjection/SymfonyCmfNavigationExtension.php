@@ -4,8 +4,7 @@ namespace Symfony\Cmf\Bundle\NavigationBundle\DependencyInjection;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\Definition\Processor;
-//TODO: make config xml instead of yml
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 
 class SymfonyCmfNavigationExtension extends Extension
@@ -31,7 +30,7 @@ class SymfonyCmfNavigationExtension extends Extension
         $container->setParameter("symfony_cmf_navigation.mainmenu_routename", $config['mainmenu_routename']);
         $container->setParameter("symfony_cmf_navigation.document", $config['document']);
 
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.yml');
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.xml');
     }
 }
