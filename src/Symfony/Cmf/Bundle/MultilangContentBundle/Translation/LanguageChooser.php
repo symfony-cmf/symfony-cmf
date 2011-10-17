@@ -2,7 +2,7 @@
 
 namespace Symfony\Cmf\Bundle\MultilangContentBundle\Translation;
 
-use Symfony\Component\HttpFoundation\Session;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class to get the list of preferred languages.
@@ -15,15 +15,14 @@ use Symfony\Component\HttpFoundation\Session;
  */
 class LanguageChooser {
 
-    protected $session;
+    protected $container;
     protected $langPreference;
     protected $defaultLang;
     protected $preferred;
     protected $langMeta;
 
     /**
-     * @param Session $session the web request session to get the current
-     *      locale from
+     * @param ContainerInterface $container the container, from which we get the request and thus the locale
      * @param array $lang_preference array of arrays with a language order list
      *      for each language
      * @param string $default_lang the default language
@@ -31,9 +30,9 @@ class LanguageChooser {
      *      lang_preferences. keys are lang code, values is array as returned
      *      by getLanguageMeta
      */
-    public function __construct(Session $session, $lang_preference, $default_lang, $lang_meta)
+    public function __construct(ContainerInterface $container, $lang_preference, $default_lang, $lang_meta)
     {
-        $this->session = $session;
+        $this->container = $container;
         $this->langPreference = $lang_preference;
         $this->defaultLang = $default_lang;
         $this->langMeta = $lang_meta;
@@ -47,7 +46,7 @@ class LanguageChooser {
     public function getPreferredLanguages()
     {
         if (is_null($this->preferred)) {
-            $this->setPreferredLanguage($this->session->getLocale());
+            $this->setPreferredLanguage($this->container->get('request')->getLocale());
         }
         return $this->preferred;
     }
