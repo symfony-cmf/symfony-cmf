@@ -15,15 +15,13 @@ class LanguageSelectorController
 {
     protected $templating;
     protected $router;
-    protected $session;
     protected $chooser;
     protected $routename;
 
-    public function __construct(EngineInterface $templating, RouterInterface $router, $session, $chooser, $routename)
+    public function __construct(EngineInterface $templating, RouterInterface $router, $chooser, $routename)
     {
         $this->templating = $templating;
         $this->router = $router;
-        $this->session = $session;
         $this->chooser = $chooser;
         $this->routename = $routename;
     }

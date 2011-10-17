@@ -18,9 +18,6 @@ class SimpleNodeTranslator
     */
     protected $odm;
 
-    /** phpcr session */
-    protected $session;
-
     /** helper to get document annotations for translatable properties */
     protected $reader;
 
@@ -28,14 +25,12 @@ class SimpleNodeTranslator
 
     /**
      * @param DocumentManager $odm
-     * @param \PHPCR\SessionInterface $session the PHPCR session
      * @param object $annotation_reader the annotation reader to use
      * @param string $lang_prefix the prefix for the language child node. TODO: should use a namespace for this.
      */
-    public function __construct(DocumentManager $odm, $session, $annotation_reader, $lang_prefix)
+    public function __construct(DocumentManager $odm, $annotation_reader, $lang_prefix)
     {
         $this->odm = $odm;
-        $this->session = $session;
         $this->reader = $annotation_reader;
         $this->langPrefix = $lang_prefix;
     }

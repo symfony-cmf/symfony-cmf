@@ -8,7 +8,6 @@
 
         <service id="symfony_cmf_multilang_content.node_translation" class="Symfony\Cmf\Bundle\MultilangContentBundle\Translation\SimpleNodeTranslator">
             <argument type="service" id="doctrine_phpcr.odm.default_document_manager" />
-            <argument type="service" id="doctrine_phpcr.default_session" />
             <argument type="service" id="symfony_cmf_multilang_content.annotation_reader" />
             <argument>%symfony_cmf_multilang_content.lang_prefix%</argument>
         </service>
@@ -22,7 +21,6 @@
         <service id="symfony_cmf_multilang_content.annotation_reader" class="Symfony\Cmf\Bundle\MultilangContentBundle\Annotation\Reader" />
 
         <service id="symfony_cmf_multilang_content.event_listener" class="%symfony_cmf_multilang_content.event_listener_class%">
-            <argument type="service" id="doctrine_phpcr.default_session" />
             <argument type="service" id="symfony_cmf_multilang_content.annotation_reader" />
             <argument type="service" id="symfony_cmf_multilang_content.chooser" />
             <argument>%symfony_cmf_multilang_content.lang_prefix%</argument>
@@ -32,7 +30,6 @@
         <service id="symfony_cmf_multilang_content.languageSelectorController" class="Symfony\Cmf\Bundle\MultilangContentBundle\Controller\LanguageSelectorController">
             <argument type="service" id="templating" />
             <argument type="service" id="router" />
-            <argument type="service" id="doctrine_phpcr.default_session" />
             <argument type="service" id="symfony_cmf_multilang_content.chooser" />
             <argument>%symfony_cmf_navigation.mainmenu_routename%</argument>
         </service>

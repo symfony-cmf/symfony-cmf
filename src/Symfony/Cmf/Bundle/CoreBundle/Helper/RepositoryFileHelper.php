@@ -13,11 +13,6 @@ use Symfony\Component\HttpFoundation\File\MimeType\ExtensionGuesser;
 class RepositoryFileHelper implements FileMapperInterface
 {
     /**
-     * @var \PHPCR\SessionInterface
-     */
-    protected $session;
-
-    /**
      * @var string  (e.g. /var/www/foo/images)  : absolute path, no trailing slash
      */
     protected $fileBasePath;
@@ -32,16 +27,13 @@ class RepositoryFileHelper implements FileMapperInterface
      */
     protected $pathMapper;
 
-
     /**
-     * @param PHPCR\SessionInterface $session
      * @param string $pathPrefix Content repository path prefix (e.g. /cms/content)
      * @param string $fileBasePath
      * @param string $webRelativePath a path relative to the web directory
      */
-    public function __construct(\PHPCR\SessionInterface $session, $pathPrefix, $fileBasePath, $webRelativePath)
+    public function __construct($pathPrefix, $fileBasePath, $webRelativePath)
     {
-        $this->session = $session;
         $this->fileBasePath = $fileBasePath;
         $this->pathMapper = new DirectPathMapper($pathPrefix);
         $this->webRelativePath = '/' . $webRelativePath;

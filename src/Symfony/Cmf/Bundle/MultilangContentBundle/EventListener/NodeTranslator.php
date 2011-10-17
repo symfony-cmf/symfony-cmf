@@ -16,23 +16,19 @@ use Symfony\Cmf\Bundle\MultilangContentBundle\Annotation\Information;
  *
  * @author brian.king (at) liip.ch
  */
-class NodeTranslator implements EventSubscriber {
-
-
-    protected $session;
+class NodeTranslator implements EventSubscriber
+{
     protected $reader;
     protected $langHelper;
     protected $langPrefix;
 
     /**
-     * @param \PHPCR\SessionInterface $session the PHPCR session
      * @param object $annotation_reader the annotation reader to find out which properties are translated
      * @param object $lang_helper the language chooser
      * @param object $lang_prefix the translation child prefix. TODO: should use a namespace for this.
      */
-    public function __construct($session, $annotation_reader, $lang_helper, $lang_prefix)
+    public function __construct($annotation_reader, $lang_helper, $lang_prefix)
     {
-        $this->session = $session;
         $this->reader = $annotation_reader;
         $this->langHelper = $lang_helper;
         $this->langPrefix = $lang_prefix;
