@@ -7,7 +7,6 @@
     <parameters>
 
         <parameter key="symfony_cmf_multilang_content.translator">symfony_cmf_multilang_content.node_translation</parameter>
-        <parameter key="symfony_cmf_multilang_content.event_listener_class">Symfony\Cmf\Bundle\MultilangContentBundle\EventListener\NodeTranslator</parameter>
         <parameter key="symfony_cmf_multilang_content.lang_prefix">lang~</parameter>
         <parameter key="symfony_cmf_multilang_content.default_lang">en</parameter>
         <parameter key="symfony_cmf_multilang_content.lang_preference" type="collection">
