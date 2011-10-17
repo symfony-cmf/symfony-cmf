@@ -5,8 +5,7 @@ namespace Symfony\Cmf\Bundle\CoreBundle\Helper;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use PHPCR\NodeInterface;
 use Symfony\Cmf\Bundle\CoreBundle\Helper\DirectPathMapper;
-use Symfony\Cmf\Bundle\CoreBundle\Helper\ExtensionGuesser;
-#use Symfony\Component\HttpFoundation\File\MimeType\ExtensionGuesser;
+use Symfony\Component\HttpFoundation\File\MimeType\ExtensionGuesser;
 
 /**
  * Helper class to get paths for and save files to filesystem from repository
@@ -117,8 +116,7 @@ class RepositoryFileHelper implements FileMapperInterface
     {
         if ($contentNode->hasProperty('jcr:mimeType')) {
             $mimeType = $contentNode->getPropertyValue('jcr:mimeType');
-            $extension = ExtensionGuesser::guess($mimeType);
-            #$extension = ExtensionGuesser::getInstance()->guess($mimeType);
+            $extension = ExtensionGuesser::getInstance()->guess($mimeType);
             if (null !== $extension) {
                 return '.' . $extension;
             }
