@@ -12,7 +12,6 @@
 
         <parameter key="doctrine_phpcr.odm.metadata.driver_chain.class">Doctrine\ODM\PHPCR\Mapping\Driver\DriverChain</parameter>
         <parameter key="doctrine_phpcr.odm.metadata.annotation.class">Doctrine\ODM\PHPCR\Mapping\Driver\AnnotationDriver</parameter>
-        <parameter key="doctrine_phpcr.odm.metadata.annotation_reader.class">Symfony\Bridge\Doctrine\Annotations\IndexedReader</parameter>
         <parameter key="doctrine_phpcr.odm.metadata.xml.class">Doctrine\Bundle\PHPCRBundle\Mapping\Driver\XmlDriver</parameter>
         <parameter key="doctrine_phpcr.odm.metadata.yml.class">Doctrine\Bundle\PHPCRBundle\Mapping\Driver\YamlDriver</parameter>
         <parameter key="doctrine_phpcr.odm.metadata.php.class">Doctrine\ODM\PHPCR\Mapping\Driver\PHPDriver</parameter>
@@ -21,9 +20,7 @@
 
     <services>
 
-        <service id="doctrine_phpcr.odm.metadata.annotation_reader" class="%doctrine_phpcr.odm.metadata.annotation_reader.class%" public="false">
-            <argument type="service" id="annotation_reader" />
-        </service>
+        <service id="doctrine_phpcr.odm.metadata.annotation_reader" alias="annotation_reader" public="false" />
 
         <service
             id="doctrine_phpcr.odm.configuration"
