@@ -11,7 +11,7 @@ services:
     symfony_cmf_multilang_content.chooser:
         class: Symfony\Cmf\Bundle\MultilangContentBundle\Translation\LanguageChooser
         arguments:
-            session: @session
+            container: "@service_container"
             available_langs: %symfony_cmf_multilang_content.lang_preference%
             default_lang: %symfony_cmf_multilang_content.default_lang%
             lang_meta: %symfony_cmf_multilang_content.lang_meta%
