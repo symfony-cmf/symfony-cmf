@@ -9,6 +9,9 @@ use Symfony\Component\Config\FileLocator,
     Symfony\Component\DependencyInjection\ContainerBuilder,
     Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
+/**
+  * @author Lukas Kahwe Smith <smith@pooteeweet.org>
+  */
 class SymfonyCmfPHPCRBrowserExtension extends Extension
 {
     /**

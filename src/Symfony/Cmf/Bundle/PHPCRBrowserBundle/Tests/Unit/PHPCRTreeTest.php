@@ -5,6 +5,13 @@ namespace Symfony\Cmf\Bundle\PHPCRBrowserBundle\Tests\Unit;
 use \PHPCR;
 use \Jackalope;
 
+/**
+ * Unit test for PHPCRTree class
+ * 
+ * @author Jacopo Jakuza Romei <jromei@gmail.com>
+ * @see \Symfony\Cmf\Bundle\PHPCRBrowserBundle\Tree\PHPCRTree
+ * 
+ */
 class PHPCRTreeTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()

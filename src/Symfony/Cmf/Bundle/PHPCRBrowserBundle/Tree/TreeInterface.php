@@ -7,6 +7,7 @@ namespace Symfony\Cmf\Bundle\PHPCRBrowserBundle\Tree;
  * 
  * @author Jacopo Jakuza Romei <jromei@gmail.com>
  * @author cirpo <alessandro.cinelli@gmail.com>
+ * @author Lukas Kahwe Smith <smith@pooteeweet.org>
 */
 interface TreeInterface
 {

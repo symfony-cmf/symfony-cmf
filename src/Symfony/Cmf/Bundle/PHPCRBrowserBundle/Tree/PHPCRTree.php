@@ -6,6 +6,7 @@ namespace Symfony\Cmf\Bundle\PHPCRBrowserBundle\Tree;
  * A simple class to get PHPCR trees in JSON format
  *
  * @author Jacopo 'Jakuza' Romei <jromei@gmail.com>
+ * @author Lukas Kahwe Smith <smith@pooteeweet.org>
  */
 class PHPCRTree implements TreeInterface
 {

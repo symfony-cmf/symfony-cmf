@@ -7,6 +7,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 use Symfony\Cmf\Bundle\PHPCRBrowserBundle\Tree\TreeInterface;
 
+/**
+ * @author Jacopo Jakuza Romei <jromei@gmail.com>
+ * @author Lukas Kahwe Smith <smith@pooteeweet.org>
+ */
 class PHPCRBrowserController
 {
     /**
