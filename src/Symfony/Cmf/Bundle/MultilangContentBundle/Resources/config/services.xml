@@ -34,7 +34,6 @@
             <argument type="service" id="router" />
             <argument type="service" id="doctrine_phpcr.default_session" />
             <argument type="service" id="symfony_cmf_multilang_content.chooser" />
-            <argument type="service" id="symfony_cmf_multilang_content.annotation_reader" />
             <argument>%symfony_cmf_navigation.mainmenu_routename%</argument>
         </service>
 
