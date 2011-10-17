@@ -2,7 +2,7 @@
 
 namespace Symfony\Cmf\Bundle\NavigationBundle\Controller;
 
-use \Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 
 /**
  * A controller to render navigational elements into simple html that can be
