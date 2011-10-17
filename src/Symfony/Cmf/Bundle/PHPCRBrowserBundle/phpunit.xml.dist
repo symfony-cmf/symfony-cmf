@@ -2,6 +2,7 @@
 <phpunit bootstrap="../../../../../../../app/bootstrap.php.cache">
   <php>
     <server name="SYMFONY" value="../../../../../../symfony/src" />
+    <server name="KERNEL_DIR" value="../../../../../../../app" />
   </php>
   <testsuites>
     <testsuite name="PHPCRBrowserBundle Test Suite">
