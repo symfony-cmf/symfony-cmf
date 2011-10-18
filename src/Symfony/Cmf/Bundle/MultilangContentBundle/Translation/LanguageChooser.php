@@ -23,34 +23,34 @@ class LanguageChooser
     protected $langMeta;
 
     /**
-     * @param array $lang_preference array of arrays with a language order list
+     * @param array $langPreference array of arrays with a language order list
      *      for each language
-     * @param string $default_lang the default language
-     * @param array $lang_meta meta information about the languages in the
+     * @param string $defaultLang the default language
+     * @param array $langMeta meta information about the languages in the
      *      lang_preferences. keys are lang code, values is array as returned
      *      by getLanguageMeta
      */
-    public function __construct($lang_preference, $default_lang, $lang_meta)
+    public function __construct($langPreference, $defaultLang, $langMeta)
     {
-        $this->langPreference = $lang_preference;
-        $this->defaultLang = $default_lang;
-        $this->langMeta = $lang_meta;
+        $this->langPreference = $langPreference;
+        $this->defaultLang = $defaultLang;
+        $this->langMeta = $langMeta;
     }
 
     /**
      * Gets an ordered list of preferred languages.
      *
-     * @param string $for_lang for which language you need the language order, i.e. the current request language
+     * @param string $forLang for which language you need the language order, i.e. the current request language
      *
      * @return array $preferredLanguages
      */
-    public function getPreferredLanguages($for_lang=null)
+    public function getPreferredLanguages($forLang = null)
     {
         // Use the default language for lang preferences if the given language is not one of the available languages.
-        if (!in_array($for_lang, array_keys($this->langPreference))) {
+        if (!in_array($forLang, array_keys($this->langPreference))) {
             $preferred = $this->langPreference[$this->defaultLang];
         } else {
-            $preferred = $this->langPreference[$for_lang];
+            $preferred = $this->langPreference[$forLang];
         }
         return $preferred;
     }
@@ -77,7 +77,7 @@ class LanguageChooser
     public function getLanguageMeta($lang)
     {
         if (! array_key_exists($lang, $this->langMeta)) {
-            throw new \IllegalArgumentException("No meta for $lang");
+            throw new \InvalidArgumentException("No meta for $lang");
         }
         return $this->langMeta[$lang];
     }
