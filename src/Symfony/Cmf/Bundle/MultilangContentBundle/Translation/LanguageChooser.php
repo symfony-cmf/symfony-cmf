@@ -47,6 +47,7 @@ class LanguageChooser
     public function getPreferredLanguages(Request $request)
     {
         if (is_null($this->preferred)) {
+            // TODO: we probaly just pass the locale instead of the entire Request
             $this->setPreferredLanguage($request->getLocale());
         }
         return $this->preferred;
