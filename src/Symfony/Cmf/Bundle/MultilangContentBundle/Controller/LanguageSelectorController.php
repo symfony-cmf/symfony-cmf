@@ -44,7 +44,7 @@ class LanguageSelectorController
 
             foreach ($available as $lang) {
                 $languageUrls[$lang] = $this->chooser->getLanguageMeta($lang);
-                $languageUrls[$lang]['url'] = $this->generateUrl($this->routename, array('_locale' => $lang, 'url' => $url));
+                $languageUrls[$lang]['url'] = $this->router->generate($this->routename, array('_locale' => $lang, 'url' => $url));
                 // TODO: check for availability of this url in this lang and add to the language info.
                 // we could also provide a variant that walks up the tree to link only existing languages if no fallback is desired
             }
