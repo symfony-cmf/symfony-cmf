@@ -10,32 +10,32 @@
         <parameter key="symfony_cmf_multilang_content.lang_prefix">lang~</parameter>
         <parameter key="symfony_cmf_multilang_content.default_lang">en</parameter>
         <parameter key="symfony_cmf_multilang_content.lang_preference" type="collection">
-            <argument key="en">
-                <argument>en</argument>
-                <argument>de</argument>
-            </argument>
-            <argument key="de">
-                <argument>de</argument>
-                <argument>en</argument>
-            </argument>
+            <parameter key="en" type="collection">
+                <parameter>en</parameter>
+                <parameter>de</parameter>
+            </parameter>
+            <parameter key="de" type="collection">
+                <parameter>de</parameter>
+                <parameter>en</parameter>
+            </parameter>
         </parameter>
         <parameter key="symfony_cmf_multilang_content.lang_meta" type="collection">
-            <argument key="de">
-                <argument key="fullname">Deutsch</argument>
-                <argument key="completion">utsch</argument>
-            </argument>
-            <argument key="fr">
-                <argument key="fullname">Français</argument>
-                <argument key="completion">ançais</argument>
-            </argument>
-            <argument key="en">
-                <argument key="fullname">English</argument>
-                <argument key="completion">glish</argument>
-            </argument>
-            <argument key="it">
-                <argument key="fullname">Italiano</argument>
-                <argument key="completion">aliano</argument>
-            </argument>
+            <parameter key="de" type="collection">
+                <parameter key="fullname">Deutsch</parameter>
+                <parameter key="completion">utsch</parameter>
+            </parameter>
+            <parameter key="fr" type="collection">
+                <parameter key="fullname">Français</parameter>
+                <parameter key="completion">ançais</parameter>
+            </parameter>
+            <parameter key="en" type="collection">
+                <parameter key="fullname">English</parameter>
+                <parameter key="completion">glish</parameter>
+            </parameter>
+            <parameter key="it" type="collection">
+                <parameter key="fullname">Italiano</parameter>
+                <parameter key="completion">aliano</parameter>
+            </parameter>
         </parameter>
 
     </parameters>

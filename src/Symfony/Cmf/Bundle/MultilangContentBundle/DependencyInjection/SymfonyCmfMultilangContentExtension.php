@@ -16,6 +16,8 @@ class SymfonyCmfMultilangContentExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
+        // TODO: use the configuration mechanism to validate the configuration
+
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('config.xml');
 
