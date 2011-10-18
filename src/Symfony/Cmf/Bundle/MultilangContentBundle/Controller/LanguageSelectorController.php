@@ -60,7 +60,7 @@ class LanguageSelectorController
      */
     public function defaultLanguageAction(Request $request)
     {
-        $defaultPreferredLangs = $this->chooser->getPreferredLanguages($request);
+        $defaultPreferredLangs = $this->chooser->getPreferredLanguages($request->getLocale());
         $bestLang = $request->getPreferredLanguage($defaultPreferredLangs);
         // we only care about the first 2 characters, even if the user's preference is de_CH.
         $bestLang = substr($bestLang, 0, 2);

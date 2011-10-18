@@ -7,7 +7,7 @@ use Doctrine\ODM\PHPCR\Event;
 use Doctrine\ODM\PHPCR\Event\LifecycleEventArgs;
 
 use Symfony\Cmf\Bundle\MultilangContentBundle\Annotation\Information;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * An event listener to load the best available languague into a document when
@@ -20,19 +20,19 @@ use Symfony\Component\HttpFoundation\Request;
 class NodeTranslator implements EventSubscriber
 {
     protected $reader;
-    protected $request;
     protected $langHelper;
     protected $langPrefix;
+    protected $container;
 
     /**
      * @param object $annotation_reader the annotation reader to find out which properties are translated
      * @param object $lang_helper the language chooser
      * @param object $lang_prefix the translation child prefix. TODO: should use a namespace for this.
      */
-    public function __construct($annotation_reader, Request $request, $lang_helper, $lang_prefix)
+    public function __construct(ContainerInterface $container, $annotation_reader, $lang_helper, $lang_prefix)
     {
+        $this->container = $container;
         $this->reader = $annotation_reader;
-        $this->request = $request;
         $this->langHelper = $lang_helper;
         $this->langPrefix = $lang_prefix;
     }
@@ -49,6 +49,11 @@ class NodeTranslator implements EventSubscriber
 #            Event::postPersist,
 #            Event::postUpdate,
         );
+    }
+
+    protected function getLocale()
+    {
+        return $this->container->get('request')->getLocale();
     }
 
     /**
@@ -79,7 +84,7 @@ class NodeTranslator implements EventSubscriber
     {
         $node = $document->getNode();
         // Get the best language for this user.
-        $langs = $this->langHelper->getPreferredLanguages($this->request);
+        $langs = $this->langHelper->getPreferredLanguages($this->getLocale());
 
         $child = null;
         foreach ($langs as $lang) {
@@ -110,7 +115,7 @@ class NodeTranslator implements EventSubscriber
         $props = null;
 
         // Get the best language for this user.
-        $langs = $this->langHelper->getPreferredLanguages($this->request);
+        $langs = $this->langHelper->getPreferredLanguages($this->getLocale());
         foreach ($langs as $lang) {
             $prefix = $this->langPrefix . $lang .'-';
             if ($props = $node->getPropertiesValues($prefix.'*')) {

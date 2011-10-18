@@ -42,13 +42,13 @@ class LanguageChooser
     /**
      * Gets an ordered list of preferred languages.
      *
+     * $param $locale string
      * @return array $preferredLanguages
      */
-    public function getPreferredLanguages(Request $request)
+    public function getPreferredLanguages($locale)
     {
         if (is_null($this->preferred)) {
-            // TODO: we probaly just pass the locale instead of the entire Request
-            $this->setPreferredLanguage($request->getLocale());
+            $this->setPreferredLanguage($locale);
         }
         return $this->preferred;
     }

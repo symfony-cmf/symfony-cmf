@@ -26,9 +26,9 @@
 
         <service id="symfony_cmf_multilang_content.annotation_reader" class="Symfony\Cmf\Bundle\MultilangContentBundle\Annotation\Reader" />
 
-        <service id="symfony_cmf_multilang_content.event_listener" class="%symfony_cmf_multilang_content.event_listener_class%" scope="request">
+        <service id="symfony_cmf_multilang_content.event_listener" class="%symfony_cmf_multilang_content.event_listener_class%">
+            <argument type="service" id="service_container" />
             <argument type="service" id="symfony_cmf_multilang_content.annotation_reader" />
-            <argument type="service" id="request" />
             <argument type="service" id="symfony_cmf_multilang_content.chooser" />
             <argument>%symfony_cmf_multilang_content.lang_prefix%</argument>
             <tag name="doctrine_phpcr.event_subscriber"></tag>
