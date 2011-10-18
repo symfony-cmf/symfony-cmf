@@ -11,8 +11,8 @@ require_once __DIR__.'/TranslationAnnotations.php';
  *
  * @author brian.king (at) liip.ch
  */
-class Reader {
-
+class Reader
+{
     protected $reader;
     protected $propertyInformation;
 

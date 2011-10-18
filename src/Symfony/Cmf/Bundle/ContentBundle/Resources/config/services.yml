@@ -1,6 +1,0 @@
-services:
-    symfony_cmf_content.controller:
-        class: Symfony\Cmf\Bundle\ContentBundle\Controller\ContentController
-        arguments:
-            container: "@service_container"
-        shared: true

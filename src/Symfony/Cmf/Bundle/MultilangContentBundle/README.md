@@ -98,7 +98,8 @@ data and call persistTranslation again.
 ## Language preferences
 
 The ``symfony_cmf_multilang_content.chooser`` provides a method
-getPreferredLanguages that returns an ordered list of languages to choose from.
+getPreferredLanguages that returns an ordered list of languages ordered by
+preference to choose from.
 
 The default implementation uses a static list that can be configured with:
 

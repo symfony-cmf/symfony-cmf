@@ -39,10 +39,10 @@ to see how the components are used.
 
 ## Cms route
 
-Include the navigation route in your main routing.yml as the *very last* entry:
+Include the navigation route in your main routing.xml as the *very last* entry:
 
     cmf:
-        resource: "@SymfonyCmfNavigationBundle/Resources/config/routing.yml"
+        resource: "@SymfonyCmfNavigationBundle/Resources/config/routing.xml"
 
 This route is a catch all route that matches on all requests and lets the
 ``symfony_cmf_navigation.controller`` handle them.

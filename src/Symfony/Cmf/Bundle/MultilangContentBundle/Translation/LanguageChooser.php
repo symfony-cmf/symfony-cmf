@@ -3,26 +3,26 @@
 namespace Symfony\Cmf\Bundle\MultilangContentBundle\Translation;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class to get the list of preferred languages.
  *
  * The order is defined as list of language codes per language.
  *
- * TODO: extract interface so we can implement and plug in other strategies
+ * TODO: extract interface so we can implement and plug in other strategies.
+ * getPreferredLanguages might be a problem as some strategies may not care
+ * about the request language.
  *
  * @author brian.king (at) liip.ch
  */
-class LanguageChooser {
-
-    protected $container;
+class LanguageChooser
+{
     protected $langPreference;
     protected $defaultLang;
-    protected $preferred;
     protected $langMeta;
 
     /**
-     * @param ContainerInterface $container the container, from which we get the request and thus the locale
      * @param array $lang_preference array of arrays with a language order list
      *      for each language
      * @param string $default_lang the default language
@@ -30,9 +30,8 @@ class LanguageChooser {
      *      lang_preferences. keys are lang code, values is array as returned
      *      by getLanguageMeta
      */
-    public function __construct(ContainerInterface $container, $lang_preference, $default_lang, $lang_meta)
+    public function __construct($lang_preference, $default_lang, $lang_meta)
     {
-        $this->container = $container;
         $this->langPreference = $lang_preference;
         $this->defaultLang = $default_lang;
         $this->langMeta = $lang_meta;
@@ -41,14 +40,19 @@ class LanguageChooser {
     /**
      * Gets an ordered list of preferred languages.
      *
+     * @param string $for_lang for which language you need the language order, i.e. the current request language
+     *
      * @return array $preferredLanguages
      */
-    public function getPreferredLanguages()
+    public function getPreferredLanguages($for_lang=null)
     {
-        if (is_null($this->preferred)) {
-            $this->setPreferredLanguage($this->container->get('request')->getLocale());
+        // Use the default language for lang preferences if the given language is not one of the available languages.
+        if (!in_array($for_lang, array_keys($this->langPreference))) {
+            $preferred = $this->langPreference[$this->defaultLang];
+        } else {
+            $preferred = $this->langPreference[$for_lang];
         }
-        return $this->preferred;
+        return $preferred;
     }
 
     /**
@@ -72,22 +76,9 @@ class LanguageChooser {
      */
     public function getLanguageMeta($lang)
     {
-        return $this->langMeta[$lang];
-    }
-
-    /**
-     * Set the preferred language.
-     *
-     * If it is not available, the default language is used.
-     * @param string $lang the language to set.
-     */
-    protected function setPreferredLanguage($lang)
-    {
-        // Use the default language for lang preferences if the given language is not one of the available languages.
-        if (!in_array($lang, array_keys($this->langPreference))) {
-            $this->preferred = $this->langPreference[$this->defaultLang];
-        } else {
-            $this->preferred = $this->langPreference[$lang];
+        if (! array_key_exists($lang, $this->langMeta)) {
+            throw new \IllegalArgumentException("No meta for $lang");
         }
+        return $this->langMeta[$lang];
     }
 }

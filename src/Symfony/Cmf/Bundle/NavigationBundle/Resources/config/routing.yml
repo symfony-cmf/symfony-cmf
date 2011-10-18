@@ -1,9 +1,0 @@
-# the catch-all route for the navigation
-
-# make very sure you include this last
-# TODO: look into the possibility to create our own router instead of the catchall route
-navigation:
-    pattern: "/{url}"
-    defaults: { _controller: symfony_cmf_navigation.controller:indexAction }
-    requirements:
-        url: .*

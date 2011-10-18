@@ -16,17 +16,7 @@ class StaticContent
      * @PHPCRODM\Id
      */
     protected $path;
-    /**
-     * Set repository path of this navigation item for creation
-     */
-    public function setPath($path)
-    {
-      $this->path = $path;
-    }
-    public function getPath()
-    {
-      return $this->path;
-    }
+
     /**
      * @PHPCRODM\Node
      */
@@ -49,4 +39,17 @@ class StaticContent
      * @PHPCRODM\String()
      */
     public $content;
+
+    /**
+     * Set repository path of this navigation item for creation
+     */
+    public function setPath($path)
+    {
+      $this->path = $path;
+    }
+
+    public function getPath()
+    {
+      return $this->path;
+    }
 }

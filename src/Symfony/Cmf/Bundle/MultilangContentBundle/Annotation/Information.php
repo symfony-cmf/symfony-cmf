@@ -7,8 +7,8 @@ namespace Symfony\Cmf\Bundle\MultilangContentBundle\Annotation;
  *
  * @author brian.king (at) liip.ch
  */
-class Information {
-
+class Information
+{
     /** translations should be stored as child */
     const STRATEGY_CHILD = 1;
     /** translations should be stored as attributes */

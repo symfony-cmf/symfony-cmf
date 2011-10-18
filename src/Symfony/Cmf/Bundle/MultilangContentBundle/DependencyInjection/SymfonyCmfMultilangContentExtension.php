@@ -3,12 +3,12 @@
 namespace Symfony\Cmf\Bundle\MultilangContentBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\FileLocator;
 
 /**
- * Dependency injection class to load services.yml
+ * Dependency injection class to load services.xml
  *
  * @author brian.king (at) liip.ch
  */
@@ -16,8 +16,10 @@ class SymfonyCmfMultilangContentExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('config.yml');
+        // TODO: use the configuration mechanism to validate the configuration
+
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('config.xml');
 
         $config = array();
         foreach ($configs as $conf) {
@@ -28,6 +30,7 @@ class SymfonyCmfMultilangContentExtension extends Extension
         foreach ($config as $key => $value) {
             $container->setParameter($alias . '.' . $key, $value);
         }
-        $loader->load('services.yml');
+
+        $loader->load('services.xml');
     }
 }
