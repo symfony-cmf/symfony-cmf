@@ -26,6 +26,7 @@ class NodeTranslator implements EventSubscriber
 
     /**
      * @param object $annotation_reader the annotation reader to find out which properties are translated
+     * @param Request $request the request to get the locale from
      * @param object $lang_helper the language chooser
      * @param object $lang_prefix the translation child prefix. TODO: should use a namespace for this.
      */
@@ -84,7 +85,7 @@ class NodeTranslator implements EventSubscriber
     {
         $node = $document->getNode();
         // Get the best language for this user.
-        $langs = $this->langHelper->getPreferredLanguages($this->getLocale());
+        $langs = $this->langHelper->getPreferredLanguages($this->request->getLocale());
 
         $child = null;
         foreach ($langs as $lang) {
@@ -115,7 +116,7 @@ class NodeTranslator implements EventSubscriber
         $props = null;
 
         // Get the best language for this user.
-        $langs = $this->langHelper->getPreferredLanguages($this->getLocale());
+        $langs = $this->langHelper->getPreferredLanguages($this->request->getLocale());
         foreach ($langs as $lang) {
             $prefix = $this->langPrefix . $lang .'-';
             if ($props = $node->getPropertiesValues($prefix.'*')) {
