@@ -3,6 +3,7 @@
 namespace Symfony\Cmf\Bundle\MultilangContentBundle\Translation;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class to get the list of preferred languages.
@@ -43,10 +44,10 @@ class LanguageChooser
      *
      * @return array $preferredLanguages
      */
-    public function getPreferredLanguages()
+    public function getPreferredLanguages(Request $request)
     {
         if (is_null($this->preferred)) {
-            $this->setPreferredLanguage($this->container->get('request')->getLocale());
+            $this->setPreferredLanguage($request->getLocale());
         }
         return $this->preferred;
     }
