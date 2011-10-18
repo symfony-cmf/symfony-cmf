@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+
+        <parameter key="symfony_cmf_multilang_content.event_listener_class">Symfony\Cmf\Bundle\MultilangContentBundle\EventListener\NodeTranslator</parameter>
+
+    </parameters>
+
+    <services>
+
+        <service id="symfony_cmf_multilang_content.node_translation" class="Symfony\Cmf\Bundle\MultilangContentBundle\Translation\SimpleNodeTranslator">
+            <argument type="service" id="doctrine_phpcr.odm.default_document_manager" />
+            <argument type="service" id="symfony_cmf_multilang_content.annotation_reader" />
+            <argument>%symfony_cmf_multilang_content.lang_prefix%</argument>
+        </service>
+
+        <service id="symfony_cmf_multilang_content.chooser" class="Symfony\Cmf\Bundle\MultilangContentBundle\Translation\LanguageChooser">
+            <argument>%symfony_cmf_multilang_content.lang_preference%</argument>
+            <argument>%symfony_cmf_multilang_content.default_lang%</argument>
+            <argument>%symfony_cmf_multilang_content.lang_meta%</argument>
+        </service>
+
+        <service id="symfony_cmf_multilang_content.annotation_reader" class="Symfony\Cmf\Bundle\MultilangContentBundle\Annotation\Reader" />
+
+        <service id="symfony_cmf_multilang_content.event_listener" class="%symfony_cmf_multilang_content.event_listener_class%">
+            <argument type="service" id="service_container" />
+            <argument type="service" id="symfony_cmf_multilang_content.annotation_reader" />
+            <argument type="service" id="symfony_cmf_multilang_content.chooser" />
+            <argument>%symfony_cmf_multilang_content.lang_prefix%</argument>
+            <tag name="doctrine_phpcr.event_subscriber"></tag>
+        </service>
+
+        <service id="symfony_cmf_multilang_content.languageSelectorController" class="Symfony\Cmf\Bundle\MultilangContentBundle\Controller\LanguageSelectorController">
+            <argument type="service" id="templating" />
+            <argument type="service" id="router" />
+            <argument type="service" id="symfony_cmf_multilang_content.chooser" />
+            <argument>%symfony_cmf_navigation.mainmenu_routename%</argument>
+        </service>
+
+    </services>
+</container>

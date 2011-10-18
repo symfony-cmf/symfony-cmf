@@ -54,7 +54,7 @@ class HierarchyWalker
      * @param \PHPCR\SessionInterface $session the phpcr session. TODO: remove when all annotations work
      * @param PathMapperInterface $mapper to map urls to storage ids
      */
-    public function __construct(DocumentManager $document_manager, $session, PathMapperInterface $mapper)
+    public function __construct(DocumentManager $document_manager, SessionInterface $session, PathMapperInterface $mapper)
     {
         $this->odm = $document_manager;
         $this->session = $session;

@@ -7,6 +7,7 @@ use Doctrine\ODM\PHPCR\Event;
 use Doctrine\ODM\PHPCR\Event\LifecycleEventArgs;
 
 use Symfony\Cmf\Bundle\MultilangContentBundle\Annotation\Information;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * An event listener to load the best available languague into a document when
@@ -16,23 +17,22 @@ use Symfony\Cmf\Bundle\MultilangContentBundle\Annotation\Information;
  *
  * @author brian.king (at) liip.ch
  */
-class NodeTranslator implements EventSubscriber {
-
-
-    protected $session;
+class NodeTranslator implements EventSubscriber
+{
     protected $reader;
     protected $langHelper;
     protected $langPrefix;
+    protected $container;
 
     /**
-     * @param \PHPCR\SessionInterface $session the PHPCR session
      * @param object $annotation_reader the annotation reader to find out which properties are translated
+     * @param Container $container the container to get the request from to get the locale from (can't inject the request because of scope issues)
      * @param object $lang_helper the language chooser
      * @param object $lang_prefix the translation child prefix. TODO: should use a namespace for this.
      */
-    public function __construct($session, $annotation_reader, $lang_helper, $lang_prefix)
+    public function __construct(ContainerInterface $container, $annotation_reader, $lang_helper, $lang_prefix)
     {
-        $this->session = $session;
+        $this->container = $container;
         $this->reader = $annotation_reader;
         $this->langHelper = $lang_helper;
         $this->langPrefix = $lang_prefix;
@@ -52,6 +52,11 @@ class NodeTranslator implements EventSubscriber {
         );
     }
 
+    protected function getLocale()
+    {
+        return $this->container->get('request')->getLocale();
+    }
+
     /**
      * Load the translatable properties from a subnode into the Node being read.
      */
@@ -60,10 +65,10 @@ class NodeTranslator implements EventSubscriber {
         $document = $eventArgs->getDocument();
 
         $translationInfo = $this->reader->translationInformation(get_class($document));
-
         if (!$translationInfo->isTranslatable()) {
             return;
         }
+
         switch($translationInfo->getTranslationStrategy()) {
             case Information::STRATEGY_CHILD:
                 $this->loadTranslationFromNode($document, $translationInfo);
@@ -80,7 +85,7 @@ class NodeTranslator implements EventSubscriber {
     {
         $node = $document->getNode();
         // Get the best language for this user.
-        $langs = $this->langHelper->getPreferredLanguages();
+        $langs = $this->langHelper->getPreferredLanguages($this->getLocale());
 
         $child = null;
         foreach ($langs as $lang) {
@@ -101,21 +106,24 @@ class NodeTranslator implements EventSubscriber {
                 $document->$property = $child->getPropertyValue($property);
             }
         }
+
         $document->{$translationInfo->getLanguageIndicator()} = $lang;
     }
 
     protected function loadTranslationFromAttribute($document, $translationInfo)
     {
         $node = $document->getNode();
-        // Get the best language for this user.
-        $langs = $this->langHelper->getPreferredLanguages();
         $props = null;
+
+        // Get the best language for this user.
+        $langs = $this->langHelper->getPreferredLanguages($this->getLocale());
         foreach ($langs as $lang) {
             $prefix = $this->langPrefix . $lang .'-';
             if ($props = $node->getPropertiesValues($prefix.'*')) {
                 break;
             }
         }
+
         foreach ($translationInfo->getTranslatedProperties() as $property) {
             if (isset($props[$prefix.$property])) {
                 $document->$property = $props[$prefix.$property];

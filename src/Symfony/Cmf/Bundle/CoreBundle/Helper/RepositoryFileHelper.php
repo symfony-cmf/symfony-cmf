@@ -5,19 +5,13 @@ namespace Symfony\Cmf\Bundle\CoreBundle\Helper;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use PHPCR\NodeInterface;
 use Symfony\Cmf\Bundle\CoreBundle\Helper\DirectPathMapper;
-use Symfony\Cmf\Bundle\CoreBundle\Helper\ExtensionGuesser;
-#use Symfony\Component\HttpFoundation\File\MimeType\ExtensionGuesser;
+use Symfony\Component\HttpFoundation\File\MimeType\ExtensionGuesser;
 
 /**
  * Helper class to get paths for and save files to filesystem from repository
  */
 class RepositoryFileHelper implements FileMapperInterface
 {
-    /**
-     * @var \PHPCR\SessionInterface
-     */
-    protected $session;
-
     /**
      * @var string  (e.g. /var/www/foo/images)  : absolute path, no trailing slash
      */
@@ -33,16 +27,13 @@ class RepositoryFileHelper implements FileMapperInterface
      */
     protected $pathMapper;
 
-
     /**
-     * @param PHPCR\SessionInterface $session
      * @param string $pathPrefix Content repository path prefix (e.g. /cms/content)
      * @param string $fileBasePath
      * @param string $webRelativePath a path relative to the web directory
      */
-    public function __construct(\PHPCR\SessionInterface $session, $pathPrefix, $fileBasePath, $webRelativePath)
+    public function __construct($pathPrefix, $fileBasePath, $webRelativePath)
     {
-        $this->session = $session;
         $this->fileBasePath = $fileBasePath;
         $this->pathMapper = new DirectPathMapper($pathPrefix);
         $this->webRelativePath = '/' . $webRelativePath;
@@ -117,8 +108,7 @@ class RepositoryFileHelper implements FileMapperInterface
     {
         if ($contentNode->hasProperty('jcr:mimeType')) {
             $mimeType = $contentNode->getPropertyValue('jcr:mimeType');
-            $extension = ExtensionGuesser::guess($mimeType);
-            #$extension = ExtensionGuesser::getInstance()->guess($mimeType);
+            $extension = ExtensionGuesser::getInstance()->guess($mimeType);
             if (null !== $extension) {
                 return '.' . $extension;
             }

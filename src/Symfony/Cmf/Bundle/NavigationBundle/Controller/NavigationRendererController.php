@@ -2,7 +2,7 @@
 
 namespace Symfony\Cmf\Bundle\NavigationBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 
 /**
  * A controller to render navigational elements into simple html that can be
@@ -12,17 +12,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  * instances of a navigation controller. The urls must be only the part after
  * such information
  */
-class NavigationRendererController extends Controller
+class NavigationRendererController
 {
+    protected $templating;
     protected $walker;
     protected $routename;
 
     /**
      * @param HierarchyWalker $walker the service to know about hierarchies
      */
-    public function __construct($container, $walker, $routename)
+    public function __construct(EngineInterface $templating, $walker, $routename)
     {
-        $this->container = $container;
+        $this->templating = $templating;
         $this->walker = $walker;
         $this->routename = $routename;
     }
@@ -35,7 +36,7 @@ class NavigationRendererController extends Controller
     protected function checkUrl($url)
     {
         if (strstr($url, '/../')) {
-            throw new Exception('Invalid url');
+            throw new \Exception('Invalid url');
         }
     }
 
@@ -48,7 +49,7 @@ class NavigationRendererController extends Controller
     {
         $this->checkUrl($url);
         $children = $this->walker->getChildList($url);
-        return $this->render('SymfonyCmfNavigationBundle:NavigationRenderer:childlist.html.twig',
+        return $this->templating->renderResponse('SymfonyCmfNavigationBundle:NavigationRenderer:childlist.html.twig',
                              array('children' => $children,
                                    'routename' => $this->routename));
     }
@@ -62,7 +63,7 @@ class NavigationRendererController extends Controller
     {
         $this->checkUrl($url);
         $breadcrumb = $this->walker->getAncestors($url);
-        return $this->render('SymfonyCmfNavigationBundle:NavigationRenderer:breadcrumb.html.twig',
+        return $this->templating->renderResponse('SymfonyCmfNavigationBundle:NavigationRenderer:breadcrumb.html.twig',
                              array('breadcrumb' => $breadcrumb,
                                    'routename' => $this->routename));
     }
@@ -87,7 +88,7 @@ class NavigationRendererController extends Controller
             }
         }
 
-        return $this->render('SymfonyCmfNavigationBundle:NavigationRenderer:menu.html.twig',
+        return $this->templating->renderResponse('SymfonyCmfNavigationBundle:NavigationRenderer:menu.html.twig',
                              array('root' => $menu,
                                    'routename' => $this->routename,
                                    'entryselected' => $entryselected,
@@ -97,8 +98,7 @@ class NavigationRendererController extends Controller
     public function sitemapAction()
     {
         $map = $this->walker->getMenu('/', -1);
-        return $this->render('SymfonyCmfNavigationBundle:NavigationRenderer:sitemap.html.twig',
-                             array('map' => $map,
-                                   'routename' => $this->routename));
+        return $this->templating->renderResponse('SymfonyCmfNavigationBundle:NavigationRenderer:sitemap.html.twig',
+                             array('map' => $map, 'routename' => $this->routename));
     }
 }

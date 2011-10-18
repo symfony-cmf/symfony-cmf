@@ -99,9 +99,8 @@ class MenuItem implements NodeInterface {
     {
         if ($this->weak) {
             return $this->weakContent;
-        } else {
-            return $this->stringContent;
         }
+        return $this->stringContent;
     }
 
     public function setContent($content)

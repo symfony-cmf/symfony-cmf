@@ -12,12 +12,12 @@ namespace Symfony\Cmf\Bundle\CoreBundle\Helper;
 * and allows for integration with file based image bundles like
 * AvalancheImagineBundle.
 */
-interface FileMapperInterface {
-
+interface FileMapperInterface
+{
     /**
-    * @Param $imgnode the node containing the jcr:content node with a jcr:data property with file data
-    * @Return string a url suitable for inclusion in your img references or anchor href links
+    * @param $imgnode the node containing the jcr:content node with a jcr:data property with file data
+    *
+    * @return string a url suitable for inclusion in your img references or anchor href links
     */
-    public function getUrl(\PHPCR\NodeInterface $dataNode);
-
+    function getUrl(\PHPCR\NodeInterface $dataNode);
 }
