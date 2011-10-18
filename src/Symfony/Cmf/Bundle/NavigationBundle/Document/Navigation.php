@@ -193,7 +193,7 @@ class Navigation
         return $this->controller;
     }
 
-    // TODO: clean this up once mapping documents is implemented
+    // TODO: clean this up with the @PHPCRODM\Reference() annotation
 
     /**
      * set content for this controller

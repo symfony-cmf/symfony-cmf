@@ -63,8 +63,6 @@ class SimpleNodeTranslator
 
         if (!$document->getNode() || $updateExistingParent) {
             $this->odm->persist($document);
-            // Flush to store so that the document will have an associated node, but do not commit
-            $this->odm->flushNoSave();
         }
 
         $languageField = $translationInfo->getLanguageIndicator();

@@ -64,12 +64,10 @@ document and/or specify a controller to be used to render them.
     // have some content for this navigation entry (optional)
     $content = new StaticPage();
     /*
-     * this is a workaround because we need the phpcr nod
-     * once the reference annotation of phpcr-odm is implemented, this will be
-     * refactored
+     * Persist to have the ODM populate the node.
+     * TODO: refactor this to use the @Reference annotation
      */
     $document_manager->persist($content);
-    $document_manager->flushNoSave();
 
     $nav = new Navigation();
     $nav->setPath('/cms/navigation/main/entry');
