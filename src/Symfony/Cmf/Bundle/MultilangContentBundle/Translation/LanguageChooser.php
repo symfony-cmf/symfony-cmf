@@ -30,7 +30,7 @@ class LanguageChooser
      *      lang_preferences. keys are lang code, values is array as returned
      *      by getLanguageMeta
      */
-    public function __construct($request, $lang_preference, $default_lang, $lang_meta)
+    public function __construct($lang_preference, $default_lang, $lang_meta)
     {
         $this->langPreference = $lang_preference;
         $this->defaultLang = $default_lang;
