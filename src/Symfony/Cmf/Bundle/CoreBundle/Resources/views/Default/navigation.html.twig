@@ -1,4 +1,10 @@
-{% render "symfony_cmf_navigation.renderer:breadcrumbAction" with { 'url': url } %}
+<div class="cmf-breadcrumb">
+    <ul>
+        {% for title, url in knp_menu_get('main').currentItem.breadcrumbsArray %}
+            <li><a href="{{url}}">{{ title }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
 
 <h2 class="offset">Main navigation</h2>
 
