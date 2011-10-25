@@ -247,7 +247,7 @@
             <h2>Properties</h2>
             <ul>
                 <li>Use namespaced names
-                    <ul><li>jcr:created, jcr:mimeType, phpcr:alias</li></ul>
+                    <ul><li>jcr:created, jcr:mimeType, phpcr:class</li></ul>
                 </li>
                 <li>Use one of the several type
                     <ul><li>STRING, URI, BOOLEAN, LONG, DOUBLE, DECIMAL, BINARY, DATE, NAME, PATH, WEAKREFERENCE, REFERENCE</li></ul>
@@ -388,7 +388,7 @@
                 $queryManager = $workspace->getQueryManager();
 
                 $sql = "SELECT * FROM [nt:unstructured]
-                    WHERE [nt:unstructured].[phpcr:alias] = 'bar'
+                    WHERE [nt:unstructured].[phpcr:class] = 'Foo\Bar'
                     ORDER BY [nt:unstructured].title";
                 $query = $queryManager->createQuery($sql, 'JCR-SQL2');
                 $query->setLimit($limit);
