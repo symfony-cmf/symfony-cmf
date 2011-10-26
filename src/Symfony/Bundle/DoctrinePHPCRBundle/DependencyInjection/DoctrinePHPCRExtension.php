@@ -248,7 +248,7 @@ class DoctrinePHPCRExtension extends AbstractDoctrineExtension
 
     protected function getMappingObjectDefaultName()
     {
-        return 'PHPCRDocument';
+        return 'Document';
     }
 
     protected function getMappingResourceConfigDirectory()
