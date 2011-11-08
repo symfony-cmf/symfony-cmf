@@ -1,8 +1,10 @@
 <div class="cmf-breadcrumb">
     <ul>
+        {% if knp_menu_get('main').currentItem %}
         {% for title, url in knp_menu_get('main').currentItem.breadcrumbsArray %}
             <li><a href="{{url}}">{{ title }}</a></li>
         {% endfor %}
+        {% endif %}
     </ul>
 </div>
 
