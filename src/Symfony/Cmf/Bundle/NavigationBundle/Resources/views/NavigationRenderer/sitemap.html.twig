@@ -1,6 +1,6 @@
 <div class="cmf-sitemap">
     <ul>
-        {% foreach entry in map %}
+        {% for entry in map %}
             <li>
                 <a href="{{ path(routename, {'url': entry.url}) }}"
                     class="
@@ -12,6 +12,6 @@
                     {% include "SymfonyCmfNavigationBundle:NavigationRenderer:sitemap.html.twig" with {'map': entry.children} %}
                 {% endif %}
             </li>
-        {% endforeach %}
+        {% endfor %}
     </ul>
 </div>
