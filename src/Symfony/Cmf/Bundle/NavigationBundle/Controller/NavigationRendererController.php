@@ -98,7 +98,7 @@ class NavigationRendererController extends Controller
     {
         $map = $this->walker->getMenu('/', true, -1);
         return $this->render('SymfonyCmfNavigationBundle:NavigationRenderer:sitemap.html.twig',
-                             array('map' => $map,
+                             array('root' => $map,
                                    'routename' => $this->routename));
     }
 }
