@@ -1,11 +1,11 @@
 <div class="cmf-sitemap">
     <ul>
-        {% for entry in map %}
+        {% for entry in root %}
             <li>
                 <a href="{{ path(routename, {'url': entry.url}) }}"
                     class="{% if entry.children %}children{% endif %}">{{ entry.title }}</a>
                 {% if entry.children %}
-                    {% include "SymfonyCmfNavigationBundle:NavigationRenderer:sitemap.html.twig" with {'map': entry.children} %}
+                    {% include "SymfonyCmfNavigationBundle:NavigationRenderer:sitemap.html.twig" with {'root': entry.children} %}
                 {% endif %}
             </li>
         {% endfor %}
