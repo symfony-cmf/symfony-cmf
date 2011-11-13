@@ -8,6 +8,7 @@
 
         <!-- TODO: make this path configurable -->
         <parameter key="symfony_cmf_core.mainmenu_basepath">/cms/navigation/main</parameter>
+        <parameter key="symfony_cmf_core.routing_basepath">/cms/routes</parameter>
         <parameter key="symfony_cmf_core.content_basepath">/cms/content</parameter>
         <parameter key="symfony_cmf_core.filestore_basepath">%kernel.root_dir%/../../web/filestore</parameter>
         <parameter key="symfony_cmf_core.filestore_relative_basepath">filestore</parameter>
