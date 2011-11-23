@@ -1,33 +1,25 @@
 <?php
-
 namespace Symfony\Bundle\DoctrinePHPCRBundle\Command;
+
+use PHPCR\Util\Console\Command\PurgeCommand as BasePurgeCommand;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Helper\DialogHelper;
-
-use Symfony\Bundle\DoctrinePHPCRBundle\Helper\NodeHelper;
-use Symfony\Bundle\DoctrinePHPCRBundle\Helper\ConsoleParametersParser;
 
 /**
  * @author Daniel Barsotti <daniel.barsotti@liip.ch>
  */
-class PurgeCommand extends Command
+class PurgeCommand extends BasePurgeCommand
 {
     protected function configure()
     {
         parent::configure();
 
         $this->setName('doctrine:phpcr:purge')
-            ->setDescription('Purge the content repository')
-            ->addOption('session', null, InputOption::VALUE_OPTIONAL, 'The session to use for this command')
-            ->addOption('force', null, InputOption::VALUE_OPTIONAL, 'Set to "yes" to bypass the confirmation dialog', "no")
-            ->setHelp(<<<EOF
-The <info>phpcr:purge</info> command remove all the non-standard nodes from the content repository
-EOF
-        );
+             ->addOption('session', null, InputOption::VALUE_OPTIONAL, 'The session to use for this command')
+        ;
     }
 
     /**
@@ -42,19 +34,6 @@ EOF
     {
         DoctrineCommandHelper::setApplicationPHPCRSession($this->getApplication(), $input->getOption('session'));
 
-        $force = ConsoleParametersParser::isTrueString($input->getOption('force'));
-
-        if (! $force) {
-            $dialog = new DialogHelper();
-            $res = $dialog->askConfirmation($output, 'Are you sure you want to delete all the nodes of the content repository?', false);
-        }
-
-        if ($force || $res) {
-            $nodeHelper = new NodeHelper($this->getHelper('phpcr')->getSession());
-            $nodeHelper->deleteAllNodes();
-            $output->writeln("Done\n");
-        }
-
-        return 0;
+        return parent::execute($input, $output);
     }
 }

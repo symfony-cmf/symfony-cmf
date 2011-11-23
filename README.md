@@ -36,7 +36,10 @@ You need to install [Doctrine PHPCR ODM](http://github.com/doctrine/phpcr-odm) a
     'Symfony\\Bundle\\DoctrinePHPCRBundle'  => __DIR__.'/../vendor/symfony-cmf/src',
     'Doctrine\\ODM\\PHPCR'                  => __DIR__.'/../vendor/symfony-cmf/vendor/doctrine-phpcr-odm/lib',
     'Jackalope'                             => __DIR__.'/../vendor/symfony-cmf/vendor/doctrine-phpcr-odm/lib/vendor/jackalope/src',
-    'PHPCR'                                 => __DIR__.'/../vendor/symfony-cmf/vendor/doctrine-phpcr-odm/lib/vendor/jackalope/lib/phpcr/src',
+    'PHPCR'                                 => array(
+                                                 __DIR__.'/../vendor/symfony-cmf/vendor/doctrine-phpcr-odm/lib/vendor/jackalope/lib/phpcr/src',
+                                                 __DIR__.'/../vendor/symfony-cmf/vendor/doctrine-phpcr-odm/lib/vendor/jackalope/lib/phpcr-utils/src',
+                                               ),
 
 
 *app/autoload.php:* Add autoloader entries for the multilang and ODM annotations right after the last AnnotationRegistry::registerFile line

@@ -1,5 +1,4 @@
 <?php
-
 namespace Symfony\Bundle\DoctrinePHPCRBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -13,7 +12,7 @@ use Symfony\Bundle\DoctrineFixturesBundle\Common\DataFixtures\Loader;
 
 use Symfony\Bundle\DoctrinePHPCRBundle\Helper\Fixtures\PHPCRExecutor;
 use Symfony\Bundle\DoctrinePHPCRBundle\Helper\Fixtures\PHPCRPurger;
-use Symfony\Bundle\DoctrinePHPCRBundle\Helper\ConsoleParametersParser;
+use PHPCR\Util\Console\Helper\ConsoleParametersParser;
 
 /**
  * @author Daniel Barsotti <daniel.barsotti@liip.ch>
@@ -30,7 +29,7 @@ class LoadFixtureCommand extends ContainerAwareCommand
             ->addOption('path', null, InputOption::VALUE_REQUIRED, 'The path to the fixtures')
             ->addOption('purge', null, InputOption::VALUE_OPTIONAL, 'Set to true if the database must be purged')
             ->setHelp(<<<EOF
-The <info>phpcr:fixtures:load</info> command loads PHPCR fixtures
+The <info>fixtures:load</info> command loads PHPCR fixtures
 EOF
         );
     }

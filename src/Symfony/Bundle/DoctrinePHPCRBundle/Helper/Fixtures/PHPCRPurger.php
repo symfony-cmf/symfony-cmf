@@ -2,6 +2,8 @@
 
 namespace Symfony\Bundle\DoctrinePHPCRBundle\Helper\Fixtures;
 
+use PHPCR\Util\NodeHelper;
+
 use Doctrine\ODM\PHPCR\DocumentManager;
 use Doctrine\Common\DataFixtures\Purger\PurgerInterface;
 
@@ -38,20 +40,8 @@ class PHPCRPurger implements PurgerInterface
     /** @inheritDoc */
     public function purge()
     {
-        $this->deleteAllNodes();
-    }
-
-    /**
-     * Delete all the nodes in the repository which are not prefixed with jcr:
-     */
-    protected function deleteAllNodes()
-    {
         $session = $this->dm->getPhpcrSession();
-        foreach ($session->getRootNode()->getNodes() as $node) {
-            if (substr($node->getName(), 0, 4) !== 'jcr:') {
-                $node->remove();
-            }
-        }
+        NodeHelper::deleteAllNodes($session);
         $session->save();
     }
 

@@ -1,26 +1,21 @@
 <?php
-
 namespace Symfony\Bundle\DoctrinePHPCRBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Jackalope\Tools\Console\Command\JackrabbitCommand as BaseJackrabbitCommand;
+
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-use Symfony\Bundle\DoctrinePHPCRBundle\Helper\JackrabbitHelper;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
 /**
  * @author Daniel Barsotti <daniel.barsotti@liip.ch>
  */
-class JackrabbitCommand extends ContainerAwareCommand
+class JackrabbitCommand extends BaseJackrabbitCommand implements ContainerAwareInterface
 {
-    /**
-     * Path to Jackrabbit jar file
-     * @var string
-     */
-    protected $jrpath;
-
     /**
      * Configures the current command.
      */
@@ -29,11 +24,8 @@ class JackrabbitCommand extends ContainerAwareCommand
         parent::configure();
 
         $this->setName('doctrine:phpcr:jackrabbit')
-            ->addArgument('cmd', InputArgument::REQUIRED, 'Command to execute (start | stop | status)')
-            ->addOption('jackrabbit_jar', null, InputOption::VALUE_OPTIONAL, 'Path to the Jackrabbit jar file')
-            ->setDescription('Start and stop the Jackrabbit server')
-            ->setHelp(<<<EOF
-The <info>phpcr:jackrabbit</info> command allows to have a minimal control on the Jackrabbit server from within a
+              ->setHelp(<<<EOF
+The <info>doctrine:phpcr:jackrabbit</info> command allows to have a minimal control on the Jackrabbit server from within a
 Symfony 2 command.
 
 If the <info>jackrabbit_jar</info> option is set, it will be used as the Jackrabbit server jar file.
@@ -53,38 +45,34 @@ EOF
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $cmd = $input->getArgument('cmd');
-
-        if (! in_array(strtolower($cmd), array('start', 'stop', 'status'))) {
-            $output->writeln($this->asText());
-            return 1;
+        if ($this->getContainer()->hasParameter('doctrine_phpcr.jackrabbit_jar')) {
+            $this->setJackrabbitPath($this->getContainer()->getParameter('doctrine_phpcr.jackrabbit_jar'));
         }
 
-        $jar = $input->getOption('jackrabbit_jar');
-        if ($jar) {
-            $this->jrpath = $jar;
-        } elseif ($this->getContainer()->hasParameter('doctrine_phpcr.jackrabbit_jar')) {
-            $this->jrpath = $this->getContainer()->getParameter('doctrine_phpcr.jackrabbit_jar');
+        return parent::execute($input, $output);
+    }
+
+
+
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
+
+    protected function getContainer()
+    {
+        if (null === $this->container) {
+            $this->container = $this->getApplication()->getKernel()->getContainer();
         }
 
-        if (!file_exists($this->jrpath)) {
-            throw new \Exception("Invalid Jackrabbit JAR file ' {$this->jrpath}'");
-        }
+        return $this->container;
+    }
 
-        $helper = new JackrabbitHelper($this->jrpath);
-
-        switch(strtolower($cmd)) {
-            case 'start':
-                $helper->startServer();
-                break;
-            case 'stop':
-                $helper->stopServer();
-                break;
-            case 'status':
-                $output->writeln("Jackrabbit server " . ($helper->isServerRunning() ? 'is running' : 'is not running'));
-                break;
-        }
-
-        return 0;
+    /**
+     * @see ContainerAwareInterface::setContainer()
+     */
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
     }
 }
