@@ -1,4 +1,5 @@
 <?php
+
 namespace Symfony\Bundle\DoctrinePHPCRBundle\Command;
 
 use PHPCR\Util\Console\Command\Sql2Command as BaseSql2Command;
@@ -20,8 +21,9 @@ class Sql2Command extends BaseSql2Command
     {
         parent::configure();
 
-        $this->setName('doctrine:phpcr:sql2')
-             ->addOption('session', null, InputOption::VALUE_OPTIONAL, 'The session to use for this command')
+        $this
+            ->setName('doctrine:phpcr:sql2')
+            ->addOption('session', null, InputOption::VALUE_OPTIONAL, 'The session to use for this command')
         ;
     }
 

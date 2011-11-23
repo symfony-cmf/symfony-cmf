@@ -1,4 +1,5 @@
 <?php
+
 namespace Symfony\Bundle\DoctrinePHPCRBundle\Command;
 
 use Jackalope\Tools\Console\Command\JackrabbitCommand as BaseJackrabbitCommand;
@@ -23,8 +24,9 @@ class JackrabbitCommand extends BaseJackrabbitCommand implements ContainerAwareI
     {
         parent::configure();
 
-        $this->setName('doctrine:phpcr:jackrabbit')
-              ->setHelp(<<<EOF
+        $this
+            ->setName('doctrine:phpcr:jackrabbit')
+            ->setHelp(<<<EOF
 The <info>doctrine:phpcr:jackrabbit</info> command allows to have a minimal control on the Jackrabbit server from within a
 Symfony 2 command.
 
@@ -32,7 +34,8 @@ If the <info>jackrabbit_jar</info> option is set, it will be used as the Jackrab
 Otherwise you will have to set the doctrine_phpcr.jackrabbit_jar config parameter to a valid Jackrabbit
 server jar file.
 EOF
-);
+            )
+        ;
     }
 
     /**

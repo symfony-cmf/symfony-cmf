@@ -1,4 +1,5 @@
 <?php
+
 namespace Symfony\Bundle\DoctrinePHPCRBundle\Command;
 
 use Symfony\Component\Console\Application;

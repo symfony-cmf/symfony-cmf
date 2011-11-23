@@ -1,4 +1,5 @@
 <?php
+
 namespace Symfony\Bundle\DoctrinePHPCRBundle\Command;
 
 use Symfony\Component\Console\Command\Command;
@@ -18,8 +19,9 @@ class CreateWorkspaceCommand extends BaseCreateWorkspaceCommand
     {
         parent::configure();
 
-        $this->setName('doctrine:phpcr:workspace:create')
-             ->addOption('session', null, InputOption::VALUE_OPTIONAL, 'The session to use for this command')
+        $this
+            ->setName('doctrine:phpcr:workspace:create')
+            ->addOption('session', null, InputOption::VALUE_OPTIONAL, 'The session to use for this command')
         ;
     }
 

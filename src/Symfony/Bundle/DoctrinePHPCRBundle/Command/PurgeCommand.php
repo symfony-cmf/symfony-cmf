@@ -1,4 +1,5 @@
 <?php
+
 namespace Symfony\Bundle\DoctrinePHPCRBundle\Command;
 
 use PHPCR\Util\Console\Command\PurgeCommand as BasePurgeCommand;
@@ -17,8 +18,9 @@ class PurgeCommand extends BasePurgeCommand
     {
         parent::configure();
 
-        $this->setName('doctrine:phpcr:purge')
-             ->addOption('session', null, InputOption::VALUE_OPTIONAL, 'The session to use for this command')
+        $this
+            ->setName('doctrine:phpcr:purge')
+            ->addOption('session', null, InputOption::VALUE_OPTIONAL, 'The session to use for this command')
         ;
     }
 

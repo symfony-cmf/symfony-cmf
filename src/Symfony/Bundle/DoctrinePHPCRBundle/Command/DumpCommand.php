@@ -1,4 +1,5 @@
 <?php
+
 namespace Symfony\Bundle\DoctrinePHPCRBundle\Command;
 
 use PHPCR\Util\Console\Command\DumpCommand as BaseDumpCommand;
@@ -23,8 +24,9 @@ class DumpCommand extends BaseDumpCommand implements ContainerAwareInterface
     {
         parent::configure();
 
-        $this->setName('doctrine:phpcr:dump')
-             ->addOption('session', null, InputOption::VALUE_OPTIONAL, 'The session to use for this command')
+        $this
+            ->setName('doctrine:phpcr:dump')
+            ->addOption('session', null, InputOption::VALUE_OPTIONAL, 'The session to use for this command')
         ;
     }
 

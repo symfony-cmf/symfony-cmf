@@ -1,4 +1,5 @@
 <?php
+
 namespace Symfony\Bundle\DoctrinePHPCRBundle\Command;
 
 use PHPCR\Util\Console\Command\RegisterNodeTypesCommand as BaseRegisterNodeTypesCommand;
@@ -18,8 +19,9 @@ class RegisterNodeTypesCommand extends BaseRegisterNodeTypesCommand
     {
         parent::configure();
 
-        $this->setName('doctrine:phpcr:register-node-types')
-             ->addOption('session', null, InputOption::VALUE_OPTIONAL, 'The session to use for this command')
+        $this
+            ->setName('doctrine:phpcr:register-node-types')
+            ->addOption('session', null, InputOption::VALUE_OPTIONAL, 'The session to use for this command')
         ;
     }
 
