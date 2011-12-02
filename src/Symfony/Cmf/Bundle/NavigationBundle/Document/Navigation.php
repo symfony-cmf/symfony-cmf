@@ -136,7 +136,7 @@ class Navigation
 
     public function setInfo($info)
     {
-        $this->info = info;
+        $this->info = $info;
     }
     public function getInfo()
     {
