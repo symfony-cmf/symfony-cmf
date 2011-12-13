@@ -24,7 +24,6 @@ class StaticContent
 
     /**
      * @Assert\NotBlank
-     * @Assert\Regex("{^[a-z]+$}")
      * @PHPCRODM\String()
      */
     public $name;
