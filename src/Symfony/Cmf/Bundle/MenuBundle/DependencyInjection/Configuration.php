@@ -14,7 +14,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('menu_root')->defaultValue('/menus')->end()
+                ->scalarNode('menu_basepath')->end()
                 ->scalarNode('document_manager')->defaultValue('doctrine_phpcr.odm.default_document_manager')->end()
             ->end()
         ;

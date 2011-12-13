@@ -5,6 +5,7 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="symfony_cmf_menu.menu_basepath">/cms/content/static</parameter>
         <parameter key="phpcr.menu.provider.class">Symfony\Cmf\Bundle\MenuBundle\Provider\PHPCRMenuProvider</parameter>
         <parameter key="phpcr.menu.factory.class">Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory</parameter>
     </parameters>
@@ -14,7 +15,7 @@
             <tag name="knp_menu.provider" />
             <argument type="service" id="service_container" />
             <argument>%symfony_cmf_menu.document_manager%</argument>
-            <argument>%symfony_cmf_menu.menu_root%</argument>
+            <argument>%symfony_cmf_menu.menu_basepath%</argument>
         </service>
         <service id="phpcr.menu.factory" class="%phpcr.menu.factory.class%">
           <argument type="service" id="router" />
