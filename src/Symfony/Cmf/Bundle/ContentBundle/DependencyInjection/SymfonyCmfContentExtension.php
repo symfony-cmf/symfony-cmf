@@ -11,14 +11,12 @@ class SymfonyCmfContentExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
-        $processor = new Processor();
-        $configuration = new Configuration();
-        $config = $processor->processConfiguration($configuration, $configs);
-
-        $container->setParameter($this->getAlias().'.document_class', $config['document_class']);
-        $container->setParameter($this->getAlias().'.static_basepath', $config['static_basepath']);
+        $config = $this->processConfiguration(new Configuration(), $configs);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
+
+        $container->setParameter($this->getAlias() . '.document_class', $config['document_class']);
+        $container->setParameter($this->getAlias() . '.static_basepath', $config['static_basepath']);
     }
 }
