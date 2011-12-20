@@ -31,8 +31,10 @@ class MenuItem implements NodeInterface {
     /** @PHPCRODM\String */
     protected $route;
 
+    /** @PHPCRODM\ReferenceOne */
     protected $weakContent;
 
+    /** @PHPCRODM\ReferenceOne(weak=false) */
     protected $strongContent;
 
     /** @PHPCRODM\Boolean */
@@ -153,7 +155,8 @@ class MenuItem implements NodeInterface {
             'attributes' => $this->getAttributes(),
             'display' => true,
             'displayChildren' => true,
-            // TODO
+            'content' => $this->getContent(),
+            // TODO provide the following information
             'routeParameters' => array(),
             'routeAbsolute' => false,
             'linkAttributes' => array(),

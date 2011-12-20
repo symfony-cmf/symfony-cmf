@@ -4,11 +4,12 @@ namespace Symfony\Cmf\Bundle\ContentBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Cmf\Bundle\ChainRoutingBundle\Routing\RouteAwareInterface;
 
 /**
  * @PHPCRODM\Document(alias="static")
  */
-class StaticContent
+class StaticContent implements RouteAwareInterface
 {
     /**
      * to create the document at the specified location. read only for existing documents.
@@ -37,7 +38,12 @@ class StaticContent
     /**
      * @PHPCRODM\String()
      */
-    public $content;
+    public $body;
+
+    /**
+     * @PHPCRODM\Referrers(filter="routeContent")
+     */
+    public $routes;
 
     /**
      * Set repository path of this navigation item for creation
@@ -50,5 +56,13 @@ class StaticContent
     public function getPath()
     {
       return $this->path;
+    }
+
+    /**
+     * @return array of route objects that point to this content
+     */
+    public function getRoutes()
+    {
+        return $this->routes;
     }
 }

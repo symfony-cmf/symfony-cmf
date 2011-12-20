@@ -19,8 +19,7 @@
         </service>
         <service id="phpcr.menu.factory" class="%phpcr.menu.factory.class%">
           <argument type="service" id="router" />
-          <!-- <argument type="service" id="symfony_cms_content_router" /> -->
-          <argument type="constant">null</argument>
+          <argument type="service" id="symfony_cmf_chain_routing.doctrine_router" />
         </service>
     </services>
 
