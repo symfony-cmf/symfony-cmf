@@ -9,6 +9,13 @@ See http://cmf.symfony-project.org/ for more information about the CMF.
 Document\MenuItem defines menu entries. You can build menu items based on
 routes, absolute or relative urls or referenceable phpcr-odm content documents.
 
+The menu tree is built from documents under [menu_basepath]/[menuname].
+
+The currently highlighted entry is determined by checking if the content
+associated with a menu document is the same as the content DoctrineRouter
+has put into the request.
+
+
 ## Configuration
 
 symfony_cmf_menu:
