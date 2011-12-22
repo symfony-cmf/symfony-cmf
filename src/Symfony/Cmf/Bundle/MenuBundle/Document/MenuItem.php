@@ -8,6 +8,9 @@ use Knp\Menu\NodeInterface;
 /**
  * This class represents a menu item for the cmf.
  *
+ * To protect against accidentally injecting things into the tree, all menu
+ * item node names must end on -item.
+ *
  * @PHPCRODM\Document(alias="menu_item")
  */
 class MenuItem implements NodeInterface {
@@ -102,7 +105,7 @@ class MenuItem implements NodeInterface {
         if ($this->weak) {
             return $this->weakContent;
         }
-        return $this->stringContent;
+        return $this->strongContent;
     }
 
     public function setContent($content)
