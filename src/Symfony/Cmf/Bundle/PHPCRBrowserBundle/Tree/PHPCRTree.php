@@ -27,13 +27,18 @@ class PHPCRTree implements TreeInterface
 
         foreach ($root->getNodes() as $name => $node) {
             $child = array(
-                "text"  => $name,
-                "id"    => $node->getPath(),
+                'data'  => $name,
+                'attr'  => array('id' => $node->getPath()),
+                'state' => 'closed'
             );
 
-            if ($node->getNodes('*')) {
-                $child['hasChildren'] = true;
+            foreach ($node->getNodes('*') as $name => $grandson) {
+                $child['children'][] = array(
+                    'data' => $name, 
+                    'attr'  => array('id' => $grandson->getPath()),
+                    'state' => 'closed');
             }
+            
             $children[] = $child;
         }
         
