@@ -36,7 +36,7 @@ class PHPCRTree implements TreeInterface
                 $child['children'][] = array(
                     'data' => $name, 
                     'attr'  => array('id' => $grandson->getPath()),
-                    'state' => 'closed');
+                    'state' => count($grandson->getNodes('*')) ? 'closed' : 'open');
             }
             
             $children[] = $child;
