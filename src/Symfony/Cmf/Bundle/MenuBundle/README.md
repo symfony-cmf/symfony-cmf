@@ -11,8 +11,9 @@ routes, absolute or relative urls or referenceable phpcr-odm content documents.
 
 The menu tree is built from documents under [menu_basepath]/[menuname]. To
 prevent accidentally exposing nodes, only nodes ending on -item are considered
-menu items. Their document classes must implement Knp\Menu\NodeInterface to
-integrate with KnpMenuBundle.
+menu items.
+You can use different document classes for menu items, as long as they implement
+Knp\Menu\NodeInterface to integrate with KnpMenuBundle.
 
 The currently highlighted entry is determined by checking if the content
 associated with a menu document is the same as the content DoctrineRouter
