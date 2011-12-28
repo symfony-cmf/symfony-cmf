@@ -28,7 +28,7 @@ class MenuItem implements NodeInterface {
     /** @PHPCRODM\String */
     protected $label;
 
-    /** @PHPCRODM\String */
+    /** @PHPCRODM\Uri */
     protected $uri;
 
     /** @PHPCRODM\String */
@@ -43,7 +43,18 @@ class MenuItem implements NodeInterface {
     /** @PHPCRODM\Boolean */
     protected $weak = true;
 
-    /** @PHPCRODM\String(multivalue=true) */
+    /**
+     * Simulate a php hashmap in phpcr. This holds the keys
+     *
+     * @PHPCRODM\String(multivalue=true)
+     */
+    protected $attributeKeys;
+
+    /**
+     * Simulate a php hashmap in phpcr. This holds the keys
+     *
+     * @PHPCRODM\String(multivalue=true)
+     */
     protected $attributes;
 
     /** @PHPCRODM\Children(filter="*item") */
@@ -136,12 +147,22 @@ class MenuItem implements NodeInterface {
 
     public function getAttributes()
     {
-        return $this->attributes === null ? array() : $this->attributes;
+        if ($this->attributeKeys === null) {
+            return array();
+        }
+        $ret = array();
+        $i = 0;
+        foreach($this->attributeKeys as $key) {
+            $ret[$key] = $this->attributes[$i];
+        }
+
+        return $ret;
     }
 
     public function setAttributes($attributes)
     {
         $this->attributes = $attributes;
+        $this->attributeKeys = array_keys($attributes);
     }
 
     public function getChildren()
