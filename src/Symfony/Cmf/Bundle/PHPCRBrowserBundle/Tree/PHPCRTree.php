@@ -19,19 +19,6 @@ class PHPCRTree implements TreeInterface
         $this->session = $session;
     }
     
-    private function nodeToArray($name, $node)
-    {
-        $has_children = (bool)count($node->getNodes('*'));
-        return array(
-            'data'  => $name,
-            'attr'  => array(
-                'id' => $node->getPath(),
-                'rel' => $has_children ? 'folder' : 'default',
-            ),
-            'state' => $has_children ? 'closed' : null,
-        );
-    }
-    
     public function getChildren($path)
     {
         $root = $this->session->getNode($path);
@@ -65,4 +52,18 @@ class PHPCRTree implements TreeInterface
         
         return $properties;
     }
+
+    private function nodeToArray($name, $node)
+    {
+        $has_children = (bool)count($node->getNodes('*'));
+        return array(
+            'data'  => $name,
+            'attr'  => array(
+                'id' => $node->getPath(),
+                'rel' => $has_children ? 'folder' : 'default',
+            ),
+            'state' => $has_children ? 'closed' : null,
+        );
+    }
+    
 }
