@@ -1,0 +1,72 @@
+<script src="{{ asset('bundles/symfonycmftree/js/jstree/jquery.jstree.js') }}" type="text/javascript"></script>
+
+<script type="text/javascript">
+    
+    (function ($) {
+        $.phpcr = {};
+        
+        $.phpcr.getUrl = function (target, node_id) {
+            {% set token = '@@ID@@' %}
+            
+            var base_urls = {
+                "edit":     "{{ path('admin_sandbox_main_editablestaticcontent_edit', { 'id': token }) }}",
+                "delete":   "{{ path('admin_sandbox_main_editablestaticcontent_delete', { 'id': token }) }}",
+            }
+
+            return base_urls[target].replace("{{ token | url_encode }}", node_id);
+        }
+    })(jQuery);
+
+    function initTree() {
+
+        jQuery("#tree").jstree({ 
+            "plugins" :     [ "contextmenu", "themes", "types", "ui", "json_data" ],
+            "json_data": {
+                "ajax": {
+                    url:    "{{ path('symfony_cmf_phpcr_browser_children') }}",
+                    data:   function (node) {
+                        return { 'root' : jQuery(node).attr('id') };
+                    }
+                }
+            },
+            "types": {
+                "max_depth":        -2,
+                "max_children":     -2,
+                "valid_children":  [ "folder" ],
+                "types": {
+                    "default": {
+                        "valid_children": "none",
+                        "icon": {
+                            "image": "{{ asset('bundles/symfonycmftree/images/document.png') }}"
+                        }
+                    },
+                    "folder": {
+                        "valid_children": [ "default", "folder" ],
+                        "icon": {
+                            "image": "{{ asset('bundles/symfonycmftree/images/folder.png') }}"
+                        }
+                    }
+                }
+            },
+            "contextmenu": {
+                "items": {
+                    "delete": {
+                        "label":    "Delete",
+                        "action":   function (node) {
+                                        window.location = jQuery.phpcr.getUrl('delete', node.attr("id"));
+                                    }
+                    }
+                }
+            }
+        })
+        .bind("select_node.jstree", function (event, data) {
+            window.location = jQuery.phpcr.getUrl('edit', data.rslt.obj.attr("id"));
+        })
+        .delegate("a", "click", function (event, data) { event.preventDefault(); });
+    }
+
+    $(document).ready(function() {
+        initTree();
+    });
+
+</script>
