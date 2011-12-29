@@ -9,8 +9,9 @@
             {% set token = '@@ID@@' %}
             
             var base_urls = {
-                "edit":     "{% block edit_base_url %}{% endblock %}",
+                "create":   "{% block create_base_url %}{% endblock %}",
                 "delete":   "{% block delete_base_url %}{% endblock %}",
+                "edit":     "{% block edit_base_url %}{% endblock %}",
             }
 
             return base_urls[target].replace("{{ token | url_encode }}", node_id);
@@ -50,14 +51,19 @@
             },
             "contextmenu": {
                 "items": {
-                    "create":   null,
                     "rename":   null,
                     "remove":   null,
                     "ccp":      null,
+                    "create": {
+                        "label":    "Create",
+                        "action":   function (node) {
+                                        window.location = jQuery.phpcrbrowser.getUrl('create', node.attr("id"));
+                                    }
+                    },
                     "delete": {
                         "label":    "Delete",
                         "action":   function (node) {
-                                        window.location = jQuery.phpcr.getUrl('delete', node.attr("id"));
+                                        window.location = jQuery.phpcrbrowser.getUrl('delete', node.attr("id"));
                                     }
                     }
                 }
