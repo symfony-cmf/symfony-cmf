@@ -9,17 +9,17 @@
             {% set token = '@@ID@@' %}
             
             var base_urls = {
-                "edit":     "{{ path('admin_sandbox_main_editablestaticcontent_edit', { 'id': token }) }}",
-                "delete":   "{{ path('admin_sandbox_main_editablestaticcontent_delete', { 'id': token }) }}",
+                "edit":     "{% block edit_base_url %}{% endblock %}",
+                "delete":   "{% block delete_base_url %}{% endblock %}",
             }
 
             return base_urls[target].replace("{{ token | url_encode }}", node_id);
         }
     })(jQuery);
 
-    function initTree() {
+    function initTree(selector) {
 
-        jQuery("#tree").jstree({ 
+        jQuery(selector).jstree({ 
             "plugins" :     [ "contextmenu", "themes", "types", "ui", "json_data" ],
             "json_data": {
                 "ajax": {
@@ -66,7 +66,7 @@
     }
 
     $(document).ready(function() {
-        initTree();
+        initTree("#tree");
     });
 
 </script>
