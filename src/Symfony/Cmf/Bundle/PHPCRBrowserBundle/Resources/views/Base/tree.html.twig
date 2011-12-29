@@ -3,9 +3,9 @@
 <script type="text/javascript">
     
     (function ($) {
-        $.phpcr = {};
+        $.phpcrbrowser = {};
         
-        $.phpcr.getUrl = function (target, node_id) {
+        $.phpcrbrowser.getUrl = function (target, node_id) {
             {% set token = '@@ID@@' %}
             
             var base_urls = {
@@ -60,13 +60,13 @@
             }
         })
         .bind("select_node.jstree", function (event, data) {
-            window.location = jQuery.phpcr.getUrl('edit', data.rslt.obj.attr("id"));
+            window.location = jQuery.phpcrbrowser.getUrl('edit', data.rslt.obj.attr("id"));
         })
         .delegate("a", "click", function (event, data) { event.preventDefault(); });
     }
 
     $(document).ready(function() {
-        initTree("#tree");
+        initTree("{% block selector %}{% endblock %}");
     });
 
 </script>
