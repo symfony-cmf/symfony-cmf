@@ -42,33 +42,33 @@ class PHPCRTreeTest extends \PHPUnit_Framework_TestCase
         $anonimarmonisti->expects($this->once())->
                 method('getPath')->
                 will($this->returnValue('/com/anonimarmonisti'));
-        $anonimarmonisti->expects($this->once())->
+        $anonimarmonisti->expects($this->exactly(2))->
                 method('getNodes')->
-                will($this->returnValue(true));
+                will($this->returnValue(array()));
         
         $romereview = $node_mock_prototype->getMock();
         $romereview->expects($this->once())->
                 method('getPath')->
                 will($this->returnValue('/com/romereview'));
-        $romereview->expects($this->once())->
+        $romereview->expects($this->exactly(2))->
                 method('getNodes')->
-                will($this->returnValue(true));
+                will($this->returnValue(array()));
         
         $_5etto = $node_mock_prototype->getMock();
         $_5etto->expects($this->once())->
                 method('getPath')->
                 will($this->returnValue('/com/5etto'));
-        $_5etto->expects($this->once())->
+        $_5etto->expects($this->exactly(2))->
                 method('getNodes')->
-                will($this->returnValue(true));
+                will($this->returnValue(array()));
         
         $wordpress = $node_mock_prototype->getMock();
         $wordpress->expects($this->once())->
                 method('getPath')->
                 will($this->returnValue('/com/wordpress'));
-        $wordpress->expects($this->once())->
+        $wordpress->expects($this->exactly(2))->
                 method('getNodes')->
-                will($this->returnValue(true));
+                will($this->returnValue(array()));
         
         $children = array(
             'anonimarmonisti'   => $anonimarmonisti,
@@ -77,30 +77,42 @@ class PHPCRTreeTest extends \PHPUnit_Framework_TestCase
             'wordpress'         => $wordpress,
         );
         
-        $this->com->expects($this->once())->
+        $this->com->expects($this->exactly(1))->
                 method('getNodes')->
                 will($this->returnValue($children));
 
         $expected = array (
             array (
-                'text' => 'anonimarmonisti',
-                'id' => '/com/anonimarmonisti',
-                'hasChildren' => true,
+                'data' => 'anonimarmonisti',
+                'attr' => array(
+                    'id' =>     '/com/anonimarmonisti',
+                    'rel' =>    'default',
+                ),
+                'state' => null,
             ),
             array (
-                'text' => 'romereview',
-                'id' => '/com/romereview',
-                'hasChildren' => true,
+                'data' => 'romereview',
+                'attr' => array(
+                    'id' =>     '/com/romereview',
+                    'rel' =>    'default',
+                ),
+                'state' => null,
             ),
             array (
-                'text' => '5etto',
-                'id' => '/com/5etto',
-                'hasChildren' => true,
+                'data' => '5etto',
+                'attr' => array(
+                    'id' =>     '/com/5etto',
+                    'rel' =>    'default',
+                ),
+                'state' => null,
             ),
             array (
-                'text' => 'wordpress',
-                'id' => '/com/wordpress',
-                'hasChildren' => true,
+                'data' => 'wordpress',
+                'attr' => array(
+                    'id' =>     '/com/wordpress',
+                    'rel' =>    'default',
+                ),
+                'state' => null,
             )
         );
 

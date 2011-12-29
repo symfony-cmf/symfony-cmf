@@ -19,30 +19,30 @@ class PHPCRTree implements TreeInterface
         $this->session = $session;
     }
     
+    private function nodeToArray($name, $node)
+    {
+        $has_children = (bool)count($node->getNodes('*'));
+        return array(
+            'data'  => $name,
+            'attr'  => array(
+                'id' => $node->getPath(),
+                'rel' => $has_children ? 'folder' : 'default',
+            ),
+            'state' => $has_children ? 'closed' : null,
+        );
+    }
+    
     public function getChildren($path)
     {
         $root = $this->session->getNode($path);
 
         $children = array();
 
-        foreach ($root->getNodes() as $name => $node) {
-            $child = array(
-                'data'  => $name,
-                'attr'  => array(
-                    'id' => $node->getPath(),
-                    'rel' => count($node->getNodes('*')) ? 'folder' : 'default',
-                ),
-                'state' => 'closed'
-            );
+        foreach ($root->getNodes('*') as $name => $node) {
+            $child = $this->nodeToArray($name, $node);
 
             foreach ($node->getNodes('*') as $name => $grandson) {
-                $child['children'][] = array(
-                    'data' => $name, 
-                    'attr'  => array(
-                        'id' => $grandson->getPath(),
-                        'rel' => count($grandson->getNodes('*')) ? 'folder' : 'default',
-                    ),
-                    'state' => count($grandson->getNodes('*')) ? 'closed' : null);
+                $child['children'][] = $this->nodeToArray($name, $node);
             }
             
             $children[] = $child;
