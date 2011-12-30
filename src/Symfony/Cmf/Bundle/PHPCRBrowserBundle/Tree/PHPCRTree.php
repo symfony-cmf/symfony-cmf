@@ -29,7 +29,7 @@ class PHPCRTree implements TreeInterface
             $child = $this->nodeToArray($name, $node);
 
             foreach ($node->getNodes('*') as $name => $grandson) {
-                $child['children'][] = $this->nodeToArray($name, $node);
+                $child['children'][] = $this->nodeToArray($name, $grandson);
             }
             
             $children[] = $child;

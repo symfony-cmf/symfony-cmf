@@ -37,36 +37,48 @@ class PHPCRTreeTest extends \PHPUnit_Framework_TestCase
         $node_mock_prototype = $this->getMockBuilder('Jackalope\Node')->
             disableOriginalConstructor()->
             setMethods(array('getPath', 'getNodes'));
-        
-        $anonimarmonisti = $node_mock_prototype->getMock();
-        $anonimarmonisti->expects($this->once())->
+
+        $grandson = $node_mock_prototype->getMock();
+        $grandson->expects($this->any())->
                 method('getPath')->
-                will($this->returnValue('/com/anonimarmonisti'));
-        $anonimarmonisti->expects($this->exactly(2))->
+                will($this->returnValue('/com/anonimarmonisti/grandson'));
+        $grandson->expects($this->any())->
                 method('getNodes')->
                 will($this->returnValue(array()));
         
+        $grandchildren = array(
+            'grandson'   => $grandson,
+        );
+        
+        $anonimarmonisti = $node_mock_prototype->getMock();
+        $anonimarmonisti->expects($this->any())->
+                method('getPath')->
+                will($this->returnValue('/com/anonimarmonisti'));
+        $anonimarmonisti->expects($this->any())->
+                method('getNodes')->
+                will($this->returnValue($grandchildren));
+        
         $romereview = $node_mock_prototype->getMock();
-        $romereview->expects($this->once())->
+        $romereview->expects($this->any())->
                 method('getPath')->
                 will($this->returnValue('/com/romereview'));
-        $romereview->expects($this->exactly(2))->
+        $romereview->expects($this->any())->
                 method('getNodes')->
                 will($this->returnValue(array()));
         
         $_5etto = $node_mock_prototype->getMock();
-        $_5etto->expects($this->once())->
+        $_5etto->expects($this->any())->
                 method('getPath')->
                 will($this->returnValue('/com/5etto'));
-        $_5etto->expects($this->exactly(2))->
+        $_5etto->expects($this->any())->
                 method('getNodes')->
                 will($this->returnValue(array()));
         
         $wordpress = $node_mock_prototype->getMock();
-        $wordpress->expects($this->once())->
+        $wordpress->expects($this->any())->
                 method('getPath')->
                 will($this->returnValue('/com/wordpress'));
-        $wordpress->expects($this->exactly(2))->
+        $wordpress->expects($this->any())->
                 method('getNodes')->
                 will($this->returnValue(array()));
         
@@ -83,12 +95,22 @@ class PHPCRTreeTest extends \PHPUnit_Framework_TestCase
 
         $expected = array (
             array (
-                'data' => 'anonimarmonisti',
-                'attr' => array(
-                    'id' =>     '/com/anonimarmonisti',
-                    'rel' =>    'default',
+                'data'      => 'anonimarmonisti',
+                'attr'      => array(
+                                'id' =>     '/com/anonimarmonisti',
+                                'rel' =>    'folder',
+                            ),
+                'state'     =>  'closed',
+                'children'  => array(
+                    array(
+                        'data'      => 'grandson',
+                        'attr'      => array(
+                                        'id' =>     '/com/anonimarmonisti/grandson',
+                                        'rel' =>    'default',
+                                    ),
+                        'state' =>  null,
+                    ),
                 ),
-                'state' => null,
             ),
             array (
                 'data' => 'romereview',
@@ -129,7 +151,7 @@ class PHPCRTreeTest extends \PHPUnit_Framework_TestCase
             'jcr:primaryType'   => 'nt:folder',
         );
         
-        $this->com->expects($this->once())->
+        $this->com->expects($this->any())->
                 method('getPropertiesValues')->
                 will($this->returnValue($properties));
 
