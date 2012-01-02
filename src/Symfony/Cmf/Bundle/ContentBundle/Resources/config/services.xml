@@ -6,6 +6,7 @@
 
         <service id="symfony_cmf_content.controller" class="Symfony\Cmf\Bundle\ContentBundle\Controller\ContentController">
             <argument type="service" id="templating" />
+            <argument>%symfony_cmf_content.default_template%</argument>
         </service>
 
     </services>
