@@ -40,9 +40,7 @@ function initTree(config) {
                 "ccp":      null,
                 "create": {
                     "label":    "Create",
-                    "action":   function (node) {
-                                    window.location = Routing.generate(config.route.create, { "id": node.attr("id") })
-                                }
+                    "submenu": config.doctypes
                 },
                 "delete": {
                     "label":    "Delete",
