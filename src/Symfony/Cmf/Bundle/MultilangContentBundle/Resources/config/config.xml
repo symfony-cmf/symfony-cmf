@@ -6,8 +6,6 @@
 
     <parameters>
 
-        <parameter key="symfony_cmf_multilang_content.translator">symfony_cmf_multilang_content.node_translation</parameter>
-        <parameter key="symfony_cmf_multilang_content.lang_prefix">lang~</parameter>
         <parameter key="symfony_cmf_multilang_content.default_lang">en</parameter>
         <parameter key="symfony_cmf_multilang_content.lang_preference" type="collection">
             <parameter key="en" type="collection">

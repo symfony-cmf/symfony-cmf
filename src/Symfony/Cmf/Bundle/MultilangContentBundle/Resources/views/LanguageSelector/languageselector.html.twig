@@ -4,7 +4,7 @@
             {% if code == app.request.locale %}
                 class="selected"
             {% endif %}
-        ><a href="{{ langinfo.url }}" title="{{ langinfo.fullname }}">{{ code|capitalize }}<span>{{ langinfo.completion }}</span></a>
+        ><a href="{{ langinfo.url }}" title="{{ langinfo.fullname }}">{{ code|capitalize }}</a>
             {% if code == app.request.locale %}
                 <span>current language</span>
             {% endif %}
