@@ -17,10 +17,10 @@
             <argument>%symfony_cmf_menu.document_manager%</argument>
             <argument>%symfony_cmf_menu.menu_basepath%</argument>
         </service>
-        <service id="phpcr.menu.factory" class="%phpcr.menu.factory.class%" scope="request">
+        <service id="phpcr.menu.factory" class="%phpcr.menu.factory.class%">
           <argument type="service" id="router" />
           <argument type="service" id="symfony_cmf_chain_routing.doctrine_router" />
-          <argument type="service" id="request" />
+          <argument type="service" id="service_container" />
         </service>
     </services>
 

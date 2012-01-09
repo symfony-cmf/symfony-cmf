@@ -3,34 +3,42 @@
 namespace Symfony\Cmf\Bundle\MenuBundle;
 
 use Knp\Menu\Silex\RouterAwareFactory;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\DependencyInjection\Container;
+
 use Symfony\Cmf\Bundle\ChainRoutingBundle\Routing\DoctrineRouter;
 
 class ContentAwareFactory extends RouterAwareFactory
 {
-    protected $content_router = null;
+    protected $contentRouter;
+    protected $container;
 
     /**
      * @param UrlGeneratorInterface $generator for the parent class
-     * @param DoctrineRouter $content_router to generate routes when content is set
-     * @param Request $request to determine whether this is the current menu item
+     * @param DoctrineRouter $contentRouter to generate routes when content is set
+     * @param Container $container to fetch the request in order to determine whether this is the current menu item
      */
-    public function __construct(UrlGeneratorInterface $generator, DoctrineRouter $content_router, Request $request)
+    public function __construct(UrlGeneratorInterface $generator, DoctrineRouter $contentRouter, Container $container)
     {
         parent::__construct($generator);
-        $this->content_router = $content_router;
-        $this->request = $request;
+        $this->contentRouter = $contentRouter;
+        $this->container = $container;
     }
 
     public function createItem($name, array $options = array())
     {
         $current = false;
         if (!empty($options['content'])) {
-            if ($this->request->attributes->get(DoctrineRouter::CONTENT_KEY) == $options['content']) {
-                $current = true;
-            }
-            $options['uri'] = $this->content_router->generate(null, $options);
+            try {
+                $request = $this->container->get('request');
+                if ($request->attributes->get(DoctrineRouter::CONTENT_KEY) == $options['content']) {
+                    $current = true;
+                }
+            } catch (\Exception $e) {}
+
+            $options['uri'] = $this->contentRouter->generate(null, $options);
             unset($options['route']);
         }
 
@@ -38,6 +46,7 @@ class ContentAwareFactory extends RouterAwareFactory
         if ($current) {
             $item->setCurrent(true);
         }
+
         return $item;
     }
 }
