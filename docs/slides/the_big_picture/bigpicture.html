@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <!-- To render these slides you need Slippy https://github.com/Seldaek/slippy -->
+
+        <title>Symfony2 CMF - The Big Picture</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <meta name="author" content="Symfony CMF" />
+        <meta name="email" content="symfony-cmf-devs@googlegroups.com" />
+        <meta name="date" content="2012-01-11" />
+        <meta name="venue" content="The Internets" />
+
+        <!-- Slippy core file and dependencies -->
+        <script type="text/javascript" src="jquery.min.js"></script>
+        <script type="text/javascript" src="jquery.history.js"></script>
+        <script type="text/javascript" src="slippy.js"></script>
+        <!-- Slippy structural styles -->
+        <link type="text/css" rel="stylesheet" href="slippy.css"/>
+        <!-- Slippy theme -->
+        <link type="text/css" rel="stylesheet" href="slippy-pure.css"/>
+        <!-- Syntax highlighting core file  -->
+        <script type="text/javascript" src="highlighter/shCore.js"></script>
+        <!-- Syntax highlighting brushes, remove those you don't need -->
+        <script type="text/javascript" src="highlighter/shBrushPhp.js"></script>
+        <script type="text/javascript" src="highlighter/shBrushPlain.js"></script>
+        <script type="text/javascript" src="highlighter/shBrushXml.js"></script>
+        <!-- Syntax highlighting styles-->
+        <link type="text/css" rel="stylesheet" href="highlighter/shCore.css"/>
+        <link type="text/css" rel="stylesheet" href="highlighter/shThemeEclipse.css"/>
+
+        <style type="text/css">
+            body > * {
+                font-size: 1.2em;
+            }
+
+            body {
+                background: #fff;
+                line-height: 2em;
+            }
+
+            div.syntaxhighlighter {
+                background: #aaa !important;
+            }
+
+            span.file {
+                font-size: 0.8em;
+                color: #f00;
+                float: right;
+                margin: -.2em .5em 0 0;
+            }
+
+            .smallcode {
+                font-size: 0.8em;
+            }
+
+            strong {
+                color: #662222;
+            }
+
+        </style>
+        <!-- Slippy init code -->
+        <script type="text/javascript">
+            $(function() {
+                $(".slide").slippy({
+                    animLen: 0,
+                    baseWidth: false,
+                    margin: 0.01
+
+                });
+                SyntaxHighlighter.all();
+            });
+        </script>
+    </head>
+
+    <body>
+        <div class="slide" style="text-align:center">
+            <h2>Symfony2 CMF Project</h2>
+            <h1>The Big Picture</h1>
+            <h3><a href="http://cmf.symfony.com">cmf.symfony.com</a></h3>
+            <p style="font-style: italic; margin-top: 30px;">An overview of the Symfony2 content management framework with lots of pictures.</p>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>The Symfony CMF project makes it easier for <strong>developers</strong> to add <strong>CMS functionality</strong> to
+                applications built with the <strong>Symfony2 PHP</strong> framework. Key development principles for the provided
+                <strong>set of bundles</strong> are <strong>scalability</strong>, <strong>usability</strong>,
+                <strong>documentation</strong> and <strong>testing</strong>
+            </h2>
+        </div>
+
+        <div class="slide" style="text-align:left">
+            <h2>
+                Content management <strong>framework</strong>, not content management <strong>system</strong>
+            </h2>
+            <ul>
+                <li>Use what you can</li>
+                <li>replace what you need</li>
+                <li>ignore what you do not need<br/><br/></li>
+                <li>collection of modular tools to do content management</li>
+                <li>not a ready-to-use for end users application</li>
+            </ul>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>Symfony2 Control Flow</h2>
+            <h2>&nbsp;</h2>
+            <br/>
+            <p><img src="request_flow.png"/></p>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>Symfony2 Control Flow</h2>
+            <h2>CMF additions</h2>
+            <br/>
+            <p><img src="request_flow_cmf.png"/></p>
+        </div>
+
+
+        <div class="slide" style="text-align:center">
+            <h2>At a glance</h2>
+            <br/>
+            <p><img src="components.png"/></p>
+            <p>CMF Components. The dotted parts are what you still need to implement.
+            <p>(or should we call this the <em>sledge hammer</em> picture because it is just overwhelming?)</p>
+        </div>
+
+        <div class="slide" style="text-align:left">
+            <h2>PHPCR and the ODM</h2>
+            <ul>
+            <li>PHPCR: Standardized API for content repositories</li>
+            <li>Tree-based, schema-less, versioning database</li>
+            <li>PHPCR-ODM: map nodes to your objects</li>
+            <li>Add features like multilanguage</li>
+            </ul>
+        </div>
+
+        <div class="slide" style="text-align:left">
+            <h2>Content Routing</h2>
+            <ul>
+            <li>ChainRouter allows to have several routers in action</li>
+            <li>User defined routes in doctrine store</li>
+            <li>Specify controller and page content to use</li>
+            <li>Or just the template (with the Content Bundle)</li>
+            </ul>
+        </div>
+
+        <div class="slide" style="text-align:left">
+            <h2>Content Bundle</h2>
+            <ul>
+            <li>Provides default controller so you need only a custom template</li>
+            <li>Simple StaticContent model and template</li>
+            </ul>
+        </div>
+
+        <div class="slide" style="text-align:left">
+            <h2>Menu Bundle</h2>
+            <ul>
+            <li>Integrate KnpMenuBundle with Doctrine</li>
+            <li>Menu documents reference content documents</li>
+            </ul>
+            <br/>
+            <img src="menubundle.png"/>
+        </div>
+
+        <div class="slide" style="text-align:left">
+            <h2>Frontend Editing: Create</h2>
+            <ul>
+            <li>backbone.js based editing framework</li>
+            <li>Uses RDF annotations to detect editable data</li>
+            <li>Comes with hallo.js for contentEditable</li>
+            <li>Symfony2 integration for saving data with REST</li>
+            </ul>
+            <br/>
+            <img src="halloeditor.png"/>
+        </div>
+
+        <div class="slide" style="text-align:left">
+            <h2>Backend: Sonata PHPCRODM AdminBundle</h2>
+            <ul>
+            <li>Based on the SonataAdminBundle</li>
+            <li>Support tree oriented data</li>
+            </ul>
+            <br/>
+            <img src="adminbundle.png"/>
+        </div>
+
+        <div class="slide" style="text-align:center">
+            <h2>Many companies are committed to the effort</h2>
+            <h2><img src="cmf_companies.png" alt="CMF supporters" /></h2>
+        </div>
+
+        <div class="slide">
+            <h2>Github projects</h2>
+            <ul>
+                <li><a href="https://github.com/symfony-cmf/cmf-sandbox">CMF sandbox</a></li>
+                <li><a href="https://github.com/symfony-cmf/symfony-cmf">Core Components</a></li>
+                <li><a href="https://github.com/symfony-cmf/ChainRoutingBundle">Chain Routing and Content Routing</a></li>
+                <li><a href="https://github.com/sonata-project/SonataDoctrinePhpcrAdminBundle/">Sonata PHPCR AdminBundle</a></li>
+                <li><a href="https://github.com/bergie/create">create.js</a> and <a href="https://github.com/bergie/hallo">hallo</a></li>
+                <li><a href="https://github.com/phpcr/phpcr">PHPCR</a></li>
+                <li><a href="https://github.com/jackalope/jackalope">Jackalope</a></li>
+                <li><a href="https://github.com/doctrine/phpcr-odm">PHPCR ODM</a></li>
+                <li><a href="https://github.com/doctrine/DoctrinePHPCRBundle">DoctrinePHPCRBundle</a></li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h2>Resources</h2>
+            <ul>
+                <li><a href="irc://freenode/#symfony-cmf">#symfony-cmf IRC</a></li>
+                <li><a href="http://groups.google.com/group/symfony-cmf-devs">Mailinglist devs</a> | <a href="http://groups.google.com/group/symfony-cmf-users">users</a></li>
+                <li><a href="http://cmf.symfony.com">http://cmf.symfony.com</a></li>
+                <li><a href="https://github.com/symfony-cmf/symfony-cmf/wiki">Symfony CMF wiki</a></li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <span class="right"><a href="irc://freenode/#symfony-cmf">#symfony-cmf IRC</a></span>
+            <span class="left"><a href="http://cmf.symfony.com">cmf.symfony.com</a></span>
+            <hr class="defloat" />
+        </div>
+
+    </body>
+</html>
