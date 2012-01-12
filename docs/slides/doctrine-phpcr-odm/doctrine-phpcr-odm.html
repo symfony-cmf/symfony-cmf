@@ -4,7 +4,7 @@
 
         <!-- To render these slides you need Slippy https://github.com/Seldaek/slippy -->
 
-        <title>Symfony2 CMF Introduction</title>
+        <title>Doctrine PHPCR ODM</title>
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -71,104 +71,11 @@
 
     <body>
         <div class="slide" style="text-align:center">
-            <h1>Symfony2 CMF Project</h1>
-            <h1><a href="http://cmf.symfony.com">cmf.symfony.com</a></h1>
+            <h1>Doctrine PHPCR ODM</h1>
+            <h1><a href="http://cmf.symfony.com">github.com/doctrine/phpcr-odm/</a></h1>
         </div>
 
         <div class="slide" style="text-align:center">
-            <h2>Drupal is awesome!</h2>
-        </div>
-
-        <div class="slide" style="text-align:center">
-            <h2>No REALLY!</h2>
-            <h2>Drupal is awesome!</h2>
-        </div>
-
-        <div class="slide" style="text-align:center">
-            <h2>Drupal is awesome if you are an end user!</h2>
-            <h2>Powerful admin interface</h2>
-        </div>
-
-        <div class="slide" style="text-align:center">
-            <h2>Drupal is awesome if you are a sales guy!</h2>
-            <h2>Well known brand</h2>
-        </div>
-
-        <div class="slide" style="text-align:center">
-            <div class="vcenter">
-                <h2>Drupal sucks if you are a developer!</h2>
-            </div>
-        </div>
-
-        <div class="slide" style="text-align:center">
-            <div class="vcenter">
-                <h2>Drupal is CMS 1st, development framework 2nd</h2>
-                <h2>This is a legitimate prioritization for their users</h2>
-            </div>
-        </div>
-
-        <div class="slide">
-            <h2>Drupal developer nightmares ..</h2>
-            <ul>
-                <li>.. no clean separation of configuration, logic and content</li>
-                <li>.. no clean deployment and staging concept</li>
-                <li>.. inconsistent cache layers</li>
-                <li>.. function callback AOP is not every ones cup of tea</li>
-                <li>.. lots of legacy baggage</li>
-                <li>.. NIH (not invented here) syndrom</li>
-            </ul>
-        </div>
-
-        <div class="slide">
-            <h2>Do we also suffer from NIH?</h2>
-            <ul>
-                <li>Focus on solving core issues of Drupal</li>
-                <li>Based ourselves as much on standard tools and specs</li>
-                <li>Deliver value within a reasonable time</li>
-            </ul>
-        </div>
-
-        <div class="slide">
-            <h2>CMF = Content Management Framework</h2>
-            <ul>
-                <li>In other words: its a toolbox to create your own custom CMS</li>
-                <li>Not a one size fits all, but increase code sharing</li>
-                <li>Imagine Diem, Sympal, Apostrophe all build on the same content foundation</li>
-            </ul>
-        </div>
-
-        <div class="slide" style="text-align:center">
-            <h2>The Symfony CMF project makes it easier for <strong>developers</strong> to add <strong>CMS functionality</strong> to
-                applications built with the <strong>Symfony2 PHP</strong> framework. Key development principles for the provided
-                <strong>set of bundles</strong> are <strong>scalability</strong>, <strong>usability</strong>,
-                <strong>documentation</strong> and <strong>testing</strong>
-            </h2>
-        </div>
-
-        <div class="slide" style="text-align:center">
-            <h2>Data in a CMS is mostly unstructured</h2>
-            <h2>RDBMS are not a good fit, hurray for NoSQL</h2>
-            <h2><img src="square_in_a_circle.png" alt="like fitting a square into a circle" /></h2>
-        </div>
-
-        <div class="slide" style="text-align:center">
-            <h2>CMS often organize content as a tree/graph</h2>
-            <h2>Most NoSQL not a good fit, hurray for Graph DBs</h2>
-            <h2><img src="content_graph.png" alt="content graph" /></h2>
-        </div>
-
-        <div class="slide" style="text-align:center">
-            <h2>CMS should be able to store content versions</h2>
-            <h2><img src="versioning.png" alt="multiple versions" /></h2>
-        </div>
-
-        <div class="slide" style="text-align:center">
-            <h2>Complexity shouldn't overwhelm developers</h2>
-            <h2>Need a solution that can scale both from small to large projects and we want to get somewhere within 12 months!</h2>
-        </div>
-
-        <div class="slide" style="text-align:center">
-            <h2>Enter Doctrine PHPCR ODM</h2>
             <h2>PHP Content Repository + Doctrine ODM</h2>
             <h2>PHPCR (aka PHP-ified JCR specification)</h2>
         </div>
@@ -402,32 +309,10 @@
         </div>
 
         <div class="slide">
-            <h2>Not all data fits well in PHPCR/JCR</h2>
-            <ul>
-                <li>For example aggregation is better done in an RDBMS</li>
-                <li>Store web store product description in PHPCR/JCR</li>
-                <li>Store web store inventory and orders in RDBMS</li>
-            </ul>
-        </div>
+            <h2>TODO: versioning, translation</h2>
+            <pre class="brush: php">
 
-        <div class="slide" style="text-align:center">
-            <h2>Door swings both ways, so remember</h2>
-            <h2><img src="square_in_a_circle.png" alt="like fitting a square into a circle" /></h2>
-        </div>
-
-        <div class="slide">
-            <h2>Interest is huge!</h2>
-            <ul>
-                <li>Over 150 people on the mailinglist</li>
-                <li>About 20 more per month</li>
-                <li>All key decisions have been made in public forums</li>
-                <li>Multiple people are working and committing to all parts of the code</li>
-            </ul>
-        </div>
-
-        <div class="slide" style="text-align:center">
-            <h2>Play with it today!</h2>
-            <h2><a href="https://github.com/symfony-cmf/cmf-sandbox">CMF sandbox</a></h2>
+            </pre>
         </div>
 
         <div class="slide">
@@ -441,25 +326,12 @@
         </div>
 
         <div class="slide">
-            <h2>Eat your own dog food</h2>
-            <ul>
-                <li>Liip and Ideato are currently rebuilding their websites on top of the CMF</li>
-            </ul>
-        </div>
-
-        <div class="slide" style="text-align:center">
-            <h2>Many companies are committed to the effort</h2>
-            <h2><img src="cmf_companies.png" alt="CMF supporters" /></h2>
-        </div>
-
-        <div class="slide">
             <h2>Github projects</h2>
             <ul>
                 <li><a href="https://github.com/phpcr/phpcr">PHPCR</a></li>
                 <li><a href="https://github.com/jackalope/jackalope">Jackalope</a></li>
                 <li><a href="https://github.com/doctrine/phpcr-odm">PHPCR ODM</a></li>
                 <li><a href="https://github.com/Doctrine/DoctrinePHPCRBundle">DoctrinePHPCRBundle</a></li>
-                <li><a href="https://github.com/symfony-cmf/cmf-sandbox">CMF sandbox</a></li>
             </ul>
         </div>
 
@@ -467,8 +339,7 @@
             <h2>Resources</h2>
             <ul>
                 <li><a href="irc://freenode/#symfony-cmf">#symfony-cmf IRC</a></li>
-                <li><a href="http://cmf.symfony.com">http://cmf.symfony.com</a></li>
-                <li><a href="https://github.com/symfony-cmf/symfony-cmf/wiki">Symfony CMF wiki</a></li>
+                <li><a href="https://github.com/doctrine/phpcr-odm">PHPCR ODM</a> (the README is the doc)</li>
                 <li><a href="http://jcp.org/en/jsr/detail?id=283">JSR 283 (aka JCR 2, read Chapter 3)</a></li>
                 <li><a href="http://jcp.org/en/jsr/detail?id=333">JSR 333 (aka JCR 2.1)</a></li>
             </ul>
