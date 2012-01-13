@@ -90,20 +90,20 @@
         <div class="slide" style="text-align:center">
             <h2>PHPCR provides a <strong>standardized API</strong> that can be used by any PHP content management system to interface with any content repository.</h2>
             <hr>
-            <p>Understanding PHPCR helps to understand the phpcr-odm. See <a href="http://phpcr.github.com/slides.html#1">PHPCR slides</a> for an introduction.</p>
+            <p>Understanding PHPCR helps to understand the phpcr-odm. See <a href="http://phpcr.github.com/slides.html">PHPCR slides</a> for an introduction.</p>
         </div>
 
         <div class="slide" style="text-align:left">
-            <h2>Doctrine</h2>
+            <h2>Doctrine ODM</h2>
             <ul>
-                <li>Object - Document Mapper</li>
-                <li>Persist your Objects as PHPCR Nodes</li>
-                <li>Is <em>not</em> active record</li>
-                <li>But you explicitly register plain classes with the manager</li>
+                <li>Object to Document mapper</li>
+                <li>Persist your Objects as PHPCR nodes</li>
+                <li>This is <em>not</em> active record</li>
+                <li>But you explicitly register plain php class instances with the manager</li>
                 <li>Metadata to map from database to class properties
                     <ul>
-                    <li>YAML, XML or php annotations</li>
-                    <li>No need for interfaces or extending a base class</li>
+                        <li>YAML, XML or php annotations</li>
+                        <li>No need for interfaces or extending a base class</li>
                     </ul>
                 </li>
             </ul>
@@ -143,22 +143,22 @@
             <pre class="brush: php">
                 // Create
                 $document = new Foo\Bar();
-                $document->parent = $documentManager->find(null, '/');
+                $document->parent = $dm->find(null, '/');
                 $document->nodename = 'test';
                 $document->text = 'Test text';
-                $documentManager->persist($document);
-                $documentManager->flush();
+                $dm->persist($document);
+                $dm->flush();
 
                 // Read
-                $document = $documentManager->find(null, '/test');
+                $document = $dm->find(null, '/test');
 
                 // Update
                 $document->text = 'foo!';
-                $documentManager->flush();
+                $dm->flush();
 
                 // Remove
-                $documentManager->remove($document);
-                $documentManager->flush();
+                $dm->remove($document);
+                $dm->flush();
             </pre>
         </div>
 
@@ -178,7 +178,7 @@
                      * All child nodes starting with "a".
                      * @PHPCR\Children(filter=a*)
                      */
-                    public $achildren;
+                    public $children;
 
                     /** @PHPCR\ReferenceOne */
                     public $reference;
@@ -192,37 +192,37 @@
         </div>
 
         <div class="slide">
-            <h2>Versioning API</h2>
+            <h2>Versioning API: basics</h2>
             <pre class="brush: php">
                 // @Document(versioningType=simple)
+                $document = $dm->find(null, $id);
 
-                $document = $documentManager->find(null, $id);
                 // create a new version
-                $documentManager->checkpoint($document);
+                $dm->checkpoint($document);
 
                 // get latest 2 entries from history
-                $history = $documentManager->getAllLinearVersions($document, 2);
-                // returns array with versionname and creation date of each version
+                $history = $dm->getAllLinearVersions($document, 2);
+                // returns array with version name and creation date of each version
 
                 // get a document in an old state
                 $version = reset($history);
-                $pre = $documentManager->findVersionByName($version['versionname']);
+                $pre = $dm->findVersionByName($version['versionname']);
                 echo $pre->getPropertyValue('text');
             </pre>
         </div>
 
         <div class="slide">
-            <h2>Versioning API : restore and delete</h2>
+            <h2>Versioning API: restore and delete</h2>
             <pre class="brush: php">
-                $pre = $documentManager->findVersionByName($versionname);
+                $pre = $dm->findVersionByName($versionname);
 
                 // restore this old version, replacing the current head
-                $documentManager->restoreVersion($pre, true);
+                $dm->restoreVersion($pre, true);
 
                 // delete a version from the history
                 // (i.e. to remove illegal content from a wiki-like page)
-                $illegal = $documentManager->findVersionByName($v);
-                $documentManager->deleteVersion($illegal);
+                $illegal = $dm->findVersionByName($v);
+                $dm->deleteVersion($illegal);
             </pre>
         </div>
 
@@ -242,12 +242,12 @@
                 $queryResult = $query->execute();
 
                 foreach ($queryResult->getRows() as $row) {
-                    $doc = $documentManager->find(null, $row->getPath());
+                    $doc = $dm->find(null, $row->getPath());
                 }
             </pre>
         </div>
 
-        <!-- TODO: query builder -->
+        <!-- TODO: QOM and query builder -->
 
         <div class="slide">
             <h2>Translation</h2>
@@ -287,32 +287,32 @@
             <pre class="brush: php">
                 $article = new Article();
                 $article->topic = 'bonjour';
-                $documentManager->persistTranslation($article, 'fr');
+                $dm->persistTranslation($article, 'fr');
 
                 $article->topic = 'hello';
-                $documentManager->persistTranslation($article, 'en');
+                $dm->persistTranslation($article, 'en');
 
-                $documentManager->flush();
+                $dm->flush();
 
                 // now there are both french and english in the database
 
                 // use the @Locale field if set, otherwise default language
-                $documentManager->persist($article);
+                $dm->persist($article);
             </pre>
         </div>
 
         <div class="slide">
             <h2>Loading translations</h2>
             <pre class="brush: php">
-                $article = $documentManager->findTranslation(null, '/test', 'fr');
+                $article = $dm->findTranslation(null, '/test', 'fr');
                 echo $article->topic; // 'bonjour'
-                $article = $documentManager->findTranslation(null, '/test', 'en');
+                $article = $dm->findTranslation(null, '/test', 'en');
                 echo $article->topic; // 'hello'
 
                 // load in default language
-                $article = $documentManager->find(null, '/test');
+                $article = $dm->find(null, '/test');
 
-                $locales = $documentManager->getLocalesFor($article);
+                $locales = $dm->getLocalesFor($article);
                 var_dump($locales); // en, fr
             </pre>
         </div>
@@ -357,7 +357,7 @@
         <div class="slide">
             <h2>Access underlying PHPCR API</h2>
             <pre class="brush: php">
-                $workspace = $documentManager->getWorkspace();
+                $workspace = $dm->getWorkspace();
                 $session = $workspace->getSession();
                 $node = $session->getNode('/foo/bar/ding/dong');
 
@@ -377,10 +377,11 @@
         <div class="slide">
             <h2>Next steps</h2>
             <ul>
-                <li>Add mapping support for children, parents, versions</li>
-                <li>Implement SQL2/OQM search query support</li>
-                <li>Performance optimizations</li>
-                <li>Make AdminBundle compatible and build frontend Bundles</li>
+                <li>Finish versioning API integration</li>
+                <li>Logging</li>
+                <li>Result caching</li>
+                <li>Various missing minor ORM features</li>
+                <li>Documentation</li>
             </ul>
         </div>
 
