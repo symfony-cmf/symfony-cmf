@@ -10,7 +10,7 @@
 
         <meta name="author" content="Symfony CMF" />
         <meta name="email" content="symfony-cmf-devs@googlegroups.com" />
-        <meta name="date" content="2011-05-29" />
+        <meta name="date" content="2011-01-13" />
         <meta name="venue" content="The Internets" />
 
         <!-- Slippy core file and dependencies -->
@@ -38,6 +38,7 @@
 
             body {
                 background: #fff;
+                line-height: 2em;
             }
 
             div.syntaxhighlighter {
@@ -63,6 +64,7 @@
         <script type="text/javascript">
             $(function() {
                 $(".slide").slippy({
+                    ratio: 1.6
                 });
                 SyntaxHighlighter.all();
             });
@@ -72,7 +74,7 @@
     <body>
         <div class="slide" style="text-align:center">
             <h1>Doctrine PHPCR ODM</h1>
-            <h1><a href="http://cmf.symfony.com">github.com/doctrine/phpcr-odm/</a></h1>
+            <h1><a href="http://www.doctrine-project.org/projects/phpcr_odm">www.doctrine-project.org/projects/phpcr_odm</a></h1>
         </div>
 
         <div class="slide" style="text-align:center">
@@ -87,84 +89,24 @@
 
         <div class="slide" style="text-align:center">
             <h2>PHPCR provides a <strong>standardized API</strong> that can be used by any PHP content management system to interface with any content repository.</h2>
+            <hr>
+            <p>Understanding PHPCR helps to understand the phpcr-odm. See <a href="http://phpcr.github.com/slides.html#1">PHPCR slides</a> for an introduction.</p>
         </div>
 
-        <div class="slide">
-            <h2>PHPCR implementations</h2>
+        <div class="slide" style="text-align:left">
+            <h2>Doctrine</h2>
             <ul>
-                <li>Jackalope
+                <li>Object - Document Mapper</li>
+                <li>Persist your Objects as PHPCR Nodes</li>
+                <li>Is <em>not</em> active record</li>
+                <li>But you explicitly register plain classes with the manager</li>
+                <li>Metadata to map from database to class properties
                     <ul>
-                        <li>Davex (Jackrabbit) transport layer</li>
-                        <li>Doctrine DBAL transport layer</li>
-                    </ul>
-                </li>
-                <li>Midgard2 PHPCR</li>
-                <li>..</li>
-            </ul>
-        </div>
-
-        <div class="slide">
-            <h2>PHPCR has been <a href="http://java.net/jira/browse/JSR_333-28" target="_blank">submitted</a> to the JCR spec at the request of David Nüschler, JCR spec lead</h2>
-        </div>
-
-        <div class="slide">
-            <h2>Workspaces</h2>
-            <ul>
-                <li>Multiple workspaces, each with its own name and root node</li>
-                <li>Is similar to a Unix file system structure</li>
-                <li>Each workspace is independent</li>
-            </ul>
-        </div>
-
-        <div class="slide">
-            <h2>Nodes</h2>
-            <ul>
-                <li>Can be created, deleted, modified, copied...</li>
-                <li>Are identified by their path (*)
-                    <ul><li>ex. “/my/path/under/water/fish”</li></ul>
-                </li>
-                <li>Are typed using namespaced names
-                    <ul><li>nt:unstructured, nt:folder, nt:file ...</li></ul>
-                </li>
-            </ul>
-        </div>
-
-        <div class="slide">
-            <h2>Node mixins</h2>
-            <ul>
-                <li>A mixin node type can be assigned to a node during that node's lifetime
-                    <ul>
-                        <li>mix:referenceable implies availability of property
-                            <ul>
-                                <li>jcr:uuid</li>
-                            </ul>
-                        </li>
-                        <li>mix:versionable implies availability of properties
-                            <ul>
-                                <li>jcr:versionHistory, jcr:predecessors, jcr:baseVersion, jcr:isCheckedOut, jcr:mergeFailed properties)</li>
-                            </ul>
-                        </li>
-                        <li>...</li>
+                    <li>YAML, XML or php annotations</li>
+                    <li>No need for interfaces or extending a base class</li>
                     </ul>
                 </li>
             </ul>
-        </div>
-
-        <div class="slide">
-            <h2>Properties</h2>
-            <ul>
-                <li>Use namespaced names
-                    <ul><li>jcr:created, jcr:mimeType, phpcr:class</li></ul>
-                </li>
-                <li>Use one of the several type
-                    <ul><li>STRING, URI, BOOLEAN, LONG, DOUBLE, DECIMAL, BINARY, DATE, NAME, PATH, WEAKREFERENCE, REFERENCE</li></ul>
-                </li>
-            </ul>
-        </div>
-
-        <div class="slide" style="text-align:center">
-            <h2>PHPCR</h2>
-            <h2><img src="phpcr.png" alt="PHPCR class interaction diagramm" /></h2>
         </div>
 
         <div class="slide">
@@ -174,53 +116,24 @@
 
                 use Doctrine\ODM\PHPCR\Mapping as PHPCR
 
-                /** @PHPCR\Document(alias="bar", repositoryClass="Foo\BarRepository") */
+                /** @PHPCR\Document(alias="bar") */
                 class Bar
                 {
-                    /** @PHPCR\Id(strategy="repository") */
+                    /** @PHPCR\Id */
                     public $id;
 
-                    /** @PHPCR\Children */
-                    public $children;
-
-                    /** @PHPCR\String(name="name") */
-                    private $name;
-
-                    public function getName()
-                    {
-                        return $this->name;
-                    }
-
-                    public function setName($name)
-                    {
-                        $this->name = $name;
-                    }
-                }
-            </pre>
-        </div>
-
-        <div class="slide">
-            <h2>Document repository (optional)</h2>
-            <pre class="brush: php">
-                namespace Foo;
-
-                use Doctrine\ODM\PHPCR\DocumentRepository,
-                    Doctrine\ODM\PHPCR\Id\RepositoryIdInterface;
-
-                class BarRepository
-                    extends DocumentRepository
-                    implements RepositoryIdInterface
-                {
                     /**
-                     * Generate a document id
-                     *
-                     * @param Bar $document
-                     * @return string
+                     * presence of this annotation changes default id strategy
+                     * to "parent and name" strategy
+                     * @PHPCRODM\ParentDocument
                      */
-                    public function generateId(Bar $document)
-                    {
-                        return '/'.$document->getName();
-                    }
+                    public $parent;
+
+                    /** @PHPCRODM\Nodename */
+                    public $nodename;
+
+                    /** @PHPCR\String */
+                    public $text;
                 }
             </pre>
         </div>
@@ -230,17 +143,17 @@
             <pre class="brush: php">
                 // Create
                 $document = new Foo\Bar();
-                $document->setName($name)
+                $document->parent = $documentManager->find(null, '/');
+                $document->nodename = 'test';
+                $document->text = 'Test text';
                 $documentManager->persist($document);
                 $documentManager->flush();
-                $id = $document->id;
 
                 // Read
-                $repo = $documentManager->getRepository('Foo\Bar');
-                $document = $repo->find($id);
+                $document = $documentManager->find(null, '/test');
 
                 // Update
-                $document->setName('foo!');
+                $document->text = 'foo!';
                 $documentManager->flush();
 
                 // Remove
@@ -250,7 +163,199 @@
         </div>
 
         <div class="slide">
-            <h2>Traversal API</h2>
+            <h2>Traversal and References</h2>
+            <pre class="brush: php">
+                /** @PHPCR\Document(alias="bar") */
+                class Bar
+                {
+                    /**
+                     * Map the child node named logo
+                     * @PHPCR\Child(filter=logo)
+                     */
+                    public $logo;
+
+                    /**
+                     * All child nodes starting with "a".
+                     * @PHPCR\Children(filter=a*)
+                     */
+                    public $achildren;
+
+                    /** @PHPCR\ReferenceOne */
+                    public $reference;
+
+                    /** @PHPCR\Referrers */
+                    public $referrers;
+
+                    ...
+                }
+            </pre>
+        </div>
+
+        <div class="slide">
+            <h2>Versioning API</h2>
+            <pre class="brush: php">
+                // @Document(versioningType=simple)
+
+                $document = $documentManager->find(null, $id);
+                // create a new version
+                $documentManager->checkpoint($document);
+
+                // get latest 2 entries from history
+                $history = $documentManager->getAllLinearVersions($document, 2);
+                // returns array with versionname and creation date of each version
+
+                // get a document in an old state
+                $version = reset($history);
+                $pre = $documentManager->findVersionByName($version['versionname']);
+                echo $pre->getPropertyValue('text');
+            </pre>
+        </div>
+
+        <div class="slide">
+            <h2>Versioning API : restore and delete</h2>
+            <pre class="brush: php">
+                $pre = $documentManager->findVersionByName($versionname);
+
+                // restore this old version, replacing the current head
+                $documentManager->restoreVersion($pre, true);
+
+                // delete a version from the history
+                // (i.e. to remove illegal content from a wiki-like page)
+                $illegal = $documentManager->findVersionByName($v);
+                $documentManager->deleteVersion($illegal);
+            </pre>
+        </div>
+
+        <!-- TODO: version labels once this is implemented -->
+
+        <div class="slide">
+            <h2>Search via SQL2 API</h2>
+            <pre class="brush: php">
+                $queryManager = $workspace->getQueryManager();
+
+                $sql = "SELECT * FROM [nt:unstructured]
+                    WHERE [nt:unstructured].text = 'foo!'
+                    ORDER BY [nt:unstructured].title";
+                $query = $queryManager->createQuery($sql, 'JCR-SQL2');
+                $query->setLimit($limit);
+                $query->setOffset($offset);
+                $queryResult = $query->execute();
+
+                foreach ($queryResult->getRows() as $row) {
+                    $doc = $documentManager->find(null, $row->getPath());
+                }
+            </pre>
+        </div>
+
+        <!-- TODO: query builder -->
+
+        <div class="slide">
+            <h2>Translation</h2>
+            <pre class="brush: php">
+                /** @PHPCRODM\Document(translator="attribute") */
+                class Article
+                {
+                    /**
+                     * The language this document currently is in
+                     * @PHPCRODM\Locale
+                     */
+                    public $locale;
+
+                    /**
+                     * Untranslated property
+                     * @PHPCRODM\Date
+                     */
+                    public $publishDate;
+
+                    /**
+                     * Translated property
+                     * @PHPCRODM\String(translated=true)
+                     */
+                    public $topic;
+
+                    /**
+                     * Language specific image
+                     * @PHPCRODM\Binary(translated=true)
+                     */
+                    public $image;
+                }
+            </pre>
+        </div>
+
+        <div class="slide">
+            <h2>Storing translations</h2>
+            <pre class="brush: php">
+                $article = new Article();
+                $article->topic = 'bonjour';
+                $documentManager->persistTranslation($article, 'fr');
+
+                $article->topic = 'hello';
+                $documentManager->persistTranslation($article, 'en');
+
+                $documentManager->flush();
+
+                // now there are both french and english in the database
+
+                // use the @Locale field if set, otherwise default language
+                $documentManager->persist($article);
+            </pre>
+        </div>
+
+        <div class="slide">
+            <h2>Loading translations</h2>
+            <pre class="brush: php">
+                $article = $documentManager->findTranslation(null, '/test', 'fr');
+                echo $article->topic; // 'bonjour'
+                $article = $documentManager->findTranslation(null, '/test', 'en');
+                echo $article->topic; // 'hello'
+
+                // load in default language
+                $article = $documentManager->find(null, '/test');
+
+                $locales = $documentManager->getLocalesFor($article);
+                var_dump($locales); // en, fr
+            </pre>
+        </div>
+
+        <div class="slide">
+            <h2>Translation</h2>
+            <ul>
+                <li>Attribute strategy: Store translations into namespaced properties of same node</li>
+                <li>Child strategy: Create namespaced child for each language</li>
+                <li>Translate any type of field, but not references or children</li>
+                <li>Limited to one instance of the document, which is updated on findTranslation</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h2>Document repository (optional)</h2>
+            <pre class="brush: php">
+                namespace Foo;
+
+                use Doctrine\ODM\PHPCR\DocumentRepository;
+                use Doctrine\ODM\PHPCR\Id\RepositoryIdInterface;
+
+                /** @Document(repositoryClass="Foo\BarRepository") */
+                class Bar
+                {
+                    /** @PHPCR\Id(strategy="repository") */
+                    public $id;
+                    ...
+
+                class BarRepository
+                    extends DocumentRepository
+                    implements RepositoryIdInterface
+                {
+                    public function generateId(Bar $document)
+                    {
+                        return '/'.$document->getName();
+                    }
+                }
+            </pre>
+        </div>
+
+        <div class="slide">
+            <h2>Access underlying PHPCR API</h2>
             <pre class="brush: php">
                 $workspace = $documentManager->getWorkspace();
                 $session = $workspace->getSession();
@@ -266,52 +371,6 @@
                     $breadcrumb[$parent->getPath()] =
                         $parent->getPropertyValue('label');
                 } while ($parent != $node);
-            </pre>
-        </div>
-
-        <div class="slide">
-            <h2>Versioning API</h2>
-            <pre class="brush: php">
-                // immediate predecessor(s)
-                $repo = $documentManager->getRepository('Foo\Bar');
-                $document = $repo->find($id);
-                $predecessor = $repo->getPredecessor($document);
-                echo $predecessor->getPropertyValue('label');
-
-                // get entire history
-                $workspace = $documentManager->getWorkspace();
-                $versionManager = $workspace->getVersionManager()
-                $history = $versionManager->getVersionHistory($id);
-
-                foreach ($history->getAllVersions() as $node) {
-                    echo $node->getPropertyValue('label');
-                }
-            </pre>
-        </div>
-
-        <div class="slide">
-            <h2>Search via SQL2 API</h2>
-            <pre class="brush: php">
-                $queryManager = $workspace->getQueryManager();
-
-                $sql = "SELECT * FROM [nt:unstructured]
-                    WHERE [nt:unstructured].[phpcr:class] = 'Foo\Bar'
-                    ORDER BY [nt:unstructured].title";
-                $query = $queryManager->createQuery($sql, 'JCR-SQL2');
-                $query->setLimit($limit);
-                $query->setOffset($offset);
-                $queryResult = $query->execute();
-
-                foreach ($queryResult->getRows() as $row) {
-                    $node = $row->getNode();
-                }
-            </pre>
-        </div>
-
-        <div class="slide">
-            <h2>TODO: versioning, translation</h2>
-            <pre class="brush: php">
-
             </pre>
         </div>
 

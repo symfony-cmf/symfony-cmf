@@ -57,7 +57,7 @@
             }
 
             strong {
-                color: #662222;
+                color: #c90606;
             }
 
         </style>
@@ -66,8 +66,6 @@
             $(function() {
                 $(".slide").slippy({
                     animLen: 0,
-                    baseWidth: false,
-                    margin: 0.1,
                     ratio: 1.6
 
                 });
@@ -94,14 +92,14 @@
 
         <div class="slide" style="text-align:left">
             <h2>
-                Content management <strong>framework</strong>, not content management <strong>system</strong>
+                Content management <strong>framework</strong>,<br/> not content management <strong>system</strong>
             </h2>
             <ul>
                 <li>Use what you can</li>
-                <li>replace what you need</li>
-                <li>ignore what you do not need<br/><br/></li>
-                <li>collection of modular tools to do content management</li>
-                <li>not a ready-to-use for end users application</li>
+                <li>Replace what you need</li>
+                <li>Ignore what you do not need<br/><br/></li>
+                <li>Collection of modular tools to do content management</li>
+                <li>Not a ready-to-use for end users application</li>
             </ul>
         </div>
 
@@ -114,7 +112,7 @@
 
         <div class="slide" style="text-align:center">
             <h2>Symfony2 Control Flow</h2>
-            <h2>CMF additions</h2>
+            <h2 style="color: #0a0;">CMF additions</h2>
             <br/>
             <p><img src="request_flow_cmf.png"/></p>
         </div>
@@ -129,10 +127,10 @@
         <div class="slide" style="text-align:left">
             <h2>PHPCR and the ODM</h2>
 
-            <img src="phpcr.png" style="float: right; margin-left: 10px;"/>
+            <img src="phpcr_concept.png" style="float: right; margin-left: 10px;"/>
             <ul>
             <li>PHPCR: Standardized API for content repositories</li>
-            <li>Tree-based, schema-less, versioning database</li>
+            <li>Tree-based, schema-less, versioning database<br/><br/></li>
             <li>PHPCR-ODM: map nodes to your objects</li>
             <li>Add features like multilanguage</li>
             </ul>
@@ -142,16 +140,16 @@
             <h2>Content Routing</h2>
             <ul>
             <li>ChainRouter allows to have several routers in action</li>
-            <li>User defined routes in doctrine store</li>
-            <li>Specify controller and page content to use</li>
-            <li>Or just the template (with the Content Bundle)</li>
+            <li>User-defined routes in doctrine store</li>
+            <li>Specifies controller and page content to use</li>
+            <li>Or just the template instead of controller (with the ContentBundle)</li>
             </ul>
         </div>
 
         <div class="slide" style="text-align:left">
             <h2>Content Bundle</h2>
             <ul>
-            <li>Provides default controller so you need only a custom template</li>
+            <li>Provides generic controller so you need only a custom template</li>
             <li>Simple StaticContent model and template</li>
             </ul>
         </div>
@@ -161,13 +159,14 @@
             <ul>
             <li>Integrate KnpMenuBundle with Doctrine</li>
             <li>Menu documents reference content documents</li>
+            <li>Generates URL for content</li>
             </ul>
             <br/>
             <img src="menubundle.png"/>
         </div>
 
         <div class="slide" style="text-align:left">
-            <h2>Frontend Editing: Create</h2>
+            <h2>Frontend Editing: Create.js</h2>
             <ul>
             <li>backbone.js based editing framework</li>
             <li>Uses RDF annotations to detect editable data</li>
@@ -182,7 +181,7 @@
             <h2>Backend: Sonata PHPCRODM AdminBundle</h2>
             <ul>
             <li>Based on the SonataAdminBundle</li>
-            <li>Support tree oriented data</li>
+            <li>Supports tree oriented data</li>
             </ul>
             <br/>
             <img src="adminbundle.png"/>
