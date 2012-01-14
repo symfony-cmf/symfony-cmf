@@ -231,23 +231,16 @@
         <div class="slide">
             <h2>Search via SQL2 API</h2>
             <pre class="brush: php">
-                $queryManager = $workspace->getQueryManager();
-
                 $sql = "SELECT * FROM [nt:unstructured]
                     WHERE [nt:unstructured].text = 'foo!'
                     ORDER BY [nt:unstructured].title";
-                $query = $queryManager->createQuery($sql, 'JCR-SQL2');
+                $query = $dm->createQuery($sql, 'JCR-SQL2');
                 $query->setLimit($limit);
                 $query->setOffset($offset);
-                $queryResult = $query->execute();
 
-                foreach ($queryResult->getRows() as $row) {
-                    $doc = $dm->find(null, $row->getPath());
-                }
+                $collection = $dm->getDocumentsByQuery($query);
             </pre>
         </div>
-
-        <!-- TODO: QOM and query builder -->
 
         <div class="slide">
             <h2>Translation</h2>
