@@ -246,7 +246,7 @@
             <h2>Search via the QueryBuilder</h2>
             <pre class="brush: php">
                 $qb = $dm->createQueryBuilder();
-                $factory = $dm->getSession()->getQueryManager()->getQOMFactory();
+                $factory = $qb->getQOMFactory();
 
                 // SELECT * FROM nt:unstructured WHERE name NOT IS NULL
                 $qb->select($factory->selector('nt:unstructured'))
