@@ -9,7 +9,7 @@ The Symfony CMF project makes it easier for **developers** to add **CMS function
 
 - GitHub: <https://github.com/symfony-cmf/symfony-cmf>
 - Sandbox: <https://github.com/symfony-cmf/cmf-sandbox>
-- Web: <http://cmf.symfony-project.org/>
+- Web, documentation: <http://cmf.symfony.com/>
 - Wiki: <http://github.com/symfony-cmf/symfony-cmf/wiki>
 - Issue Tracker: <http://cmf.symfony-project.org/redmine/>
 - IRC: irc://freenode/#symfony-cmf
