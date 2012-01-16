@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Cmf\Bundle\ChainRoutingBundle\Routing\RouteAwareInterface;
 
 /**
- * @PHPCRODM\Document(alias="static")
+ * @PHPCRODM\Document
  */
 class StaticContent implements RouteAwareInterface
 {

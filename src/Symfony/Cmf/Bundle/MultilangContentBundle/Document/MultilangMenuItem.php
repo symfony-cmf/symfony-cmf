@@ -11,7 +11,7 @@ use Knp\Menu\NodeInterface;
  * To protect against accidentally injecting things into the tree, all menu
  * item node names must end on -item.
  *
- * @PHPCRODM\Document(alias="mul-menu_item", translator="attribute")
+ * @PHPCRODM\Document(translator="attribute")
  */
 class MultilangMenuItem implements NodeInterface {
 
