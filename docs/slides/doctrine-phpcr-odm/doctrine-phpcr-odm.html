@@ -243,9 +243,25 @@
         </div>
 
         <div class="slide">
+            <h2>Search via the QueryBuilder</h2>
+            <pre class="brush: php">
+                $qb = $dm->createQueryBuilder();
+
+                // SELECT * FROM nt:unstructured WHERE name NOT IS NULL
+                $qb = new QueryBuilder($factory);
+                $qb->select($factory->selector('nt:unstructured'))
+                    ->where($factory->propertyExistance('name'))
+                    ->setFirstResult(10)
+                    ->setMaxResults(10)
+                    ->execute();
+
+                $collection = $dm->getDocumentsByQuery($qb->getQuery());
+            </pre>
+        </div>
+
+        <div class="slide">
             <h2>And more...</h2>
             <ul>
-                <li>Query Builder</li> <!-- TODO: QOM and query builder -->
                 <li>Transactions</li>  <!-- TODO: using phpcr transactions -->
             </ul>
         </div>
