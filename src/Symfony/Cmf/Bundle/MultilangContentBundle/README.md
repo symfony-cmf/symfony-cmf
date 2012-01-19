@@ -12,6 +12,8 @@ bundles and a helper service to render a language chooser.
     create separate instances to place in the different locations in the tree)
 * A service to render a language chooser to switch between the languages of the
     current page, based on the doctrine router.
+* A controller to decide on the language based on the browser request, to redirect
+    to the correct home page.
 
 # Usage
 
@@ -36,6 +38,20 @@ generated in the selector controller from the default language preferences
 order.
 But you can specify the languageUrls as parameter to the language chooser
 i.e. to use a custom route name.
+
+## Language redirection controller
+
+This controller decides on the correct page to show for the browser preference
+language. It is working with the RouteAwareInterface from the ChainRoutingBundle.
+
+The idea is that you put a MultilangLanguageSelectRoute at the route where
+language should be automatically detected (e.g. /)
+Then you add normal routes having their locale set as children of that route.
+This route will make the DoctrineRouter::generate() get all child routes.
+``generate`` then chooses the route with the best available locale.
+MultilangLanguageSelectRoute by default specifies the explicit controller
+
+    symfony_cmf_multilang_content.languageSelectorController:defaultLanguageAction
 
 
 # History

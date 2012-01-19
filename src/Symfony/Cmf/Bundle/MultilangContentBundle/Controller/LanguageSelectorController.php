@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Routing\RouterInterface;
 
+use Symfony\Cmf\Bundle\ChainRoutingBundle\Routing\RouteAwareInterface;
+
 /**
  * A controller to render the language selector and to decide on default language
  *
@@ -30,15 +32,13 @@ class LanguageSelectorController
      * @param \Symfony\Bundle\FrameworkBundle\Templating\EngineInterface $templating
      * @param \Symfony\Component\Routing\RouterInterface $router
      * @param \Doctrine\ODM\PHPCR\Translation\LocaleChooser\LocaleChooserInterface $chooser
-     * @param string $homeRouteId the route id for redirecting to the home page in the correct language
      */
-    public function __construct(ObjectManager $om, EngineInterface $templating, RouterInterface $router, LocaleChooserInterface $chooser, $homeRouteId)
+    public function __construct(ObjectManager $om, EngineInterface $templating, RouterInterface $router, LocaleChooserInterface $chooser)
     {
         $this->om = $om;
         $this->templating = $templating;
         $this->router = $router;
         $this->chooser = $chooser;
-        $this->homeRouteId = $homeRouteId;
     }
 
     /**
@@ -74,24 +74,34 @@ class LanguageSelectorController
     /**
      * action for / to redirect to the best language based on the request language order
      */
-    public function defaultLanguageAction(Request $request)
+    public function defaultLanguageAction(Request $request, $route)
     {
+        if (! $route instanceof RouteAwareInterface) {
+            throw new \Exception('The route passed to the language selection action must emulate content to have the correct route generated.');
+        }
+
         $defaultPreferredLangs = $this->chooser->getDefaultLocalesOrder();
         $bestLang = $request->getPreferredLanguage($defaultPreferredLangs);
+
         // we only care about the first 2 characters, even if the user's preference is de_CH.
         $bestLang = substr($bestLang, 0, 2);
 
+        /*
+         * Let the router generate the route for the requested language. The
+         * route provides its children, which should be the urls for each locale
+         * as content.
+         */
+        $url = $this->router->generate('', array('_locale' => $bestLang, 'content' => $route), true);
         /* Note: I wanted to send a 300 "Multiple Choices" header along with a
          * Location header, but user agents may behave inconsistently in
-         * repsonse to this.
+         * response to this.
          *
          * For example Chrome was not redirecting unless the headers were
          * carefully tailored for it. (In particular, it doesn't like the
          * lowercase 'location' header that results from calling
          * $response->headers->set('Location', '...')
          */
-        $route = $this->om->find(null, $this->homeRouteId);
-        $url = $this->router->generate('', array('_locale' => $bestLang, 'route' => $route), true);
+
         $response = new RedirectResponse($url, 301);
         $response->setVary('accept-language');
         return $response;
