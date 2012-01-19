@@ -43,7 +43,7 @@ class StaticContent implements RouteAwareInterface
     /**
      * @PHPCRODM\Referrers(filter="routeContent")
      */
-    public $routes;
+    protected $routes;
 
     /**
      * Set repository path of this navigation item for creation

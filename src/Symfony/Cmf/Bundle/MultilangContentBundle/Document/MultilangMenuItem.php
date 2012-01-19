@@ -6,7 +6,10 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
 use Knp\Menu\NodeInterface;
 
 /**
- * This class represents a menu item for the cmf.
+ * This class represents a multilanguage menu item for the cmf.
+ *
+ * The label and uri are translatable, to have a language specific menu caption
+ * and to be able to have external links language specific.
  *
  * To protect against accidentally injecting things into the tree, all menu
  * item node names must end on -item.
