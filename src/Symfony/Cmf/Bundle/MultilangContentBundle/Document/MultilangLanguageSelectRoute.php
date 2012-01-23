@@ -95,13 +95,11 @@ class MultilangLanguageSelectRoute implements RouteObjectInterface, RouteAwareIn
 
     public function getRouteContent()
     {
-        return null;
+        return $this;
     }
 
     public function getRouteDefaults()
     {
-        $defaults = array('route' => $this);
-
         $controller = $this->getController();
         if (! empty($controller)) {
             $defaults['_controller'] = $controller;

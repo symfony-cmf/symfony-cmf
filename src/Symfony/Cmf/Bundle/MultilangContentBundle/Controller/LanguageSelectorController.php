@@ -74,9 +74,9 @@ class LanguageSelectorController
     /**
      * action for / to redirect to the best language based on the request language order
      */
-    public function defaultLanguageAction(Request $request, $route)
+    public function defaultLanguageAction(Request $request, $contentDocument)
     {
-        if (! $route instanceof RouteAwareInterface) {
+        if (! $contentDocument instanceof RouteAwareInterface) {
             throw new \Exception('The route passed to the language selection action must emulate content to have the correct route generated.');
         }
 
@@ -91,7 +91,7 @@ class LanguageSelectorController
          * route provides its children, which should be the urls for each locale
          * as content.
          */
-        $url = $this->router->generate('', array('_locale' => $bestLang, 'content' => $route), true);
+        $url = $this->router->generate('', array('_locale' => $bestLang, 'content' => $contentDocument), true);
         /* Note: I wanted to send a 300 "Multiple Choices" header along with a
          * Location header, but user agents may behave inconsistently in
          * response to this.
