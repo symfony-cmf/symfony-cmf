@@ -61,6 +61,7 @@ class PHPCRTree implements TreeInterface
             'attr'  => array(
                 'id' => $node->getPath(),
                 'rel' => $has_children ? 'folder' : 'default',
+                'classname' => $node->hasProperty('phpcr:class') ? $node->getProperty('phpcr:class')->getString() : null
             ),
             'state' => $has_children ? 'closed' : null,
         );
