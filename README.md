@@ -30,7 +30,7 @@ You need to install [Doctrine PHPCR ODM](http://github.com/doctrine/phpcr-odm) a
 * Add this repository to your vendors
 * Make sure to run ```git submodule update --recursive --init``` inside the symfony-cmf folder after each vendor update (we added this to the vendors script)
 
-*app/autoload.php:* Add autoloader entries ( *before* the line registering Symfony itself )
+*app/autoload.php:* Add autoloader entries
 
     'Symfony\\Cmf'                          => __DIR__.'/../vendor/symfony-cmf/src',
     'Doctrine\\Bundle\\DoctrinePHPCRBundle' => __DIR__.'/../vendor/bundles',
@@ -42,9 +42,8 @@ You need to install [Doctrine PHPCR ODM](http://github.com/doctrine/phpcr-odm) a
                                                ),
 
 
-*app/autoload.php:* Add autoloader entries for the multilang and ODM annotations right after the last AnnotationRegistry::registerFile line
+*app/autoload.php:* Add autoloader entries for the ODM annotations right after the last AnnotationRegistry::registerFile line
 
-    AnnotationRegistry::registerFile(__DIR__.'/../vendor/symfony-cmf/src/Symfony/Cmf/Bundle/MultilangContentBundle/Annotation/TranslationAnnotations.php');
     AnnotationRegistry::registerFile(__DIR__.'/../vendor/symfony-cmf/vendor/doctrine-phpcr-odm/lib/Doctrine/ODM/PHPCR/Mapping/Annotations/DoctrineAnnotations.php');
 
 *app/AppKernel.php:* Initialize bundles in the Kernel registerBundle method
@@ -54,6 +53,8 @@ You need to install [Doctrine PHPCR ODM](http://github.com/doctrine/phpcr-odm) a
     new Symfony\Cmf\Bundle\MultilangContentBundle\SymfonyCmfMultilangContentBundle(),
     new Symfony\Cmf\Bundle\NavigationBundle\SymfonyCmfNavigationBundle(),
     new Symfony\Cmf\Bundle\ContentBundle\SymfonyCmfContentBundle(),
+    new Symfony\Cmf\Bundle\ContentBundle\SymfonyCmfMenuBundle(),
+
 
 #### Menus
 
