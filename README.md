@@ -67,11 +67,3 @@ Don't forget to add the bundle in app/AppKernel.php:
     new Symfony\Cmf\Bundle\MenuBundle\SymfonyCmfMenuBundle(),
 
 
-### Note
-
-Some of the bundles are additionally exported into separate repository in case
-you want to use only a specific bundle. Browse https://github.com/symfony-cmf/
-to see which are available. If you miss one, please contact us and explain why
-it should be available stand-alone.
-
-Documentation on that part is in doc/StandaloneBundles.md
