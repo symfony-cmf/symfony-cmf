@@ -24,11 +24,7 @@ class ContentAwareFactory extends RouterAwareFactory
      * @param string routeName the name of the route to use. DoctrineRouter
      *      ignores this.
      */
-    public function __construct(ContainerInterface $container,
-                                UrlGeneratorInterface $generator,
-                                UrlGeneratorInterface $contentRouter,
-                                $contentKey,
-                                $routeName = null)
+    public function __construct(ContainerInterface $container, UrlGeneratorInterface $generator, UrlGeneratorInterface $contentRouter, $contentKey, $routeName = null)
     {
         parent::__construct($generator);
         $this->contentRouter = $contentRouter;
