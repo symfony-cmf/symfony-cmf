@@ -1,6 +1,7 @@
 # Symfony CMF Menu Bundle to tie KnpMenuBundle into symfony cmf
 
-This bundle provides menus from phpcr-odm with the help of KnpMenuBundle.
+This bundle provides menus from a doctrine object manager with the help of
+KnpMenuBundle.
 
 See http://cmf.symfony-project.org/ for more information about the CMF.
 
@@ -24,12 +25,13 @@ has put into the request.
 
 symfony_cmf_menu:
     menu_basepath: /phpcr/path/to/menutree
-    document_manager: service.name.of.document.manager.to.use
+    document_manager: doctrine_phpcr.odm.default_document_manager
+
 
 
 TODO: document a bit more.
 
 ## Dependencies
 
-* SymfonyCmfChainRoutingBundle
+* SymfonyCmfChainRoutingBundle for the doctrine router service symfony_cmf_chain_routing.doctrine_router
 * KnpMenuBundle
