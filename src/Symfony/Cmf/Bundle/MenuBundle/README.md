@@ -67,4 +67,6 @@ the route name and eventual routeParameters.
 Unless you change defaults and provide your own implementations, also depends on
 
 * SymfonyCmfChainRoutingBundle for the doctrine router service symfony_cmf_chain_routing.doctrine_router
+    Note that you need to explicitly enable the doctrine router as per default it is not loaded.
+    See the documentation of the chain routing bundle for how to do this.
 * Doctrine PHPCR-ODM to load route documents from the content repository
