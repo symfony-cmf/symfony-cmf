@@ -153,16 +153,7 @@ class MultilangMenuItem implements NodeInterface {
 
     public function getAttributes()
     {
-        if ($this->attributeKeys === null) {
-            return array();
-        }
-        $ret = array();
-        $i = 0;
-        foreach($this->attributeKeys as $key) {
-            $ret[$key] = $this->attributes[$i];
-        }
-
-        return $ret;
+        return array_combine($this->attributeKeys, $this->attributes);
     }
 
     public function setAttributes($attributes)
