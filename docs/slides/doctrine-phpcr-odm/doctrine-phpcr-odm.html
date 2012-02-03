@@ -374,8 +374,7 @@
         <div class="slide">
             <h2>Access underlying PHPCR API</h2>
             <pre class="brush: php">
-                $workspace = $dm->getWorkspace();
-                $session = $workspace->getSession();
+                $session = $dm->getPhpcrSession();
                 $node = $session->getNode('/foo/bar/ding/dong');
 
                 $i = 0;
