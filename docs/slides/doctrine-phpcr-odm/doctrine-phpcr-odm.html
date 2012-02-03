@@ -194,7 +194,7 @@
         <div class="slide">
             <h2>Versioning API: basics</h2>
             <pre class="brush: php">
-                // @Document(versioningType="simple")
+                // @Document(versionable="simple")
                 $document = $dm->find(null, $id);
 
                 // create a new version
@@ -216,7 +216,7 @@
             <pre class="brush: php">
                 $pre = $dm->findVersionByName($versionname);
 
-                // restore this old version, replacing the current head
+                // restore this old version
                 $dm->restoreVersion($pre, true);
 
                 // delete a version from the history
@@ -304,17 +304,14 @@
             <pre class="brush: php">
                 $article = new Article();
                 $article->topic = 'bonjour';
-                $dm->persistTranslation($article, 'fr');
+                $dm->bindTranslation($article, 'fr');
 
                 $article->topic = 'hello';
-                $dm->persistTranslation($article, 'en');
+                $dm->bindTranslation($article, 'en');
 
                 $dm->flush();
 
                 // now there are both french and english in the database
-
-                // use the @Locale field if set, otherwise default language
-                $dm->persist($article);
             </pre>
         </div>
 
@@ -326,11 +323,16 @@
                 $article = $dm->findTranslation(null, '/test', 'en');
                 echo $article->topic; // 'hello'
 
+                $article->topic = 'hello you';
+                // use the @Locale field if set, otherwise language document was loaded in
+                $dm->flush();
+
                 // load in default language
                 $article = $dm->find(null, '/test');
 
                 $locales = $dm->getLocalesFor($article);
                 var_dump($locales); // en, fr
+
             </pre>
         </div>
 
