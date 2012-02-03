@@ -304,14 +304,19 @@
             <pre class="brush: php">
                 $article = new Article();
                 $article->topic = 'bonjour';
+                $dm->persist($article);
                 $dm->bindTranslation($article, 'fr');
 
                 $article->topic = 'hello';
                 $dm->bindTranslation($article, 'en');
 
-                $dm->flush();
+                $article->topic = 'hello';
+                // ODM tracks the locale change and
+                // does an implicit bindTranslation() call on flush()
+                $article->locale = 'de';
 
-                // now there are both french and english in the database
+                // flushes french, english and german versions into the database
+                $dm->flush();
             </pre>
         </div>
 
