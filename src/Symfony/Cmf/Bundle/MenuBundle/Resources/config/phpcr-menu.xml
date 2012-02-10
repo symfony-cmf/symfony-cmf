@@ -5,22 +5,25 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="symfony_cmf_menu.menu_basepath">/cms/content/static</parameter>
-        <parameter key="phpcr.menu.provider.class">Symfony\Cmf\Bundle\MenuBundle\Provider\PHPCRMenuProvider</parameter>
-        <parameter key="phpcr.menu.factory.class">Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory</parameter>
+        <parameter key="symfony_cmf_menu.provider_class">Symfony\Cmf\Bundle\MenuBundle\Provider\PHPCRMenuProvider</parameter>
+        <parameter key="symfony_cmf_menu.factory_class">Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory</parameter>
     </parameters>
 
     <services>
-        <service id="phpcr.menu.provider" class="%phpcr.menu.provider.class%">
+        <service id="symfony_cmf_menu.provider" class="%symfony_cmf_menu.provider_class%">
             <tag name="knp_menu.provider" />
-            <argument type="service" id="service_container" />
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="symfony_cmf_menu.factory"/>
             <argument>%symfony_cmf_menu.document_manager%</argument>
             <argument>%symfony_cmf_menu.menu_basepath%</argument>
+            <argument>%symfony_cmf_menu.menu_document_class%</argument>
         </service>
-        <service id="phpcr.menu.factory" class="%phpcr.menu.factory.class%">
-          <argument type="service" id="router" />
-          <argument type="service" id="symfony_cmf_chain_routing.doctrine_router" />
-          <argument type="service" id="service_container" />
+        <service id="symfony_cmf_menu.factory" class="%symfony_cmf_menu.factory_class%">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="router" />
+            <argument/> <!-- content url generator -->
+            <argument>%symfony_cmf_menu.content_key%</argument>
+            <argument>%symfony_cmf_menu.route_name%</argument>
         </service>
     </services>
 

@@ -4,6 +4,7 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
 use Knp\Menu\NodeInterface;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * This class represents a menu item for the cmf.
@@ -147,16 +148,16 @@ class MenuItem implements NodeInterface {
 
     public function getAttributes()
     {
-        if ($this->attributeKeys === null) {
+        if (is_null($this->attributeKeys)) {
             return array();
         }
-        $ret = array();
-        $i = 0;
-        foreach($this->attributeKeys as $key) {
-            $ret[$key] = $this->attributes[$i];
-        }
-
-        return $ret;
+        $keys = $this->attributeKeys instanceof Collection ?
+            $this->attributeKeys->toArray() :
+            $this->attributeKeys;
+        $values = $this->attributes instanceof Collection ?
+            $this->attributes->toArray() :
+            $this->attributes;
+        return array_combine($keys, $values);
     }
 
     public function setAttributes($attributes)

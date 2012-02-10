@@ -41,21 +41,18 @@ function initTree(config) {
                 "create": {
                     "label":    "Create",
                     "submenu": config.doctypes,
-                    "action":   function(node) {
-                                    window.location = Routing.generate(config.routecollection[node.attr("className")].routes.create, { "id": node.attr("id") })
-                                }
                 },
                 "delete": {
                     "label":    "Delete",
                     "action":   function (node) {
-                                    window.location = Routing.generate(config.route.erase, { "id": node.attr("id") })
+                                    $(config.contentselector).load(Routing.generate(config.routecollection[node.attr("className").replace(/\\/g, '')].routes.delete, { "id": node.attr("id") }));
                                 }
                 }
             }
         }
     })
     .bind("select_node.jstree", function (event, data) {
-        window.location = Routing.generate(config.routecollection[data.rslt.obj.attr("className").replace(/\\/g, '')].routes.edit, { "id": data.rslt.obj.attr("id") });
+        $(config.contentselector).load(Routing.generate(config.routecollection[data.rslt.obj.attr("className").replace(/\\/g, '')].routes.edit, { "id": data.rslt.obj.attr("id") }));
     })
     .delegate("a", "click", function (event, data) { event.preventDefault(); });
 }

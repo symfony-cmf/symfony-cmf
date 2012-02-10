@@ -18,7 +18,6 @@
             <argument type="service" id="templating" />
             <argument type="service" id="router" />
             <argument type="service" id="doctrine_phpcr.odm.locale_chooser" />
-            <argument>%symfony_cmf_core.routing_basepath%</argument>
         </service>
 
     </services>

@@ -16,15 +16,21 @@ class ContentAwareFactory extends RouterAwareFactory
     protected $container;
 
     /**
+     * @param Container $container to fetch the request in order to determine
+     *      whether this is the current menu item
      * @param UrlGeneratorInterface $generator for the parent class
-     * @param DoctrineRouter $contentRouter to generate routes when content is set
-     * @param Container $container to fetch the request in order to determine whether this is the current menu item
+     * @param UrlGeneratorInterface $contentRouter to generate routes when
+     *      content is set
+     * @param string routeName the name of the route to use. DoctrineRouter
+     *      ignores this.
      */
-    public function __construct(UrlGeneratorInterface $generator, DoctrineRouter $contentRouter, ContainerInterface $container)
+    public function __construct(ContainerInterface $container, UrlGeneratorInterface $generator, UrlGeneratorInterface $contentRouter, $contentKey, $routeName = null)
     {
         parent::__construct($generator);
         $this->contentRouter = $contentRouter;
         $this->container = $container;
+        $this->contentKey = $contentKey;
+        $this->routeName = $routeName;
     }
 
     public function createItem($name, array $options = array())
@@ -33,12 +39,12 @@ class ContentAwareFactory extends RouterAwareFactory
         if (!empty($options['content'])) {
             try {
                 $request = $this->container->get('request');
-                if ($request->attributes->get(DoctrineRouter::CONTENT_KEY) == $options['content']) {
+                if ($request->attributes->get($this->contentKey) == $options['content']) {
                     $current = true;
                 }
             } catch (\Exception $e) {}
 
-            $options['uri'] = $this->contentRouter->generate(null, $options);
+            $options['uri'] = $this->contentRouter->generate($this->routeName, $options);
             unset($options['route']);
         }
 

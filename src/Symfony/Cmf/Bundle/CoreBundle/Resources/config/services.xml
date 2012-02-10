@@ -6,10 +6,6 @@
 
     <services>
 
-        <service id="symfony_cmf_core.pathMapper" class="Symfony\Cmf\Bundle\CoreBundle\Helper\DirectPathMapper">
-            <argument>%symfony_cmf_core.mainmenu_basepath%</argument>
-        </service>
-
         <service id="symfony_cmf_core.fileHelper" class="Symfony\Cmf\Bundle\CoreBundle\Helper\RepositoryFileHelper">
             <argument>%symfony_cmf_core.content_basepath%</argument>
             <argument>%symfony_cmf_core.filestore_basepath%</argument>
