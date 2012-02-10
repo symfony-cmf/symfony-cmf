@@ -172,4 +172,19 @@ class PHPCRTreeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($expected, $this->tree->getProperties('/com'));
     }
+    
+    public function testMoveNodes()
+    {
+        $workspace = $this->getMockBuilder('Jackalope\Workspace')->
+            disableOriginalConstructor()->
+            setMethods(array('move'))->
+            getMock();
+        
+        $this->session->expects($this->once())->
+            method('getWorkspace')->
+            with(array('/mother/litigated_son', '/father/litigated_son'));
+        
+        $this->tree->move('/mother/litigated_son', '/father');
+    }
+
 }

@@ -76,8 +76,8 @@ var AdminTree = (function () {
                     "delete": {
                         "label":    "Delete",
                         "action":   function (node) {
-                                        window.location = Routing.generate(config.routecollection[node.attr("className").replace(/\\/g, '')].routes.delete, { "id": node.attr("id") });
-                                    }
+                            window.location = Routing.generate(config.routecollection[node.attr("className").replace(/\\/g, '')].routes.delete, { "id": node.attr("id") });
+                        }
                     }
                 }
             },
@@ -95,7 +95,14 @@ var AdminTree = (function () {
             window.location = Routing.generate(config.routecollection[data.rslt.obj.attr("className").replace(/\\/g, '')].routes.edit, { "id": data.rslt.obj.attr("id") });
         })
         .bind("move_node.jstree", function (event, data) {
-            alert('Server side move yet to be done! Beer time then! doh!');
+            var dropped = data.rslt.o.attr("id");
+            var target = data.rslt.r.attr("id");
+            
+            $.post(
+                Routing.generate('symfony_cmf_phpcr_browser_move'),
+                { "dropped": dropped, "target": target },
+                function () { alert("Hey you moved!") }
+            );
         })
         .delegate("a", "click", function (event, data) { event.preventDefault(); });
     };
