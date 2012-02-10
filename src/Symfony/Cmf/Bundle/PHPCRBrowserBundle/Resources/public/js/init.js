@@ -76,7 +76,7 @@ var AdminTree = (function () {
                     "delete": {
                         "label":    "Delete",
                         "action":   function (node) {
-                                        $(config.contentselector).load(Routing.generate(config.routecollection[node.attr("className").replace(/\\/g, '')].routes.delete, { "id": node.attr("id") }));
+                                        window.location = Routing.generate(config.routecollection[node.attr("className").replace(/\\/g, '')].routes.delete, { "id": node.attr("id") });
                                     }
                     }
                 }
