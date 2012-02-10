@@ -75,7 +75,7 @@ function initTree(config) {
         }
     })
     .bind("select_node.jstree", function (event, data) {
-        $(config.contentselector).load(Routing.generate(config.routecollection[data.rslt.obj.attr("className").replace(/\\/g, '')].routes.edit, { "id": data.rslt.obj.attr("id") }));
+        window.location = Routing.generate(config.routecollection[data.rslt.obj.attr("className").replace(/\\/g, '')].routes.edit, { "id": data.rslt.obj.attr("id") });
     })
     .delegate("a", "click", function (event, data) { event.preventDefault(); });
 }
