@@ -1,3 +1,26 @@
+function generateTreeStateArray(path) {
+    var start, pos, segments, curSegment;
+
+    curSegment = '';
+    segments = [];
+    start = 1;
+    pos = path.indexOf('/', start);
+
+    while (pos > 0) {
+        curSegment = curSegment + '/' + path.substr(start, pos - start);
+        segments.push(curSegment);
+        start = pos + 1;
+        pos = path.indexOf('/', start);
+    }
+
+    var curItem = path.substr(start);
+    if (curItem !== '') {
+        curSegment = curSegment + '/' + curItem;
+        segments.push(curSegment);
+    }
+    return segments;
+}
+
 function initTree(config) {
 
     jQuery(config.selector).jstree({ 
