@@ -5,7 +5,7 @@ function initTree(config) {
             "initially_load": config.path.expanded,
             "initially_open": config.path.preloaded
         },
-        "plugins": [ "contextmenu", "themes", "types", "ui", "json_data", "cookies" ],
+        "plugins": [ "contextmenu", "themes", "types", "ui", "json_data" ],
         "json_data": {
             "ajax": {
                 url:    Routing.generate('symfony_cmf_phpcr_browser_children'),
