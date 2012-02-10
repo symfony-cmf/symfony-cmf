@@ -36,7 +36,7 @@ var AdminTree = (function () {
                 "initially_load": config.path.expanded,
                 "initially_open": config.path.preloaded
             },
-            "plugins": [ "contextmenu", "themes", "types", "ui", "json_data" ],
+            "plugins": [ "contextmenu", "themes", "types", "ui", "json_data", "dnd" ],
             "json_data": {
                 "ajax": {
                     url:    Routing.generate('symfony_cmf_phpcr_browser_children'),
@@ -80,10 +80,22 @@ var AdminTree = (function () {
                                     }
                     }
                 }
+            },
+            "dnd": {
+                "drop_target" : false,
+	            "drag_target" : false
+	        },
+            "crrm": {
+                "move": {
+                    
+                }
             }
         })
         .bind("select_node.jstree", function (event, data) {
             window.location = Routing.generate(config.routecollection[data.rslt.obj.attr("className").replace(/\\/g, '')].routes.edit, { "id": data.rslt.obj.attr("id") });
+        })
+        .bind("move_node.jstree", function (event, data) {
+            alert('Server side move yet to be done! Beer time then! doh!');
         })
         .delegate("a", "click", function (event, data) { event.preventDefault(); });
     };
