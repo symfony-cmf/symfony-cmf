@@ -29,7 +29,7 @@ var AdminTree = (function () {
         return segments;
 	};
 
-    my.initTree = function () {
+    my.initTree = function (config) {
 
         jQuery(config.selector).jstree({
             "core": {
