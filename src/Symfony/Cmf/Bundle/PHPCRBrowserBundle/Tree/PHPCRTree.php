@@ -55,8 +55,12 @@ class PHPCRTree implements TreeInterface
 
     public function move($moved_path, $target_path)
     {
+        $resulting_path = $target_path.'/'.basename($moved_path);
+        
         $workspace = $this->session->getWorkspace();
-        $workspace->move($moved_path, $target_path.basename($moved_path));
+        $workspace->move($moved_path, $target_path.'/'.basename($moved_path));
+        
+        return $resulting_path;
     }
 
     private function nodeToArray($name, $node)

@@ -51,16 +51,9 @@ class PHPCRBrowserController
 
     public function moveAction(Request $request)
     {
-        try {
-            $moved = $request->query->get('dropped');
-            $target = $request->query->get('target');
-        
-            $this->tree->move(url_decode($moved), url_decode($target));
-                    
-            return new Response(1);
-        }
-        catch (Exception $e) {
-            return new Response(-1);
-        }
+        $moved = $request->request->get('dropped');
+        $target = $request->request->get('target');
+
+        return new Response($this->tree->move($moved, $target));
     }
 }

@@ -22,10 +22,12 @@ var AdminTree = (function () {
         }
 
         curItem = path.substr(start);
+        
         if (curItem !== '') {
             curSegment = curSegment + '/' + curItem;
             segments.push(curSegment);
         }
+        
         return segments;
 	};
 
@@ -95,13 +97,16 @@ var AdminTree = (function () {
             window.location = Routing.generate(config.routecollection[data.rslt.obj.attr("className").replace(/\\/g, '')].routes.edit, { "id": data.rslt.obj.attr("id") });
         })
         .bind("move_node.jstree", function (event, data) {
-            var dropped = data.rslt.o.attr("id");
-            var target = data.rslt.r.attr("id");
+            var dropped = data.rslt.o;
+            var target = data.rslt.r;
             
             $.post(
                 Routing.generate('symfony_cmf_phpcr_browser_move'),
-                { "dropped": dropped, "target": target },
-                function () { alert("Hey you moved!") }
+                { "dropped": dropped.attr("id"), "target": target.attr("id") },
+                function (data) {
+alert(dropped);
+                    dropped.attr("id", data);
+                }
             );
         })
         .delegate("a", "click", function (event, data) { event.preventDefault(); });
