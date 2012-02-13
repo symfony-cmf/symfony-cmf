@@ -104,7 +104,6 @@ var AdminTree = (function () {
                 Routing.generate('symfony_cmf_phpcr_browser_move'),
                 { "dropped": dropped.attr("id"), "target": target.attr("id") },
                 function (data) {
-alert(dropped);
                     dropped.attr("id", data);
                 }
             );
