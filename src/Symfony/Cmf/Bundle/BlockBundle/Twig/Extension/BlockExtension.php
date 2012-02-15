@@ -2,17 +2,26 @@
 
 namespace Symfony\Cmf\Bundle\BlockBundle\Twig\Extension;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Doctrine\ODM\PHPCR\DocumentManager;
 use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 
 class BlockExtension extends \Twig_Extension
 {
-    private $blockServiceManager;
+    protected $container;
+    protected $odm;
+    protected $blockServiceManager;
+
 
     /**
+     * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+     * @param \use Doctrine\ODM\PHPCR\DocumentManager
      * @param \Sonata\BlockBundle\Model\BlockManagerInterface $blockServiceManager
      */
-    public function __construct(BlockServiceManagerInterface $blockServiceManager = null)
+    public function __construct(ContainerInterface $container, DocumentManager $odm, BlockServiceManagerInterface $blockServiceManager)
     {
+        $this->container = $container;
+        $this->odm = $odm;
         $this->blockServiceManager = $blockServiceManager;
     }
 
@@ -44,8 +53,22 @@ class BlockExtension extends \Twig_Extension
      */
     public function renderBlock($name)
     {
-        return 'Render block with name: ' . $name;
-        //return $this->blockServiceManager->renderBlock($name);
+        $block = $this->odm->find(null,  $this->getCurrentPage()->getPath() . '/' . $name);
+
+        if ($block) {
+            return $this->blockServiceManager->renderBlock($block);
+        } else {
+            // TODO: What do we do in that case?
+            return '';
+        }
+
+    }
+
+    /**
+     * @return \Symfony\Cmf\Bundle\ContentBundle\Document\StaticContent
+     */
+    protected function getCurrentPage() {
+        return $this->container->get('request')->attributes->get('contentDocument');
     }
 }
 
