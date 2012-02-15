@@ -18,7 +18,7 @@ class SimpleBlock extends BaseBlock
     private $content;
 
     public function getType() {
-        return 'cmf.block.simple';
+        return 'symfony_cmf.block.simple';
     }
 
     public function setTitle($title) {

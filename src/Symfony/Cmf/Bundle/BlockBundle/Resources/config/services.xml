@@ -13,5 +13,11 @@
             <argument type="service" id="sonata.block.manager" />
         </service>
 
+        <service id="symfony_cmf.block.simple" class="Symfony\Cmf\Bundle\BlockBundle\Block\SimpleBlockService">
+            <tag name="symfony_cmf.block" />
+            <argument>symfony_cmf.block.simple</argument>
+            <argument type="service" id="templating" />
+        </service>
+
     </services>
 </container>

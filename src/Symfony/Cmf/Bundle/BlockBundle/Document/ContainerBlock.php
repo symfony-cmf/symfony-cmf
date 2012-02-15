@@ -18,7 +18,7 @@ class ContainerBlock extends BaseBlock
     private $children;
 
     public function getType() {
-        return 'cmf.block.container';
+        return 'symfony_cmf.block.container';
     }
 
     public function setTitle($title) {
