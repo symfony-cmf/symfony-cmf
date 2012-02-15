@@ -44,8 +44,9 @@ class SimpleBlockService extends BaseBlockService implements BlockServiceInterfa
             $response = new Response();
         }
 
+        // TODO: id and name contain slashes and dots but are used as css-id and -class: Do something about it
+        // TODO: make sure only response-content gets printed
         if ($block->getEnabled()) {
-            //$response->setContent($block->getTitle() . $block->getContent());
             $response = $this->renderResponse('SymfonyCmfBlockBundle::block_simple.html.twig', array(
                 'block'     => $block
             ), $response);
