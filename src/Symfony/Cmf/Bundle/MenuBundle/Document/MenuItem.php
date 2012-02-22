@@ -58,6 +58,20 @@ class MenuItem implements NodeInterface {
      */
     protected $attributes;
 
+    /**
+     * Simulate a php hashmap in phpcr. This holds the keys.
+     *
+     * @PHPCRODM\String(multivalue=true)
+     */
+    protected $childrenAttributeKeys;
+
+    /**
+     * Simulate a php hashmap in phpcr.
+     *
+     * @PHPCRODM\String(multivalue=true)
+     */
+    protected $childrenAttributes;
+
     /** @PHPCRODM\Children(filter="*item") */
     protected $children;
 
@@ -166,6 +180,26 @@ class MenuItem implements NodeInterface {
         $this->attributeKeys = array_keys($attributes);
     }
 
+    public function getChildrenAttributes()
+    {
+        if (is_null($this->childrenAttributeKeys)) {
+            return array();
+        }
+        $keys = $this->childrenAttributeKeys instanceof Collection ?
+            $this->childrenAttributeKeys->toArray() :
+            $this->childrenAttributeKeys;
+        $values = $this->childrenAttributes instanceof Collection ?
+            $this->childrenAttributes->toArray() :
+            $this->childrenAttributes;
+        return array_combine($keys, $values);
+    }
+
+    public function setChildrenAttributes($attributes)
+    {
+        $this->childrenAttributes = $attributes;
+        $this->childrenAttributeKeys = array_keys($attributes);
+    }
+
     public function getChildren()
     {
         return $this->children;
@@ -178,6 +212,7 @@ class MenuItem implements NodeInterface {
             'route' => $this->getRoute(),
             'label' => $this->getLabel(),
             'attributes' => $this->getAttributes(),
+            'childrenAttributes' => $this->getChildrenAttributes(),            
             'display' => true,
             'displayChildren' => true,
             'content' => $this->getContent(),
