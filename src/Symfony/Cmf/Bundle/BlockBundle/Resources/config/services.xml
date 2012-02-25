@@ -6,15 +6,13 @@
 
     <services>
 
-        <service id="symfony_cmf.block.twig.extension" class="Symfony\Cmf\Bundle\BlockBundle\Twig\Extension\BlockExtension" public="false">
-            <tag name="twig.extension" />
+        <service id="sonata.block.repository" class="Symfony\Cmf\Bundle\BlockBundle\Document\BlockRepository" public="false">
             <argument type="service" id="service_container" />
             <argument type="service" id="doctrine_phpcr.odm.default_document_manager" />
-            <argument type="service" id="sonata.block.manager" />
         </service>
 
         <service id="symfony_cmf.block.simple" class="Symfony\Cmf\Bundle\BlockBundle\Block\SimpleBlockService">
-            <tag name="symfony_cmf.block" />
+            <tag name="sonata.block" />
             <argument>symfony_cmf.block.simple</argument>
             <argument type="service" id="templating" />
         </service>
