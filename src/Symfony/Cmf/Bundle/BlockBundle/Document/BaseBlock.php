@@ -37,7 +37,8 @@ abstract class BaseBlock implements BlockInterface
      *
      * @param string $id
      */
-    public function setId($id) {
+    public function setId($id)
+    {
         $this->id = $id;
     }
 
@@ -46,7 +47,8 @@ abstract class BaseBlock implements BlockInterface
      *
      * @return string $id
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -55,14 +57,17 @@ abstract class BaseBlock implements BlockInterface
      *
      * @param string $type
      */
-    public function setType($type) { }
+    public function setType($type)
+    {
+    }
 
     /**
      * Set enabled
      *
      * @param boolean $enabled
      */
-    public function setEnabled($enabled) {
+    public function setEnabled($enabled)
+    {
         $this->enabled = $enabled;
     }
 
@@ -80,7 +85,8 @@ abstract class BaseBlock implements BlockInterface
      *
      * @param integer $position
      */
-    public function setPosition($position) {
+    public function setPosition($position)
+    {
         $this->position = $position;
     }
 
@@ -89,7 +95,8 @@ abstract class BaseBlock implements BlockInterface
      *
      * @return integer $position
      */
-    public function getPosition() {
+    public function getPosition()
+    {
         return $this->position;
     }
 
@@ -98,7 +105,8 @@ abstract class BaseBlock implements BlockInterface
      *
      * @param \Datetime $createdAt
      */
-    public function setCreatedAt(\DateTime $createdAt = null) {
+    public function setCreatedAt(\DateTime $createdAt = null)
+    {
         // TODO
     }
 
@@ -107,7 +115,8 @@ abstract class BaseBlock implements BlockInterface
      *
      * @return \Datetime $createdAt
      */
-    public function getCreatedAt() {
+    public function getCreatedAt()
+    {
         // TODO
         return null;
     }
@@ -117,7 +126,8 @@ abstract class BaseBlock implements BlockInterface
      *
      * @param \Datetime $updatedAt
      */
-    public function setUpdatedAt(\DateTime $updatedAt = null) {
+    public function setUpdatedAt(\DateTime $updatedAt = null)
+    {
         // TODO
     }
 
@@ -126,7 +136,8 @@ abstract class BaseBlock implements BlockInterface
      *
      * @return \Datetime $updatedAt
      */
-    public function getUpdatedAt() {
+    public function getUpdatedAt()
+    {
         // TODO
         return null;
     }
@@ -136,14 +147,17 @@ abstract class BaseBlock implements BlockInterface
      *
      * @param BlockInterface $children
      */
-    public function addChildren(BlockInterface $children) { }
+    public function addChildren(BlockInterface $children)
+    {
+    }
 
     /**
      * Get children
      *
      * @return Doctrine\Common\Collections\Collection $children
      */
-    public function getChildren() {
+    public function getChildren()
+    {
         return null;
     }
 
@@ -151,7 +165,8 @@ abstract class BaseBlock implements BlockInterface
      * @abstract
      * @return bool
      */
-    public function hasChildren() {
+    public function hasChildren()
+    {
         return false;
     }
 
@@ -164,7 +179,8 @@ abstract class BaseBlock implements BlockInterface
      *
      * @param $document
      */
-    public function setParentDocument($parent) {
+    public function setParentDocument($parent)
+    {
         $this->parent = $parent;
     }
 
@@ -173,7 +189,8 @@ abstract class BaseBlock implements BlockInterface
      *
      * @return $document
      */
-    public function getParentDocument() {
+    public function getParentDocument()
+    {
         return $this->parent;
     }
 
@@ -182,7 +199,8 @@ abstract class BaseBlock implements BlockInterface
      *
      * @param BlockInterface $parent
      */
-    public function setParent(BlockInterface $parent) {
+    public function setParent(BlockInterface $parent)
+    {
         $this->parent = $parent;
     }
 
@@ -191,7 +209,8 @@ abstract class BaseBlock implements BlockInterface
      *
      * @return BlockInterface $parent
      */
-    public function getParent() {
+    public function getParent()
+    {
         if ($this->parent instanceof BlockInterface) {
             return $this->parent;
         }
@@ -205,7 +224,8 @@ abstract class BaseBlock implements BlockInterface
      *
      * @return void
      */
-    public function hasParent() {
+    public function hasParent()
+    {
         return ($this->parent instanceof BlockInterface);
     }
 
@@ -214,7 +234,8 @@ abstract class BaseBlock implements BlockInterface
      *
      * @param integer $ttl
      */
-    public function setTtl($ttl) {
+    public function setTtl($ttl)
+    {
         $this->ttl = $ttl;
     }
 
@@ -223,7 +244,8 @@ abstract class BaseBlock implements BlockInterface
      *
      * @return integer
      */
-    public function getTtl() {
+    public function getTtl()
+    {
         return $this->ttl;
     }
 
@@ -232,7 +254,8 @@ abstract class BaseBlock implements BlockInterface
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         return $this->getType() . ' - ' . $this->id;
     }
 }

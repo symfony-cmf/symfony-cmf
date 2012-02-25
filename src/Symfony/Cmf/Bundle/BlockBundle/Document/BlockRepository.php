@@ -28,7 +28,7 @@ class BlockRepository implements BlockRepositoryInterface
      *
      * @return BlockInterface
      */
-    function create()
+    public function create()
     {
         // TODO: Implement create() method.
     }
@@ -40,7 +40,7 @@ class BlockRepository implements BlockRepositoryInterface
      *
      * @return void
      */
-    function delete(BlockInterface $block)
+    public function delete(BlockInterface $block)
     {
         // TODO: Implement delete() method.
     }
@@ -52,7 +52,7 @@ class BlockRepository implements BlockRepositoryInterface
      *
      * @return BlockInterface
      */
-    function findOneBy(array $criteria)
+    public function findOneBy(array $criteria)
     {
         // TODO: this is weird - the repository should get the full path as an argument. Adapt twig-extension in BlockBundle?
         if (array_key_exists('name', $criteria)) {
@@ -70,7 +70,7 @@ class BlockRepository implements BlockRepositoryInterface
      *
      * @return BlockInterface
      */
-    function findBy(array $criteria)
+    public function findBy(array $criteria)
     {
         // TODO: Implement findBy() method.
     }
@@ -80,7 +80,7 @@ class BlockRepository implements BlockRepositoryInterface
      *
      * @return string
      */
-    function getClass()
+    public function getClass()
     {
         // TODO: Implement getClass() method.
     }
@@ -92,7 +92,7 @@ class BlockRepository implements BlockRepositoryInterface
      *
      * @return void
      */
-    function save(BlockInterface $block)
+    public function save(BlockInterface $block)
     {
         // TODO: Implement save() method.
     }

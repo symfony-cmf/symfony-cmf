@@ -32,7 +32,7 @@ class ContainerBlockService extends BaseBlockService implements BlockServiceInte
      * @param \Sonata\BlockBundle\Model\BlockInterface $block
      * @return void
      */
-    function buildEditForm(FormMapper $form, BlockInterface $block)
+    public function buildEditForm(FormMapper $form, BlockInterface $block)
     {
         // TODO: Implement buildEditForm() method.
     }
@@ -42,7 +42,7 @@ class ContainerBlockService extends BaseBlockService implements BlockServiceInte
      * @param \Sonata\BlockBundle\Model\BlockInterface $block
      * @return void
      */
-    function buildCreateForm(FormMapper $form, BlockInterface $block)
+    public function buildCreateForm(FormMapper $form, BlockInterface $block)
     {
         // TODO: Implement buildCreateForm() method.
     }
@@ -52,7 +52,7 @@ class ContainerBlockService extends BaseBlockService implements BlockServiceInte
      * @param null|\Symfony\Component\HttpFoundation\Response $response
      * @param \Symfony\Component\HttpFoundation\Response $response
      */
-    function execute(BlockInterface $block, Response $response = null)
+    public function execute(BlockInterface $block, Response $response = null)
     {
         if (!$response) {
             $response = new Response();
@@ -73,7 +73,7 @@ class ContainerBlockService extends BaseBlockService implements BlockServiceInte
      * @param \Sonata\BlockBundle\Model\BlockInterface $block
      * @return void
      */
-    function validateBlock(ErrorElement $errorElement, BlockInterface $block)
+    public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
     {
         // TODO: Implement validateBlock() method.
     }
@@ -81,7 +81,7 @@ class ContainerBlockService extends BaseBlockService implements BlockServiceInte
     /**
      * @return string
      */
-    function getName()
+    public function getName()
     {
         // TODO: Implement getName() method.
     }
@@ -91,7 +91,7 @@ class ContainerBlockService extends BaseBlockService implements BlockServiceInte
      *
      * @return array
      */
-    function getDefaultSettings()
+    public function getDefaultSettings()
     {
         // TODO: Implement getDefaultSettings() method.
     }
@@ -100,7 +100,7 @@ class ContainerBlockService extends BaseBlockService implements BlockServiceInte
      * @param \Sonata\BlockBundle\Model\BlockInterface $block
      * @return void
      */
-    function load(BlockInterface $block)
+    public function load(BlockInterface $block)
     {
         // TODO: Implement load() method.
     }
@@ -109,7 +109,7 @@ class ContainerBlockService extends BaseBlockService implements BlockServiceInte
      * @param $media
      * @return array
      */
-    function getJavacripts($media)
+    public function getJavacripts($media)
     {
         // TODO: Implement getJavacripts() method.
     }
@@ -118,7 +118,7 @@ class ContainerBlockService extends BaseBlockService implements BlockServiceInte
      * @param $media
      * @return array
      */
-    function getStylesheets($media)
+    public function getStylesheets($media)
     {
         // TODO: Implement getStylesheets() method.
     }
@@ -127,7 +127,7 @@ class ContainerBlockService extends BaseBlockService implements BlockServiceInte
      * @param \Sonata\BlockBundle\Model\BlockInterface $block
      * @return array
      */
-    function getCacheKeys(BlockInterface $block)
+    public function getCacheKeys(BlockInterface $block)
     {
         // TODO: Implement getCacheKeys() method.
     }

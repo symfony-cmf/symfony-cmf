@@ -17,23 +17,28 @@ class SimpleBlock extends BaseBlock
     /** @PHPCRODM\String */
     private $content;
 
-    public function getType() {
+    public function getType()
+    {
         return 'symfony_cmf.block.simple';
     }
 
-    public function setTitle($title) {
+    public function setTitle($title)
+    {
         $this->title = $title;
     }
 
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->title;
     }
 
-    public function setContent($content) {
+    public function setContent($content)
+    {
         $this->content;
     }
 
-    public function getContent() {
+    public function getContent()
+    {
         return $this->content;
     }
 }

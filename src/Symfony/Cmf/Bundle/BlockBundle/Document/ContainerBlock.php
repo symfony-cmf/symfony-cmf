@@ -17,19 +17,23 @@ class ContainerBlock extends BaseBlock
     /** @PHPCRODM\Children */
     private $children;
 
-    public function getType() {
+    public function getType()
+    {
         return 'symfony_cmf.block.container';
     }
 
-    public function setTitle($title) {
+    public function setTitle($title)
+    {
         $this->title = $title;
     }
 
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->title;
     }
 
-    public function getChildren() {
+    public function getChildren()
+    {
         return $this->children->getValues();
     }
 }
