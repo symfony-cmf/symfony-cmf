@@ -30,6 +30,6 @@ class ContainerBlock extends BaseBlock
     }
 
     public function getChildren() {
-        return $this->children;
+        return $this->children->getValues();
     }
 }
