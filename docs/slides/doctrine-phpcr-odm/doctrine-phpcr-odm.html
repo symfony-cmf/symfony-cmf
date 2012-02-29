@@ -260,10 +260,29 @@
         </div>
 
         <div class="slide">
-            <h2>And more...</h2>
-            <ul>
-                <li>Transactions</li>  <!-- TODO: using phpcr transactions -->
-            </ul>
+            <h2>Transactions</h2>
+            <pre class="brush: php">
+            $workspace = $dm->getPhpcrSession()->getWorkspace();
+            $utx = $workspace->getTransactionManager();
+            $utx->begin();
+
+            try {
+                $utx->begin();
+
+                // do stuff with the DocumentManager
+                $dm->flush();
+
+                // do more stuff with the DocumentManager
+                $dm->flush();
+
+                $utx->commit();
+            } catch (\Exception $e) {
+                $utx->rollback();
+
+                // the DocumentManager is now in an inconsistent state
+                unset($dm)
+            }
+            </pre>
         </div>
 
         <div class="slide">
@@ -400,7 +419,8 @@
         <div class="slide">
             <h2>Next steps</h2>
             <ul>
-                <li>Finish versioning API integration</li>
+                <li>More performance optimizations</li>
+                <li>Update XML/Yaml mapping support</li>
                 <li>Logging</li>
                 <li>Result caching</li>
                 <li>Various missing minor ORM features</li>
