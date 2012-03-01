@@ -54,10 +54,13 @@ class BlockRepository implements BlockRepositoryInterface
      */
     public function findOneBy(array $criteria)
     {
-        // TODO: this is weird - the repository should get the full path as an argument. Adapt twig-extension in BlockBundle?
         if (array_key_exists('name', $criteria)) {
-            $currentPage = $this->container->get('request')->attributes->get('contentDocument');
-            return $this->odm->find(null,  $currentPage->getPath() . '/' . $criteria['name']);
+            if ($this->isAbsolutePath($criteria['name'])) {
+                return $this->odm->find(null, $criteria['name']);
+            } else {
+                $currentPage = $this->container->get('request')->attributes->get('contentDocument');
+                return $this->odm->find(null,  $currentPage->getPath() . '/' . $criteria['name']);
+            }
         }
 
         return null;
@@ -95,5 +98,15 @@ class BlockRepository implements BlockRepositoryInterface
     public function save(BlockInterface $block)
     {
         // TODO: Implement save() method.
+    }
+
+    /**
+     * @param \string $path
+     *
+     * @return bool
+     */
+    protected function isAbsolutePath($path)
+    {
+        return substr($path, 0, 1) == '/';
     }
 }
