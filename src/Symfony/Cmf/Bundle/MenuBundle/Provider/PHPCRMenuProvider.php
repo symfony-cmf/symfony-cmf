@@ -53,7 +53,7 @@ class PHPCRMenuProvider implements MenuProviderInterface
         $this->className = $className;
     }
 
-    public function get($name)
+    public function get($name, array $options = array())
     {
         $menu = $this->dm->find($this->className, $this->menuRoot . '/' . $name);
         if ($menu === null) {
@@ -64,7 +64,7 @@ class PHPCRMenuProvider implements MenuProviderInterface
         return $menuItem;
     }
 
-    public function has($name)
+    public function has($name, array $options = array())
     {
         $menu = $this->dm->find($this->className, $this->menuRoot . '/' . $name);
         return $menu !== null;
