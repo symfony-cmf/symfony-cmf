@@ -21,49 +21,7 @@ The Symfony CMF project makes it easier for **developers** to add **CMS function
 
 This is the main repository containing all bundles you need for the CMF.
 
-### Prerequisites
+If you just want to experiment with the CMF, the easiest is to use the [CMF Sandbox](https://github.com/symfony-cmf/cmf-sandbox) which has everything set up and ready.
 
-You need to install [Doctrine PHPCR ODM](http://github.com/doctrine/phpcr-odm) according to the install instructions.
-
-### Setup
-
-* Add this repository to your vendors
-* Make sure to run ```git submodule update --recursive --init``` inside the symfony-cmf folder after each vendor update (we added this to the vendors script)
-
-*app/autoload.php:* Add autoloader entries
-
-    'Symfony\\Cmf'                          => __DIR__.'/../vendor/symfony-cmf/src',
-    'Doctrine\\Bundle\\DoctrinePHPCRBundle' => __DIR__.'/../vendor/bundles',
-    'Doctrine\\ODM\\PHPCR'                  => __DIR__.'/../vendor/symfony-cmf/vendor/doctrine-phpcr-odm/lib',
-    'Jackalope'                             => __DIR__.'/../vendor/symfony-cmf/vendor/doctrine-phpcr-odm/lib/vendor/jackalope/src',
-    'PHPCR'                                 => array(
-                                                 __DIR__.'/../vendor/symfony-cmf/vendor/doctrine-phpcr-odm/lib/vendor/jackalope/lib/phpcr/src',
-                                                 __DIR__.'/../vendor/symfony-cmf/vendor/doctrine-phpcr-odm/lib/vendor/jackalope/lib/phpcr-utils/src',
-                                               ),
-
-
-*app/autoload.php:* Add autoloader entries for the ODM annotations right after the last AnnotationRegistry::registerFile line
-
-    AnnotationRegistry::registerFile(__DIR__.'/../vendor/symfony-cmf/vendor/doctrine-phpcr-odm/lib/Doctrine/ODM/PHPCR/Mapping/Annotations/DoctrineAnnotations.php');
-
-*app/AppKernel.php:* Initialize bundles in the Kernel registerBundle method
-
-    new Doctrine\Bundle\DoctrinePHPCRBundle\DoctrinePHPCRBundle(),
-    new Symfony\Cmf\Bundle\CoreBundle\SymfonyCmfCoreBundle(),
-    new Symfony\Cmf\Bundle\MultilangContentBundle\SymfonyCmfMultilangContentBundle(),
-    new Symfony\Cmf\Bundle\NavigationBundle\SymfonyCmfNavigationBundle(),
-    new Symfony\Cmf\Bundle\ContentBundle\SymfonyCmfContentBundle(),
-    new Symfony\Cmf\Bundle\ContentBundle\SymfonyCmfMenuBundle(),
-
-
-#### Menus
-
-The MenuBundle makes use of the KnpMenu library and KnpMenuBundle (see http://github.com/knplabs/KnpMenuBundle for installation and configuration). If you want to use menus you need to add KnpMenu and KnpMenuBundle to your vendors.
-
-Don't forget to add the bundle in app/AppKernel.php:
-
-*app/AppKernel.php:* Initialize bundles in the Kernel registerBundle method
-
-    new Symfony\Cmf\Bundle\MenuBundle\SymfonyCmfMenuBundle(),
-
+To use the CMF in your own projects, we provide guides to install the [PHPCR-ODM bundle](https://github.com/symfony-cmf/symfony-cmf-docs/blob/master/tutorials/installing-configuring-doctrine-phpcr-odm.rst) and [Symfony CMF](https://github.com/symfony-cmf/symfony-cmf-docs/blob/master/tutorials/installing-configuring-cmf.rst) itself.
 
