@@ -35,10 +35,10 @@ class MenuItem implements NodeInterface {
     /** @PHPCRODM\String */
     protected $route;
 
-    /** @PHPCRODM\ReferenceOne */
+    /** @PHPCRODM\ReferenceOne(strategy="weak") */
     protected $weakContent;
 
-    /** @PHPCRODM\ReferenceOne(weak=false) */
+    /** @PHPCRODM\ReferenceOne(strategy="hard") */
     protected $strongContent;
 
     /** @PHPCRODM\Boolean */
