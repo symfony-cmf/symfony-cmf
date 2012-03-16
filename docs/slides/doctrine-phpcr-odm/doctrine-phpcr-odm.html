@@ -206,7 +206,7 @@
 
                 // get a document in an old state
                 $version = reset($history);
-                $pre = $dm->findVersionByName($version['versionname']);
+                $pre = $dm->findVersionByName(null, $id, $version['versionname']);
                 echo $pre->text;
             </pre>
         </div>
@@ -214,14 +214,14 @@
         <div class="slide">
             <h2>Versioning API: restore and delete</h2>
             <pre class="brush: php">
-                $pre = $dm->findVersionByName($versionname);
+                $pre = $dm->findVersionByName(null, $id, $versionname);
 
                 // restore this old version
                 $dm->restoreVersion($pre, true);
 
                 // delete a version from the history
                 // (i.e. to remove illegal content from a wiki-like page)
-                $illegal = $dm->findVersionByName($v);
+                $illegal = $dm->findVersionByName(null, $id, $v);
                 $dm->deleteVersion($illegal);
             </pre>
         </div>
