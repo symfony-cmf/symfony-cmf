@@ -25,5 +25,12 @@
             <argument type="service" id="sonata.block.renderer" />
         </service>
 
+        <service id="symfony_cmf.block.reference" class="Symfony\Cmf\Bundle\BlockBundle\Block\ReferenceBlockService">
+            <tag name="sonata.block" />
+            <argument>symfony_cmf.block.reference</argument>
+            <argument type="service" id="templating" />
+            <argument type="service" id="sonata.block.renderer" />
+        </service>
+
     </services>
 </container>
