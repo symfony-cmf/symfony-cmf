@@ -10,21 +10,21 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\BlockBundle\Block\BaseBlockService;
-use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
+use Sonata\BlockBundle\Block\BlockRendererInterface;
 
 class ContainerBlockService extends BaseBlockService implements BlockServiceInterface
 {
 
-    protected $blockServiceManager;
+    protected $blockRenderer;
 
     /**
      * @param $name
      * @param \Symfony\Component\Templating\EngineInterface $templating
      */
-    public function __construct($name, EngineInterface $templating, BlockServiceManagerInterface $blockServiceManager)
+    public function __construct($name, EngineInterface $templating, BlockRendererInterface $blockRenderer)
     {
         parent::__construct($name, $templating);
-        $this->blockServiceManager = $blockServiceManager;
+        $this->blockRenderer = $blockRenderer;
     }
 
     /**
@@ -61,7 +61,7 @@ class ContainerBlockService extends BaseBlockService implements BlockServiceInte
         if ($block->getEnabled()) {
             foreach ($block->getChildren() as $childBlock) {
                 // TODO: not sure if this is the right way to merge the responses?
-                $response->setContent($response->getContent() . $this->blockServiceManager->renderBlock($childBlock)->getContent());
+                $response->setContent($response->getContent() . $this->blockRenderer->render($childBlock)->getContent());
             }
         }
 

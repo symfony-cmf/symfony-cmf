@@ -6,7 +6,8 @@
 
     <services>
 
-        <service id="sonata.block.repository" class="Symfony\Cmf\Bundle\BlockBundle\Document\BlockRepository" public="false">
+        <service id="symfony_cmf.block.service" class="Symfony\Cmf\Bundle\BlockBundle\Block\PHPCRBlockLoader" public="false">
+            <tag name="sonata.block.loader" />
             <argument type="service" id="service_container" />
             <argument type="service" id="doctrine_phpcr.odm.default_document_manager" />
         </service>
@@ -21,7 +22,7 @@
             <tag name="sonata.block" />
             <argument>symfony_cmf.block.container</argument>
             <argument type="service" id="templating" />
-            <argument type="service" id="sonata.block.manager" />
+            <argument type="service" id="sonata.block.renderer" />
         </service>
 
     </services>
