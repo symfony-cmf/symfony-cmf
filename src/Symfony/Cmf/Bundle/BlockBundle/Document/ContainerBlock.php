@@ -11,25 +11,12 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
  */
 class ContainerBlock extends BaseBlock
 {
-    /** @PHPCRODM\String */
-    private $title;
-
     /** @PHPCRODM\Children */
     private $children;
 
     public function getType()
     {
         return 'symfony_cmf.block.container';
-    }
-
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
-
-    public function getTitle()
-    {
-        return $this->title;
     }
 
     public function getChildren()
