@@ -34,6 +34,14 @@ abstract class BaseBlock implements BlockInterface
     protected $settings;
 
     /**
+     * @param string $src
+     */
+    protected function dashify($src)
+    {
+        return preg_replace('/[\/\.]/', '-', $src);
+    }
+
+    /**
      * Set id
      *
      * @param string $id
@@ -300,5 +308,20 @@ abstract class BaseBlock implements BlockInterface
         return isset($this->settings[$name]) ? $this->settings[$name] : $default;
     }
 
+    /**
+     * @return string
+     */
+    public function getDashifiedId()
+    {
+        return $this->dashify($this->id);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDashifiedType()
+    {
+        return $this->dashify($this->getType());
+    }
 
 }
