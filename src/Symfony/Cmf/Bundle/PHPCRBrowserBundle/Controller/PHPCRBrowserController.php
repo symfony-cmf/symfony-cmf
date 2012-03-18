@@ -28,7 +28,7 @@ class PHPCRBrowserController
      * @param string $method Method to execute on the node
      * @return \Symfony\Component\HttpFoundation\Response 
      */
-    private function processNode($path, $method)
+    protected function processNode($path, $method)
     {
         if (empty($path)) {
             $path = '/';
@@ -47,5 +47,13 @@ class PHPCRBrowserController
     {
         $path = $request->query->get('root');
         return $this->processNode($path, "getProperties");
+    }
+
+    public function moveAction(Request $request)
+    {
+        $moved = $request->request->get('dropped');
+        $target = $request->request->get('target');
+
+        return new Response($this->tree->move($moved, $target));
     }
 }
