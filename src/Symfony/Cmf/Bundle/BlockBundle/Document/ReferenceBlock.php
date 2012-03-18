@@ -12,7 +12,7 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
 class ReferenceBlock extends BaseBlock
 {
 
-    /** @PHPCRODM\ReferenceOne(targetDocument="BlockInterface") */
+    /** @PHPCRODM\ReferenceOne */
     private $referencedBlock;
 
     public function getType()
