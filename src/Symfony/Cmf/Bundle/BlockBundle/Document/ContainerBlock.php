@@ -7,7 +7,7 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
 /**
  * Block that contains other blocks ...
  *
- * @PHPCRODM\Document
+ * @PHPCRODM\Document(referenceable=true)
  */
 class ContainerBlock extends BaseBlock
 {

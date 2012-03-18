@@ -9,7 +9,7 @@ use Sonata\BlockBundle\Model\BlockInterface;
 /**
  * Base class for all blocks - connects to Sonata Blocks
  *
- * @PHPCRODM\Document
+ * @PHPCRODM\Document(referenceable=true)
  */
 abstract class BaseBlock implements BlockInterface
 {
