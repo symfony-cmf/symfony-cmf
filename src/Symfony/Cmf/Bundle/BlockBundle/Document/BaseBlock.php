@@ -31,6 +31,7 @@ abstract class BaseBlock implements BlockInterface
     /** @PHPCRODM\Int */
     protected $ttl = 86400;
 
+    protected $settings;
 
     /**
      * Set id
@@ -258,4 +259,46 @@ abstract class BaseBlock implements BlockInterface
     {
         return $this->getType() . ' - ' . $this->id;
     }
+
+    /**
+     * Set settings
+     *
+     * @param array $settings
+     */
+    public function setSettings(array $settings = array())
+    {
+        $this->settings = $settings;
+    }
+
+    /**
+     * Get settings
+     *
+     * @return array $settings
+     */
+    public function getSettings()
+    {
+        return $this->settings;
+    }
+
+    /**
+     * @param $name
+     * @param $value
+     * @return void
+     */
+    public function setSetting($name, $value)
+    {
+        $this->settings[$name] = $value;
+    }
+
+    /**
+     * @param $name
+     * @param null $default
+     * @return null
+     */
+    public function getSetting($name, $default = null)
+    {
+        return isset($this->settings[$name]) ? $this->settings[$name] : $default;
+    }
+
+
 }
