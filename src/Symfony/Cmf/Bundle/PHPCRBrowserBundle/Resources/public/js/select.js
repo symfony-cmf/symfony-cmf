@@ -45,18 +45,6 @@ var SelectTree = (function () {
         .bind("select_node.jstree", function (event, data) {
             jQuery(config.output).val(data.rslt.obj.attr("id"));
         })
-        .bind("move_node.jstree", function (event, data) {
-            var dropped = data.rslt.o;
-            var target = data.rslt.r;
-
-            $.post(
-                Routing.generate('symfony_cmf_phpcr_browser_move'),
-                { "dropped": dropped.attr("id"), "target": target.attr("id") },
-                function (data) {
-                    dropped.attr("id", data);
-                }
-            );
-        })
         .delegate("a", "click", function (event, data) { event.preventDefault(); });
     };
 
