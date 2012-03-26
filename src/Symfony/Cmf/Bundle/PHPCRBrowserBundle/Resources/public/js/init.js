@@ -22,14 +22,14 @@ var AdminTree = (function () {
         }
 
         curItem = path.substr(start);
-        
+
         if (curItem !== '') {
             curSegment = curSegment + '/' + curItem;
             segments.push(curSegment);
         }
-        
+
         return segments;
-	};
+    };
 
     my.initTree = function (config) {
 
@@ -85,11 +85,11 @@ var AdminTree = (function () {
             },
             "dnd": {
                 "drop_target" : false,
-	            "drag_target" : false
-	        },
+                "drag_target" : false
+            },
             "crrm": {
                 "move": {
-                    
+
                 }
             }
         })
@@ -99,7 +99,7 @@ var AdminTree = (function () {
         .bind("move_node.jstree", function (event, data) {
             var dropped = data.rslt.o;
             var target = data.rslt.r;
-            
+
             $.post(
                 Routing.generate('symfony_cmf_phpcr_browser_move'),
                 { "dropped": dropped.attr("id"), "target": target.attr("id") },
@@ -111,6 +111,6 @@ var AdminTree = (function () {
         .delegate("a", "click", function (event, data) { event.preventDefault(); });
     };
 
-	return my;
+    return my;
 
 }());
