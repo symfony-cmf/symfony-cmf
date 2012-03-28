@@ -9,13 +9,12 @@ The Symfony CMF project makes it easier for **developers** to add **CMS function
 
 - GitHub: <https://github.com/symfony-cmf/symfony-cmf>
 - Sandbox: <https://github.com/symfony-cmf/cmf-sandbox>
-- Web, documentation: <http://cmf.symfony.com/>
+- Web: <http://cmf.symfony.com/>
 - Wiki: <http://github.com/symfony-cmf/symfony-cmf/wiki>
 - Issue Tracker: <http://cmf.symfony-project.org/redmine/>
 - IRC: irc://freenode/#symfony-cmf
 - Users mailing list: <http://groups.google.com/group/symfony-cmf-users>
 - Devs mailing list: <http://groups.google.com/group/symfony-cmf-devs>
-
 
 ## Installation
 
@@ -25,3 +24,6 @@ If you just want to experiment with the CMF, the easiest is to use the [CMF Sand
 
 To use the CMF in your own projects, we provide guides to install the [PHPCR-ODM bundle](https://github.com/symfony-cmf/symfony-cmf-docs/blob/master/tutorials/installing-configuring-doctrine-phpcr-odm.rst) and [Symfony CMF](https://github.com/symfony-cmf/symfony-cmf-docs/blob/master/tutorials/installing-configuring-cmf.rst) itself.
 
+## Documentation
+
+Further documentation can be found in the [documentation repo](https://github.com/symfony-cmf/symfony-cmf-docs) but is still in its early stages. There is a [documentation planning](https://github.com/symfony-cmf/symfony-cmf/wiki/Documentation-Planning) available describing the work to do.
