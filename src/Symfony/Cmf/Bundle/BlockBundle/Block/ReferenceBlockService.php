@@ -3,7 +3,6 @@
 namespace Symfony\Cmf\Bundle\BlockBundle\Block;
 
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Cmf\Bundle\BlockBundle\Document\ContainerBlock;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Sonata\BlockBundle\Block\BlockServiceInterface;
 use Sonata\AdminBundle\Form\FormMapper;
