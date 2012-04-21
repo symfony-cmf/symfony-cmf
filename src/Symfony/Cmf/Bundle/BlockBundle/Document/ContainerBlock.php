@@ -3,6 +3,7 @@
 namespace Symfony\Cmf\Bundle\BlockBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
+use Doctrine\ODM\PHPCR\ChildrenCollection;
 
 /**
  * Block that contains other blocks ...
@@ -12,7 +13,7 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
 class ContainerBlock extends BaseBlock
 {
     /** @PHPCRODM\Children */
-    private $children;
+    protected  $children;
 
     public function getType()
     {
@@ -21,6 +22,11 @@ class ContainerBlock extends BaseBlock
 
     public function getChildren()
     {
-        return $this->children->getValues();
+        return $this->children;
+    }
+
+    public function setChildren(ChildrenCollection $children)
+    {
+        return $this->children = $children;
     }
 }

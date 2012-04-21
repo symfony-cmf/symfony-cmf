@@ -59,7 +59,7 @@ class ContainerBlockService extends BaseBlockService implements BlockServiceInte
         }
 
         if ($block->getEnabled()) {
-            foreach ($block->getChildren() as $childBlock) {
+            foreach ($block->getChildren()->getValues() as $childBlock) {
                 // TODO: not sure if this is the right way to merge the responses?
                 $response->setContent($response->getContent() . $this->blockRenderer->render($childBlock)->getContent());
             }
