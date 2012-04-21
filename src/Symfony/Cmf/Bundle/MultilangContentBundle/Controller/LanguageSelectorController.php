@@ -80,6 +80,7 @@ class LanguageSelectorController
             throw new \Exception('The route passed to the language selection action must emulate content to have the correct route generated.');
         }
 
+        // TODO: use lunetics/LocaleBundle https://github.com/symfony-cmf/cmf-sandbox/issues/54
         $defaultPreferredLangs = $this->chooser->getDefaultLocalesOrder();
         $bestLang = $request->getPreferredLanguage($defaultPreferredLangs);
 
@@ -91,7 +92,11 @@ class LanguageSelectorController
          * route provides its children, which should be the urls for each locale
          * as content.
          */
-        $url = $this->router->generate('', array('_locale' => $bestLang, 'content' => $contentDocument), true);
+        $routeParams = $request->query->all(); // do not lose eventual get parameters
+        $routeParams['_locale'] = $bestLang; // and set the locale
+        $routeParams['content'] = $contentDocument; // and the content for the router
+
+        $url = $this->router->generate('', $routeParams, true);
         /* Note: I wanted to send a 300 "Multiple Choices" header along with a
          * Location header, but user agents may behave inconsistently in
          * response to this.
