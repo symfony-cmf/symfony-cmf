@@ -26,9 +26,6 @@ abstract class BaseBlock implements BlockInterface
     protected $enabled = true;
 
     /** @PHPCRODM\Int */
-    protected $position = 1;
-
-    /** @PHPCRODM\Int */
     protected $ttl = 86400;
 
     protected $settings;
@@ -96,7 +93,7 @@ abstract class BaseBlock implements BlockInterface
      */
     public function setPosition($position)
     {
-        $this->position = $position;
+        // TODO: implement
     }
 
     /**
@@ -106,7 +103,8 @@ abstract class BaseBlock implements BlockInterface
      */
     public function getPosition()
     {
-        return $this->position;
+        $siblings = $this->getParent()->getChildren();
+        return array_search($siblings->indexOf($this), $siblings->getKeys());
     }
 
     /**
