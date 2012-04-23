@@ -1,3 +1,0 @@
-[submodule "vendor/doctrine-phpcr-odm"]
-	path = vendor/doctrine-phpcr-odm
-	url = git://github.com/doctrine/phpcr-odm.git
