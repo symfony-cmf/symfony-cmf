@@ -14,7 +14,7 @@
         "doctrine/phpcr-odm":"*",
         "friendsofsymfony/jsrouting-bundle":"*",
         "knplabs/knp-menu":"*",
-        "knplabs/kmp-menu-bundle":"*"
+        "knplabs/knp-menu-bundle":"*"
     },
     "autoload": {
         "psr-0": { "Symfony\\Cmf": "src" }
