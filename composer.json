@@ -11,6 +11,10 @@
     ],
     "require": {
         "php": ">=5.3.2",
+        "doctrine/phpcr-odm":"*",
+        "friendsofsymfony/jsrouting-bundle":"*",
+        "knplabs/menu":"*",
+        "knplabs/menu-bundle":"*"
     },
     "autoload": {
         "psr-0": { "Symfony\\Cmf": "src" }
