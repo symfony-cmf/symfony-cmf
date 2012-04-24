@@ -1,0 +1,23 @@
+{
+    "name": "symfony-cmf/symfony-cmf",
+    "description": "Symfony Content Management Framework",
+    "homepage": "http://cmf.symfony.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Symfony CMF Community",
+            "homepage": "https://github.com/symfony-cmf/symfony-cmf/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/symfony": "2.1.*",
+        "doctrine/phpcr-odm": "*",
+        "friendsofsymfony/jsrouting-bundle": "*",
+        "knplabs/knp-menu": "*",
+        "knplabs/knp-menu-bundle": "*"
+    },
+    "autoload": {
+        "psr-0": { "Symfony\\Cmf": "src" }
+    }
+}
