@@ -12,10 +12,15 @@
     "require": {
         "php": ">=5.3.2",
         "symfony/symfony": "2.1.*",
-        "doctrine/phpcr-odm": "*",
-        "friendsofsymfony/jsrouting-bundle": "*",
-        "knplabs/knp-menu": "*",
-        "knplabs/knp-menu-bundle": "*"
+        "doctrine/phpcr-bundle": "dev-master",
+        "doctrine/phpcr-odm": "dev-master",
+        "symfony-cmf/core-bundle": "dev-master",
+        "symfony-cmf/content-bundle": "dev-master",
+        "symfony-cmf/menu-bundle": "dev-master",
+        "symfony-cmf/block-bundle": "dev-master",
+        "symfony-cmf/multilang-content-bundle": "dev-master",
+        "symfony-cmf/routing-extra-bundle": "dev-master",
+        "symfony-cmf/phpcr-browser-bundle": "dev-master"
     },
     "autoload": {
         "psr-0": { "Symfony\\Cmf": "src" }
