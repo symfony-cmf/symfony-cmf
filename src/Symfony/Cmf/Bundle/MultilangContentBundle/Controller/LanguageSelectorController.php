@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-use Symfony\Cmf\Bundle\ChainRoutingBundle\Routing\RouteAwareInterface;
+use Symfony\Cmf\Component\Routing\RouteAwareInterface;
 
 /**
  * A controller to render the language selector and to decide on default language

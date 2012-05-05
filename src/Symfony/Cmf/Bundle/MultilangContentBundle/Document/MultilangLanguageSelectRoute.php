@@ -2,8 +2,8 @@
 
 namespace Symfony\Cmf\Bundle\MultilangContentBundle\Document;
 
-use Symfony\Cmf\Bundle\ChainRoutingBundle\Document\Route;
-use Symfony\Cmf\Bundle\ChainRoutingBundle\Routing\RouteAwareInterface;
+use Symfony\Cmf\Bundle\RoutingExtraBundle\Document\Route;
+use Symfony\Cmf\Component\Routing\RouteAwareInterface;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
 use Knp\Menu\NodeInterface;
@@ -14,7 +14,7 @@ use Knp\Menu\NodeInterface;
  *
  * The children of this route must carry all locales that should be available.
  *
- * @PHPCRODM\Document(repositoryClass="Symfony\Cmf\Bundle\ChainRoutingBundle\Document\RouteRepository")
+ * @PHPCRODM\Document(repositoryClass="Symfony\Cmf\Bundle\RoutingExtraBundle\Document\RouteRepository")
  */
 class MultilangLanguageSelectRoute extends Route implements RouteAwareInterface
 {
@@ -27,7 +27,8 @@ class MultilangLanguageSelectRoute extends Route implements RouteAwareInterface
      */
     public function __construct()
     {
-        $this->setController('symfony_cmf_multilang_content.languageSelectorController:defaultLanguageAction');
+        parent::__construct();
+        $this->setDefault('_controller', 'symfony_cmf_multilang_content.languageSelectorController:defaultLanguageAction');
     }
 
     /**

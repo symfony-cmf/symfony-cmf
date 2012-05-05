@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-use Symfony\Cmf\Bundle\ChainRoutingBundle\Routing\DoctrineRouter;
+use Symfony\Cmf\Bundle\RoutingExtraBundle\Routing\DoctrineRouter;
 
 class ContentAwareFactory extends RouterAwareFactory
 {

@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-use Symfony\Cmf\Bundle\ChainRoutingBundle\Routing\DoctrineRouter;
+use Symfony\Cmf\Bundle\RoutingExtraBundle\Routing\DoctrineRouter;
 
 class SymfonyCmfMenuExtension extends Extension
 {
