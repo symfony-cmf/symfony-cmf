@@ -13,9 +13,13 @@
         "php": ">=5.3.2",
         "symfony/symfony": "2.1.*",
         "doctrine/phpcr-odm": "*",
-        "friendsofsymfony/jsrouting-bundle": "*",
-        "knplabs/knp-menu": "*",
-        "knplabs/knp-menu-bundle": "*"
+        "symfony-cmf/core-bundle": "*",
+        "symfony-cmf/content-bundle": "*",
+        "symfony-cmf/menu-bundle": "*",
+        "symfony-cmf/block-bundle": "*",
+        "symfony-cmf/multilang-content-bundle": "*",
+        "symfony-cmf/routing-extra-bundle": "*",
+        "symfony-cmf/phpcr-browser-bundle": "*"
     },
     "autoload": {
         "psr-0": { "Symfony\\Cmf": "src" }
