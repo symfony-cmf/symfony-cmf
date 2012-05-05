@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="symfony_cmf.block.service" class="Symfony\Cmf\Bundle\BlockBundle\Block\PHPCRBlockLoader">
+            <tag name="sonata.block.loader" />
+            <argument type="service" id="service_container" />
+            <argument type="service" id="doctrine_phpcr.odm.default_document_manager" />
+        </service>
+
+        <service id="symfony_cmf.block.simple" class="Symfony\Cmf\Bundle\BlockBundle\Block\SimpleBlockService">
+            <tag name="sonata.block" />
+            <argument>symfony_cmf.block.simple</argument>
+            <argument type="service" id="templating" />
+        </service>
+
+        <service id="symfony_cmf.block.container" class="Symfony\Cmf\Bundle\BlockBundle\Block\ContainerBlockService">
+            <tag name="sonata.block" />
+            <argument>symfony_cmf.block.container</argument>
+            <argument type="service" id="templating" />
+            <argument type="service" id="sonata.block.renderer" />
+        </service>
+
+        <service id="symfony_cmf.block.reference" class="Symfony\Cmf\Bundle\BlockBundle\Block\ReferenceBlockService">
+            <tag name="sonata.block" />
+            <argument>symfony_cmf.block.reference</argument>
+            <argument type="service" id="templating" />
+            <argument type="service" id="sonata.block.renderer" />
+        </service>
+
+        <service id="symfony_cmf.block.action" class="Symfony\Cmf\Bundle\BlockBundle\Block\ActionBlockService">
+            <tag name="sonata.block" />
+            <argument>symfony_cmf.block.action</argument>
+            <argument type="service" id="templating" />
+            <argument type="service" id="http_kernel" />
+        </service>
+
+    </services>
+</container>
