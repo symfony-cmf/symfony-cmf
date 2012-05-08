@@ -18,7 +18,7 @@ The Symfony CMF project makes it easier for **developers** to add **CMS function
 
 ## Installation
 
-This is the main repository containing all bundles you need for the CMF.
+This is the main repository containing some documentation as well as a composer file pulling together all core dependencies for the CMF.
 
 If you just want to experiment with the CMF, the easiest is to use the [CMF Sandbox](https://github.com/symfony-cmf/cmf-sandbox) which has everything set up and ready.
 
