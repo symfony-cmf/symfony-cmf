@@ -98,7 +98,7 @@
                 </li>
                 <li>does not support editing routes</li>
                 <li>does not scale to a large number of routes</li>
-                <li>in a cms, the <em>user</em> wants to define his urls</li>
+                <li>in a cms, <em>users</em> wants to define their urls</li>
             </ul>
         </div>
 
@@ -108,8 +108,8 @@
             </h2>
             <ul>
                 <li>possible to separate content tree from navigation tree</li>
-                <li>navigation tree consists of references to the content tree</li>
                 <li>
+                    navigation tree consists of references to the content tree
                     <ul>
                         <li>multi site: f.e. desktop, tablet, phone ..</li>
                         <li>multi language: f.e. english, french, german ..</li>
@@ -219,10 +219,10 @@
         </div>
 
         <div class="slide" style="text-align:left">
-            <h2>DoctrineRouter: Generate</h2>
-            <ul>
-                <li>generate url from content being referenced by route</li>
-            </ul>
+            <h2>DoctrineRouter: Generate url from referenced content</h2>
+            <pre class="brush: php">
+                $this->router->generate(null, array('content_id' => $uuid));
+            </pre>
         </div>
 
         <div class="slide" style="text-align:left">
@@ -250,18 +250,6 @@
             <h2>Routing and Content and Menu</h2>
             <br/>
             <p><img src="routing_and_menu.png"/></p>
-        </div>
-
-        <div class="slide" style="text-align:left">
-            <h2>Outlook</h2>
-            <ul>
-            <li>DoctrineRouter considered stable, but maybe some additions
-                <ul>
-                    <li>decide on getRouteCollection (<a href="https://github.com/symfony-cmf/Routing/issues/1">github</a>)</li>
-                </ul>
-            </li>
-            <li>pimp KnpMenu with breadcrumb twig function (<a href="https://github.com/KnpLabs/KnpMenu/pull/45">github</a>)</li>
-            </ul>
         </div>
 
         <div class="slide" style="text-align:left">
