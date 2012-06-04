@@ -141,7 +141,7 @@
         <div class="slide" style="text-align:left">
             <h2>Solution: Better</h2>
             <ul>
-                <li>The new DoctrineRouter
+                <li>The new DynamicRouter
                     <ul>
                         <li>full flexibility</li>
                         <li>lookup in database</li>
@@ -174,7 +174,7 @@
         </div>
 
         <div class="slide" style="text-align:left">
-            <h2>DoctrineRouter: Match url</h2>
+            <h2>DynamicRouter: Match url</h2>
             <ul>
                 <li>find route document by url from database
                     <ul>
@@ -184,27 +184,27 @@
                 </li>
                 <li>built on top of the standard symfony router</li>
                 <li>route may explicitly specify controller</li>
-                <li>otherwise a controller resolver is used</li>
+                <li>otherwise a controller mapper is used</li>
                 <li>redirection route (to other route or absolute url)</li>
             </ul>
         </div>
 
         <div class="slide" style="text-align:left">
-            <h2>DoctrineRouter: Controller Resolvers</h2>
+            <h2>DynamicRouter: Controller Mappers</h2>
             <ul>
                 <li>find out which controller handles given content node</li>
-                <li>useful resolvers provided:</li>
+                <li>useful mappers provided:</li>
                     <ul>
                         <li>route specifies explicit template: use generic controller</li>
                         <li>map content type to controller</li>
                         <li>map content type to template and use generic controller</li>
                     </ul>
                 </li>
-                <li>you can add your own resolvers</li>
+                <li>you can add your own mappers</li>
             </ul>
             <br/><br/>
             <pre class="brush: php">
-                interface ControllerResolverInterface
+                interface ControllerMapperInterface
                 {
                     function getController(RouteObjectInterface $document,
                                            array &$defaults);
@@ -219,7 +219,7 @@
         </div>
 
         <div class="slide" style="text-align:left">
-            <h2>DoctrineRouter: Generate url from referenced content</h2>
+            <h2>DynamicRouter: Generate url from referenced content</h2>
             <pre class="brush: php">
                 $this->router->generate(null, array('content_id' => $uuid));
             </pre>
@@ -267,7 +267,7 @@
             <ul>
                 <li><a href="https://github.com/symfony-cmf/cmf-sandbox">CMF sandbox</a></li>
                 <li><a href="https://github.com/symfony-cmf/symfony-cmf">Core Components</a> including SymfonyCmfMenuBundle</li>
-                <li><a href="https://github.com/symfony-cmf/RoutingExtraBundle">ChainRouter and DoctrineRouter</a></li>
+                <li><a href="https://github.com/symfony-cmf/RoutingExtraBundle">ChainRouter and DynamicRouter</a></li>
             </ul>
         </div>
 
