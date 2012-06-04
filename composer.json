@@ -12,17 +12,22 @@
     "require": {
         "php": ">=5.3.2",
         "symfony/symfony": "2.1.*",
-        "doctrine/phpcr-bundle": "dev-master",
-        "doctrine/phpcr-odm": "dev-master",
-        "symfony-cmf/core-bundle": "dev-master",
-        "symfony-cmf/content-bundle": "dev-master",
-        "symfony-cmf/menu-bundle": "dev-master",
-        "symfony-cmf/block-bundle": "dev-master",
-        "symfony-cmf/multilang-content-bundle": "dev-master",
-        "symfony-cmf/routing-extra-bundle": "dev-master",
-        "symfony-cmf/tree-browser-bundle": "dev-master"
+        "doctrine/phpcr-bundle": "1.0.*",
+        "doctrine/phpcr-odm": "1.0.*",
+        "symfony-cmf/core-bundle": "1.0.*",
+        "symfony-cmf/content-bundle": "1.0.*",
+        "symfony-cmf/menu-bundle": "1.0.*",
+        "symfony-cmf/block-bundle": "1.0.*",
+        "symfony-cmf/multilang-content-bundle": "1.0.*",
+        "symfony-cmf/routing-extra-bundle": "1.0.*",
+        "symfony-cmf/tree-browser-bundle": "1.0.*"
     },
     "autoload": {
         "psr-0": { "Symfony\\Cmf": "src" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
     }
 }
