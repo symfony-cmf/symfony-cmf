@@ -20,7 +20,7 @@
         "symfony-cmf/block-bundle": "dev-master",
         "symfony-cmf/multilang-content-bundle": "dev-master",
         "symfony-cmf/routing-extra-bundle": "dev-master",
-        "symfony-cmf/phpcr-browser-bundle": "dev-master"
+        "symfony-cmf/tree-browser-bundle": "dev-master"
     },
     "autoload": {
         "psr-0": { "Symfony\\Cmf": "src" }
