@@ -97,7 +97,7 @@
                     </ul>
                 </li>
                 <li>does not support editing routes</li>
-                <li>does not scale to a large number of routes</li>
+                <li>large number of routes?</li>
                 <li>in a cms, <em>users</em> wants to define their urls</li>
             </ul>
         </div>
@@ -107,16 +107,17 @@
                 Symfony2 CMF routing concept
             </h2>
             <ul>
-                <li>possible to separate content tree from navigation tree</li>
+                <li>load routes at runtime based on current request</li>
+                <li>possible to separate content tree from routing tree</li>
                 <li>
-                    navigation tree consists of references to the content tree
+                    routing tree consists of references to the content tree
                     <ul>
                         <li>multi site: f.e. desktop, tablet, phone ..</li>
                         <li>multi language: f.e. english, french, german ..</li>
                     </ul>
                 </li>
-                <li>reworking the navigation requires cloning the navigation tree</li>
-                <li>merge back into the production navigation tree once ready</li>
+                <li>reworking the routing requires cloning the routing tree</li>
+                <li>merge back into the production routing tree once ready</li>
             </ul>
         </div>
 
@@ -124,7 +125,7 @@
             <h2>Solution: First Take</h2>
             <ul>
                 <li>catch-all route <tt>/{url}</tt> with requirement <tt>url: .*</tt></li>
-                <li>one controller for all requests (but could forward based on content)</li>
+                <li>one controller for all requests (but could forward based on route information)</li>
                 <li>does not play nicely with other routes</li>
             </ul>
             <br/><br/>
@@ -139,7 +140,7 @@
 
 
         <div class="slide" style="text-align:left">
-            <h2>Solution: Better</h2>
+            <h2>Solution: Cmf Routing component</h2>
             <ul>
                 <li>The new DynamicRouter
                     <ul>
@@ -162,7 +163,6 @@
                 <li>find router services by tagging</li>
                 <li>tries to match with each configured router</li>
                 <li>with priorities to control order</li>
-                <li>fully production-ready and complete</li>
             </ul>
             <br/><br/>
             <pre class="brush: xml">
@@ -228,7 +228,7 @@
         <div class="slide" style="text-align:left">
             <h2>Menu</h2>
             <ul>
-                <li>provide NodeInterface with PHPCR ODM documents</li>
+                <li>provide <tt>Knp\Menu\NodeInterface</tt> with PHPCR ODM documents</li>
                 <li>menu renderer: if MenuItem specifies content
                     <ul>
                         <li>generate route from content</li>
@@ -258,6 +258,7 @@
                 <li>very flexible way to handle things</li>
                 <li>building on top of the symfony router</li>
                 <li>routing parameters, locale support</li>
+                <li>ready to use standalone or with other Symfony CMF components</li>
                 <li>if you don't need the flexibility, just make menu, route and content the same class :-)</li>
             </ul>
         </div>
@@ -266,8 +267,8 @@
             <h2>Github projects</h2>
             <ul>
                 <li><a href="https://github.com/symfony-cmf/cmf-sandbox">CMF sandbox</a></li>
-                <li><a href="https://github.com/symfony-cmf/symfony-cmf">Core Components</a> including SymfonyCmfMenuBundle</li>
-                <li><a href="https://github.com/symfony-cmf/RoutingExtraBundle">ChainRouter and DynamicRouter</a></li>
+                <li><a href="https://github.com/symfony-cmf/MenuBundle/">MenuBundle</a></li>
+                <li><a href="https://github.com/symfony-cmf/RoutingExtraBundle">RoutingExtraBundle</a>: ChainRouter and DynamicRouter</li>
             </ul>
         </div>
 
