@@ -26,4 +26,4 @@ To use the CMF in your own projects, we provide guides to install the [PHPCR-ODM
 
 ## Documentation
 
-Further documentation can be found in the [documentation repo](https://github.com/symfony-cmf/symfony-cmf-docs) but is still in its early stages. There is a [documentation planning](https://github.com/symfony-cmf/symfony-cmf/wiki/Documentation-Planning) available describing the work to do.
+Further documentation can be found in the [here](http://symfony-cmf.readthedocs.org/en/latest/index.html) but is still in its early stages. There is a [documentation planning](https://github.com/symfony-cmf/symfony-cmf/wiki/Documentation-Planning) available describing the work to do.
