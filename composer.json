@@ -22,6 +22,9 @@
         "symfony-cmf/routing-extra-bundle": "1.0.*",
         "symfony-cmf/tree-browser-bundle": "1.0.*"
     },
+    "suggest": {
+        "symfony-cmf/simple-cms-bundle": "1.0.*"
+    },
     "autoload": {
         "psr-0": { "Symfony\\Cmf": "src" }
     },
