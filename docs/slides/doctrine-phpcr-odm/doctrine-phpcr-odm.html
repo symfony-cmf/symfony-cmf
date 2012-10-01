@@ -249,8 +249,8 @@
                 $factory = $qb->getQOMFactory();
 
                 // SELECT * FROM nt:unstructured WHERE name NOT IS NULL
-                $qb->select($factory->selector('nt:unstructured'))
-                    ->where($factory->propertyExistance('name'))
+                $qb->from($factory->selector('nt:unstructured'))
+                    ->where($factory->propertyExistence('name'))
                     ->setFirstResult(10)
                     ->setMaxResults(10)
                     ->execute();
