@@ -108,6 +108,7 @@
             </h2>
             <ul>
                 <li>load routes at runtime based on current request</li>
+                <li>simple interface for route loading can be implemented with your storage</li>
                 <li>possible to separate content tree from routing tree</li>
                 <li>
                     routing tree consists of references to the content tree
@@ -126,6 +127,7 @@
             <ul>
                 <li>catch-all route <tt>/{url}</tt> with requirement <tt>url: .*</tt></li>
                 <li>one controller for all requests (but could forward based on route information)</li>
+                <li>two-step-routing tends to reinventing the wheel and creating a mess</li>
                 <li>does not play nicely with other routes</li>
             </ul>
             <br/><br/>
@@ -221,8 +223,11 @@
         <div class="slide" style="text-align:left">
             <h2>DynamicRouter: Generate url from referenced content</h2>
             <pre class="brush: php">
-                $this->router->generate(null, array('content_id' => $uuid));
+                $this->router->generate($content);
             </pre>
+            <ul>
+                <li>DynamicRouter can generate url from content document, route document as well as content or route repository id</li>
+            </ul>
         </div>
 
         <div class="slide" style="text-align:left">
@@ -259,7 +264,9 @@
                 <li>building on top of the symfony router</li>
                 <li>routing parameters, locale support</li>
                 <li>ready to use standalone or with other Symfony CMF components</li>
-                <li>if you don't need the flexibility, just make menu, route and content the same class :-)</li>
+                <li>if you don't need the flexibility, just make menu, route and content the same class :-)
+                    [ As demonstrated in the SimpleCmsBundle ]
+                </li>
             </ul>
         </div>
 
