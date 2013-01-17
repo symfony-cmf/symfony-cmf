@@ -23,4 +23,4 @@ The Symfony CMF project makes it easier for **developers** to add **CMS function
 
 If you just want to experiment with the CMF, the easiest is to use the [CMF Sandbox](https://github.com/symfony-cmf/cmf-sandbox) which has everything set up and ready.
 
-If you want a basis for a new CMF project you can use the [CMF Standard Editiong](https://github.com/symfony-cmf/symfony-cmf-standard) which provides a ready project template for a new Symfony2 application.
+If you want a basis for a new CMF project you can use the [CMF Standard Edition](https://github.com/symfony-cmf/symfony-cmf-standard) which provides a ready project template for a new Symfony2 application.
