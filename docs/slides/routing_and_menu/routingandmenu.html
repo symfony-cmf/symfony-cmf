@@ -186,30 +186,30 @@
                 </li>
                 <li>built on top of the standard symfony router</li>
                 <li>route may explicitly specify controller</li>
-                <li>otherwise a controller mapper is used</li>
+                <li>otherwise enhancers to determine values</li>
                 <li>redirection route (to other route or absolute url)</li>
             </ul>
         </div>
 
         <div class="slide" style="text-align:left">
-            <h2>DynamicRouter: Controller Mappers</h2>
+            <h2>DynamicRouter: Route Enhancers</h2>
             <ul>
-                <li>find out which controller handles given content node</li>
-                <li>useful mappers provided:</li>
+                <li>infer some information from the route information</li>
+                <li>i.e. decide which controller to use based on content document type</li>
+                <li>useful enhancers provided:</li>
                     <ul>
                         <li>route specifies explicit template: use generic controller</li>
                         <li>map content type to controller</li>
                         <li>map content type to template and use generic controller</li>
                     </ul>
                 </li>
-                <li>you can add your own mappers</li>
+                <li>you can add your own enhancers</li>
             </ul>
             <br/><br/>
             <pre class="brush: php">
-                interface ControllerMapperInterface
+                interface ControllerEnhancerInterface
                 {
-                    function getController(RouteObjectInterface $document,
-                                           array &$defaults);
+                    public function enhance(array $defaults, Request $request);
                 }
             </pre>
         </div>
