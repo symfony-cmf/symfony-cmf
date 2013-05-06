@@ -18,7 +18,7 @@
         "symfony-cmf/content-bundle": "1.0.*",
         "symfony-cmf/menu-bundle": "1.0.*",
         "symfony-cmf/block-bundle": "1.0.*",
-        "symfony-cmf/routing-extra-bundle": "1.0.*",
+        "symfony-cmf/routing-bundle": "dev-master",
         "symfony-cmf/tree-browser-bundle": "1.0.*"
     },
     "suggest": {
