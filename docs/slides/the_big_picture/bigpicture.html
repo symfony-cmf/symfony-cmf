@@ -157,10 +157,21 @@
         </div>
 
         <div class="slide" style="text-align:left">
+            <h2>Core Bundle</h2>
+            <ul>
+                <li>Provides common infrastructure for all CMF Bundles</li>
+                <li>Unifies several configuration options for Bundles</li>
+                <li>Simple publish workflow</li>
+                <li>Twig extension for interaction with PHPCR ODM</li>
+                <li>Some BC helpers to maintain Symfony 2.2 compatibility</li>
+            </ul>
+        </div>
+
+        <div class="slide" style="text-align:left">
             <h2>Content Bundle</h2>
             <ul>
-            <li>Provides generic controller so you need only a custom template</li>
-            <li>Simple StaticContent model and template</li>
+                <li>Provides generic controller so you need only a custom template</li>
+                <li>Simple StaticContent model and sonata admin integration</li>
             </ul>
         </div>
 
@@ -176,9 +187,9 @@
         </div>
 
         <div class="slide" style="text-align:left">
-            <h2>Block: Sonata PHPCR ODM BlockBundle</h2>
+            <h2>Block Bundle</h2>
             <ul>
-                <li>Based on the SonataBlockBundle</li>
+                <li>Integration between SonataBlockBundle and PHPCR ODM</li>
                 <li>Multiple blocks per page</li>
                 <li>Blocks can be reused on different page</li>
             </ul>
@@ -187,21 +198,21 @@
         </div>
 
         <div class="slide" style="text-align:left">
-            <h2>Frontend Editing: Create.js</h2>
+            <h2>Create Bundle</h2>
             <ul>
+                <li>Integration with <a href="http://createjs.org">create.js</a></li>
                 <li>backbone.js based editing framework</li>
                 <li>Uses RDF annotations to detect editable data</li>
-                <li>Comes with hallo.js for contentEditable</li>
-                <li>Symfony2 integration for saving data via REST</li>
+                <li>Supports <a href="http://hallojs.org">hallo.js</a>, CKEditor, Aloha via contentEditable</li>
             </ul>
             <br/>
             <img src="halloeditor.png"/>
         </div>
 
         <div class="slide" style="text-align:left">
-            <h2>Backend: Sonata PHPCR ODM AdminBundle</h2>
+            <h2>Sonata PHPCR ODM AdminBundle</h2>
             <ul>
-                <li>Based on the SonataAdminBundle</li>
+                <li>Integration between SonataAdminBundle and PHPCR ODM</li>
                 <li>Supports tree oriented data</li>
             </ul>
             <br/>
@@ -211,10 +222,13 @@
         <div class="slide" style="text-align:left">
             <h2>Other related Bundles</h2>
             <ul>
+                <li>CmfTreeBrowserBundle (tree UI for sonata admin)</li>
+                <li>CmfMediaBundle (interfaces and models for media assets)</li>
+                <li>CmfBlogBundle (simple blog solution)</li>
                 <li>CmfSearchBundle (content search, extends LiipSearchBundle)</li>
                 <li>CmfSimpleCms (a simple CMS incl. content authoring)</li>
                 <li>LuneticsLocaleBundle (automatic locale detection)</li>
-                <li>Planning integration with several more Sonata Bundles</li>
+                <li>Integration with several more Sonata Bundles</li>
             </ul>
         </div>
 
