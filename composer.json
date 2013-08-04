@@ -14,12 +14,12 @@
         "php": ">=5.3.3",
         "symfony/framework-bundle": "~2.2",
         "doctrine/phpcr-bundle": "1.0.0-beta3",
-        "doctrine/phpcr-odm": "1.0.0-beta3",
-        "symfony-cmf/core-bundle": "1.0.0-RC1",
+        "doctrine/phpcr-odm": "1.0.0-beta4",
+        "symfony-cmf/core-bundle": "1.0.0-RC2",
         "symfony-cmf/content-bundle": "1.0.0-RC1",
-        "symfony-cmf/menu-bundle": "1.0.0-RC1",
+        "symfony-cmf/menu-bundle": "1.0.0-RC2",
         "symfony-cmf/block-bundle": "1.0.0-beta3",
-        "symfony-cmf/routing-bundle": "1.1.0-RC1",
+        "symfony-cmf/routing-bundle": "1.1.0-RC2",
         "symfony-cmf/tree-browser-bundle": "1.0.0-beta2"
     },
     "suggest": {
