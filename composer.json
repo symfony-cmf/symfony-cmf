@@ -14,12 +14,12 @@
         "php": ">=5.3.3",
         "symfony/framework-bundle": "~2.2",
         "doctrine/phpcr-bundle": "1.0.0-RC1",
-        "doctrine/phpcr-odm": "1.0.0-RC3",
-        "symfony-cmf/core-bundle": "1.0.0-RC7",
-        "symfony-cmf/content-bundle": "1.0.0-RC6",
+        "doctrine/phpcr-odm": "1.0.0-RC4",
+        "symfony-cmf/core-bundle": "1.0.0-RC8",
+        "symfony-cmf/content-bundle": "1.0.0-RC7",
         "symfony-cmf/menu-bundle": "1.0.0-RC7",
-        "symfony-cmf/block-bundle": "1.0.0-RC4",
-        "symfony-cmf/routing-bundle": "1.1.0-RC7",
+        "symfony-cmf/block-bundle": "1.0.0-RC5",
+        "symfony-cmf/routing-bundle": "1.1.0-RC8",
         "symfony-cmf/media-bundle": "1.0.0-RC2"
     },
     "suggest": {
@@ -27,7 +27,7 @@
         "symfony-cmf/create-bundle": "1.0.0-RC2",
         "symfony-cmf/search-bundle": "1.0.0-RC3",
         "symfony-cmf/tree-browser-bundle": "1.0.0-RC3",
-        "sonata-project/doctrine-phpcr-admin-bundle": "1.0.0-RC2",
+        "sonata-project/doctrine-phpcr-admin-bundle": "1.0.0-RC3",
         "symfony-cmf/blog-bundle": "1.0.0-beta5",
         "symfony-cmf/routing-auto-bundle": "1.0.0-alpha5"
     },
