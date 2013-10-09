@@ -17,19 +17,19 @@
         "doctrine/phpcr-odm": "1.0.0-RC4",
         "symfony-cmf/core-bundle": "1.0.0-RC7",
         "symfony-cmf/content-bundle": "1.0.0-RC7",
-        "symfony-cmf/menu-bundle": "1.0.0-RC7",
-        "symfony-cmf/block-bundle": "1.0.0-RC5",
-        "symfony-cmf/routing-bundle": "1.1.0-RC8",
+        "symfony-cmf/menu-bundle": "1.0.0-RC8",
+        "symfony-cmf/block-bundle": "1.0.0-RC6",
+        "symfony-cmf/routing-bundle": "1.1.0-RC9",
         "symfony-cmf/media-bundle": "1.0.0-RC2"
     },
     "suggest": {
-        "symfony-cmf/simple-cms-bundle": "1.0.0-RC5",
-        "symfony-cmf/create-bundle": "1.0.0-RC2",
+        "symfony-cmf/simple-cms-bundle": "1.0.0-RC6",
+        "symfony-cmf/create-bundle": "1.0.0-RC3",
         "symfony-cmf/search-bundle": "1.0.0-RC3",
-        "symfony-cmf/tree-browser-bundle": "1.0.0-RC3",
-        "sonata-project/doctrine-phpcr-admin-bundle": "1.0.0-RC3",
-        "symfony-cmf/blog-bundle": "1.0.0-beta5",
-        "symfony-cmf/routing-auto-bundle": "1.0.0-alpha5"
+        "symfony-cmf/tree-browser-bundle": "1.0.0-RC4",
+        "sonata-project/doctrine-phpcr-admin-bundle": "1.0.0-RC4",
+        "symfony-cmf/blog-bundle": "1.0.0-beta6",
+        "symfony-cmf/routing-auto-bundle": "1.0.0-alpha6"
     },
     "autoload": {
         "psr-0": { "Symfony\\Cmf": "src" }
