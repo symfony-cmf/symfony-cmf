@@ -14,7 +14,7 @@
         "php": ">=5.3.3",
         "symfony/framework-bundle": "~2.2",
         "doctrine/phpcr-bundle": "1.0.0-RC1",
-        "doctrine/phpcr-odm": "1.0.0-RC4",
+        "doctrine/phpcr-odm": "1.0.0-RC5",
         "symfony-cmf/core-bundle": "1.0.0-RC7",
         "symfony-cmf/content-bundle": "1.0.0-RC7",
         "symfony-cmf/menu-bundle": "1.0.0-RC8",
