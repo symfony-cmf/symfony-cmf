@@ -10,7 +10,7 @@
 
         <meta name="author" content="Symfony2 CMF" />
         <meta name="email" content="symfony-cmf-devs@googlegroups.com" />
-        <meta name="date" content="2012-01-11" />
+        <meta name="date" content="2013-10-18" />
         <meta name="venue" content="The Internets" />
 
         <!-- Slippy core file and dependencies -->
@@ -98,27 +98,7 @@
                 </li>
                 <li>does not support editing routes</li>
                 <li>large number of routes?</li>
-                <li>in a cms, <em>users</em> wants to define their urls</li>
-            </ul>
-        </div>
-
-        <div class="slide" style="text-align:left">
-            <h2>
-                Symfony2 CMF routing concept
-            </h2>
-            <ul>
-                <li>load routes at runtime based on current request</li>
-                <li>simple interface for route loading can be implemented with your storage</li>
-                <li>possible to separate content tree from routing tree</li>
-                <li>
-                    routing tree consists of references to the content tree
-                    <ul>
-                        <li>multi site: f.e. desktop, tablet, phone ..</li>
-                        <li>multi language: f.e. english, french, german ..</li>
-                    </ul>
-                </li>
-                <li>reworking the routing requires cloning the routing tree</li>
-                <li>merge back into the production routing tree once ready</li>
+                <li>in a cms, <em>users</em> want to define their URLs</li>
             </ul>
         </div>
 
@@ -126,8 +106,8 @@
             <h2>Solution: First Take</h2>
             <ul>
                 <li>catch-all route <tt>/{url}</tt> with requirement <tt>url: .*</tt></li>
-                <li>one controller for all requests (but could forward based on route information)</li>
-                <li>two-step-routing tends to reinventing the wheel and creating a mess</li>
+                <li>one controller for all requests (forward to specific controllers?)</li>
+                <li>two-step-routing tends to reinvent the wheel and creating a mess</li>
                 <li>does not play nicely with other routes</li>
             </ul>
             <br/><br/>
@@ -139,7 +119,6 @@
                     url: .*
             </pre>
         </div>
-
 
         <div class="slide" style="text-align:left">
             <h2>Solution: Cmf Routing component</h2>
@@ -178,12 +157,9 @@
         <div class="slide" style="text-align:left">
             <h2>DynamicRouter: Match url</h2>
             <ul>
-                <li>find route document by url from database
-                    <ul>
-                        <li>provide implementation with PHPCR ODM</li>
-                        <li>but you can provide your own</li>
-                    </ul>
-                </li>
+                <li>find route at runtime based on current request</li>
+                <li>write your own route loader by implementing a simple interface</li>
+                <li>provided implementation with PHPCR ODM</li>
                 <li>built on top of the standard symfony router</li>
                 <li>route may explicitly specify controller</li>
                 <li>otherwise enhancers to determine values</li>
@@ -192,15 +168,33 @@
         </div>
 
         <div class="slide" style="text-align:left">
+            <h2>
+                DynamicRouter: PHPCR-ODM
+            </h2>
+            <ul>
+                <li>translate request URL to repository path</li>
+                <li>routing tree consists of references to the content tree</li>
+                <li>possible to separate content tree from routing tree
+                    <ul>
+                        <li>multi site: f.e. desktop, tablet, phone ..</li>
+                        <li>multi language: f.e. english, french, german ..</li>
+                    </ul>
+                </li>
+                <li>reworking the routing requires cloning the routing tree</li>
+                <li>merge back into the production routing tree once ready</li>
+            </ul>
+        </div>
+
+        <div class="slide" style="text-align:left">
             <h2>DynamicRouter: Route Enhancers</h2>
             <ul>
                 <li>infer some information from the route information</li>
-                <li>i.e. decide which controller to use based on content document type</li>
+                <li>i.e. decide which controller to use based on content document class</li>
                 <li>useful enhancers provided:</li>
                     <ul>
-                        <li>route specifies explicit template: use generic controller</li>
-                        <li>map content type to controller</li>
-                        <li>map content type to template and use generic controller</li>
+                        <li>map content class to controller</li>
+                        <li>map content class to template and use generic controller</li>
+                        <li>use a default controller for any DynamicRouter route</li>
                     </ul>
                 </li>
                 <li>you can add your own enhancers</li>
@@ -271,7 +265,8 @@
             <ul>
                 <li><a href="https://github.com/symfony-cmf/cmf-sandbox">CMF sandbox</a></li>
                 <li><a href="https://github.com/symfony-cmf/MenuBundle/">MenuBundle</a></li>
-                <li><a href="https://github.com/symfony-cmf/RoutingBundle">RoutingBundle</a>: ChainRouter and DynamicRouter</li>
+                <li><a href="https://github.com/symfony-cmf/Routing">Routing Component</a>: ChainRouter and DynamicRouter</li>
+                <li><a href="https://github.com/symfony-cmf/RoutingBundle">RoutingBundle</a>: Symfony2 Bundle for the Routing component</li>
             </ul>
         </div>
 
