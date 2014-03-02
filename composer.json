@@ -28,7 +28,6 @@
         "symfony-cmf/search-bundle": "1.0.*",
         "symfony-cmf/tree-browser-bundle": "1.1.*",
         "sonata-project/doctrine-phpcr-admin-bundle": "1.1.*",
-        "symfony-cmf/blog-bundle": "~1.0.0-beta6",
         "symfony-cmf/routing-auto-bundle": "~1.0.0-alpha6"
     },
     "autoload": {
