@@ -23,12 +23,12 @@
         "symfony-cmf/media-bundle": "1.1.*"
     },
     "suggest": {
+        "symfony-cmf/seo-bundle": "1.0.*",
         "symfony-cmf/simple-cms-bundle": "1.1.*",
         "symfony-cmf/create-bundle": "1.1.*",
         "symfony-cmf/search-bundle": "1.0.*",
         "symfony-cmf/tree-browser-bundle": "1.1.*",
-        "sonata-project/doctrine-phpcr-admin-bundle": "1.1.*",
-        "symfony-cmf/routing-auto-bundle": "~1.0.0-alpha6"
+        "sonata-project/doctrine-phpcr-admin-bundle": "1.1.*"
     },
     "autoload": {
         "psr-0": { "Symfony\\Cmf": "src" }
