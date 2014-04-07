@@ -20,7 +20,7 @@
         "symfony-cmf/menu-bundle": "1.1.*",
         "symfony-cmf/block-bundle": "1.1.*",
         "symfony-cmf/routing-bundle": "1.2.*",
-        "symfony-cmf/media-bundle": "1.1.*"
+        "symfony-cmf/media-bundle": "1.0.*"
     },
     "suggest": {
         "symfony-cmf/seo-bundle": "1.0.*",
