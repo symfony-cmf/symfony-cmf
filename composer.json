@@ -12,7 +12,7 @@
     "minimum-stability":"dev",
     "require": {
         "php": ">=5.3.3",
-        "symfony/framework-bundle": "~2.2",
+        "symfony/framework-bundle": "~2.3",
         "doctrine/phpcr-bundle": "1.1.*",
         "doctrine/phpcr-odm": "1.1.*",
         "symfony-cmf/core-bundle": "1.1.*",
