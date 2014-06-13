@@ -12,6 +12,7 @@ env:
 
 before_script:
   - composer require symfony/symfony:${SYMFONY_VERSION} --no-update
+  - composer require jackalope/jackalope-jackrabbit:1.* --no-update
   - composer update --dry-run
 
 # we are really only interested if the composer runs through or not
