@@ -1,6 +1,6 @@
 # Symfony Content Management Framework
 
-[![Build Status](https://secure.travis-ci.org/symfony-cmf/symfony-cmf.png)](http://travis-ci.org/symfony-cmf/symfony-cmf)
+[![Build Status](https://secure.travis-ci.org/symfony-cmf/symfony-cmf.png?branch=1.1)](http://travis-ci.org/symfony-cmf/symfony-cmf)
 [![Latest Stable Version](https://poser.pugx.org/symfony-cmf/symfony-cmf/version.png)](https://packagist.org/packages/symfony-cmf/symfony-cmf)
 [![Total Downloads](https://poser.pugx.org/symfony-cmf/symfony-cmf/d/total.png)](https://packagist.org/packages/symfony-cmf/symfony-cmf)
 
