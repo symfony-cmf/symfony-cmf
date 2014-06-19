@@ -22,16 +22,18 @@
         "symfony-cmf/routing-bundle": "1.2.*",
         "symfony-cmf/media-bundle": "1.1.*"
     },
-    "suggest": {
-        "symfony-cmf/seo-bundle": "1.0.*",
-        "symfony-cmf/simple-cms-bundle": "1.1.*",
-        "symfony-cmf/create-bundle": "1.1.*",
-        "symfony-cmf/search-bundle": "1.0.*",
-        "symfony-cmf/tree-browser-bundle": "1.0.*",
-        "sonata-project/doctrine-phpcr-admin-bundle": "1.1.*"
+    "require-dev": {
+        "jackalope/jackalope-jackrabbit": "1.*"
     },
-    "autoload": {
-        "psr-0": { "Symfony\\Cmf": "src" }
+    "suggest": {
+        "jackalope/jackalope-jackrabbit": "1.* as PHPCR implementation required by PHPCR-ODM",
+        "jackalope/jackalope-doctrine-dbal": "1.* as PHPCR implementation required by PHPCR-ODM",
+        "symfony-cmf/seo-bundle": "1.0.* for search engine optimization",
+        "symfony-cmf/simple-cms-bundle": "1.1.* for simplified handling of route, content and menu",
+        "symfony-cmf/create-bundle": "1.1.* for frontend editing",
+        "symfony-cmf/search-bundle": "1.0.* for searching",
+        "symfony-cmf/tree-browser-bundle": "1.0.* to support tree navigation in admins",
+        "sonata-project/doctrine-phpcr-admin-bundle": "1.1.* for backend admin"
     },
     "extra": {
         "branch-alias": {
