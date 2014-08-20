@@ -33,6 +33,7 @@
         "symfony-cmf/create-bundle": "1.2.* for frontend editing",
         "symfony-cmf/search-bundle": "1.1.* for searching",
         "symfony-cmf/tree-browser-bundle": "1.1.* to support tree navigation in admins",
+        "symfony-cmf/routing-auto-bundle": "1.0.* to automatically generate routes on certain events",
         "sonata-project/doctrine-phpcr-admin-bundle": "1.1.* for backend admin"
     },
     "extra": {
