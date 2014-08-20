@@ -13,7 +13,7 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/framework-bundle": "~2.3",
-        "doctrine/phpcr-bundle": "1.1.*",
+        "doctrine/phpcr-bundle": "1.2.*",
         "doctrine/phpcr-odm": "1.2.*",
         "symfony-cmf/core-bundle": "1.2.*",
         "symfony-cmf/content-bundle": "1.2.*",
