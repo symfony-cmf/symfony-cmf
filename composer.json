@@ -18,7 +18,7 @@
         "symfony-cmf/core-bundle": "1.3.*",
         "symfony-cmf/content-bundle": "1.3.*",
         "symfony-cmf/menu-bundle": "1.2.*",
-        "symfony-cmf/block-bundle": "1.3.*",
+        "symfony-cmf/block-bundle": "1.2.*",
         "symfony-cmf/routing-bundle": "1.4.*",
         "symfony-cmf/media-bundle": "1.3.*"
     },
