@@ -5,18 +5,12 @@ php:
   
 sudo: false
 
-cache:
-  directories:
-    - $HOME/.composer/cache
-
 env:
   - SYMFONY_VERSION=2.3.*
   - SYMFONY_VERSION=2.6.*
   - SYMFONY_VERSION=2.7.*
 
-before_install: composer require symfony/symfony:${SYMFONY_VERSION} --no-update
-
-install: ~
+before_script: composer require symfony/symfony:${SYMFONY_VERSION} --no-update
 
 # we are really only interested if the composer runs through or not
 script: composer update --dry-run
