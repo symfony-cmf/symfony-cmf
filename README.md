@@ -1,6 +1,7 @@
 # Symfony Content Management Framework
 
 [![Build Status](https://secure.travis-ci.org/symfony-cmf/symfony-cmf.png?branch=master)](http://travis-ci.org/symfony-cmf/symfony-cmf)
+[![StyleCI](https://styleci.io/repos/793489/shield)](https://styleci.io/repos/793489)
 [![Latest Stable Version](https://poser.pugx.org/symfony-cmf/symfony-cmf/version.png)](https://packagist.org/packages/symfony-cmf/symfony-cmf)
 [![Total Downloads](https://poser.pugx.org/symfony-cmf/symfony-cmf/d/total.png)](https://packagist.org/packages/symfony-cmf/symfony-cmf)
 
