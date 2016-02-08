@@ -20,7 +20,7 @@
         "symfony-cmf/menu-bundle": "2.0.*",
         "symfony-cmf/block-bundle": "1.3.*",
         "symfony-cmf/routing-bundle": "1.4.*",
-        "symfony-cmf/media-bundle": "1.2.*"
+        "symfony-cmf/media-bundle": "1.3.*"
     },
     "require-dev": {
         "jackalope/jackalope-jackrabbit": "1.*"
