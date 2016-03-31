@@ -9,7 +9,6 @@
             "homepage": "https://github.com/symfony-cmf/symfony-cmf/contributors"
         }
     ],
-    "minimum-stability": "RC",
     "require": {
         "php": "^5.3.9|^7.0",
         "symfony/framework-bundle": "~2.3",
