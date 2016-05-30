@@ -23,6 +23,8 @@
     "require-dev": {
         "jackalope/jackalope-jackrabbit": "1.*"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "suggest": {
         "jackalope/jackalope-jackrabbit": "1.* as PHPCR implementation required by PHPCR-ODM",
         "jackalope/jackalope-doctrine-dbal": "1.* as PHPCR implementation required by PHPCR-ODM",
