@@ -13,7 +13,7 @@
         "php": "^5.5.9|^7.0",
         "symfony/framework-bundle": "^2.7|^3.0",
         "doctrine/phpcr-bundle": "^1.3",
-        "doctrine/phpcr-odm": "^2.0",
+        "doctrine/phpcr-odm": "^1.4",
         "symfony-cmf/core-bundle": "2.0.*",
         "symfony-cmf/content-bundle": "2.0.*",
         "symfony-cmf/menu-bundle": "2.1.*",
