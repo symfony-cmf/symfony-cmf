@@ -13,7 +13,7 @@ The Symfony CMF project makes it easier for **developers** to add **CMS function
 
 ## Requirements
 
-* Symfony 2.3+
+* Symfony 2.8+
 * See also the `require` section of [composer.json](composer.json)
 
 
