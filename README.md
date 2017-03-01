@@ -9,7 +9,7 @@ and licensed under the [MIT License](LICENSE).
 
 Note the main purpose of this repository is to offer a composer package that ties together various packages that will be used in most CMF projects. The bulk of the development is done in other repositories on the https://github.com/symfony-cmf organization.
 
-The Symfony CMF project makes it easier for **developers** to add **CMS functionality** to applications built with the **Symfony2 PHP** framework. Key development principles for the provided **set of bundles** are **scalability**, **usability**, **documentation** and **testing**.
+The Symfony CMF project makes it easier for **developers** to add **CMS functionality** to applications built with the **Symfony PHP** framework. Key development principles for the provided **set of bundles** are **scalability**, **usability**, **documentation** and **testing**.
 
 ## Requirements
 
