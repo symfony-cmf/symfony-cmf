@@ -5,13 +5,14 @@ php: 7.1
 sudo: false
 
 env:
-  - SYMFONY_VERSION=2.8.*
-  - SYMFONY_VERSION=3.0.*
-  - SYMFONY_VERSION=3.1.*
+  - SYMFONY_VERSION=2.8.* STABILITY=dev
+  - SYMFONY_VERSION=3.0.* STABILITY=dev
+  - SYMFONY_VERSION=3.1.* STABILITY=dev
 
 before_script:
   - phpenv config-rm xdebug.ini || true
   - composer require symfony/symfony:${SYMFONY_VERSION} --no-update
+  - if ! [ -z "$STABILITY" ]; then composer config minimum-stability ${STABILITY}; composer config prefer-stable true; fi;
 
 # we are really only interested if the composer runs through or not
 script: composer update --dry-run
