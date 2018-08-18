@@ -8,13 +8,13 @@ matrix:
     fast_finish: true
     include:
         - php: 7.1
-          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" DEPENDENCIES="symfony/lts:^2" STABILITY="dev"
+          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" DEPENDENCIES="symfony/lts:^2"
         - php: 7.1
-          env: DEPENDENCIES="symfony/lts:^3" STABILITY="dev"
+          env: DEPENDENCIES="symfony/lts:^3"
         - php: 7.1
-          env: DEPENDENCIES="symfony/lts:^4" STABILITY="dev"
+          env: DEPENDENCIES="symfony/symfony:^4.0"
         - php: 7.2
-          env: DEPENDENCIES="symfony/lts:^4" STABILITY="dev"
+          env: DEPENDENCIES="symfony/symfony:^4.0"
 
 before_install:
     - if [[ $COVERAGE != true ]]; then phpenv config-rm xdebug.ini || true; fi
