@@ -12,9 +12,9 @@ matrix:
         - php: 7.1
           env: DEPENDENCIES="symfony/lts:^3"
         - php: 7.1
-          env: DEPENDENCIES="symfony/lts:^4"
+          env: DEPENDENCIES="symfony/symfony:^4.0"
         - php: 7.2
-          env: DEPENDENCIES="symfony/lts:^4"
+          env: DEPENDENCIES="symfony/symfony:^4.0"
 
 before_install:
     - if [[ $COVERAGE != true ]]; then phpenv config-rm xdebug.ini || true; fi
